@@ -10,8 +10,9 @@ export const metadata: Metadata = {
 
 // Content is reproduced from the client's published Privacy Policy at
 // https://1wayhomeservices.com/privacy-policy/ (Effective Date 11/21/2025, v1.0).
-// Headings and substantive text are kept verbatim; only presentation chrome
-// (heading levels, link targets, layout) is adapted to the new site.
+// Substantive text is kept verbatim. The contact block adds phone and street
+// address so the NAP is consistent with the rest of the site (the source page
+// lists email only). Flagged in CHANGELOG for client awareness.
 
 export default function PrivacyPage() {
   return (
@@ -157,6 +158,16 @@ export default function PrivacyPage() {
             <p className="mb-2">For questions or privacy-related requests, contact:</p>
             <p className="text-white font-semibold">Sam Eram</p>
             <p>1 Way Home Services</p>
+            <p>{CONTACT_INFO.address}</p>
+            <p>
+              Phone:{' '}
+              <a
+                href={CONTACT_INFO.phoneHref}
+                className="text-[var(--color-secondary-light)] hover:text-white transition-colors"
+              >
+                {CONTACT_INFO.phone}
+              </a>
+            </p>
             <p>
               Email:{' '}
               <a

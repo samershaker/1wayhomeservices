@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 
 // Content is reproduced from the client's published Terms and Conditions at
 // https://1wayhomeservices.com/terms-and-conditions/ (Effective Date 11/21/2025, v1.0).
-// Headings and substantive text are kept verbatim; only presentation chrome is adapted.
+// Substantive text is kept verbatim. Two minor corrections applied for the new
+// publication: (1) the heading "Not Professional Advise" → "Not Professional
+// Advice" (typo); (2) the contact block adds phone and street address so the
+// NAP is consistent with the rest of the site. Both are flagged in CHANGELOG.
 
 export default function TermsPage() {
   return (
@@ -62,7 +65,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl font-bold text-white mb-3">Not Professional Advise</h2>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Not Professional Advice</h2>
             <p className="mb-3">
               Although 1 Way Home Services provides tax services, mortgage services, real
               estate services, and financial-related assistance, the content on this
@@ -179,6 +182,16 @@ export default function TermsPage() {
             <p className="mb-2">For questions or privacy-related requests, contact:</p>
             <p className="text-white font-semibold">Sam Eram</p>
             <p>1 Way Home Services</p>
+            <p>{CONTACT_INFO.address}</p>
+            <p>
+              Phone:{' '}
+              <a
+                href={CONTACT_INFO.phoneHref}
+                className="text-[var(--color-secondary-light)] hover:text-white transition-colors"
+              >
+                {CONTACT_INFO.phone}
+              </a>
+            </p>
             <p>
               Email:{' '}
               <a

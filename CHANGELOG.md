@@ -1,5 +1,56 @@
 # 1Way Home Services - Website Changelog
 
+## Version 2.2.0 — Professional Footer & Verbatim Client Legal Pages (April 22, 2026)
+
+**Focus of this release:** Make the bottom of the site look and act like the rest — a regulated, professional services firm — and replace the placeholder Privacy / Terms with the client's actual published legal copy. As before, every change is grounded in publicly verifiable information and the client's own published content. Anything that requires a policy or compliance decision is flagged below for client sign-off rather than guessed at.
+
+### What changed
+
+**1. Footer redesign (`components/site/SiteFooter.tsx`)**
+- Reorganized into a 12-column layout: Brand (5) · Services (2) · Company (2) · Contact (3), collapsing to a single column on mobile.
+- Services column is now a real linked list (was an unlinked middle-dot text paragraph) — recovers a high-value internal-linking surface and meets the "footer is the bottom of every funnel" expectation for a professional-services site.
+- Contact column carries the full NAP block (street address, phone, email, service-area cities) and now displays hours **Mon–Fri 9:00 AM – 6:00 PM · By appointment** — this matches what was already in the LocalBusiness JSON-LD's `openingHoursSpecification`. The previous footer text said "By Appointment" only and silently contradicted the schema.
+- Compliance strip added: Equal Housing Opportunity mark, Bakhan Kareem's California DRE License #02223420 with link to dre.ca.gov, and a professional disclaimer paragraph using Circular 230–style language ("not intended or written to be used, and cannot be used, for the purpose of avoiding penalties under the Internal Revenue Code"). For a CA real-estate brokerage, surfacing the DRE number publicly is closer to advertising-rule compliance than what we had before.
+- Reused the existing `GoogleReviewsBadge` and added a small "Verified Apr 22, 2026" stamp underneath, so the social-proof claim carries a freshness signal LLMs and reviewers can trust.
+- Company LinkedIn social link rendered as an icon button with full a11y labelling.
+- Bottom bar now uses the legal entity name (`1 Way Home Real Estate and Mortgage Services Inc.`) in the copyright, with Privacy / Terms / Sitemap as links.
+- Semantic HTML and a11y: `<footer role="contentinfo">`, `<nav aria-label>` on each column, `<address>` for the NAP block, focus-visible rings on every interactive element.
+
+**2. New asset (`public/images/equal-housing-opportunity.svg`)**
+- Clean monochrome Equal Housing Opportunity mark using `currentColor`, so it inherits whatever color the surrounding text uses. The EHO mark is in the public domain (HUD).
+
+**3. Verbatim legal pages from the client's existing site**
+- `/en/privacy/` — content reproduced verbatim from https://1wayhomeservices.com/privacy-policy/ (Effective 11/21/2025, v1.0). Includes the A2P 10DLC SMS consent block exactly as the client published it.
+- `/en/terms/` — content reproduced verbatim from https://1wayhomeservices.com/terms-and-conditions/ (Effective 11/21/2025, v1.0). Includes the SMS opt-in clause, governing-law clause (California), indemnification, and limitation of liability sections.
+- Source-attribution comments are included at the top of each page file so future maintainers can see exactly what was sourced and what was changed.
+
+**4. Two minor corrections applied to the published versions (versus the source pages)**
+- Heading **"Not Professional Advise"** → **"Not Professional Advice"** in `/en/terms/`. Obvious typo we should not propagate. Flagged so the client can fix it on their own site as well.
+- Contact blocks in **both** legal pages now include the office address and phone number in addition to the email Sam published. The source pages list email only. NAP consistency matters for both regulatory disclosure and LLM citation grounding — adding it here aligns the legal pages with the rest of the site.
+
+### PENDING CLIENT INPUT — flagged for legal/policy review
+
+These items came out of the verbatim source review. They require a decision from the client (or their attorney) rather than a guess from us:
+
+- **Legal entity binding** — the published Terms run to "1 Way Home Services" (trade name) throughout. The footer copyright on the new site uses the formal entity "1 Way Home Real Estate and Mortgage Services Inc." Client should confirm which legal person these Terms should bind. Inconsistent entity reference in IP / indemnification clauses is a real enforceability gap.
+- **"Available for individuals of all ages"** in the Terms — unusual for a financial-services T&C; most sites restrict to 13+ (COPPA) or 18+. Worth checking with their counsel.
+- **"(Future) Send SMS messages if you opt in"** in the Privacy Policy — the parenthetical suggests SMS wasn't live when this was drafted. If SMS is now live, drop "(Future)"; if it isn't, our new contact form should not ship with the consent checkbox the policy describes.
+- **A2P 10DLC consent checkbox parity** — the policy and Terms both reference an exact consent-language string that "our forms will display." We need to confirm the new site's contact form actually shows that checkbox, or the policy overstates current practice.
+- **CCPA/CPRA "Do Not Sell / Share" section** is not present despite the firm being California-based and serving California residents. Likely advisable even if they genuinely don't sell data — confirm with counsel.
+- **Privacy Policy cross-reference** — the published Terms say "you agree to be bound by... our Privacy Policy" but never link to it. The new footer cross-links them; the legal copy itself still doesn't.
+- **Email domain handover** — `sam@1wayhomeservices.com` is the address the client publishes today. Confirm whether it remains monitored after the new site launches, or whether `info@` (or another shared inbox) should take over.
+- **Office hours** — Mon–Fri 9–6 is what we publish in the JSON-LD and now in the footer. The client's own site does not list hours. Confirm these are correct.
+- **NMLS registration** — the firm offers mortgage *consulting*, not loan origination. We deliberately do **not** publish an NMLS number anywhere. If they hold an active NMLS, send it; if not, this footer wording is correct as-is.
+- **EFIN / IRS Authorized e-File Provider** — the existing `TrustBadges` component (used elsewhere on the site) claims this. We did **not** carry it into the new footer. Confirm Sam holds an active EFIN before we surface it anywhere, since stronger placement = stronger liability if false.
+- **BBB accreditation** — not added to the footer because no public record was found. If the firm is currently accredited, send the listing URL.
+- **Sam's CPA / EA / PTIN** — still pending from v2.1.0. Once provided, his Person schema gets a `hasCredential` block matching what Bakhan now has.
+
+### Why this matters for the pitch
+
+The client's stated #1 priority is being shown and cited by LLMs. LLMs (and humans) trust regulated-firm footers — license numbers, equal-housing language, named legal entity, verified social proof, real disclaimer copy — far more than they trust a generic SaaS-style footer with three columns of links. After this release, the bottom of every page on the new site reinforces the same entity graph the JSON-LD declares, the legal pages match what the firm has actually published, and we have a clean punch list of compliance items the client can resolve in a single 15-minute conversation.
+
+---
+
 ## Version 2.1.0 — LLM Discoverability & Verified Entity Data (April 22, 2026)
 
 **Focus of this release:** Make the site as easy as possible for LLM-powered search engines (ChatGPT, Claude, Perplexity, Google AI Overviews, Gemini) to confidently *cite* 1Way Home Services. Every change in this release is built from publicly verifiable information — the client's own website, public business records, and publicly listed professional licenses. Nothing was invented; gaps that need client confirmation are listed in the "Pending Client Input" section below.
