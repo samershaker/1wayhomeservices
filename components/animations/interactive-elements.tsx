@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Interactive Elements Component for HVAC Website
+ * Interactive Elements Component for Business Website
  * Provides physics-based animations using React Spring for interactive UI elements
  */
 
@@ -81,10 +81,10 @@ export const SpringButton: React.FC<InteractiveButtonProps> = ({
   });
 
   const variantClasses = {
-    primary: 'bg-hvac-primary text-white hover:bg-hvac-primary/90',
-    secondary: 'bg-hvac-secondary text-white hover:bg-hvac-secondary/90',
-    outline: 'border-2 border-hvac-primary text-hvac-primary hover:bg-hvac-primary hover:text-white',
-    ghost: 'text-hvac-primary hover:bg-hvac-primary/10'
+    primary: 'bg-primary text-white hover:bg-primary/90',
+    secondary: 'bg-secondary text-white hover:bg-secondary/90',
+    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white',
+    ghost: 'text-primary hover:bg-primary/10'
   };
 
   const sizeClasses = {
@@ -101,7 +101,7 @@ export const SpringButton: React.FC<InteractiveButtonProps> = ({
         ${sizeClasses[size]} 
         ${className}
         rounded-lg font-medium transition-colors duration-200 
-        focus:outline-none focus:ring-2 focus:ring-hvac-primary/50
+        focus:outline-none focus:ring-2 focus:ring-primary/50
         disabled:opacity-50 disabled:cursor-not-allowed
         relative overflow-hidden
       `}
@@ -344,7 +344,7 @@ export const ServiceCardsTrail: React.FC<{
             >
               <div className="flex items-start space-x-4">
                 {item.icon && (
-                  <div className="flex-shrink-0 text-hvac-primary">
+                  <div className="flex-shrink-0 text-primary">
                     {item.icon}
                   </div>
                 )}

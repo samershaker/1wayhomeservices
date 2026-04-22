@@ -1,8 +1,8 @@
 'use client';
 
 /**
- * Text Effects Component for HVAC Website
- * Provides animated text components using Motion Primitives with HVAC-themed animations
+ * Text Effects Component for Business Website
+ * Provides animated text components using Motion Primitives with Business-themed animations
  */
 
 import { motion } from 'framer-motion';
@@ -89,7 +89,7 @@ export const HeroText: React.FC<BaseTextProps> = ({
   );
 };
 
-// Typewriter Effect - Perfect for HVAC service descriptions
+// Typewriter Effect - Perfect for Business service descriptions
 export const TypewriterText: React.FC<TypewriterProps> = ({
   children,
   className = '',
@@ -202,7 +202,7 @@ export const AnimatedCounter: React.FC<CounterProps> = ({
   );
 };
 
-// Glow Text - For highlighting important HVAC terms
+// Glow Text - For highlighting important Business terms
 export const GlowText: React.FC<GlowTextProps> = ({
   children,
   className = '',

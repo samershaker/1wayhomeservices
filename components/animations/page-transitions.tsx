@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Page Transitions Component for HVAC Website
+ * Page Transitions Component for Business Website
  * Provides smooth page transitions and layout animations using Motion Primitives
  */
 
@@ -14,7 +14,7 @@ import { ReactNode } from 'react';
 interface PageTransitionProps {
   children: ReactNode;
   className?: string;
-  transition?: 'fade' | 'slide' | 'scale' | 'hvac-cool' | 'hvac-heat';
+  transition?: 'fade' | 'slide' | 'scale' | 'cool-blue' | 'warm-orange';
 }
 
 interface RouteTransitionProps {
@@ -58,40 +58,40 @@ const transitionVariants = {
     transition: { duration: 0.4 }
   },
   
-  'hvac-cool': {
-    initial: { 
-      scale: 0.9, 
-      opacity: 0, 
-      filter: 'blur(10px) hue-rotate(180deg)' 
+  'cool-blue': {
+    initial: {
+      scale: 0.9,
+      opacity: 0,
+      filter: 'blur(10px) hue-rotate(180deg)'
     },
-    animate: { 
-      scale: 1, 
-      opacity: 1, 
-      filter: 'blur(0px) hue-rotate(0deg)' 
+    animate: {
+      scale: 1,
+      opacity: 1,
+      filter: 'blur(0px) hue-rotate(0deg)'
     },
-    exit: { 
-      scale: 1.1, 
-      opacity: 0, 
-      filter: 'blur(5px) hue-rotate(-180deg)' 
+    exit: {
+      scale: 1.1,
+      opacity: 0,
+      filter: 'blur(5px) hue-rotate(-180deg)'
     },
     transition: { duration: 0.6 }
   },
-  
-  'hvac-heat': {
-    initial: { 
-      scale: 1.1, 
-      opacity: 0, 
-      filter: 'blur(10px) brightness(1.5)' 
+
+  'warm-orange': {
+    initial: {
+      scale: 1.1,
+      opacity: 0,
+      filter: 'blur(10px) brightness(1.5)'
     },
-    animate: { 
-      scale: 1, 
-      opacity: 1, 
-      filter: 'blur(0px) brightness(1)' 
+    animate: {
+      scale: 1,
+      opacity: 1,
+      filter: 'blur(0px) brightness(1)'
     },
-    exit: { 
-      scale: 0.9, 
-      opacity: 0, 
-      filter: 'blur(5px) brightness(0.5)' 
+    exit: {
+      scale: 0.9,
+      opacity: 0,
+      filter: 'blur(5px) brightness(0.5)'
     },
     transition: { duration: 0.6 }
   }
@@ -131,10 +131,10 @@ export const RouteTransition: React.FC<RouteTransitionProps> = ({
   // Determine transition type based on route
   const getTransitionType = (path: string): keyof typeof transitionVariants => {
     if (path.includes('/cooling') || path.includes('/air-conditioning')) {
-      return 'hvac-cool';
+      return 'cool-blue';
     }
     if (path.includes('/heating') || path.includes('/furnace')) {
-      return 'hvac-heat';
+      return 'warm-orange';
     }
     if (path.includes('/services')) {
       return 'slide';
@@ -199,7 +199,7 @@ export const LoadingTransition: React.FC<LoadingTransitionProps> = ({
   );
 };
 
-// Default loading component with HVAC theme
+// Default loading component with Business theme
 const DefaultLoadingComponent: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-[200px]">
@@ -220,7 +220,7 @@ const DefaultLoadingComponent: React.FC = () => {
         
         {/* Center dot */}
         <motion.div
-          className="absolute inset-4 w-4 h-4 bg-hvac-accent rounded-full"
+          className="absolute inset-4 w-4 h-4 bg-accent rounded-full"
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -373,7 +373,7 @@ export const NavTransition: React.FC<{
   );
 };
 
-// HVAC Equipment showcase transition
+// Business Equipment showcase transition
 export const EquipmentShowcase: React.FC<{
   children: ReactNode;
   className?: string;

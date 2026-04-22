@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Scroll Animations Component for HVAC Website
+ * Scroll Animations Component for Business Website
  * Provides scroll-triggered animations using Motion Primitives with intersection observer
  */
 
@@ -235,8 +235,8 @@ export const StaggerItem: React.FC<{
   );
 };
 
-// HVAC Equipment Animation - Simulates equipment operation
-export const HVACEquipmentAnimation: React.FC<{
+// Equipment Animation - Simulates equipment/feature operation
+export const EquipmentAnimation: React.FC<{
   children: ReactNode;
   className?: string;
   type?: 'cooling' | 'heating' | 'ventilation';

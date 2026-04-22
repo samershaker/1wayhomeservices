@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { IconProps } from './icons/hvac-icons';
+import { IconProps } from './icons/page-icons';
 
 export interface ServiceCardProps {
   title: string;

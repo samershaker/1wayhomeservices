@@ -1,5 +1,5 @@
 /**
- * Animation Utilities for HVAC Website
+ * Animation Utilities for Business Website
  * Provides reusable animation configurations and utilities for Motion Primitives and React Spring
  */
 
@@ -12,7 +12,7 @@ interface SpringConfig {
 
 // Motion Primitives Animation Presets
 export const motionPresets = {
-  // Text animations for HVAC terminology
+  // Text animations
   fadeInUp: {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -43,8 +43,8 @@ export const motionPresets = {
     transition: { duration: 0.5 }
   },
   
-  // HVAC equipment simulation effects
-  hvacRotate: {
+  // Equipment/service simulation effects
+  equipmentRotate: {
     initial: { rotate: 0 },
     animate: { rotate: 360 },
     transition: { duration: 10, repeat: Infinity }
@@ -87,7 +87,7 @@ export const springConfigs: Record<string, SpringConfig> = {
     mass: 0.8
   },
   
-  // Physics simulation for HVAC equipment
+  // Physics simulation for equipment/features
   equipment: {
     tension: 200,
     friction: 15,
@@ -144,10 +144,10 @@ export const getAnimationProps = (animationKey: keyof typeof motionPresets) => {
   return motionPresets[animationKey];
 };
 
-// HVAC-specific animation utilities
-export const hvacAnimations = {
-  // Cooling effect - blue glow and gentle movement
-  cooling: {
+// Service-specific animation utilities
+export const serviceAnimations = {
+  // Primary feature effect - blue glow and gentle movement
+  primaryFeature: {
     boxShadow: [
       '0 0 0px rgba(37, 99, 235, 0)',
       '0 0 20px rgba(37, 99, 235, 0.4)',
@@ -157,9 +157,9 @@ export const hvacAnimations = {
     ],
     y: [0, -2, 0, 2, 0]
   },
-  
-  // Heating effect - orange glow and warm movement
-  heating: {
+
+  // Secondary feature effect - orange glow and warm movement
+  secondaryFeature: {
     boxShadow: [
       '0 0 0px rgba(234, 88, 12, 0)',
       '0 0 20px rgba(234, 88, 12, 0.4)',
@@ -169,9 +169,9 @@ export const hvacAnimations = {
     ],
     scale: [1, 1.02, 1, 1.01, 1]
   },
-  
-  // Ventilation effect - subtle rotation and movement
-  ventilation: {
+
+  // Accent effect - subtle rotation and movement
+  accentFeature: {
     rotate: [0, 2, -2, 1, 0],
     scale: [1, 1.01, 0.99, 1.005, 1]
   }
@@ -224,10 +224,10 @@ export const animationClasses = {
   entered: 'opacity-100 transform translate-y-0 scale-100 transition-all duration-500 ease-out',
   exiting: 'opacity-0 transform translate-y-2 scale-98 transition-all duration-300 ease-in',
   
-  // HVAC service card animations
+  // Service card animations
   serviceCard: {
     idle: 'transition-all duration-300 ease-in-out',
-    hover: 'transform hover:scale-105 hover:shadow-lg hover:shadow-hvac-primary/20',
+    hover: 'transform hover:scale-105 hover:shadow-lg hover:shadow-primary/20',
     active: 'transform scale-98'
   },
   
@@ -262,7 +262,7 @@ const animationsConfig = {
   staggerConfig,
   inViewConfig,
   getAnimationProps,
-  hvacAnimations,
+  serviceAnimations,
   animationUtils,
   animationClasses,
   timing

@@ -1,6 +1,6 @@
 /**
- * HVAC-themed SVG Icons Collection
- * Professional icons for heating, cooling, and HVAC services
+ * Business Service Icons Collection
+ * Professional icons for general service businesses
  */
 
 import React from 'react';
@@ -47,8 +47,8 @@ export const ThermometerIcon = ({ size = 24, className = '', color = 'currentCol
   </svg>
 );
 
-// HVAC Wrench Icon
-export const HVACWrenchIcon = ({ size = 24, className = '', color = 'currentColor' }: IconProps) => (
+// Wrench/Tool Icon
+export const WrenchIcon = ({ size = 24, className = '', color = 'currentColor' }: IconProps) => (
   <svg
     width={size}
     height={size}
@@ -216,10 +216,10 @@ export const LocationIcon = ({ size = 24, className = '', color = 'currentColor'
 );
 
 // Export all icons
-export const HVACIcons = {
+export const ServiceIcons = {
   AirConditioner: AirConditionerIcon,
   Thermometer: ThermometerIcon,
-  Wrench: HVACWrenchIcon,
+  Wrench: WrenchIcon,
   Furnace: FurnaceIcon,
   Snowflake: SnowflakeIcon,
   Ductwork: DuctworkIcon,
@@ -230,4 +230,4 @@ export const HVACIcons = {
   Location: LocationIcon,
 } as const;
 
-export type HVACIconName = keyof typeof HVACIcons;
+export type ServiceIconName = keyof typeof ServiceIcons;

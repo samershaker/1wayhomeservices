@@ -137,11 +137,11 @@ export const BackgroundOrnaments: React.FC<BackgroundOrnamentsProps> = ({
   );
 };
 
-// Predefined ornament sets for common HVAC contexts
+// Predefined ornament sets for common service contexts
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type IconComponents = Record<string, React.ComponentType<{ size?: number }>>;
 
-export const HVACOrnamentSets = {
+export const ServiceOrnamentSets = {
   heating: (iconComponents: IconComponents) => [
     <iconComponents.Thermostat key="thermostat-1" size={60} />,
     <iconComponents.Heating key="heating-1" size={80} />,

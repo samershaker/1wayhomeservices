@@ -1,6 +1,6 @@
 /**
  * Animation Components Export Index
- * Centralizes all animation components for easy importing throughout the HVAC website
+ * Centralizes all animation components for easy importing throughout the Business website
  */
 
 // Text Effects Components
@@ -23,7 +23,7 @@ export {
   RevealOnScroll,
   StaggeredReveal,
   StaggerItem,
-  HVACEquipmentAnimation,
+  EquipmentAnimation,
   ScrollCounter,
   ScrollRevealImage
 } from './scroll-animations';
