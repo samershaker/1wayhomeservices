@@ -19,12 +19,12 @@ export const brandColors = {
   },
 
   // ═══════════════════════════════════════════════════════════════
-  // SECONDARY - Teal (Freshness, Growth, Balance)
+  // SECONDARY - Collapses into the Primary blue family (monochromatic brand)
   // ═══════════════════════════════════════════════════════════════
   secondary: {
-    DEFAULT: '#0D4E53',     // Teal accent for highlights
-    light: '#157A82',       // Lighter teal
-    dark: '#083A3E',        // Darker teal
+    DEFAULT: '#2557A8',     // Same hex as primary — one brand color
+    light: '#6B9FE8',       // Brighter blue for text accents (AA on dark)
+    dark: '#1A3D82',        // Same as primary-dark
   },
 
   // ═══════════════════════════════════════════════════════════════

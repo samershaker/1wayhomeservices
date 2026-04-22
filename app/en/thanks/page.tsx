@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ThanksPage() {
   return (
-    <main className="min-h-screen bg-[var(--color-black)] bg-noise flex items-center justify-center px-6 py-20">
+    <div className="min-h-screen bg-noise flex items-center justify-center px-6 pt-20 pb-20">
       <div className="max-w-xl text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--color-secondary)]/20 mb-6">
           <svg className="w-8 h-8 text-[var(--color-secondary-light)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -34,6 +34,6 @@ export default function ThanksPage() {
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

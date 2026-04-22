@@ -54,7 +54,8 @@ export const SERVICES = [
     ],
     image: '/images/services/tax-filing.jpg',
     featured: true,
-    badge: null
+    badge: null,
+    landingUrl: '/en/personal-tax-filing/'
   },
   {
     id: 'payroll-tax',

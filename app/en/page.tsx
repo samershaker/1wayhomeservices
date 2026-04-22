@@ -18,9 +18,6 @@ import {
   UserIcon,
   HomeIcon,
   BuildingIcon,
-  MenuIcon,
-  XIcon,
-  MailIcon,
 } from "@/components/ui/icons/page-icons";
 import {
   STATS,
@@ -95,141 +92,6 @@ function AnimateSlideIn({ children, className = "", direction = "left", delay = 
     >
       {children}
     </motion.div>
-  );
-}
-
-/* ═══ MOBILE STICKY CTA ═══ */
-function MobileStickyCTA() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Skip scroll listener entirely on desktop — component returns null anyway.
-    if (typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches) return;
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 800);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  if (!isVisible) return null;
-
-  return (
-    <div
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-black/95 backdrop-blur-xl border-t border-white/10"
-      style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
-    >
-      <div className="flex gap-2">
-        <a href={CONTACT_INFO.phoneHref} className="btn-primary flex-1 justify-center text-sm !py-3">
-          <PhoneIcon size={16} /> Call Now
-        </a>
-        <a href="#contact" className="btn-secondary flex-1 justify-center text-sm !py-3">
-          <MailIcon size={16} /> Message
-        </a>
-      </div>
-    </div>
-  );
-}
-
-/* ═══ NAVIGATION ═══ */
-function Navigation() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const toggleBtnRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const closeMenu = () => {
-    setMobileMenuOpen(false);
-    toggleBtnRef.current?.focus();
-  };
-
-  useEffect(() => {
-    if (!mobileMenuOpen) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        closeMenu();
-        return;
-      }
-      if (e.key === 'Tab' && menuRef.current) {
-        const focusables = menuRef.current.querySelectorAll<HTMLElement>('a, button');
-        if (focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    };
-    document.addEventListener('keydown', handleKey);
-    // Focus first link when menu opens
-    menuRef.current?.querySelector<HTMLElement>('a, button')?.focus();
-    return () => document.removeEventListener('keydown', handleKey);
-  }, [mobileMenuOpen]);
-
-  return (
-    <>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
-      >
-        Skip to main content
-      </a>
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/70 border-b border-white/5" aria-label="Main navigation">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/en/" className="flex items-center gap-3">
-            <img src="/images/logo-color.png" alt="1Way Home Services home" className="h-10 w-auto" width={120} height={40} />
-          </Link>
-
-          {/* Desktop navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-sm text-gray-300 hover:text-white transition-colors py-3">Services</a>
-            <a href="#about" className="text-sm text-gray-300 hover:text-white transition-colors py-3">About</a>
-            <a href="#process" className="text-sm text-gray-300 hover:text-white transition-colors py-3">Process</a>
-            <a href="#faq" className="text-sm text-gray-300 hover:text-white transition-colors py-3">FAQ</a>
-            <a href={CONTACT_INFO.phoneHref} className="btn-primary text-sm !py-2 !px-5">
-              <span className="sr-only">Call us at {CONTACT_INFO.phone}</span>
-              <span aria-hidden="true">{icons.phone}</span>
-              <span className="hidden sm:inline">Call Now</span>
-            </a>
-          </div>
-
-          {/* Mobile: Hamburger + Phone */}
-          <div className="md:hidden flex items-center gap-2">
-            <button
-              ref={toggleBtnRef}
-              className="min-h-11 min-w-11 flex items-center justify-center text-white hover:text-blue-400 transition-colors"
-              onClick={() => setMobileMenuOpen((v) => !v)}
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            >
-              {mobileMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
-            </button>
-            <a href={CONTACT_INFO.phoneHref} className="btn-primary text-sm !py-2 !px-4" aria-label={`Call ${CONTACT_INFO.phone}`}>
-              <span aria-hidden="true">{icons.phone}</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Mobile menu dropdown */}
-        {mobileMenuOpen && (
-          <div id="mobile-menu" ref={menuRef} className="md:hidden bg-black/95 border-t border-white/5">
-            <div className="flex flex-col p-6 gap-4">
-              <a href="#services" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Services</a>
-              <a href="#about" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>About</a>
-              <a href="#process" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Process</a>
-              <a href="#faq" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>FAQ</a>
-              <a href="#contact" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Contact</a>
-            </div>
-          </div>
-        )}
-      </nav>
-    </>
   );
 }
 
@@ -497,6 +359,7 @@ function ServicesSection() {
 
 /* ═══ SERVICE CARD - Reusable card with image ═══ */
 function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[number]; isLarge?: boolean }) {
+  const href = 'landingUrl' in service && service.landingUrl ? service.landingUrl : `/en/services/${service.slug}/`;
   return (
     <motion.div
       variants={fadeUp}
@@ -504,7 +367,7 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
       className={isLarge ? 'md:col-span-1' : ''}
     >
       <Link
-        href={`/en/services/${service.slug}/`}
+        href={href}
         className="glass-card h-full flex flex-col group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black relative overflow-hidden"
         aria-label={`Learn more about ${service.name}`}
       >
@@ -521,7 +384,7 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
 
           {/* Badge */}
           {service.badge && (
-            <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full bg-teal-500/90 text-white backdrop-blur-sm">
+            <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full bg-[var(--color-secondary)]/90 text-white backdrop-blur-sm">
               {service.badge}
             </span>
           )}
@@ -529,7 +392,7 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-grow">
-          <h4 className="font-display text-lg font-bold mb-2 text-white tracking-tight group-hover:text-teal-400 transition-colors">
+          <h4 className="font-display text-lg font-bold mb-2 text-white tracking-tight group-hover:text-[var(--color-secondary-light)] transition-colors">
             {service.name}
           </h4>
           <p className="text-sm text-gray-300 leading-relaxed flex-grow mb-4">
@@ -540,7 +403,7 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
           <ul className="space-y-1.5 mb-4">
             {service.features.slice(0, 2).map((feature, i) => (
               <li key={i} className="flex items-center gap-2 text-xs text-gray-300">
-                <svg className="w-3.5 h-3.5 text-teal-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-3.5 h-3.5 text-[var(--color-secondary-light)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 {feature}
@@ -549,13 +412,13 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
           </ul>
 
           {/* CTA */}
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-teal-400 group-hover:gap-3 transition-all">
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-secondary-light)] group-hover:gap-3 transition-all">
             Learn more {icons.arrowRight}
           </span>
         </div>
 
         {/* Hover glow effect */}
-        <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-teal-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-[var(--color-secondary)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       </Link>
     </motion.div>
   );
@@ -608,8 +471,12 @@ function AboutSection() {
                   key={member.id}
                   className="glass-card p-7 flex items-start gap-6 group"
                   whileHover={{ x: 8, transition: { duration: 0.3 } }}
+                  spellCheck={false}
+                  data-gramm="false"
+                  data-gramm_editor="false"
+                  data-enable-grammarly="false"
                 >
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-teal-500/20 to-primary/5 ring-2 ring-teal-500/20 group-hover:ring-teal-500/40 transition-all">
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-[var(--color-secondary)]/20 to-primary/5 ring-2 ring-[var(--color-secondary)]/20 group-hover:ring-[var(--color-secondary)]/40 transition-all">
                     <picture>
                       <source srcSet={member.image.replace('.PNG', '.webp')} type="image/webp" />
                       <img
@@ -624,7 +491,7 @@ function AboutSection() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-display text-xl font-bold text-white mb-1">{member.name}</h3>
-                    <p className="text-sm text-teal-400 font-semibold mb-3">{member.credentials}</p>
+                    <p className="text-sm text-[var(--color-secondary-light)] font-semibold mb-3">{member.credentials}</p>
                     <p className="text-sm text-gray-300 leading-relaxed">{member.bio}</p>
                   </div>
                 </motion.div>
@@ -670,16 +537,16 @@ function ProcessSection() {
             >
               {/* Connecting line between steps */}
               {i < PROCESS_STEPS.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-teal-500/30 to-transparent" />
+                <div className="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-[var(--color-secondary)]/30 to-transparent" />
               )}
 
               <motion.div
-                className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-500/10 border border-teal-500/30 mb-6 group"
+                className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/30 mb-6 group"
                 whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
               >
                 <span className="stat-number font-display text-2xl font-extrabold">{step.step}</span>
                 {/* Glow on hover */}
-                <div className="absolute inset-0 rounded-full bg-teal-500/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity" />
+                <div className="absolute inset-0 rounded-full bg-[var(--color-secondary)]/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity" />
               </motion.div>
               <h3 className="font-display text-base font-bold text-white mb-3">{step.title}</h3>
               <p className="text-sm text-gray-300 leading-relaxed">{step.description}</p>
@@ -724,20 +591,20 @@ function TestimonialSection() {
             onBlur={() => setPaused(false)}
           >
             {/* Decorative quote marks */}
-            <div className="absolute top-6 left-6 text-6xl text-teal-500/10 font-serif" aria-hidden="true">&ldquo;</div>
-            <div className="absolute bottom-6 right-6 text-6xl text-teal-500/10 font-serif" aria-hidden="true">&rdquo;</div>
+            <div className="absolute top-6 left-6 text-6xl text-[var(--color-secondary)]/10 font-serif" aria-hidden="true">&ldquo;</div>
+            <div className="absolute bottom-6 right-6 text-6xl text-[var(--color-secondary)]/10 font-serif" aria-hidden="true">&rdquo;</div>
 
             <div aria-live="polite" aria-atomic="true">
               <div className="flex items-center justify-center gap-1 mb-6" aria-hidden="true">
                 {STAR_INDICES.map((i) => (
-                  <span key={i} className="text-teal-400">{icons.star}</span>
+                  <span key={i} className="text-[var(--color-secondary-light)]">{icons.star}</span>
                 ))}
               </div>
               <blockquote className="text-xl md:text-2xl text-gray-200 font-display font-medium leading-relaxed mb-8 relative z-10 min-h-[8rem]">
                 &ldquo;{current.quote}&rdquo;
               </blockquote>
               <div className="flex items-center justify-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center" aria-hidden="true">
+                <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)]/20 flex items-center justify-center" aria-hidden="true">
                   {icons.user}
                 </div>
                 <div className="text-left">
@@ -789,7 +656,7 @@ function FAQSection() {
                 className="glass-card p-6 group"
                 whileHover={{ x: i % 2 === 0 ? 8 : -8, transition: { duration: 0.3 } }}
               >
-                <h3 className="font-display text-base font-semibold text-white mb-3 group-hover:text-teal-400 transition-colors">{item.question}</h3>
+                <h3 className="font-display text-base font-semibold text-white mb-3 group-hover:text-[var(--color-secondary-light)] transition-colors">{item.question}</h3>
                 <p className="text-sm text-gray-300 leading-relaxed">{item.answer}</p>
               </motion.div>
             </AnimateSlideIn>
@@ -815,7 +682,7 @@ function CTABanner() {
         >
           <div className="relative rounded-2xl overflow-hidden glass-card-premium p-10 md:p-16 text-center">
             {/* Enhanced gradient with teal accent */}
-            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-primary/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-secondary)]/10 via-primary/10 to-transparent" />
             <div className="absolute inset-0 animate-glow-pulse-teal" />
             <div className="absolute inset-0 bg-noise opacity-50" />
 
@@ -846,74 +713,22 @@ function CTABanner() {
   );
 }
 
-/* ═══ FOOTER ═══ */
-function Footer() {
-  return (
-    <footer className="border-t border-white/5 py-16 px-6 bg-noise" aria-label="Site footer">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-12">
-          <div>
-            <img src="/images/logo-color.png" alt="1Way Home Services" className="h-10 w-auto mb-4" width={120} height={40} />
-            <p className="text-sm text-gray-300">
-              Tax Preparation & Real Estate Services serving El Cajon, San Diego, and surrounding areas.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-display font-bold text-sm mb-4 text-teal-400">Services</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Tax Planning & Advisory · Tax Filing · Payroll Taxes<br />
-              Bookkeeping · IRS Audit Support · Real Estate Tax<br />
-              Mortgage Consulting
-            </p>
-          </div>
-          <div>
-            <h3 className="font-display font-bold text-sm mb-4 text-teal-400">Contact</h3>
-            <div className="space-y-2 text-sm text-gray-300">
-              <p>
-                {icons.phone}{' '}
-                <a href={CONTACT_INFO.phoneHref} className="hover:text-white transition-colors">
-                  {CONTACT_INFO.phone}
-                </a>
-              </p>
-              <p>{icons.mapPin} {CONTACT_INFO.address}</p>
-              <p>Hours: By Appointment</p>
-            </div>
-          </div>
-        </div>
-        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center">
-          <p className="text-xs text-gray-300">
-            © {new Date().getFullYear()} 1Way Home Services. All rights reserved.
-          </p>
-          <nav aria-label="Legal" className="flex items-center gap-4 text-xs text-gray-300">
-            <Link href="/en/privacy/" className="hover:text-white transition-colors">Privacy</Link>
-            <span aria-hidden="true" className="text-gray-500">·</span>
-            <Link href="/en/terms/" className="hover:text-white transition-colors">Terms</Link>
-          </nav>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 /* ═══ PAGE ASSEMBLY ═══ */
+/* Nav, footer, and mobile sticky CTA are provided by app/en/layout.tsx
+   so they persist across every page under /en/. */
 export default function HomePage() {
   return (
     <>
-      <MobileStickyCTA />
-      <Navigation />
-      <main id="main-content" className="bg-[var(--color-black)] pb-24 md:pb-0">
-        <HeroSection />
-        <StatsBand />
-        <TrustBadgesSection />
-        <ServicesSection />
-        <AboutSection />
-        <ProcessSection />
-        <TestimonialSection />
-        <ContactFormSection />
-        <FAQSection />
-        <CTABanner />
-        <Footer />
-      </main>
+      <HeroSection />
+      <StatsBand />
+      <TrustBadgesSection />
+      <ServicesSection />
+      <AboutSection />
+      <ProcessSection />
+      <TestimonialSection />
+      <ContactFormSection />
+      <FAQSection />
+      <CTABanner />
     </>
   );
 }

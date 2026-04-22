@@ -10,6 +10,10 @@ interface SpringConfig {
   mass: number;
 }
 
+// Shared motion constants used across the site
+export const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
+export const SCROLL_VIEWPORT = { once: true, margin: "-80px" as const };
+
 // Motion Primitives Animation Presets
 export const motionPresets = {
   // Fade up animation for sections (using hidden/visible for variants)

@@ -18,9 +18,12 @@
   --color-primary-glow:  rgba(37, 87, 168, 0.25);
 
   /* Secondary — Teal (Freshness, Growth) */
-  --color-secondary:       #0D4E53;   /* Teal accent for highlights */
-  --color-secondary-light: #157A82;   /* Lighter teal */
-  --color-secondary-dark:  #083A3E;   /* Darker teal */
+  /* Secondary collapses into the blue family — one brand color, monochromatic.
+     secondary == primary; secondary-light is a brighter blue so highlight
+     gradients still have motion and AA text contrast on dark backgrounds. */
+  --color-secondary:       #2557A8;
+  --color-secondary-light: #6B9FE8;   /* Brighter blue (AA on dark) */
+  --color-secondary-dark:  #1A3D82;
 
   /* Navy — Dark Blue Sections */
   --color-navy:       #0A2342;   /* Section backgrounds, cards */
@@ -163,7 +166,7 @@ h6 {
 }
 
 /* ═══ Section labels (eyebrow text) ═══ */
-/* Uses secondary-light (#157A82) for WCAG AA contrast on dark backgrounds */
+/* Uses secondary-light (#6B9FE8) for WCAG AA contrast on dark backgrounds */
 .text-label {
   font-family: var(--font-body);
   font-size: 0.8125rem;
@@ -286,7 +289,7 @@ h6 {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  background: var(--color-primary);
   color: white;
   font-family: var(--font-body);
   font-weight: 600;
@@ -305,7 +308,7 @@ h6 {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px var(--color-primary-glow);
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, #7AAFF0 100%);
+  background: var(--color-primary-light);
 }
 
 .btn-secondary {
@@ -447,7 +450,7 @@ h6 {
 .btn-teal:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(13, 78, 83, 0.35);
-  background: linear-gradient(135deg, var(--color-secondary-light) 0%, #1A8F98 100%);
+  background: linear-gradient(135deg, var(--color-secondary-light) 0%, #A0C4F0 100%);
 }
 
 /* Legacy alias */
@@ -474,7 +477,7 @@ h6 {
 .btn-gold:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(13, 78, 83, 0.35);
-  background: linear-gradient(135deg, var(--color-secondary-light) 0%, #1A8F98 100%);
+  background: linear-gradient(135deg, var(--color-secondary-light) 0%, #A0C4F0 100%);
 }
 
 /* ═══ Image zoom on hover ═══ */

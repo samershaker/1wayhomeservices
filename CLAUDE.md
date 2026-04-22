@@ -84,7 +84,7 @@ public/
 
 **Brand Colors** (inspired by client's current site https://1wayhomeservices.com/):
 - Primary: `#2557A8` (royal blue — trust, professionalism)
-- Secondary: `#0D4E53` (teal — freshness, growth)
+- Secondary: `#2557A8` (collapsed into primary — monochromatic brand)
 - Navy: `#0A2342` (dark blue — authority, depth) - used for dark sections
 - Neutrals: Black (`#0A0A0A`), white (`#F9FAFB`), grays
 
@@ -141,7 +141,7 @@ The website uses a generic, semantic theming system that makes components reusab
 
 **Color Semantics:**
 - `primary` - Main brand color (blue #2557A8 for 1Way Home Services)
-- `secondary` - Secondary accent color (teal #0D4E53)
+- `secondary` - Collapses into primary (#2557A8); `secondary-light` #6B9FE8 is the brighter accent variant for text on dark
 - `navy` - Dark section backgrounds (#0A2342)
 - `neutral` - Grayscale for neutral elements
 
