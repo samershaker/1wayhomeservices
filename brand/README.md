@@ -21,9 +21,9 @@ Colors inspired by the client's current website: https://1wayhomeservices.com/
 
 | Color | Hex | RGB | Usage |
 |-------|-----|-----|-------|
-| **Teal** | `#0D4E53` | `rgb(13, 78, 83)` | Accent highlights, secondary emphasis |
-| Teal Light | `#157A82` | `rgb(21, 122, 130)` | Lighter accent |
-| Teal Dark | `#083A3E` | `rgb(8, 58, 62)` | Darker accent |
+| **Deep Purple** | `#7E57C2` | `rgb(126, 87, 194)` | Accent highlights, secondary emphasis |
+| Purple Light | `#B39DDB` | `rgb(179, 157, 219)` | Lighter accent (AA on dark backgrounds) |
+| Purple Dark | `#5E35B1` | `rgb(94, 53, 177)` | Darker accent, pressed states |
 
 ### Navy (Dark Sections)
 
@@ -65,10 +65,10 @@ All colors are defined as CSS variables in `app/globals.css`:
   --color-primary-light: #3068C8;
   --color-primary-dark: #1A3D82;
 
-  /* Secondary (Teal) */
-  --color-secondary: #0D4E53;
-  --color-secondary-light: #157A82;
-  --color-secondary-dark: #083A3E;
+  /* Secondary (Deep Purple) */
+  --color-secondary: #7E57C2;
+  --color-secondary-light: #B39DDB;
+  --color-secondary-dark: #5E35B1;
 
   /* Navy */
   --color-navy: #0A2342;
@@ -113,7 +113,7 @@ Colors are mapped in `tailwind.config.ts`:
 ## Color Psychology
 
 - **Blue (#2557A8)**: Trust, professionalism, stability - ideal for financial services
-- **Teal (#0D4E53)**: Growth, freshness, balance - adds warmth to the professional palette
+- **Deep Purple (#7E57C2)**: Distinction, warmth, premium feel — differentiates from typical financial-services blue
 - **Navy (#0A2342)**: Authority, depth, sophistication - premium feel for dark sections
 - **Black/Gray**: Neutrality, elegance, modernity - clean, professional aesthetic
 

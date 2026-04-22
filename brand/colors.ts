@@ -19,12 +19,12 @@ export const brandColors = {
   },
 
   // ═══════════════════════════════════════════════════════════════
-  // SECONDARY - Teal (Freshness, Growth, Balance)
+  // SECONDARY - Deep Purple (Distinction, Premium, Warmth)
   // ═══════════════════════════════════════════════════════════════
   secondary: {
-    DEFAULT: '#0D4E53',     // Teal accent for highlights
-    light: '#157A82',       // Lighter teal
-    dark: '#083A3E',        // Darker teal
+    DEFAULT: '#7E57C2',     // Deep purple accent for highlights
+    light: '#B39DDB',       // Lighter purple (AA on dark)
+    dark: '#5E35B1',        // Darker purple
   },
 
   // ═══════════════════════════════════════════════════════════════
