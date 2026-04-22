@@ -1,0 +1,119 @@
+# 1Way Home Services
+
+> 1Way Home Services is a tax preparation and real estate advisory firm based in El Cajon, California, serving individuals, families, small businesses, and real estate investors across San Diego County. The team combines tax expertise with real estate and mortgage consulting under one roof, so clients get coordinated advice on filings, IRS matters, property transactions, and financing decisions.
+
+Now in its sixth year of business, the firm reports 100+ repeat customers and a 100% client satisfaction rate. Leadership pairs Sam Eram (CFO, tax and financial services) with Bakhan Kareem (CEO, real estate and mortgage consulting), giving clients a single point of contact for tax filings, IRS representation, bookkeeping, property transactions, and loan decisions. Initial consultations are always free and offered in person at the El Cajon office, by phone, or via Zoom.
+
+## Services
+
+### Tax Planning & Advisory
+Strategic tax planning to minimize liability and maximize deductions for individuals and businesses year-round. Engagements include year-round tax strategy development, deduction optimization, business structure analysis, and quarterly estimated tax planning. Pricing varies by scope; the initial consultation is free.
+Link: https://1wayhomeservices.vercel.app/en/services/tax-planning/
+
+### Tax Filing
+Complete federal and state tax return preparation for individuals and businesses. Every return includes a line-by-line review, itemized vs. standard deduction optimization, and e-file with direct deposit for the fastest refund. Individual returns start at $199; complex returns (self-employed, rental income, multi-state) are quoted in writing after a free review.
+Link: https://1wayhomeservices.vercel.app/en/services/tax-filing/
+
+### Personal Tax Filing (dedicated landing page)
+A focused experience for individuals and families in El Cajon, San Diego, and surrounding areas. Highlights flat, upfront pricing (no per-form surprises), 6+ years of experience, IRS e-file authorization, and year-round IRS notice response at no extra cost.
+Link: https://1wayhomeservices.vercel.app/en/personal-tax-filing/
+
+### Payroll Tax Filing
+Quarterly and annual payroll tax filings, W-2 and 1099 preparation, payroll tax calculations, and compliance management for small businesses. Starting at $150/month; pricing varies by employee count.
+Link: https://1wayhomeservices.vercel.app/en/services/payroll-tax/
+
+### Bookkeeping
+Monthly financial record keeping, bank reconciliation, financial statement preparation, and expense categorization so owners can focus on running the business. Starting at $200/month; pricing varies by transaction volume.
+Link: https://1wayhomeservices.vercel.app/en/services/bookkeeping/
+
+### IRS Help & Audit Support
+Professional representation during IRS audits, notices, and collections. Includes audit representation, notice response management, payment plan negotiation, and penalty abatement requests. Free consultation for audit cases.
+Link: https://1wayhomeservices.vercel.app/en/services/irs-help/
+
+### Real Estate Tax Support
+Tax strategy tailored to property owners and investors: capital gains planning, 1031 exchange guidance, depreciation strategies, and property sale tax planning. Free initial consultation.
+Link: https://1wayhomeservices.vercel.app/en/services/real-estate-tax/
+
+### Mortgage Consulting
+Loan pre-approval assistance, refinancing analysis, debt planning strategies, and home-buying guidance. Initial consultation at no charge.
+Link: https://1wayhomeservices.vercel.app/en/services/mortgage-consulting/
+
+## Pricing Approach
+
+1Way Home Services uses flat, upfront pricing on personal tax filing. Clients are quoted before work starts, with no per-form charges and no surprise add-ons. Standard individual returns start at $199. Complex situations — self-employed, rental income, multi-state, or bundled business returns — are reviewed for free and then quoted in writing so clients always know the cost in advance. Ongoing services (bookkeeping, payroll) are priced per month and scale with transaction volume or employee count.
+
+## Year-Round IRS Support
+
+Filing is not where the firm's responsibility ends. If a client receives an IRS notice or audit inquiry for a return 1Way Home Services prepared, the team responds on the client's behalf year-round at no additional cost. Notices can be forwarded to the firm, which will handle communication, explanation, and resolution directly with the IRS. This audit protection is included with tax filing engagements and is one of the firm's core differentiators.
+
+## How It Works
+
+1. **Schedule a free consultation** — in person at the El Cajon office, over the phone, or via Zoom.
+2. **Submit your tax paperwork** — send documents by email, secure upload, or in person; a tailored checklist is provided after the consultation.
+3. **File with confidence** — the team prepares the return, walks you through it line by line, and e-files with direct deposit.
+4. **Post-filing support** — year-round IRS notice response, amendment help, and planning for next year.
+
+## Team
+
+- **Sam Eram, Chief Financial Officer** — Tax preparation and financial services. Expert in tax planning, filing, and financial strategy for individuals and businesses.
+- **Bakhan Kareem, Chief Executive Officer** — Real estate and mortgage consulting. Leads real estate tax strategy and mortgage consulting for clients across San Diego.
+
+## Testimonials
+
+- **Jennifer R., Business Owner (El Cajon, CA)** — Service: Tax Planning & Business Formation. "Sam is the best! So welcoming and knows what he's doing. He's helped me with my taxes, running loan numbers, and starting my business. Great guy and helps with whatever you need when it comes to taxes, real estate, and business. I will keep coming back."
+- **Michael T., Real Estate Investor (San Diego, CA)** — Service: IRS Audit Defense. Result: saved $4,200 in penalties. "I was facing an IRS audit and didn't know where to turn. Sam represented me professionally and got the penalties completely waived. His expertise saved me over $4,200 in potential fines."
+- **Sarah K., Small Business Owner (La Mesa, CA)** — Service: Bookkeeping & Payroll. Result: saves 10+ hours per month. "As a small business owner, bookkeeping was taking up too much of my time. 1Way Home Services handles everything — from monthly reconciliation to quarterly tax filings. My financials have never been cleaner and I can focus on growing my business."
+- **David L., W-2 Employee (Santee, CA)** — Service: Individual Tax Filing. Result: additional $1,850 refund. "Fast, professional, and thorough. They completed my tax return in just 3 days and found deductions I didn't even know existed. Got back $1,850 more than I expected."
+- **Lisa M., Freelance Designer (El Cajon, CA)** — Service: Quarterly Tax Planning. Result: eliminated tax surprises. "Working as a freelance designer, my taxes were a mess. Sam helped me set up quarterly estimated payments and maximize my home office deduction. No more surprises at tax time."
+- **Robert & Patricia P., Property Investors (San Diego, CA)** — Service: 1031 Exchange Guidance. Result: tax-deferred $85,000 capital gain. "Bakhan guided us through a 1031 exchange on our investment property. His knowledge of real estate tax law saved us from a huge capital gains hit. The process was smooth and we reinvested tax-free."
+- **Amanda H., First-Time Homebuyer (El Cajon, CA)** — Service: Mortgage Consulting. Result: smooth first-home purchase. "Buying our first home was overwhelming, but the team at 1Way made the tax side simple. They explained mortgage interest deductions, property tax implications, and connected us with a great lender."
+
+## Frequently Asked Questions
+
+**How long does tax preparation take?** Most individual returns are completed within 5–7 business days after all documents are submitted. Straightforward W-2 returns often wrap up in 2–3 days. Complex returns (self-employed, rental property, multiple states) and business returns may take longer.
+
+**Do you offer virtual consultations?** Yes — consultations are available in person, by phone, or via Zoom to fit any schedule.
+
+**What areas do you serve?** Primarily El Cajon, San Diego, and surrounding San Diego County cities. Contact the office to confirm your location is within the service area.
+
+**Can you help with past-due tax returns?** Yes. The firm specializes in catching up on back taxes — one year or several — and can negotiate payment plans or penalty abatement with the IRS when needed.
+
+**What documents should I bring?** The essentials: W-2s, 1099s, mortgage interest (1098), charitable donation receipts, medical expense records over 7.5% of income, student loan interest statements, and the prior-year return. A full tailored checklist is sent after the free consultation.
+
+**What does it cost?** Individual returns start at $199 for standard situations. Complex returns are quoted in writing after a free initial review. No hidden fees and no per-form surprises.
+
+**Can I file if I'm missing some paperwork?** Yes. The firm can request transcripts from the IRS and help reconstruct records for missing W-2s, 1099s, or prior returns.
+
+**Do I have to come in person?** No. The full process can be handled virtually: Zoom consultation, secure document upload, remote review, and e-signature.
+
+**What if the IRS contacts me after filing?** Forward the notice — the firm responds on your behalf at no extra charge and handles communication, explanation, or resolution directly with the IRS.
+
+**What if I owe taxes?** The team will show exactly what is owed and the available options — installment plans, offer-in-compromise, hardship deferral — and help set up the one that fits the situation.
+
+## Office & Consultations
+
+- **Location:** El Cajon, San Diego, California
+- **Hours:** By appointment
+- **Consultation formats:** In person at the El Cajon office, by phone, or via Zoom
+- **Initial consultation:** Free
+
+## Contact
+
+- **Phone:** (619) 716-9193 (fastest response)
+- **Email:** info@1wayhomeservices.com
+- **Website:** https://1wayhomeservices.vercel.app
+- **Service area:** El Cajon, San Diego, and surrounding San Diego County cities
+
+## Key Pages
+
+- Home: https://1wayhomeservices.vercel.app/en/
+- Personal Tax Filing: https://1wayhomeservices.vercel.app/en/personal-tax-filing/
+- Tax Planning: https://1wayhomeservices.vercel.app/en/services/tax-planning/
+- Tax Filing: https://1wayhomeservices.vercel.app/en/services/tax-filing/
+- Payroll Tax: https://1wayhomeservices.vercel.app/en/services/payroll-tax/
+- Bookkeeping: https://1wayhomeservices.vercel.app/en/services/bookkeeping/
+- IRS Help: https://1wayhomeservices.vercel.app/en/services/irs-help/
+- Real Estate Tax: https://1wayhomeservices.vercel.app/en/services/real-estate-tax/
+- Mortgage Consulting: https://1wayhomeservices.vercel.app/en/services/mortgage-consulting/
+- Privacy Policy: https://1wayhomeservices.vercel.app/en/privacy/
+- Terms of Service: https://1wayhomeservices.vercel.app/en/terms/

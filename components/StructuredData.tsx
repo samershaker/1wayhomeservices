@@ -198,10 +198,50 @@ export function ServiceStructuredData({ serviceId }: { serviceId: string }) {
 }
 
 /**
+ * Breadcrumb structured data (reusable)
+ * Pass an ordered list of { name, url }. Relative URLs are resolved against
+ * NEXT_PUBLIC_SITE_URL (falling back to the canonical Vercel preview URL)
+ * so search engines always receive absolute URLs as required by schema.org.
+ */
+export function BreadcrumbStructuredData({
+  items,
+}: {
+  items: { name: string; url: string }[];
+}) {
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ||
+    'https://1wayhomeservices.vercel.app';
+
+  const toAbsolute = (url: string) => {
+    if (/^https?:\/\//i.test(url)) return url;
+    const path = url.startsWith('/') ? url : `/${url}`;
+    return `${siteUrl}${path}`;
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: toAbsolute(item.url),
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
+  );
+}
+
+/**
  * FAQ structured data
  * Use on FAQ section or page
  */
-export function FAQStructuredData({ faqs }: { faqs: Array<{ question: string; answer: string }> }) {
+export function FAQStructuredData({ faqs }: { faqs: ReadonlyArray<{ readonly question: string; readonly answer: string }> }) {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

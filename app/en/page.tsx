@@ -30,6 +30,7 @@ import {
 } from "@/lib/constants";
 import { ContactFormSection } from '@/components/ui/ContactForm';
 import { TrustBadges, GoogleReviewsBadge, CompactTrustIndicator } from '@/components/ui/TrustBadges';
+import { FAQStructuredData } from '@/components/StructuredData';
 
 /* ═══ Animations ═══ */
 import { motionPresets } from "@/lib/animations";
@@ -641,6 +642,7 @@ function TestimonialSection() {
 function FAQSection() {
   return (
     <section id="faq" className="py-24 md:py-32 px-6 section-gradient-navy bg-noise">
+      <FAQStructuredData faqs={FAQ_ITEMS} />
       <div className="max-w-3xl mx-auto">
         <AnimateOnScroll className="text-center mb-16">
           <p className="text-label mb-4">FAQ</p>

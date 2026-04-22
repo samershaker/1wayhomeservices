@@ -1,45 +1,39 @@
-# 1Way Home Services - Tax & Real Estate Services El Cajon
+# 1Way Home Services
 
-Professional tax preparation, IRS audit support, bookkeeping, and real estate tax consulting in El Cajon and San Diego, CA. 6 years in business, 100+ repeat customers, 100% satisfaction rate. Dual expertise in tax and real estate/mortgage services for homeowners, investors, and businesses.
+> 1Way Home Services is a tax preparation and real estate advisory firm based in El Cajon, California, serving individuals, families, small businesses, and real estate investors across San Diego County. The team combines tax expertise with real estate and mortgage consulting under one roof, so clients get coordinated advice on filings, IRS matters, property transactions, and financing decisions.
 
-## Contact
-(619) 716-9193 | info@1wayhomeservices.com | https://1wayhomeservices.com
-Location: El Cajon, San Diego County, CA | Hours: By Appointment
-Free consultations available (in-person, phone, Zoom)
+Now in its sixth year, the firm is led by CFO Sam Eram (tax preparation and financial services) and CEO Bakhan Kareem (real estate and mortgage consulting). The practice offers seven core services, flat and upfront pricing on tax filing, and year-round IRS notice support at no additional cost. Initial consultations are free and available in person, by phone, or via Zoom. The fastest way to reach the firm is by phone at (619) 716-9193.
 
-## Services & Pricing
+## Services
 
-Tax Planning & Advisory - Year-round strategy, deduction optimization, business structure analysis, quarterly planning | Free consultation
-Tax Filing - Federal/state returns for individuals & businesses, e-file, direct deposit | From $199 (5-7 day turnaround)
-Payroll Tax - Quarterly filings, W-2/1099 prep, compliance | From $150/mo
-Bookkeeping - Monthly records, reconciliation, P&L, Balance Sheet | From $200/mo (saves 10+ hours/month)
-IRS Help & Audit - Audit representation, notice response, penalty abatement, payment plans | Free consultation
-Real Estate Tax - Capital gains planning, 1031 exchanges, depreciation strategies | Free consultation
-Mortgage Consulting - Pre-approval, refinancing, debt planning, home buying | Free consultation
+- [Tax Planning & Advisory](https://1wayhomeservices.vercel.app/en/services/tax-planning/): Strategic tax planning to minimize liability and maximize deductions for individuals and businesses year-round. Free initial consultation.
+- [Tax Filing](https://1wayhomeservices.vercel.app/en/services/tax-filing/): Complete federal and state tax return preparation for individuals and businesses, with e-file and direct deposit. Starting at $199.
+- [Personal Tax Filing (Individuals & Families)](https://1wayhomeservices.vercel.app/en/personal-tax-filing/): Dedicated landing page for individual and family returns with flat-rate pricing, IRS audit protection, and a full FAQ.
+- [Payroll Tax Filing](https://1wayhomeservices.vercel.app/en/services/payroll-tax/): Quarterly and annual payroll tax filings, W-2 and 1099 preparation, and compliance management for businesses. From $150/month.
+- [Bookkeeping](https://1wayhomeservices.vercel.app/en/services/bookkeeping/): Monthly financial record keeping, bank reconciliation, and financial statement preparation. From $200/month.
+- [IRS Help & Audit Support](https://1wayhomeservices.vercel.app/en/services/irs-help/): Professional representation during IRS audits, notices, and collections, including penalty abatement and payment plan negotiation. Free consultation for audit cases.
+- [Real Estate Tax Support](https://1wayhomeservices.vercel.app/en/services/real-estate-tax/): Capital gains planning, 1031 exchanges, depreciation strategies, and property sale tax planning for investors. Free initial consultation.
+- [Mortgage Consulting](https://1wayhomeservices.vercel.app/en/services/mortgage-consulting/): Loan pre-approval, refinancing analysis, debt planning, and home buying guidance. Initial consultation at no charge.
 
 ## Team
-Sam Eram, CFO - CPA, Tax Advisor (tax planning, filing, IRS representation)
-Bakhan Kareem, CEO - Real Estate & Mortgage Specialist (1031 exchanges, property tax)
 
-## Service Area
-El Cajon, San Diego, La Mesa, Santee, San Diego County | Consultations: In-person, phone, Zoom
+- **Sam Eram** — Chief Financial Officer · Tax Preparation & Financial Services
+- **Bakhan Kareem** — Chief Executive Officer · Real Estate & Mortgage Consulting
 
-## Why Choose Us
-100% satisfaction over 6 years | Tax + real estate expertise | Bilingual (English, Arabic) | Flexible consultations | Post-filing audit support | Year-round planning | IRS Authorized E-File Provider
+## Pages
 
-## Client Results
-Saved $4,200 in IRS penalties | +$1,850 tax refunds via deduction optimization | Deferred $85,000 capital gains (1031 exchange) | 5-7 day tax filing | 10+ hours/month saved on bookkeeping
+- [Home](https://1wayhomeservices.vercel.app/en/): Overview of services, team, process, and testimonials.
+- [Personal Tax Filing](https://1wayhomeservices.vercel.app/en/personal-tax-filing/): Dedicated landing page with flat-rate pricing, audit protection guarantee, and 8-question FAQ.
+- [Privacy Policy](https://1wayhomeservices.vercel.app/en/privacy/)
+- [Terms of Service](https://1wayhomeservices.vercel.app/en/terms/)
 
-## Credentials
-CPA Certified | IRS Authorized E-File Provider | 6+ years experience | 100+ successful resolutions | 1031 exchange specialist
+## Contact
 
-## Common Searches
-Tax preparer El Cajon, CPA San Diego, IRS audit help, 1031 exchange advisor, real estate tax, bookkeeping, payroll tax, capital gains, mortgage pre-approval, tax advisor for investors
+- **Phone:** (619) 716-9193 — best for fastest response
+- **Email:** info@1wayhomeservices.com
+- **Service area:** El Cajon, San Diego, and surrounding San Diego County cities (La Mesa, Santee, and nearby areas)
+- **Hours:** By appointment; free initial consultations available in person, by phone, or via Zoom
 
-## How It Works
-1. Free consultation 2. Submit paperwork 3. We file everything 4. Post-filing support
+## Optional
 
-Specialties: Individual & business taxes, IRS representation, real estate tax (1031, capital gains, depreciation), bookkeeping, payroll, mortgage consulting | Languages: English, Arabic
-
----
-https://1wayhomeservices.com | 4.9/5 Google reviews (87+) | Est. 2020
+- [Full business context (llms-full.txt)](https://1wayhomeservices.vercel.app/llms-full.txt)

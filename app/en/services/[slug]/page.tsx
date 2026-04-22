@@ -9,7 +9,7 @@ import {
   TESTIMONIALS,
   FAQ_ITEMS,
 } from '@/lib/constants';
-import { ServiceStructuredData } from '@/components/StructuredData';
+import { ServiceStructuredData, BreadcrumbStructuredData } from '@/components/StructuredData';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -66,6 +66,13 @@ export default async function ServicePage({
   return (
     <div className="bg-noise">
       <ServiceStructuredData serviceId={service.id} />
+      <BreadcrumbStructuredData
+        items={[
+          { name: 'Home', url: '/en/' },
+          { name: 'Services', url: '/en/#services' },
+          { name: service.name, url: `/en/services/${service.slug}/` },
+        ]}
+      />
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-28 pb-12">

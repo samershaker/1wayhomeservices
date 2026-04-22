@@ -1,25 +1,99 @@
-# Robots.txt for 1Way Home Services
-# https://1wayhomeservices.com
+# ============================================================================
+# robots.txt for 1Way Home Services
+# Site: https://1wayhomeservices.vercel.app
+# Purpose: Control crawler access for search engines and AI assistants
+# ============================================================================
 
-# Allow all crawlers
+# ----------------------------------------------------------------------------
+# Default policy: allow all well-behaved crawlers to index public pages.
+# Block Next.js build artifacts, any private/internal paths, and the
+# post-submission "thanks" page (which is also noindex at the page level).
+# ----------------------------------------------------------------------------
 User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://1wayhomeservices.com/sitemap.xml
-
-# Crawl delay (optional - prevents server overload)
+Disallow: /en/thanks/
+Disallow: /_next/
+Disallow: /api/
+Disallow: /private/
+Disallow: /admin/
 Crawl-delay: 1
 
-# Disallow admin/private areas (if any)
-Disallow: /api/
+# ----------------------------------------------------------------------------
+# Major search engines — explicitly welcomed.
+# ----------------------------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+Disallow: /en/thanks/
 Disallow: /_next/
-Disallow: /private/
+Disallow: /api/
 
-# Allow important pages
-Allow: /en/
-Allow: /services/
-Allow: /images/
+User-agent: Bingbot
+Allow: /
+Disallow: /en/thanks/
+Disallow: /_next/
+Disallow: /api/
 
-# Host preference
-Host: https://1wayhomeservices.com
+# ----------------------------------------------------------------------------
+# AI crawlers — explicitly allowed.
+# The client wants their content discoverable by AI assistants and answer
+# engines (ChatGPT, Claude, Perplexity, Google AI Overviews, etc.), so each
+# major AI/LLM crawler gets its own allow block below.
+# ----------------------------------------------------------------------------
+
+# OpenAI — training crawler
+User-agent: GPTBot
+Allow: /
+
+# OpenAI — on-demand fetcher triggered by ChatGPT users
+User-agent: ChatGPT-User
+Allow: /
+
+# OpenAI — SearchGPT / ChatGPT search index
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic — Claude training/indexing crawler
+User-agent: ClaudeBot
+Allow: /
+
+# Anthropic — legacy training crawler identifier
+User-agent: anthropic-ai
+Allow: /
+
+# Anthropic — on-demand fetcher for Claude citations
+User-agent: Claude-Web
+Allow: /
+
+# Common Crawl — powers many downstream LLM datasets
+User-agent: CCBot
+Allow: /
+
+# Perplexity AI — answer engine crawler
+User-agent: PerplexityBot
+Allow: /
+
+# Google — opt-in signal for Gemini / Vertex AI / AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# Apple — opt-in signal for Apple Intelligence training
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon — Alexa / Amazon LLM crawler
+User-agent: Amazonbot
+Allow: /
+
+# ByteDance — Doubao / TikTok search crawler
+User-agent: Bytespider
+Allow: /
+
+# Meta — Facebook/Meta AI crawler
+User-agent: FacebookBot
+Allow: /
+
+# ----------------------------------------------------------------------------
+# Sitemap and canonical host hint.
+# ----------------------------------------------------------------------------
+Sitemap: https://1wayhomeservices.vercel.app/sitemap.xml
+Host: 1wayhomeservices.vercel.app
