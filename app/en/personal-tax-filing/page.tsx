@@ -21,8 +21,8 @@ const config: LandingConfig = {
     subheadline:
       "Fast, accurate tax returns for individuals and families across El Cajon, San Diego, and surrounding areas. Flat pricing, no surprises, and year-round IRS support if you need it.",
     trustRow: [
+      `★ ${CONTACT_INFO.reviewRating.toFixed(1)} · ${CONTACT_INFO.reviewCount}+ Google Reviews`,
       "6+ Years Experience",
-      "IRS E-File Authorized",
       "Flat, Upfront Pricing",
     ],
   },

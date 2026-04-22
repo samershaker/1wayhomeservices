@@ -227,7 +227,11 @@ export const CONTACT_INFO = {
   website: 'https://1wayhomeservices.vercel.app',
   yearsInBusiness: 6,
   repeatCustomers: 100,
-  satisfactionRate: 100
+  satisfactionRate: 100,
+  // Google Business — verified review data (source of truth for JSON-LD + trust badges)
+  reviewCount: 416,
+  reviewRating: 5.0,
+  googleReviewsUrl: 'https://www.google.com/search?q=1wayhomeservices+el+cajon#lrd=0x80d959b762e109ad:0x48deced3a0f716dc,1',
 } as const;
 
 // Stats

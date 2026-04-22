@@ -4,6 +4,8 @@
  * Increases trust and credibility for professional services
  */
 
+import { CONTACT_INFO } from '@/lib/constants';
+
 const ACCENT = 'text-[var(--color-secondary-light)]';
 
 export function TrustBadges({ variant = 'horizontal', size = 'md' }: { variant?: 'horizontal' | 'vertical' | 'grid'; size?: 'sm' | 'md' | 'lg' }) {
@@ -132,30 +134,42 @@ export function TrustBadges({ variant = 'horizontal', size = 'md' }: { variant?:
 
 /**
  * Compact Trust Indicator (for hero / under CTA)
+ * Rating + review count sourced from CONTACT_INFO (verified Google Business data).
  */
 export function CompactTrustIndicator() {
   return (
-    <div className="flex items-center gap-2 text-xs text-gray-300">
+    <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-gray-300">
+      <a
+        href={CONTACT_INFO.googleReviewsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1 hover:text-white transition-colors"
+        aria-label={`${CONTACT_INFO.reviewRating.toFixed(1)} out of 5 from ${CONTACT_INFO.reviewCount} Google reviews`}
+      >
+        <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <span className="font-semibold">{CONTACT_INFO.reviewRating.toFixed(1)}</span>
+        <span>({CONTACT_INFO.reviewCount}+ Google reviews)</span>
+      </a>
+      <span aria-hidden="true" className="text-gray-500">•</span>
       <span>6+ Years Experience</span>
-      <span className="text-gray-500">•</span>
-      <span>Free Initial Consultation</span>
-      <span className="text-gray-500">•</span>
-      <span>IRS E-File Authorized</span>
     </div>
   );
 }
 
 /**
  * Google Reviews Badge — outbound link to Google Business listing.
- * No hard-coded rating; swap to a real widget once the business profile is verified.
+ * Rating and review count come from CONTACT_INFO (verified Google Business data).
  */
 export function GoogleReviewsBadge() {
   return (
     <a
-      href="https://www.google.com/search?q=1wayhomeservices+el+cajon"
+      href={CONTACT_INFO.googleReviewsUrl}
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center gap-3 px-4 py-3 rounded-lg bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all group"
+      aria-label={`${CONTACT_INFO.reviewRating.toFixed(1)} out of 5 stars from ${CONTACT_INFO.reviewCount} Google reviews. Opens in a new tab.`}
     >
       <div className="w-8 h-8">
         <svg viewBox="0 0 48 48" className="w-full h-full" aria-hidden="true">
@@ -167,8 +181,15 @@ export function GoogleReviewsBadge() {
       </div>
 
       <div>
-        <p className="text-sm font-semibold">Find us on Google</p>
-        <p className="text-xs text-gray-300">Read reviews · Get directions</p>
+        <div className="flex items-center gap-1 mb-1" aria-hidden="true">
+          {[...Array(5)].map((_, i) => (
+            <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          ))}
+        </div>
+        <p className="text-sm font-semibold">{CONTACT_INFO.reviewRating.toFixed(1)} out of 5</p>
+        <p className="text-xs text-gray-300">{CONTACT_INFO.reviewCount}+ Google reviews</p>
       </div>
 
       <svg className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

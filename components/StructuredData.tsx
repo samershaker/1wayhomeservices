@@ -84,6 +84,14 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
         jobTitle: member.title,
         description: member.bio,
       })),
+      // Verified Google Business data (see CONTACT_INFO.googleReviewsUrl)
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: CONTACT_INFO.reviewRating.toFixed(1),
+        reviewCount: String(CONTACT_INFO.reviewCount),
+        bestRating: '5',
+        worstRating: '1',
+      },
     };
     schemas.push(localBusinessSchema);
   }
