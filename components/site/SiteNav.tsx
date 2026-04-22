@@ -97,7 +97,7 @@ export function SiteNav() {
           <div className="md:hidden flex items-center gap-2">
             <button
               ref={toggleBtnRef}
-              className="min-h-11 min-w-11 flex items-center justify-center text-white hover:text-blue-400 transition-colors"
+              className="min-h-11 min-w-11 flex items-center justify-center text-white hover:text-[var(--color-primary-light)] transition-colors"
               onClick={() => setMobileMenuOpen((v) => !v)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
@@ -124,7 +124,7 @@ export function SiteNav() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-white py-2 text-lg hover:text-blue-400 transition-colors"
+                  className="text-white py-2 text-lg hover:text-[var(--color-primary-light)] transition-colors"
                   onClick={closeMenu}
                 >
                   {link.label}
@@ -132,7 +132,7 @@ export function SiteNav() {
               ))}
               <Link
                 href="/en/#contact"
-                className="text-white py-2 text-lg hover:text-blue-400 transition-colors"
+                className="text-white py-2 text-lg hover:text-[var(--color-primary-light)] transition-colors"
                 onClick={closeMenu}
               >
                 Contact
