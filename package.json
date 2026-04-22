@@ -33,13 +33,19 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.0.1",
+    "autoprefixer": "^10.5.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "15.5.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2"
   },
-  "keywords": ["tax", "real-estate", "homes", "next.js"],
+  "keywords": [
+    "tax",
+    "real-estate",
+    "homes",
+    "next.js"
+  ],
   "author": "1Way Home Services",
   "license": "MIT",
   "notes": {
