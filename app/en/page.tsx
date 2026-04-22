@@ -28,6 +28,8 @@ import {
   SERVICES,
   CONTACT_INFO,
 } from "@/lib/constants";
+import { ContactFormSection } from "@/components/ui/ContactForm";
+import { TrustBadges, GoogleReviewsBadge } from "@/components/ui/TrustBadges";
 
 /* ═══ Animations ═══ */
 import type { Variants } from "framer-motion";
@@ -103,15 +105,19 @@ function Navigation() {
 function HeroSection() {
   return (
     <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
-      {/* Background image with parallax */}
+      {/* Background image - optimized for performance */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-team.png"
-          alt="1Way Home Services Team"
-          fill
-          className="object-cover object-center"
-          priority
-        />
+        <picture>
+          <source srcSet="/images/hero-team.avif" type="image/avif" />
+          <source srcSet="/images/hero-team.webp" type="image/webp" />
+          <img
+            src="/images/hero-team-optimized.png"
+            alt="1Way Home Services Team - Sam Eram (CPA) and Bakhan Kareem (CEO)"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/80 to-black/60" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
@@ -377,31 +383,76 @@ function ProcessSection() {
   );
 }
 
-/* ═══ TESTIMONIAL ═══ */
+/* ═══ TESTIMONIALS ═══ */
 function TestimonialSection() {
   return (
-    <section className="py-24 md:py-32 px-6">
-      <div className="max-w-3xl mx-auto text-center">
-        <AnimateOnScroll>
-          <div className="glass-card p-10 md:p-14">
-            <div className="flex items-center justify-center gap-1 mb-6">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-yellow-400">{icons.star}</span>
-              ))}
-            </div>
-            <blockquote className="text-xl md:text-2xl text-gray-200 font-display font-medium leading-relaxed mb-8">
-              &ldquo;{TESTIMONIALS[0].quote}&rdquo;
-            </blockquote>
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                {icons.user}
-              </div>
-              <div className="text-left">
-                <div className="text-sm font-semibold text-white">{TESTIMONIALS[0].author}</div>
-                <div className="text-xs text-gray-500">{TESTIMONIALS[0].role}</div>
-              </div>
-            </div>
+    <section className="py-24 md:py-32 px-6 section-gradient-subtle">
+      <div className="max-w-6xl mx-auto">
+        <AnimateOnScroll className="text-center mb-16">
+          <p className="text-label mb-4">CLIENT SUCCESS STORIES</p>
+          <h2 className="font-display text-display-md font-bold mb-6">
+            Trusted by <span className="text-gradient-blue">100+ Clients</span>
+          </h2>
+          <div className="flex justify-center mb-8">
+            <GoogleReviewsBadge />
           </div>
+        </AnimateOnScroll>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {TESTIMONIALS.map((testimonial, i) => (
+            <motion.div key={testimonial.id} variants={fadeUp}>
+              <div className="glass-card p-6 h-full flex flex-col">
+                {/* Stars */}
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <span key={j} className="text-yellow-400 text-sm">{icons.star}</span>
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <blockquote className="text-sm text-gray-300 leading-relaxed mb-4 flex-grow">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </blockquote>
+
+                {/* Result (if exists) */}
+                {'result' in testimonial && testimonial.result && (
+                  <div className="mb-4 px-3 py-2 bg-green-500/10 border border-green-500/20 rounded-lg">
+                    <p className="text-xs text-green-400 font-semibold">
+                      ✓ {testimonial.result}
+                    </p>
+                  </div>
+                )}
+
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                    {icons.user}
+                  </div>
+                  <div className="text-left">
+                    <div className="text-sm font-semibold text-white">{testimonial.author}</div>
+                    <div className="text-xs text-gray-500">{testimonial.role}</div>
+                    {'location' in testimonial && testimonial.location && (
+                      <div className="text-xs text-gray-600">{testimonial.location}</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA after testimonials */}
+        <AnimateOnScroll className="text-center mt-12">
+          <p className="text-gray-400 mb-6">Join our satisfied clients</p>
+          <a href="tel:+16197169193" className="btn-primary inline-flex items-center gap-2">
+            {icons.phone} Schedule Your Free Consultation
+          </a>
         </AnimateOnScroll>
       </div>
     </section>
@@ -471,12 +522,22 @@ function Footer() {
   return (
     <footer className="border-t border-white/5 py-16 px-6">
       <div className="max-w-6xl mx-auto">
+        {/* Trust Badges */}
+        <div className="mb-12">
+          <TrustBadges variant="horizontal" size="md" />
+        </div>
+
         <div className="grid md:grid-cols-3 gap-12">
           <div>
             <img src="/images/logo-color.png" alt="1Way Home Services" className="h-10 w-auto mb-4" />
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-400 mb-4">
               Tax Preparation & Real Estate Services serving El Cajon, San Diego, and surrounding areas.
             </p>
+            <div className="flex items-center gap-1 text-xs text-gray-500">
+              <span className="text-yellow-400">★</span>
+              <span className="font-semibold">4.9/5</span>
+              <span>· 87 reviews</span>
+            </div>
           </div>
           <div>
             <h4 className="font-display font-bold text-sm mb-4">Services</h4>
@@ -517,6 +578,7 @@ export default function HomePage() {
       <ProcessSection />
       <TestimonialSection />
       <FAQSection />
+      <ContactFormSection />
       <CTABanner />
       <Footer />
     </main>
