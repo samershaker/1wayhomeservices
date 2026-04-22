@@ -32,7 +32,9 @@ export const SERVICES = [
       'Business structure analysis',
       'Quarterly estimated tax planning'
     ],
-    images: ['tax-planning.jpg']
+    image: '/images/services/tax-planning.jpg',
+    featured: true,
+    badge: 'Most Popular'
   },
   {
     id: 'tax-filing',
@@ -50,7 +52,9 @@ export const SERVICES = [
       'Itemized deductions',
       'E-file with direct deposit'
     ],
-    images: ['tax-filing.jpg']
+    image: '/images/services/tax-filing.jpg',
+    featured: true,
+    badge: null
   },
   {
     id: 'payroll-tax',
@@ -68,7 +72,9 @@ export const SERVICES = [
       'Payroll tax calculations',
       'Compliance management'
     ],
-    images: ['payroll.jpg']
+    image: '/images/services/payroll.jpg',
+    featured: false,
+    badge: 'For Business'
   },
   {
     id: 'bookkeeping',
@@ -86,7 +92,9 @@ export const SERVICES = [
       'Financial statement preparation',
       'Expense categorization'
     ],
-    images: ['bookkeeping.jpg']
+    image: '/images/services/bookkeeping.jpg',
+    featured: false,
+    badge: null
   },
   {
     id: 'irs-help',
@@ -104,7 +112,9 @@ export const SERVICES = [
       'Payment plan negotiation',
       'Penalty abatement requests'
     ],
-    images: ['irs-help.jpg']
+    image: '/images/services/irs-help.jpg',
+    featured: false,
+    badge: 'Expert Help'
   },
   {
     id: 'real-estate-tax',
@@ -122,7 +132,9 @@ export const SERVICES = [
       'Depreciation strategies',
       'Property sale tax planning'
     ],
-    images: ['real-estate.jpg']
+    image: '/images/services/real-estate.jpg',
+    featured: true,
+    badge: 'For Investors'
   },
   {
     id: 'mortgage-consulting',
@@ -140,7 +152,9 @@ export const SERVICES = [
       'Debt planning strategies',
       'Home buying guidance'
     ],
-    images: ['mortgage.jpg']
+    image: '/images/services/mortgage.jpg',
+    featured: true,
+    badge: 'Free Consult'
   }
 ] as const;
 
@@ -199,14 +213,17 @@ export const CONTACT_INFO = {
   tagline: 'Tax Preparation & Real Estate Services',
   phone: '(619) 716-9193',
   phoneFormatted: '(619) 716-9193',
+  phoneTel: '+16197169193',
+  phoneHref: 'tel:+16197169193',
   email: 'info@1wayhomeservices.com',
+  emailHref: 'mailto:info@1wayhomeservices.com',
   address: 'El Cajon, San Diego, California',
   hours: {
     regular: 'By Appointment',
     consultation: 'Free Initial Consultation Available'
   },
   serviceArea: 'El Cajon, San Diego, and surrounding areas',
-  website: 'https://1wayhomeservices.com',
+  website: 'https://1wayhomeservices.vercel.app',
   yearsInBusiness: 6,
   repeatCustomers: 100,
   satisfactionRate: 100

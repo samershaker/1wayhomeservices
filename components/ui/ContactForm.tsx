@@ -3,11 +3,16 @@
 /**
  * Professional Contact Form Component
  * Features: Real-time validation, service selection, mobile-optimized
- * TODO: Install react-hook-form and zod for production: npm install react-hook-form zod @hookform/resolvers
+ *
+ * Submission strategy:
+ *   1. If NEXT_PUBLIC_FORMSPREE_ID is set, POST to Formspree.
+ *   2. Otherwise fall back to a mailto: compose so leads still reach inbox.
  */
 
 import { useState, FormEvent } from 'react';
-import { SERVICES } from '@/lib/constants';
+import { SERVICES, CONTACT_INFO } from '@/lib/constants';
+
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
 interface FormData {
   name: string;
@@ -90,13 +95,27 @@ export function ContactForm() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
+    // Fallback: no Formspree configured — open the user's email client with a pre-filled message
+    if (!FORMSPREE_ID) {
+      const body = [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Phone: ${formData.phone || '—'}`,
+        `Service: ${formData.service}`,
+        '',
+        formData.message,
+      ].join('\n');
+      const mailto = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(`Website inquiry — ${formData.service}`)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+      setErrors({});
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      // TODO: Replace with actual Formspree endpoint
-      // 1. Go to https://formspree.io
-      // 2. Create account with info@1wayhomeservices.com
-      // 3. Create form, get endpoint ID
-      // 4. Replace 'YOUR_FORM_ID' below with actual ID
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,17 +124,14 @@ export function ContactForm() {
       });
 
       if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
-        setErrors({});
-
-        // Track conversion event (if analytics is set up)
         if (typeof window !== 'undefined' && window.gtag) {
           window.gtag('event', 'form_submission', {
             event_category: 'Contact',
             event_label: formData.service,
           });
         }
+        window.location.href = '/en/thanks/';
+        return;
       } else {
         setSubmitStatus('error');
       }
@@ -187,7 +203,7 @@ export function ContactForm() {
       {/* Phone Field */}
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-          Phone Number <span className="text-gray-400 text-xs">(Optional)</span>
+          Phone Number <span className="text-gray-300 text-xs">(Optional)</span>
         </label>
         <input
           type="tel"
@@ -258,7 +274,7 @@ export function ContactForm() {
         {errors.message && (
           <p role="alert" className="mt-1 text-sm text-red-400">{errors.message}</p>
         )}
-        <p className="mt-1 text-xs text-gray-400">
+        <p className="mt-1 text-xs text-gray-300">
           {formData.message.length}/500 characters
         </p>
       </div>
@@ -295,12 +311,12 @@ export function ContactForm() {
       {submitStatus === 'error' && (
         <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-center">
           <p className="font-semibold">Oops! Something went wrong.</p>
-          <p className="text-sm mt-1">Please try again or call us at (619) 716-9193.</p>
+          <p className="text-sm mt-1">Please try again or call us at {CONTACT_INFO.phone}.</p>
         </div>
       )}
 
       {/* Privacy Note */}
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-gray-300 text-center">
         We respect your privacy. Your information will only be used to contact you about our services.
       </p>
     </form>
@@ -344,8 +360,8 @@ export function ContactFormSection() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-300 mb-1">Phone</p>
-                    <a href="tel:+16197169193" className="text-lg font-semibold text-white hover:text-[var(--color-accent)] transition-colors">
-                      (619) 716-9193
+                    <a href={CONTACT_INFO.phoneHref} className="text-lg font-semibold text-white hover:text-[var(--color-accent)] transition-colors">
+                      {CONTACT_INFO.phone}
                     </a>
                   </div>
                 </div>
@@ -358,8 +374,8 @@ export function ContactFormSection() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-300 mb-1">Email</p>
-                    <a href="mailto:info@1wayhomeservices.com" className="text-lg font-semibold text-white hover:text-[var(--color-accent)] transition-colors">
-                      info@1wayhomeservices.com
+                    <a href={CONTACT_INFO.emailHref} className="text-lg font-semibold text-white hover:text-[var(--color-accent)] transition-colors">
+                      {CONTACT_INFO.email}
                     </a>
                   </div>
                 </div>
@@ -399,12 +415,12 @@ export function ContactFormSection() {
             </div>
 
             <div className="glass-card p-8 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/10">
-              <h4 className="font-display text-lg font-bold mb-3">Prefer to Call?</h4>
+              <h3 className="font-display text-lg font-bold mb-3">Prefer to Call?</h3>
               <p className="text-gray-300 text-sm mb-4">
                 Speak directly with a tax professional. We're here to answer your questions.
               </p>
-              <a href="tel:+16197169193" className="btn-primary inline-block">
-                Call (619) 716-9193
+              <a href={CONTACT_INFO.phoneHref} className="btn-primary inline-block">
+                Call {CONTACT_INFO.phone}
               </a>
             </div>
           </div>

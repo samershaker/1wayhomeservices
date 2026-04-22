@@ -163,13 +163,14 @@ h6 {
 }
 
 /* ═══ Section labels (eyebrow text) ═══ */
+/* Uses secondary-light (#157A82) for WCAG AA contrast on dark backgrounds */
 .text-label {
   font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-secondary);
+  color: var(--color-secondary-light);
 }
 
 /* ═══ Subheadings ═══ */

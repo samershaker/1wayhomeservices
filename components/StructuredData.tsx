@@ -12,17 +12,19 @@ interface StructuredDataProps {
 export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
   const schemas = [];
 
+  const siteUrl = CONTACT_INFO.website;
+
   // LocalBusiness Schema
   if (type === 'local-business' || type === 'all') {
     const localBusinessSchema = {
       '@context': 'https://schema.org',
       '@type': 'ProfessionalService',
-      '@id': 'https://1wayhomeservices.com/#organization',
+      '@id': `${siteUrl}/#organization`,
       name: CONTACT_INFO.businessName,
       alternateName: '1Way Home Services',
       description: 'Professional tax preparation, bookkeeping, and real estate tax services in El Cajon and San Diego County',
-      url: 'https://1wayhomeservices.com',
-      telephone: CONTACT_INFO.phone,
+      url: siteUrl,
+      telephone: CONTACT_INFO.phoneTel,
       email: CONTACT_INFO.email,
       priceRange: '$$',
       address: {
@@ -60,10 +62,6 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
         opens: '09:00',
         closes: '18:00',
       },
-      sameAs: [
-        'https://www.facebook.com/1wayhomeservices',
-        'https://www.linkedin.com/company/1wayhomeservices',
-      ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Tax and Real Estate Services',
@@ -86,14 +84,6 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
         jobTitle: member.title,
         description: member.bio,
       })),
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        ratingCount: '87',
-        reviewCount: '87',
-        bestRating: '5',
-        worstRating: '1',
-      },
     };
     schemas.push(localBusinessSchema);
   }
@@ -104,10 +94,10 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: CONTACT_INFO.businessName,
-      url: 'https://1wayhomeservices.com',
-      logo: 'https://1wayhomeservices.com/images/logo-color.png',
+      url: siteUrl,
+      logo: `${siteUrl}/images/logo-color.png`,
       description: 'Tax preparation and real estate services in San Diego County',
-      telephone: CONTACT_INFO.phone,
+      telephone: CONTACT_INFO.phoneTel,
       email: CONTACT_INFO.email,
       address: {
         '@type': 'PostalAddress',
@@ -117,7 +107,7 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
       },
       contactPoint: {
         '@type': 'ContactPoint',
-        telephone: CONTACT_INFO.phone,
+        telephone: CONTACT_INFO.phoneTel,
         contactType: 'Customer Service',
         areaServed: 'US',
         availableLanguage: ['English', 'Arabic'],
@@ -136,13 +126,13 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
           '@type': 'ListItem',
           position: 1,
           name: 'Home',
-          item: 'https://1wayhomeservices.com',
+          item: siteUrl,
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Services',
-          item: 'https://1wayhomeservices.com#services',
+          item: `${siteUrl}/#services`,
         },
       ],
     };
@@ -178,7 +168,7 @@ export function ServiceStructuredData({ serviceId }: { serviceId: string }) {
     provider: {
       '@type': 'ProfessionalService',
       name: CONTACT_INFO.businessName,
-      telephone: CONTACT_INFO.phone,
+      telephone: CONTACT_INFO.phoneTel,
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'El Cajon',

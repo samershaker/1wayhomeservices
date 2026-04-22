@@ -2,9 +2,12 @@
 
 > Tax Preparation & Real Estate Services | El Cajon & San Diego, CA
 
+**Status:** Prospective Client Project
+**Preview:** https://1wayhomeservices.vercel.app
+
 ## Color Palette
 
-Colors extracted from the live website: https://1wayhomeservices.com/
+Colors inspired by the client's current website: https://1wayhomeservices.com/
 
 ### Primary Colors
 

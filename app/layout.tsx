@@ -23,13 +23,15 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://1wayhomeservices.vercel.app';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://1wayhomeservices.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "1Way Home Services | Tax Preparation & Real Estate",
     template: "%s | 1Way Home Services"
   },
-  description: "1Way Home Services — Tax Preparation, Real Estate Tax, and Mortgage Consulting in El Cajon and San Diego. 6 years, 100+ repeat customers, 100% satisfaction.",
+  description: "1Way Home Services — Tax Preparation, Real Estate Tax, and Mortgage Consulting in El Cajon and San Diego.",
   keywords: [
     "tax preparation San Diego",
     "tax advisor El Cajon",
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://1wayhomeservices.com',
+    url: SITE_URL,
     siteName: '1Way Home Services',
     title: '1Way Home Services | Tax Preparation & Real Estate',
     description: "Tax Preparation, Real Estate Tax, and Mortgage Consulting serving El Cajon and San Diego.",
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: 'https://1wayhomeservices.com',
+    canonical: SITE_URL,
   },
 };
 

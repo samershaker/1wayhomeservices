@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ClockIcon,
   DollarIcon,
@@ -28,10 +29,10 @@ import {
   TESTIMONIALS,
   FAQ_ITEMS,
   SERVICES,
+  CONTACT_INFO,
 } from "@/lib/constants";
 import { ContactFormSection } from '@/components/ui/ContactForm';
 import { TrustBadges, GoogleReviewsBadge, CompactTrustIndicator } from '@/components/ui/TrustBadges';
-import { BackgroundImage } from '@/components/ui/ResponsiveImage';
 
 /* ═══ Animations ═══ */
 import { motionPresets } from "@/lib/animations";
@@ -102,6 +103,8 @@ function MobileStickyCTA() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Skip scroll listener entirely on desktop — component returns null anyway.
+    if (typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches) return;
     const handleScroll = () => {
       setIsVisible(window.scrollY > 800);
     };
@@ -112,9 +115,12 @@ function MobileStickyCTA() {
   if (!isVisible) return null;
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-black/95 backdrop-blur-xl border-t border-white/10">
+    <div
+      className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-black/95 backdrop-blur-xl border-t border-white/10"
+      style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
+    >
       <div className="flex gap-2">
-        <a href="tel:+16197169193" className="btn-primary flex-1 justify-center text-sm !py-3">
+        <a href={CONTACT_INFO.phoneHref} className="btn-primary flex-1 justify-center text-sm !py-3">
           <PhoneIcon size={16} /> Call Now
         </a>
         <a href="#contact" className="btn-secondary flex-1 justify-center text-sm !py-3">
@@ -128,6 +134,41 @@ function MobileStickyCTA() {
 /* ═══ NAVIGATION ═══ */
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const toggleBtnRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const closeMenu = () => {
+    setMobileMenuOpen(false);
+    toggleBtnRef.current?.focus();
+  };
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeMenu();
+        return;
+      }
+      if (e.key === 'Tab' && menuRef.current) {
+        const focusables = menuRef.current.querySelectorAll<HTMLElement>('a, button');
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', handleKey);
+    // Focus first link when menu opens
+    menuRef.current?.querySelector<HTMLElement>('a, button')?.focus();
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [mobileMenuOpen]);
 
   return (
     <>
@@ -150,8 +191,8 @@ function Navigation() {
             <a href="#about" className="text-sm text-gray-300 hover:text-white transition-colors py-3">About</a>
             <a href="#process" className="text-sm text-gray-300 hover:text-white transition-colors py-3">Process</a>
             <a href="#faq" className="text-sm text-gray-300 hover:text-white transition-colors py-3">FAQ</a>
-            <a href="tel:+16197169193" className="btn-primary text-sm !py-2 !px-5">
-              <span className="sr-only">Call us at </span>
+            <a href={CONTACT_INFO.phoneHref} className="btn-primary text-sm !py-2 !px-5">
+              <span className="sr-only">Call us at {CONTACT_INFO.phone}</span>
               <span aria-hidden="true">{icons.phone}</span>
               <span className="hidden sm:inline">Call Now</span>
             </a>
@@ -160,15 +201,16 @@ function Navigation() {
           {/* Mobile: Hamburger + Phone */}
           <div className="md:hidden flex items-center gap-2">
             <button
+              ref={toggleBtnRef}
               className="min-h-11 min-w-11 flex items-center justify-center text-white hover:text-blue-400 transition-colors"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen((v) => !v)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
-              aria-label="Toggle navigation menu"
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
               {mobileMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
             </button>
-            <a href="tel:+16197169193" className="btn-primary text-sm !py-2 !px-4" aria-label="Call (619) 716-9193">
+            <a href={CONTACT_INFO.phoneHref} className="btn-primary text-sm !py-2 !px-4" aria-label={`Call ${CONTACT_INFO.phone}`}>
               <span aria-hidden="true">{icons.phone}</span>
             </a>
           </div>
@@ -176,13 +218,13 @@ function Navigation() {
 
         {/* Mobile menu dropdown */}
         {mobileMenuOpen && (
-          <div id="mobile-menu" className="md:hidden bg-black/95 border-t border-white/5">
+          <div id="mobile-menu" ref={menuRef} className="md:hidden bg-black/95 border-t border-white/5">
             <div className="flex flex-col p-6 gap-4">
-              <a href="#services" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Services</a>
-              <a href="#about" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>About</a>
-              <a href="#process" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Process</a>
-              <a href="#faq" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
-              <a href="#contact" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+              <a href="#services" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Services</a>
+              <a href="#about" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>About</a>
+              <a href="#process" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Process</a>
+              <a href="#faq" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>FAQ</a>
+              <a href="#contact" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Contact</a>
             </div>
           </div>
         )}
@@ -193,28 +235,35 @@ function Navigation() {
 
 /* ═══ HERO WITH WORD-BY-WORD REVEAL ═══ */
 function HeroSection() {
+  const prefersReducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const textY = useTransform(scrollYProgress, [0, 0.5], ["0%", "10%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  // Respect prefers-reduced-motion: skip parallax + fade, keep content stable.
+  const textY = useTransform(scrollYProgress, [0, 0.5], prefersReducedMotion ? ["0%", "0%"] : ["0%", "10%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], prefersReducedMotion ? [1, 1] : [1, 0]);
 
   // Word-by-word reveal for the headline
   const headlineWords = ["Helping", "You", "Claim"];
   const highlightWords = ["Every", "Deduction", "Possible"];
 
   return (
-    <BackgroundImage
-      basePath="/images/hero-team"
-      alt=""
-      overlay="gradient"
-      priority={true}
-      className="min-h-[100vh] flex items-center justify-center bg-noise"
-    >
-      <div ref={containerRef} className="max-w-4xl mx-auto px-6 text-center">
+    <section className="relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/images/hero-banner.png"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          fetchPriority="high"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/80 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+      </div>
+      <div className="relative z-10 min-h-[100vh] flex items-center justify-center bg-noise">
+        <div ref={containerRef} className="max-w-4xl mx-auto px-6 text-center">
         <motion.div
           style={{ y: textY, opacity }}
           className="relative z-10"
@@ -298,7 +347,7 @@ function HeroSection() {
             transition={{ duration: 1, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <motion.a
-              href="tel:+16197169193"
+              href={CONTACT_INFO.phoneHref}
               className="btn-primary text-base !py-3 !px-8"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.98 }}
@@ -324,8 +373,9 @@ function HeroSection() {
             <CompactTrustIndicator />
           </motion.div>
         </motion.div>
+        </div>
       </div>
-    </BackgroundImage>
+    </section>
   );
 }
 
@@ -381,30 +431,17 @@ function TrustBadgesSection() {
   );
 }
 
-/* ═══ SERVICES - with staggered card animations ═══ */
+/* ═══ SERVICES - Two Category Layout with Images ═══ */
 function ServicesSection() {
-  // Icon mapping utility
-  const getServiceIcon = (iconName: string) => {
-    const iconMap: Record<string, React.ReactNode> = {
-      'clock': icons.clock,
-      'dollar': icons.dollar,
-      'calendar': icons.calendar,
-      'document': icons.document,
-      'shield': icons.shield,
-      'home': icons.home,
-      'building': icons.building,
-    };
-    return iconMap[iconName] || icons.clock;
-  };
-
-  // Color mapping for service cards - using teal for first card
-  const serviceColors = ['text-teal-400', 'text-blue-400', 'text-emerald-400', 'text-purple-400', 'text-sky-400', 'text-blue-400', 'text-emerald-400'];
-  const serviceCTAs = ['Get Tax Guidance', 'Start Your Return', 'Business Services', 'Organize Your Books', 'IRS Assistance', 'Real Estate Tax', 'Mortgage Help'];
+  // Split services by category
+  const taxServices = SERVICES.filter(s => s.category === 'tax');
+  const realEstateServices = SERVICES.filter(s => s.category === 'real-estate');
 
   return (
     <section id="services" className="py-24 md:py-32 px-6 section-gradient-navy bg-noise relative">
       <div className="max-w-6xl mx-auto">
-        <AnimateOnScroll className="text-center mb-20">
+        {/* Section Header */}
+        <AnimateOnScroll className="text-center mb-16">
           <p className="text-label mb-3">What We Do</p>
           <h2 className="font-display text-display-md font-bold mb-4">
             Full-Service <span className="text-gradient-teal">Tax & Real Estate</span>
@@ -414,47 +451,113 @@ function ServicesSection() {
           </p>
         </AnimateOnScroll>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.1 } },
-          }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {SERVICES.map((service, i) => (
-            <motion.div
-              key={service.id}
-              variants={fadeUp}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-            >
-              <a
-                href="tel:+16197169193"
-                className="glass-card p-7 h-full flex flex-col group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black relative overflow-hidden"
-                aria-label={`${service.name} - ${service.description}. Call to learn more.`}
-              >
-                {/* Hover glow effect */}
-                <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+        {/* TAX SERVICES */}
+        <div className="mb-20">
+          <AnimateOnScroll className="mb-10">
+            <h3 className="font-display text-2xl font-bold text-white mb-2">Tax Services</h3>
+            <p className="text-gray-300">Professional tax preparation and planning for individuals & businesses</p>
+          </AnimateOnScroll>
 
-                <div className={`${serviceColors[i]} mb-4 icon-glow w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center transition-all relative z-10 group-hover:scale-110`} aria-hidden="true">
-                  {getServiceIcon(service.icon)}
-                </div>
-                <h3 className="font-display text-lg font-bold mb-3 text-white tracking-tight relative z-10">{service.name}</h3>
-                <p className="text-sm text-gray-300 leading-relaxed flex-grow mb-5 relative z-10">{service.description}</p>
-                <span className="link-underline inline-flex items-center gap-2 text-sm font-semibold text-teal-400 relative z-10">
-                  {serviceCTAs[i]} {icons.arrowRight}
-                </span>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {taxServices.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </motion.div>
+        </div>
 
-                {/* Bottom accent line on hover */}
-                <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-teal-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </a>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* REAL ESTATE SERVICES */}
+        <div>
+          <AnimateOnScroll className="mb-10">
+            <h3 className="font-display text-2xl font-bold text-white mb-2">Real Estate Services</h3>
+            <p className="text-gray-300">Property investment guidance and mortgage consulting</p>
+          </AnimateOnScroll>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+            className="grid md:grid-cols-2 gap-6"
+          >
+            {realEstateServices.map((service) => (
+              <ServiceCard key={service.id} service={service} isLarge />
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
+  );
+}
+
+/* ═══ SERVICE CARD - Reusable card with image ═══ */
+function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[number]; isLarge?: boolean }) {
+  return (
+    <motion.div
+      variants={fadeUp}
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      className={isLarge ? 'md:col-span-1' : ''}
+    >
+      <Link
+        href={`/en/services/${service.slug}/`}
+        className="glass-card h-full flex flex-col group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black relative overflow-hidden"
+        aria-label={`Learn more about ${service.name}`}
+      >
+        {/* Image */}
+        <div className="relative h-44 overflow-hidden">
+          <Image
+            src={service.image}
+            alt={service.name}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+          {/* Badge */}
+          {service.badge && (
+            <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full bg-teal-500/90 text-white backdrop-blur-sm">
+              {service.badge}
+            </span>
+          )}
+        </div>
+
+        {/* Content */}
+        <div className="p-6 flex flex-col flex-grow">
+          <h4 className="font-display text-lg font-bold mb-2 text-white tracking-tight group-hover:text-teal-400 transition-colors">
+            {service.name}
+          </h4>
+          <p className="text-sm text-gray-300 leading-relaxed flex-grow mb-4">
+            {service.description}
+          </p>
+
+          {/* Features - show first 2 */}
+          <ul className="space-y-1.5 mb-4">
+            {service.features.slice(0, 2).map((feature, i) => (
+              <li key={i} className="flex items-center gap-2 text-xs text-gray-300">
+                <svg className="w-3.5 h-3.5 text-teal-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA */}
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-teal-400 group-hover:gap-3 transition-all">
+            Learn more {icons.arrowRight}
+          </span>
+        </div>
+
+        {/* Hover glow effect */}
+        <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-teal-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      </Link>
+    </motion.div>
   );
 }
 
@@ -520,7 +623,7 @@ function AboutSection() {
                     </picture>
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-display text-xl font-bold text-white mb-1">{member.name}</h4>
+                    <h3 className="font-display text-xl font-bold text-white mb-1">{member.name}</h3>
                     <p className="text-sm text-teal-400 font-semibold mb-3">{member.credentials}</p>
                     <p className="text-sm text-gray-300 leading-relaxed">{member.bio}</p>
                   </div>
@@ -578,7 +681,7 @@ function ProcessSection() {
                 {/* Glow on hover */}
                 <div className="absolute inset-0 rounded-full bg-teal-500/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity" />
               </motion.div>
-              <h4 className="font-display text-base font-bold text-white mb-3">{step.title}</h4>
+              <h3 className="font-display text-base font-bold text-white mb-3">{step.title}</h3>
               <p className="text-sm text-gray-300 leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
@@ -588,48 +691,77 @@ function ProcessSection() {
   );
 }
 
-/* ═══ TESTIMONIAL - with scale animation ═══ */
+/* ═══ TESTIMONIAL CAROUSEL - cycles through all reviews ═══ */
 function TestimonialSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % TESTIMONIALS.length);
+    }, 7000);
+    return () => clearInterval(id);
+  }, [paused]);
+
+  const current = TESTIMONIALS[index];
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-noise">
+    <section className="py-24 md:py-32 px-6 bg-noise" aria-label="Client testimonials">
       <div className="max-w-3xl mx-auto text-center" ref={ref}>
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="glass-card-premium p-10 md:p-14 relative overflow-hidden">
+          <div
+            className="glass-card-premium p-10 md:p-14 relative overflow-hidden"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocus={() => setPaused(true)}
+            onBlur={() => setPaused(false)}
+          >
             {/* Decorative quote marks */}
-            <div className="absolute top-6 left-6 text-6xl text-teal-500/10 font-serif">&ldquo;</div>
-            <div className="absolute bottom-6 right-6 text-6xl text-teal-500/10 font-serif">&rdquo;</div>
+            <div className="absolute top-6 left-6 text-6xl text-teal-500/10 font-serif" aria-hidden="true">&ldquo;</div>
+            <div className="absolute bottom-6 right-6 text-6xl text-teal-500/10 font-serif" aria-hidden="true">&rdquo;</div>
 
-            <div className="flex items-center justify-center gap-1 mb-6">
-              {STAR_INDICES.map((i) => (
-                <motion.span
-                  key={i}
-                  className="text-teal-400"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                >
-                  {icons.star}
-                </motion.span>
-              ))}
+            <div aria-live="polite" aria-atomic="true">
+              <div className="flex items-center justify-center gap-1 mb-6" aria-hidden="true">
+                {STAR_INDICES.map((i) => (
+                  <span key={i} className="text-teal-400">{icons.star}</span>
+                ))}
+              </div>
+              <blockquote className="text-xl md:text-2xl text-gray-200 font-display font-medium leading-relaxed mb-8 relative z-10 min-h-[8rem]">
+                &ldquo;{current.quote}&rdquo;
+              </blockquote>
+              <div className="flex items-center justify-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center" aria-hidden="true">
+                  {icons.user}
+                </div>
+                <div className="text-left">
+                  <div className="text-sm font-semibold text-white">{current.author}</div>
+                  <div className="text-xs text-gray-300">{current.role} · {current.location}</div>
+                </div>
+              </div>
             </div>
-            <blockquote className="text-xl md:text-2xl text-gray-200 font-display font-medium leading-relaxed mb-8 relative z-10">
-              &ldquo;{TESTIMONIALS[0].quote}&rdquo;
-            </blockquote>
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center">
-                {icons.user}
-              </div>
-              <div className="text-left">
-                <div className="text-sm font-semibold text-white">{TESTIMONIALS[0].author}</div>
-                <div className="text-xs text-gray-400">{TESTIMONIALS[0].role}</div>
-              </div>
+
+            {/* Dot navigation */}
+            <div className="flex items-center justify-center gap-2">
+              {TESTIMONIALS.map((t, i) => (
+                <button
+                  key={t.id}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Show testimonial ${i + 1} of ${TESTIMONIALS.length}`}
+                  aria-current={i === index ? 'true' : undefined}
+                  className={`h-2 rounded-full transition-all ${
+                    i === index
+                      ? 'bg-[var(--color-secondary-light)] w-6'
+                      : 'bg-white/20 hover:bg-white/40 w-2'
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </motion.div>
@@ -657,7 +789,7 @@ function FAQSection() {
                 className="glass-card p-6 group"
                 whileHover={{ x: i % 2 === 0 ? 8 : -8, transition: { duration: 0.3 } }}
               >
-                <h4 className="font-display text-base font-semibold text-white mb-3 group-hover:text-teal-400 transition-colors">{item.question}</h4>
+                <h3 className="font-display text-base font-semibold text-white mb-3 group-hover:text-teal-400 transition-colors">{item.question}</h3>
                 <p className="text-sm text-gray-300 leading-relaxed">{item.answer}</p>
               </motion.div>
             </AnimateSlideIn>
@@ -698,12 +830,12 @@ function CTABanner() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <motion.a
-                  href="tel:+16197169193"
+                  href={CONTACT_INFO.phoneHref}
                   className="btn-primary text-base !py-4 !px-10"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {icons.phone} Call Now: (619) 716-9193
+                  {icons.phone} Call Now: {CONTACT_INFO.phone}
                 </motion.a>
               </div>
             </div>
@@ -727,26 +859,36 @@ function Footer() {
             </p>
           </div>
           <div>
-            <h4 className="font-display font-bold text-sm mb-4 text-teal-400">Services</h4>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <h3 className="font-display font-bold text-sm mb-4 text-teal-400">Services</h3>
+            <p className="text-sm text-gray-300 leading-relaxed">
               Tax Planning & Advisory · Tax Filing · Payroll Taxes<br />
               Bookkeeping · IRS Audit Support · Real Estate Tax<br />
               Mortgage Consulting
             </p>
           </div>
           <div>
-            <h4 className="font-display font-bold text-sm mb-4 text-teal-400">Contact</h4>
+            <h3 className="font-display font-bold text-sm mb-4 text-teal-400">Contact</h3>
             <div className="space-y-2 text-sm text-gray-300">
-              <p>{icons.phone} (619) 716-9193</p>
-              <p>{icons.mapPin} El Cajon, San Diego, California</p>
+              <p>
+                {icons.phone}{' '}
+                <a href={CONTACT_INFO.phoneHref} className="hover:text-white transition-colors">
+                  {CONTACT_INFO.phone}
+                </a>
+              </p>
+              <p>{icons.mapPin} {CONTACT_INFO.address}</p>
               <p>Hours: By Appointment</p>
             </div>
           </div>
         </div>
-        <div className="mt-12 pt-6 border-t border-white/5 text-center">
-          <p className="text-xs text-gray-400">
+        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center">
+          <p className="text-xs text-gray-300">
             © {new Date().getFullYear()} 1Way Home Services. All rights reserved.
           </p>
+          <nav aria-label="Legal" className="flex items-center gap-4 text-xs text-gray-300">
+            <Link href="/en/privacy/" className="hover:text-white transition-colors">Privacy</Link>
+            <span aria-hidden="true" className="text-gray-500">·</span>
+            <Link href="/en/terms/" className="hover:text-white transition-colors">Terms</Link>
+          </nav>
         </div>
       </div>
     </footer>
@@ -759,7 +901,7 @@ export default function HomePage() {
     <>
       <MobileStickyCTA />
       <Navigation />
-      <main id="main-content" className="bg-[var(--color-black)]">
+      <main id="main-content" className="bg-[var(--color-black)] pb-24 md:pb-0">
         <HeroSection />
         <StatsBand />
         <TrustBadgesSection />

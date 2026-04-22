@@ -4,9 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-1Way Home Services is a tax preparation and real estate services website built with Next.js 16 (App Router) and deployed as a static site. The site serves El Cajon and San Diego areas, offering tax planning, filing, bookkeeping, IRS support, real estate tax guidance, and mortgage consulting.
+**This is a prospective client project.** We are building a modern website for 1Way Home Services to win them as a client. The site showcases tax preparation and real estate services for the El Cajon and San Diego areas, offering tax planning, filing, bookkeeping, IRS support, real estate tax guidance, and mortgage consulting.
 
-**Live Site:** https://1wayhomeservices.com
+**Status:** In Development (Prospective Client)
+**Preview Site:** https://1wayhomeservices.vercel.app
+**GitHub Repo:** https://github.com/samershaker/1wayhomeservices
+**Client's Current Site:** https://1wayhomeservices.com (for reference only)
 
 ## Tech Stack
 
@@ -79,7 +82,7 @@ public/
 
 ### Design System & Styling
 
-**Brand Colors** (extracted from live site https://1wayhomeservices.com/):
+**Brand Colors** (inspired by client's current site https://1wayhomeservices.com/):
 - Primary: `#2557A8` (royal blue — trust, professionalism)
 - Secondary: `#0D4E53` (teal — freshness, growth)
 - Navy: `#0A2342` (dark blue — authority, depth) - used for dark sections
