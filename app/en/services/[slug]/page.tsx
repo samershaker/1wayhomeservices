@@ -41,22 +41,17 @@ export default async function ServicePage({
   ).slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-[var(--color-black)] bg-noise">
+    <div className="bg-noise">
       <ServiceStructuredData serviceId={service.id} />
 
-      {/* Minimal top bar */}
-      <header className="border-b border-white/5 backdrop-blur-xl bg-black/60 sticky top-0 z-40">
-        <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/en/" className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors">
-            <span aria-hidden="true">←</span> Back to home
-          </Link>
-          <a href={CONTACT_INFO.phoneHref} className="btn-primary text-sm !py-2 !px-4">
-            {CONTACT_INFO.phone}
-          </a>
-        </div>
-      </header>
+      <div className="max-w-4xl mx-auto px-6 pt-28 pb-16 md:pb-20">
+        <Link
+          href="/en/"
+          className="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors mb-6"
+        >
+          <span aria-hidden="true">←</span> Back to home
+        </Link>
 
-      <div className="max-w-4xl mx-auto px-6 py-12 md:py-20">
         {/* Hero image */}
         <div className="relative h-56 md:h-80 rounded-2xl overflow-hidden mb-10">
           <Image
@@ -155,6 +150,6 @@ export default async function ServicePage({
           </section>
         )}
       </div>
-    </main>
+    </div>
   );
 }

@@ -18,9 +18,6 @@ import {
   UserIcon,
   HomeIcon,
   BuildingIcon,
-  MenuIcon,
-  XIcon,
-  MailIcon,
 } from "@/components/ui/icons/page-icons";
 import {
   STATS,
@@ -95,141 +92,6 @@ function AnimateSlideIn({ children, className = "", direction = "left", delay = 
     >
       {children}
     </motion.div>
-  );
-}
-
-/* ═══ MOBILE STICKY CTA ═══ */
-function MobileStickyCTA() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Skip scroll listener entirely on desktop — component returns null anyway.
-    if (typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches) return;
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 800);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  if (!isVisible) return null;
-
-  return (
-    <div
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-black/95 backdrop-blur-xl border-t border-white/10"
-      style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
-    >
-      <div className="flex gap-2">
-        <a href={CONTACT_INFO.phoneHref} className="btn-primary flex-1 justify-center text-sm !py-3">
-          <PhoneIcon size={16} /> Call Now
-        </a>
-        <a href="#contact" className="btn-secondary flex-1 justify-center text-sm !py-3">
-          <MailIcon size={16} /> Message
-        </a>
-      </div>
-    </div>
-  );
-}
-
-/* ═══ NAVIGATION ═══ */
-function Navigation() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const toggleBtnRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const closeMenu = () => {
-    setMobileMenuOpen(false);
-    toggleBtnRef.current?.focus();
-  };
-
-  useEffect(() => {
-    if (!mobileMenuOpen) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        closeMenu();
-        return;
-      }
-      if (e.key === 'Tab' && menuRef.current) {
-        const focusables = menuRef.current.querySelectorAll<HTMLElement>('a, button');
-        if (focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    };
-    document.addEventListener('keydown', handleKey);
-    // Focus first link when menu opens
-    menuRef.current?.querySelector<HTMLElement>('a, button')?.focus();
-    return () => document.removeEventListener('keydown', handleKey);
-  }, [mobileMenuOpen]);
-
-  return (
-    <>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
-      >
-        Skip to main content
-      </a>
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/70 border-b border-white/5" aria-label="Main navigation">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/en/" className="flex items-center gap-3">
-            <img src="/images/logo-color.png" alt="1Way Home Services home" className="h-10 w-auto" width={120} height={40} />
-          </Link>
-
-          {/* Desktop navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-sm text-gray-300 hover:text-white transition-colors py-3">Services</a>
-            <a href="#about" className="text-sm text-gray-300 hover:text-white transition-colors py-3">About</a>
-            <a href="#process" className="text-sm text-gray-300 hover:text-white transition-colors py-3">Process</a>
-            <a href="#faq" className="text-sm text-gray-300 hover:text-white transition-colors py-3">FAQ</a>
-            <a href={CONTACT_INFO.phoneHref} className="btn-primary text-sm !py-2 !px-5">
-              <span className="sr-only">Call us at {CONTACT_INFO.phone}</span>
-              <span aria-hidden="true">{icons.phone}</span>
-              <span className="hidden sm:inline">Call Now</span>
-            </a>
-          </div>
-
-          {/* Mobile: Hamburger + Phone */}
-          <div className="md:hidden flex items-center gap-2">
-            <button
-              ref={toggleBtnRef}
-              className="min-h-11 min-w-11 flex items-center justify-center text-white hover:text-blue-400 transition-colors"
-              onClick={() => setMobileMenuOpen((v) => !v)}
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            >
-              {mobileMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
-            </button>
-            <a href={CONTACT_INFO.phoneHref} className="btn-primary text-sm !py-2 !px-4" aria-label={`Call ${CONTACT_INFO.phone}`}>
-              <span aria-hidden="true">{icons.phone}</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Mobile menu dropdown */}
-        {mobileMenuOpen && (
-          <div id="mobile-menu" ref={menuRef} className="md:hidden bg-black/95 border-t border-white/5">
-            <div className="flex flex-col p-6 gap-4">
-              <a href="#services" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Services</a>
-              <a href="#about" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>About</a>
-              <a href="#process" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Process</a>
-              <a href="#faq" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>FAQ</a>
-              <a href="#contact" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={closeMenu}>Contact</a>
-            </div>
-          </div>
-        )}
-      </nav>
-    </>
   );
 }
 
@@ -846,74 +708,22 @@ function CTABanner() {
   );
 }
 
-/* ═══ FOOTER ═══ */
-function Footer() {
-  return (
-    <footer className="border-t border-white/5 py-16 px-6 bg-noise" aria-label="Site footer">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-12">
-          <div>
-            <img src="/images/logo-color.png" alt="1Way Home Services" className="h-10 w-auto mb-4" width={120} height={40} />
-            <p className="text-sm text-gray-300">
-              Tax Preparation & Real Estate Services serving El Cajon, San Diego, and surrounding areas.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-display font-bold text-sm mb-4 text-teal-400">Services</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Tax Planning & Advisory · Tax Filing · Payroll Taxes<br />
-              Bookkeeping · IRS Audit Support · Real Estate Tax<br />
-              Mortgage Consulting
-            </p>
-          </div>
-          <div>
-            <h3 className="font-display font-bold text-sm mb-4 text-teal-400">Contact</h3>
-            <div className="space-y-2 text-sm text-gray-300">
-              <p>
-                {icons.phone}{' '}
-                <a href={CONTACT_INFO.phoneHref} className="hover:text-white transition-colors">
-                  {CONTACT_INFO.phone}
-                </a>
-              </p>
-              <p>{icons.mapPin} {CONTACT_INFO.address}</p>
-              <p>Hours: By Appointment</p>
-            </div>
-          </div>
-        </div>
-        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center">
-          <p className="text-xs text-gray-300">
-            © {new Date().getFullYear()} 1Way Home Services. All rights reserved.
-          </p>
-          <nav aria-label="Legal" className="flex items-center gap-4 text-xs text-gray-300">
-            <Link href="/en/privacy/" className="hover:text-white transition-colors">Privacy</Link>
-            <span aria-hidden="true" className="text-gray-500">·</span>
-            <Link href="/en/terms/" className="hover:text-white transition-colors">Terms</Link>
-          </nav>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 /* ═══ PAGE ASSEMBLY ═══ */
+/* Nav, footer, and mobile sticky CTA are provided by app/en/layout.tsx
+   so they persist across every page under /en/. */
 export default function HomePage() {
   return (
     <>
-      <MobileStickyCTA />
-      <Navigation />
-      <main id="main-content" className="bg-[var(--color-black)] pb-24 md:pb-0">
-        <HeroSection />
-        <StatsBand />
-        <TrustBadgesSection />
-        <ServicesSection />
-        <AboutSection />
-        <ProcessSection />
-        <TestimonialSection />
-        <ContactFormSection />
-        <FAQSection />
-        <CTABanner />
-        <Footer />
-      </main>
+      <HeroSection />
+      <StatsBand />
+      <TrustBadgesSection />
+      <ServicesSection />
+      <AboutSection />
+      <ProcessSection />
+      <TestimonialSection />
+      <ContactFormSection />
+      <FAQSection />
+      <CTABanner />
     </>
   );
 }

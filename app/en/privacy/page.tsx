@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { CONTACT_INFO } from '@/lib/constants';
 
@@ -11,16 +10,8 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-[var(--color-black)] bg-noise">
-      <header className="border-b border-white/5 backdrop-blur-xl bg-black/60 sticky top-0 z-40">
-        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center">
-          <Link href="/en/" className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors">
-            <span aria-hidden="true">←</span> Back to home
-          </Link>
-        </div>
-      </header>
-
-      <div className="max-w-3xl mx-auto px-6 py-12 md:py-20 prose-content">
+    <div className="bg-noise">
+      <div className="max-w-3xl mx-auto px-6 pt-32 pb-16 md:pb-20">
         <p className="text-label mb-3">Legal</p>
         <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
           Privacy Policy
@@ -101,6 +92,6 @@ export default function PrivacyPage() {
           </section>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
