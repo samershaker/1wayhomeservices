@@ -470,6 +470,10 @@ function AboutSection() {
                   key={member.id}
                   className="glass-card p-7 flex items-start gap-6 group"
                   whileHover={{ x: 8, transition: { duration: 0.3 } }}
+                  spellCheck={false}
+                  data-gramm="false"
+                  data-gramm_editor="false"
+                  data-enable-grammarly="false"
                 >
                   <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-teal-500/20 to-primary/5 ring-2 ring-teal-500/20 group-hover:ring-teal-500/40 transition-all">
                     <picture>
