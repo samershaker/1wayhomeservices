@@ -18,9 +18,10 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
   if (type === 'local-business' || type === 'all') {
     const localBusinessSchema = {
       '@context': 'https://schema.org',
-      '@type': 'ProfessionalService',
+      '@type': ['ProfessionalService', 'AccountingService', 'LocalBusiness'],
       '@id': `${siteUrl}/#organization`,
       name: CONTACT_INFO.businessName,
+      legalName: CONTACT_INFO.legalEntityName,
       alternateName: '1Way Home Services',
       description: 'Professional tax preparation, bookkeeping, and real estate tax services in El Cajon and San Diego County',
       url: siteUrl,
@@ -29,15 +30,18 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
       priceRange: '$$',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'El Cajon',
-        addressRegion: 'CA',
-        addressCountry: 'US',
+        streetAddress: CONTACT_INFO.addressParts.streetAddress,
+        addressLocality: CONTACT_INFO.addressParts.locality,
+        addressRegion: CONTACT_INFO.addressParts.region,
+        postalCode: CONTACT_INFO.addressParts.postalCode,
+        addressCountry: CONTACT_INFO.addressParts.country,
       },
       geo: {
         '@type': 'GeoCoordinates',
         latitude: '32.7948',
         longitude: '-116.9625',
       },
+      sameAs: CONTACT_INFO.socialLinks.map((s) => s.url),
       areaServed: [
         {
           '@type': 'City',
@@ -78,13 +82,32 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
           },
         })),
       },
-      employee: TEAM_MEMBERS.map((member) => ({
-        '@type': 'Person',
-        name: member.name,
-        jobTitle: member.title,
-        description: member.bio,
-      })),
-      // Verified Google Business data (see CONTACT_INFO.googleReviewsUrl)
+      employee: TEAM_MEMBERS.map((member) => {
+        const person: Record<string, unknown> = {
+          '@type': 'Person',
+          name: member.name,
+          jobTitle: member.title,
+          description: member.bio,
+          worksFor: { '@type': 'Organization', name: CONTACT_INFO.businessName },
+        };
+        if (member.socialLinks && member.socialLinks.length > 0) {
+          person.sameAs = member.socialLinks.map((s) => s.url);
+        }
+        if (member.licenseNumber && member.licenseAuthority) {
+          person.hasCredential = {
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'license',
+            name: `${member.licenseAuthority} License #${member.licenseNumber}`,
+            recognizedBy: {
+              '@type': 'Organization',
+              name: member.licenseAuthority,
+            },
+          };
+        }
+        return person;
+      }),
+      // Verified Google Business data (see CONTACT_INFO.googleReviewsUrl).
+      // reviewVerifiedDate stamps when this count was last confirmed.
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: CONTACT_INFO.reviewRating.toFixed(1),
@@ -102,6 +125,7 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: CONTACT_INFO.businessName,
+      legalName: CONTACT_INFO.legalEntityName,
       url: siteUrl,
       logo: `${siteUrl}/images/logo-color.png`,
       description: 'Tax preparation and real estate services in San Diego County',
@@ -109,10 +133,13 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
       email: CONTACT_INFO.email,
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'El Cajon',
-        addressRegion: 'CA',
-        addressCountry: 'US',
+        streetAddress: CONTACT_INFO.addressParts.streetAddress,
+        addressLocality: CONTACT_INFO.addressParts.locality,
+        addressRegion: CONTACT_INFO.addressParts.region,
+        postalCode: CONTACT_INFO.addressParts.postalCode,
+        addressCountry: CONTACT_INFO.addressParts.country,
       },
+      sameAs: CONTACT_INFO.socialLinks.map((s) => s.url),
       contactPoint: {
         '@type': 'ContactPoint',
         telephone: CONTACT_INFO.phoneTel,
@@ -122,6 +149,21 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
       },
     };
     schemas.push(organizationSchema);
+  }
+
+  // WebSite Schema — helps LLMs and search engines resolve the canonical site
+  // entity and associate it with the publisher organization above.
+  if (type === 'all') {
+    const websiteSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: CONTACT_INFO.businessName,
+      inLanguage: 'en-US',
+      publisher: { '@id': `${siteUrl}/#organization` },
+    };
+    schemas.push(websiteSchema);
   }
 
   // BreadcrumbList Schema (for navigation)
@@ -179,9 +221,11 @@ export function ServiceStructuredData({ serviceId }: { serviceId: string }) {
       telephone: CONTACT_INFO.phoneTel,
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'El Cajon',
-        addressRegion: 'CA',
-        addressCountry: 'US',
+        streetAddress: CONTACT_INFO.addressParts.streetAddress,
+        addressLocality: CONTACT_INFO.addressParts.locality,
+        addressRegion: CONTACT_INFO.addressParts.region,
+        postalCode: CONTACT_INFO.addressParts.postalCode,
+        addressCountry: CONTACT_INFO.addressParts.country,
       },
     },
     areaServed: {

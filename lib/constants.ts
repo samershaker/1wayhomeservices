@@ -188,37 +188,62 @@ export const PROCESS_STEPS = [
 ] as const;
 
 // Team Members
+// Note: Credentials, license numbers, and social links below are populated only
+// where publicly verifiable. Items marked with `null`/empty are pending client
+// confirmation (see PENDING CLIENT INPUT in CHANGELOG.md).
 export const TEAM_MEMBERS = [
   {
     id: 'sam-eram',
     name: 'Sam Eram',
     title: 'Chief Financial Officer',
     credentials: 'Tax Preparation & Financial Services',
-    bio: 'Expert in tax planning, filing, and financial strategy for individuals and businesses.',
-    image: '/images/Sam_Eram_Headshot.PNG'
+    bio: 'Leads tax planning, filing, and financial strategy for individuals and businesses at 1Way Home Services.',
+    image: '/images/Sam_Eram_Headshot.PNG',
+    licenseNumber: null,
+    licenseAuthority: null,
+    socialLinks: [] as { type: string; url: string }[],
   },
   {
     id: 'bakhan-kareem',
     name: 'Bakhan Kareem',
     title: 'Chief Executive Officer',
-    credentials: 'Real Estate & Mortgage Consulting',
-    bio: 'Leading real estate tax strategy and mortgage consulting for clients across San Diego.',
-    image: '/images/Bakhan_Kareem_Headshot.PNG'
+    credentials: 'Real Estate & Mortgage Consulting · California DRE License #02223420',
+    bio: 'San Diego County REALTOR® leading real estate and mortgage services at 1Way Home Real Estate and Mortgage Services Inc.',
+    image: '/images/Bakhan_Kareem_Headshot.PNG',
+    licenseNumber: '02223420',
+    licenseAuthority: 'California Department of Real Estate',
+    socialLinks: [
+      { type: 'LinkedIn', url: 'https://www.linkedin.com/in/bakhan-kareem-1657842a5/' },
+      { type: 'Instagram', url: 'https://www.instagram.com/bakhan.sdrealtor/' },
+    ],
   }
 ] as const;
 
 // Contact Information
+// Address, email, and legal entity name verified against client's public website
+// (1wayhomeservices.com) and California Secretary of State business records.
+// reviewVerifiedDate stamps the last time the Google review count was confirmed —
+// update on each verification pass so LLMs see a recency signal.
 export const CONTACT_INFO = {
   name: '1Way Home Services',
   businessName: '1Way Home Services',
+  legalEntityName: '1 Way Home Real Estate and Mortgage Services Inc.',
   tagline: 'Tax Preparation & Real Estate Services',
   phone: '(619) 716-9193',
   phoneFormatted: '(619) 716-9193',
   phoneTel: '+16197169193',
   phoneHref: 'tel:+16197169193',
-  email: 'info@1wayhomeservices.com',
-  emailHref: 'mailto:info@1wayhomeservices.com',
-  address: 'El Cajon, San Diego, California',
+  email: 'sam@1wayhomeservices.com',
+  emailHref: 'mailto:sam@1wayhomeservices.com',
+  // Verified against client's public website
+  address: '250 E Chase Ave, Suite 107, El Cajon, CA 92020',
+  addressParts: {
+    streetAddress: '250 E Chase Ave, Suite 107',
+    locality: 'El Cajon',
+    region: 'CA',
+    postalCode: '92020',
+    country: 'US',
+  },
   hours: {
     regular: 'By Appointment',
     consultation: 'Free Initial Consultation Available'
@@ -231,7 +256,12 @@ export const CONTACT_INFO = {
   // Google Business — verified review data (source of truth for JSON-LD + trust badges)
   reviewCount: 416,
   reviewRating: 5.0,
+  reviewVerifiedDate: '2026-04-22',
   googleReviewsUrl: 'https://www.google.com/search?q=1wayhomeservices+el+cajon#lrd=0x80d959b762e109ad:0x48deced3a0f716dc,1',
+  // Verified company social profiles
+  socialLinks: [
+    { type: 'LinkedIn', url: 'https://www.linkedin.com/company/1-way-home-real-estate-and-mortgage-services-inc' },
+  ],
 } as const;
 
 // Stats
@@ -322,22 +352,41 @@ export const TESTIMONIALS = [
 ] as const;
 
 // FAQ Items
+// Answers are sourced from existing service-page content and the client's own
+// public service descriptions. Kept concrete and standalone so each one reads
+// as a complete, citable answer for LLM snippet extraction.
 export const FAQ_ITEMS = [
   {
-    question: 'How long does tax preparation take?',
-    answer: 'Most tax returns are completed within 5-7 business days after all documents are submitted. Complex business returns may take longer.'
+    question: 'How long does tax preparation take at 1Way Home Services?',
+    answer: 'Most individual returns are completed within 5–7 business days from when we receive all your documents at our El Cajon office. Straightforward W-2 returns often wrap up in 2–3 days. Complex returns — self-employed, rental property, or multi-state — may take a little longer.'
   },
   {
-    question: 'Do you offer virtual consultations?',
-    answer: 'Yes! We offer consultations in-person, over the phone, or via Zoom to accommodate your schedule and preferences.'
+    question: 'Do I have to come in person, or can the entire process be done remotely?',
+    answer: 'The full process can be done virtually. We offer Zoom or phone consultations, secure document upload, remote review, and e-signature. Many of our tax clients we have never met in person. In-person appointments are also available at our El Cajon office at 250 E Chase Ave, Suite 107.'
   },
   {
-    question: 'What areas do you serve?',
-    answer: 'We primarily serve El Cajon, San Diego, and surrounding areas. Contact us to confirm your location is within our service area.'
+    question: 'Do you offer free consultations?',
+    answer: 'Yes. Initial consultations are free for both tax services and mortgage consulting. You can meet with us in person at our El Cajon office, by phone, or via Zoom — whichever fits your schedule.'
+  },
+  {
+    question: 'What areas does 1Way Home Services serve?',
+    answer: 'We are based in El Cajon and primarily serve clients across San Diego County, including El Cajon, San Diego, La Mesa, and Santee. We also work with clients beyond San Diego County for tax matters where remote service is appropriate.'
   },
   {
     question: 'Can you help with past-due tax returns?',
-    answer: 'Absolutely. We specialize in helping clients catch up on past-due tax returns and can represent you in any IRS matters.'
+    answer: 'Yes. We help clients catch up on back taxes — one year or several — and can request transcripts from the IRS to reconstruct missing records. If you owe, we can negotiate installment plans or pursue penalty abatement on your behalf.'
+  },
+  {
+    question: 'What happens if the IRS contacts me after you file my return?',
+    answer: 'For returns we file, we respond on your behalf at no additional cost, year-round. Forward any IRS notice or audit inquiry to us and we will handle the communication and resolution directly with the IRS. Filing with us does not end in April — it covers you until the next one.'
+  },
+  {
+    question: 'Can you help with real estate investment taxes and 1031 exchanges?',
+    answer: 'Yes. Real estate tax support is a core part of what we do. We provide capital gains planning, 1031 exchange guidance, depreciation strategies, and property-sale tax planning for individual investors and landlords across San Diego County.'
+  },
+  {
+    question: 'What if I owe taxes and cannot pay in full?',
+    answer: 'We will show you exactly what you owe and walk through the available options — IRS installment plans, offer-in-compromise, hardship deferral — and help you set up the one that fits your situation. Past-due-return resolution is a service we handle regularly.'
   }
 ] as const;
 

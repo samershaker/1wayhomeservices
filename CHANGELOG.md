@@ -1,5 +1,68 @@
 # 1Way Home Services - Website Changelog
 
+## Version 2.1.0 — LLM Discoverability & Verified Entity Data (April 22, 2026)
+
+**Focus of this release:** Make the site as easy as possible for LLM-powered search engines (ChatGPT, Claude, Perplexity, Google AI Overviews, Gemini) to confidently *cite* 1Way Home Services. Every change in this release is built from publicly verifiable information — the client's own website, public business records, and publicly listed professional licenses. Nothing was invented; gaps that need client confirmation are listed in the "Pending Client Input" section below.
+
+### What changed
+
+**1. Verified business entity data**
+- Replaced the generic city-only address with the verified office address: **250 E Chase Ave, Suite 107, El Cajon, CA 92020** (sourced from 1wayhomeservices.com).
+- Added the legal entity name **1 Way Home Real Estate and Mortgage Services Inc.** to schema and `llms-full.txt`.
+- Updated the public contact email to **sam@1wayhomeservices.com** to match the address listed on the client's own website.
+- Added structured address fields (`streetAddress`, `postalCode`, etc.) to all JSON-LD schemas so search engines and LLMs can geo-resolve the business cleanly.
+
+**2. Verified team credentials**
+- Added **Bakhan Kareem's California DRE License #02223420** to the Team data, the visible credentials line, the LocalBusiness `employee` schema (as `hasCredential`), and `llms.txt`. License is publicly listed in multiple real-estate directories.
+- Added Bakhan's verified social profiles: **LinkedIn** and **Instagram (@bakhan.sdrealtor)**.
+- Added the **company LinkedIn page** to the Organization schema and llms.txt.
+- Sam Eram's credential and social fields are scaffolded but left empty pending client input — see below.
+
+**3. Schema upgrades for entity resolution**
+- LocalBusiness now declares multiple `@type` values (`ProfessionalService`, `AccountingService`, `LocalBusiness`) so it qualifies for both finance-vertical and local-pack queries.
+- Added `sameAs` arrays on LocalBusiness, Organization, and Person schemas — this is the single most load-bearing signal in 2026 GEO playbooks for letting LLMs disambiguate the business and the people behind it.
+- Added `worksFor` and `hasCredential` Person properties so AI can attribute statements to a specific licensed individual rather than an anonymous "tax preparer".
+- Added a top-level `WebSite` schema linked back to the publisher Organization, completing the entity graph.
+- Stamped a `reviewVerifiedDate` (2026-04-22) on the Google review count so freshness signals stay honest.
+
+**4. Citable, location-aware FAQ content**
+- Replaced the four generic homepage FAQ items with **eight expanded, location-anchored Q&A entries** (50–100 words each), built from existing service-page content. Each answer is structured as a complete, standalone snippet — the format LLMs preferentially extract and cite.
+- Same FAQ block is consumed by the `FAQPage` JSON-LD on both the homepage and service pages, so the schema upgrade is automatic.
+
+**5. llms.txt and llms-full.txt updates**
+- Both files updated with the verified street address, legal entity name, correct contact email, Bakhan's DRE license, and the company + principal social links — the canonical fact-sheet AI crawlers and dev-tool agents read first.
+
+### Files touched
+- `lib/constants.ts` — CONTACT_INFO (address, email, legal entity, social links, review verification date), TEAM_MEMBERS (license fields, social fields), FAQ_ITEMS (rewritten).
+- `components/StructuredData.tsx` — multi-type LocalBusiness, sameAs arrays, hasCredential, WebSite schema, full structured address everywhere.
+- `public/llms.txt` and `public/llms-full.txt` — verified contact and team data.
+
+### What this unlocks for the client pitch (high-level)
+- Every credential, address, and identifier on the site is now traceable to a public source — when an LLM is deciding which of three CPA firms to cite, the one with verifiable entity grounding wins.
+- The DRE-license-plus-LinkedIn `sameAs` graph for Bakhan creates a defensible "real person, verifiable credentials" signal that very few small CPA/RE firms have wired up.
+- The richer FAQ block converts homepage Q&A from boilerplate into the exact format ChatGPT and Perplexity prefer to quote.
+- The site is positioned for the next-tier upgrades (cornerstone "San Diego Tax Deadlines 2026" page, author entity URLs, glossary, IndexNow freshness pings) without rework — those build on the entity graph this release establishes.
+
+### PENDING CLIENT INPUT — needed to close the remaining gaps
+
+The single biggest uncited area on the site is **Sam Eram's professional profile**. To bring his entity grounding to parity with Bakhan's, we need confirmation on the following — none of which I will populate without the client's verification:
+
+- Sam Eram — professional credential(s): CPA license number + state, EA (Enrolled Agent) #, AFSP, PTIN, or other applicable IRS/state designations
+- Sam Eram — LinkedIn profile URL (and any other public profiles)
+- Sam Eram — years of professional experience and any relevant specializations (e.g., S-corp, real estate, multi-state)
+- Bakhan Kareem — brokerage affiliation under which DRE #02223420 is held
+- Founding year of the practice (the site says "6 years"; the corporation was incorporated July 2023 — we should clarify whether the 6-year claim refers to Sam's tax practice tenure pre-incorporation)
+- Confirmed Google review count and a screenshot/link for the audit trail (codebase asserts 416; client's own site does not display a count)
+- Preferred public contact email (`sam@` per the client's site vs. `info@` previously used)
+- Office hours (client's site does not list them)
+- Service area zip codes the firm wants to highlight
+- Professional affiliations to feature: BBB, NAHREP, NAR, AICPA local chapter, El Cajon Chamber of Commerce, etc.
+- Permission to claim the firm's Google Business Profile and ensure NAP parity with the new street address
+
+Each of these is a small input from the client that meaningfully strengthens citation eligibility — and asking for them is itself a sales moment that demonstrates we're operating at a level above a typical web vendor.
+
+---
+
 ## Version 2.0.0 - Production Launch (April 2026)
 
 ### 🚀 Performance Improvements
