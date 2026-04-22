@@ -25,7 +25,7 @@ interface HoverCardProps {
   className?: string;
   hoverScale?: number;
   hoverRotation?: number;
-  glowColor?: 'cooling' | 'heating' | 'accent';
+  glowColor?: 'primary' | 'accent' | 'neutral';
 }
 
 interface FloatingElementProps {
@@ -41,15 +41,6 @@ interface SpringModalProps {
   onClose: () => void;
   children: ReactNode;
   className?: string;
-}
-
-interface ThermostatControlProps {
-  value: number;
-  onChange: (value: number) => void;
-  min?: number;
-  max?: number;
-  className?: string;
-  mode?: 'heating' | 'cooling';
 }
 
 // Physics-based interactive button
@@ -136,18 +127,18 @@ export const SpringHoverCard: React.FC<HoverCardProps> = ({
   className = '',
   hoverScale = 1.05,
   hoverRotation = 2,
-  glowColor = 'cooling'
+  glowColor = 'primary'
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const spring = useSpring({
     scale: isHovered ? hoverScale : 1,
     rotate: isHovered ? hoverRotation : 0,
-    boxShadow: isHovered 
-      ? `0 20px 40px rgba(${glowColor === 'cooling' ? '37, 99, 235' : glowColor === 'heating' ? '234, 88, 12' : '16, 185, 129'}, 0.15)`
+    boxShadow: isHovered
+      ? `0 20px 40px rgba(${glowColor === 'primary' ? '34, 81, 163' : glowColor === 'accent' ? '212, 168, 83' : '107, 114, 128'}, 0.15)`
       : '0 5px 15px rgba(0, 0, 0, 0.1)',
-    borderColor: isHovered 
-      ? glowColor === 'cooling' ? '#2563eb' : glowColor === 'heating' ? '#ea580c' : '#10b981'
+    borderColor: isHovered
+      ? glowColor === 'primary' ? '#2251A3' : glowColor === 'accent' ? '#D4A853' : '#6B7280'
       : 'transparent',
     config: springConfigs.bouncy
   });
@@ -234,82 +225,6 @@ export const SpringModal: React.FC<SpringModalProps> = ({
         {children}
       </animated.div>
     </animated.div>
-  );
-};
-
-// Thermostat control with physics
-export const SpringThermostat: React.FC<ThermostatControlProps> = ({
-  value,
-  onChange,
-  min = 60,
-  max = 85,
-  className = '',
-  mode = 'cooling'
-}) => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [localValue, setLocalValue] = useState(value);
-
-  const spring = useSpring({
-    scale: isDragging ? 1.1 : 1,
-    rotate: ((localValue - min) / (max - min)) * 270 - 135,
-    config: springConfigs.bouncy
-  });
-
-  const backgroundSpring = useSpring({
-    background: mode === 'heating' 
-      ? `linear-gradient(${((localValue - min) / (max - min)) * 180}deg, #ea580c, #f97316)`
-      : `linear-gradient(${((localValue - min) / (max - min)) * 180}deg, #2563eb, #3b82f6)`,
-    config: springConfigs.gentle
-  });
-
-  const handleMouseDown = useCallback(() => {
-    setIsDragging(true);
-  }, []);
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-    onChange(localValue);
-  }, [localValue, onChange]);
-
-  const handleValueChange = useCallback((newValue: number) => {
-    const clampedValue = Math.max(min, Math.min(max, newValue));
-    setLocalValue(clampedValue);
-  }, [min, max]);
-
-  return (
-    <div className={`relative w-32 h-32 ${className}`}>
-      <animated.div
-        style={backgroundSpring}
-        className="absolute inset-0 rounded-full shadow-lg"
-      />
-      
-      <div className="absolute inset-4 bg-white rounded-full shadow-inner flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-gray-800">
-            {Math.round(localValue)}°
-          </div>
-          <div className="text-xs text-gray-500 uppercase">
-            {mode}
-          </div>
-        </div>
-      </div>
-
-      <animated.div
-        style={spring}
-        className="absolute top-1 left-1/2 w-1 h-8 bg-white rounded-full shadow-md origin-bottom -translate-x-1/2 cursor-pointer"
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-      />
-
-      <input
-        type="range"
-        min={min}
-        max={max}
-        value={localValue}
-        onChange={(e) => handleValueChange(Number(e.target.value))}
-        className="absolute inset-0 opacity-0 cursor-pointer"
-      />
-    </div>
   );
 };
 

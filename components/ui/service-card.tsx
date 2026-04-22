@@ -11,7 +11,7 @@ export interface ServiceCardProps {
   priceNote?: string;
   features?: string[];
   icon: React.ComponentType<IconProps>;
-  primaryColor?: 'cooling' | 'heating' | 'neutral';
+  primaryColor?: 'primary' | 'accent' | 'neutral';
   onLearnMore?: () => void;
   onBookNow?: () => void;
   className?: string;
@@ -19,9 +19,9 @@ export interface ServiceCardProps {
 }
 
 const colorVariants = {
-  cooling: {
-    gradient: 'from-blue-50 to-cyan-50',
-    cardBg: 'bg-gradient-to-br from-blue-50 via-white to-cyan-50',
+  primary: {
+    gradient: 'from-blue-50 to-blue-100',
+    cardBg: 'bg-gradient-to-br from-blue-50 via-white to-blue-100',
     iconBg: 'bg-blue-100',
     iconColor: 'text-blue-600',
     accent: 'text-blue-700',
@@ -29,15 +29,15 @@ const colorVariants = {
     featuredRing: 'ring-blue-500',
     border: 'border-blue-200'
   },
-  heating: {
-    gradient: 'from-orange-50 to-red-50',
-    cardBg: 'bg-gradient-to-br from-orange-50 via-white to-red-50',
-    iconBg: 'bg-orange-100',
-    iconColor: 'text-orange-600',
-    accent: 'text-orange-700',
-    button: 'bg-orange-600 hover:bg-orange-700 text-white',
-    featuredRing: 'ring-orange-500',
-    border: 'border-orange-200'
+  accent: {
+    gradient: 'from-amber-50 to-amber-100',
+    cardBg: 'bg-gradient-to-br from-amber-50 via-white to-amber-100',
+    iconBg: 'bg-amber-100',
+    iconColor: 'text-amber-600',
+    accent: 'text-amber-700',
+    button: 'bg-amber-600 hover:bg-amber-700 text-white',
+    featuredRing: 'ring-amber-500',
+    border: 'border-amber-200'
   },
   neutral: {
     gradient: 'from-gray-50 to-slate-50',
@@ -58,7 +58,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   priceNote,
   features = [],
   icon: Icon,
-  primaryColor = 'cooling',
+  primaryColor = 'primary',
   onLearnMore,
   onBookNow,
   className = '',

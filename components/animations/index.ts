@@ -23,7 +23,6 @@ export {
   RevealOnScroll,
   StaggeredReveal,
   StaggerItem,
-  EquipmentAnimation,
   ScrollCounter,
   ScrollRevealImage
 } from './scroll-animations';
@@ -34,7 +33,6 @@ export {
   SpringHoverCard,
   FloatingElement,
   SpringModal,
-  SpringThermostat,
   ServiceCardsTrail,
   SpringInput
 } from './interactive-elements';
@@ -48,8 +46,7 @@ export {
   LayoutTransition,
   StaggeredSections,
   ModalTransition,
-  NavTransition,
-  EquipmentShowcase
+  NavTransition
 } from './page-transitions';
 
 // Animation utilities and configurations
@@ -74,29 +71,18 @@ export const AnimationPresets = {
   // Service section animations
   serviceCard: {
     component: 'SpringHoverCard',
-    props: { hoverScale: 1.05, glowColor: 'cooling' }
+    props: { hoverScale: 1.05, glowColor: 'primary' }
   },
-  
+
   serviceButton: {
     component: 'SpringButton',
     props: { variant: 'primary', size: 'lg' }
   },
-  
+
   // Statistics animations
   statCounter: {
     component: 'ScrollCounter',
     props: { duration: 2000, decimals: 0 }
-  },
-  
-  // Equipment showcase
-  coolingEquipment: {
-    component: 'EquipmentShowcase',
-    props: { equipmentType: 'cooling' }
-  },
-  
-  heatingEquipment: {
-    component: 'EquipmentShowcase',
-    props: { equipmentType: 'heating' }
   }
 };
 

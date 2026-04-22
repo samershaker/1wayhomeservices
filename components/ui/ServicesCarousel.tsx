@@ -96,7 +96,7 @@ function CarouselCard({ service, isActive: _isActive, index }: CarouselCardProps
         />
 
         {/* Main card */}
-        <div className="relative h-[320px] sm:h-[360px] md:h-[400px] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-2xl transition-all duration-500 group-hover:bg-white/[0.04] group-hover:border-everglade-orange/20">
+        <div className="relative h-[320px] sm:h-[360px] md:h-[400px] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-2xl transition-all duration-500 group-hover:bg-white/[0.04] group-hover:border-amber-500/20">
           
           {/* Specular highlight (top edge) */}
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent z-20" />
@@ -113,7 +113,7 @@ function CarouselCard({ service, isActive: _isActive, index }: CarouselCardProps
             
             {/* Gradient overlays for depth */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-            <div className="absolute inset-0 bg-gradient-to-br from-everglade-navy/30 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-transparent to-transparent" />
           </div>
 
           {/* Content overlay */}
@@ -122,10 +122,10 @@ function CarouselCard({ service, isActive: _isActive, index }: CarouselCardProps
             <motion.div 
               className="mb-3 flex items-center gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500"
             >
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-everglade-orange">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber-500">
                 Everglade Service
               </span>
-              <div className="h-[1px] w-8 bg-everglade-orange/40" />
+              <div className="h-[1px] w-8 bg-amber-500/40" />
             </motion.div>
             
             {/* Title */}
@@ -139,7 +139,7 @@ function CarouselCard({ service, isActive: _isActive, index }: CarouselCardProps
             </p>
             
             {/* CTA hint */}
-            <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-everglade-orange opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+            <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-500 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
               <span>Learn More</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -167,7 +167,7 @@ function ArrowButton({
     <button
       onClick={onClick}
       aria-label={`Scroll ${direction}`}
-      className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/60 hover:bg-white/10 hover:text-white hover:border-everglade-orange/30 transition-all duration-300 flex-shrink-0"
+      className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/60 hover:bg-white/10 hover:text-white hover:border-amber-500/30 transition-all duration-300 flex-shrink-0"
     >
       <svg
         width="20"
@@ -289,7 +289,7 @@ export function ServicesCarousel() {
             onClick={() => scrollToIndex(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               index === activeIndex
-                ? "bg-everglade-orange w-6"
+                ? "bg-amber-500 w-6"
                 : "bg-white/20 hover:bg-white/40"
             }`}
             aria-label={`Go to slide ${index + 1}`}

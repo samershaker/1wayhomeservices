@@ -26,7 +26,7 @@ interface TypewriterProps extends BaseTextProps {
 }
 
 interface GlowTextProps extends BaseTextProps {
-  glowColor?: 'cooling' | 'heating' | 'accent';
+  glowColor?: 'primary' | 'accent' | 'neutral';
   intensity?: 'low' | 'medium' | 'high';
 }
 
@@ -206,26 +206,26 @@ export const AnimatedCounter: React.FC<CounterProps> = ({
 export const GlowText: React.FC<GlowTextProps> = ({
   children,
   className = '',
-  glowColor = 'cooling',
+  glowColor = 'primary',
   intensity = 'medium',
   delay = 0,
   disabled = false
 }) => {
   const glowStyles = {
-    cooling: {
-      low: 'text-cooling-400 drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]',
-      medium: 'text-cooling-300 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]',
-      high: 'text-cooling-200 drop-shadow-[0_0_25px_rgba(59,130,246,0.7)]'
-    },
-    heating: {
-      low: 'text-heating-400 drop-shadow-[0_0_10px_rgba(249,115,22,0.3)]',
-      medium: 'text-heating-300 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]',
-      high: 'text-heating-200 drop-shadow-[0_0_25px_rgba(249,115,22,0.7)]'
+    primary: {
+      low: 'text-blue-600 drop-shadow-[0_0_10px_rgba(34,81,163,0.3)]',
+      medium: 'text-blue-500 drop-shadow-[0_0_15px_rgba(34,81,163,0.5)]',
+      high: 'text-blue-400 drop-shadow-[0_0_25px_rgba(34,81,163,0.7)]'
     },
     accent: {
-      low: 'text-green-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]',
-      medium: 'text-green-300 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]',
-      high: 'text-green-200 drop-shadow-[0_0_25px_rgba(16,185,129,0.7)]'
+      low: 'text-amber-600 drop-shadow-[0_0_10px_rgba(212,168,83,0.3)]',
+      medium: 'text-amber-500 drop-shadow-[0_0_15px_rgba(212,168,83,0.5)]',
+      high: 'text-amber-400 drop-shadow-[0_0_25px_rgba(212,168,83,0.7)]'
+    },
+    neutral: {
+      low: 'text-gray-600 drop-shadow-[0_0_10px_rgba(107,114,128,0.3)]',
+      medium: 'text-gray-500 drop-shadow-[0_0_15px_rgba(107,114,128,0.5)]',
+      high: 'text-gray-400 drop-shadow-[0_0_25px_rgba(107,114,128,0.7)]'
     }
   };
 
@@ -359,20 +359,20 @@ export const PulsingText: React.FC<BaseTextProps & { intensity?: 'subtle' | 'nor
 };
 
 // Text with gradient animation
-export const GradientText: React.FC<BaseTextProps & { 
-  gradient?: 'cooling' | 'heating' | 'full-spectrum';
+export const GradientText: React.FC<BaseTextProps & {
+  gradient?: 'primary' | 'accent' | 'vibrant';
   animated?: boolean;
 }> = ({
   children,
   className = '',
-  gradient = 'cooling',
+  gradient = 'primary',
   animated = true,
   disabled = false
 }) => {
   const gradients = {
-    cooling: 'bg-gradient-to-r from-cooling-400 via-cooling-500 to-cooling-600',
-    heating: 'bg-gradient-to-r from-heating-400 via-heating-500 to-heating-600',
-    'full-spectrum': 'bg-gradient-to-r from-heating-400 via-green-500 to-cooling-500'
+    primary: 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400',
+    accent: 'bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400',
+    vibrant: 'bg-gradient-to-r from-blue-500 via-purple-500 to-amber-500'
   };
 
   const gradientClass = gradients[gradient];

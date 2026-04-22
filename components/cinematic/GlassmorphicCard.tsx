@@ -49,7 +49,7 @@ export function GlassmorphicCard({
 
         {/* Icon */}
         {icon && (
-          <div className="relative mb-6 w-12 h-12 rounded-xl bg-everglade-orange/10 flex items-center justify-center text-everglade-orange group-hover:bg-everglade-orange/20 transition-colors duration-300">
+          <div className="relative mb-6 w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:bg-amber-500/20 transition-colors duration-300">
             {icon}
           </div>
         )}
@@ -77,7 +77,7 @@ export function GlassmorphicCard({
         </p>
 
         {/* Bottom accent line */}
-        <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-everglade-orange/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
     </motion.div>
   );

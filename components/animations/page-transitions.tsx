@@ -130,12 +130,6 @@ export const RouteTransition: React.FC<RouteTransitionProps> = ({
   
   // Determine transition type based on route
   const getTransitionType = (path: string): keyof typeof transitionVariants => {
-    if (path.includes('/cooling') || path.includes('/air-conditioning')) {
-      return 'cool-blue';
-    }
-    if (path.includes('/heating') || path.includes('/furnace')) {
-      return 'warm-orange';
-    }
     if (path.includes('/services')) {
       return 'slide';
     }
@@ -204,23 +198,23 @@ const DefaultLoadingComponent: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-[200px]">
       <div className="relative">
-        {/* Cooling animation */}
+        {/* Primary ring */}
         <motion.div
-          className="w-12 h-12 border-4 border-cooling-200 rounded-full"
+          className="w-12 h-12 border-4 border-blue-200 rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
         />
-        
-        {/* Heating animation */}
+
+        {/* Secondary ring */}
         <motion.div
-          className="absolute inset-1 w-10 h-10 border-4 border-heating-400 border-t-transparent rounded-full"
+          className="absolute inset-1 w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full"
           animate={{ rotate: -360 }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
         />
-        
+
         {/* Center dot */}
         <motion.div
-          className="absolute inset-4 w-4 h-4 bg-accent rounded-full"
+          className="absolute inset-4 w-4 h-4 bg-amber-500 rounded-full"
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -370,68 +364,6 @@ export const NavTransition: React.FC<{
         </motion.nav>
       )}
     </AnimatePresence>
-  );
-};
-
-// Business Equipment showcase transition
-export const EquipmentShowcase: React.FC<{
-  children: ReactNode;
-  className?: string;
-  equipmentType?: 'cooling' | 'heating' | 'ventilation';
-}> = ({ children, className = '', equipmentType = 'cooling' }) => {
-  const equipmentVariants = {
-    cooling: {
-      initial: { 
-        opacity: 0, 
-        scale: 0.8, 
-        filter: 'blur(10px) brightness(0.5)' 
-      },
-      animate: { 
-        opacity: 1, 
-        scale: 1, 
-        filter: 'blur(0px) brightness(1)',
-        boxShadow: '0 0 30px rgba(37, 99, 235, 0.3)'
-      }
-    },
-    heating: {
-      initial: { 
-        opacity: 0, 
-        scale: 1.2, 
-        filter: 'blur(10px) saturate(2)' 
-      },
-      animate: { 
-        opacity: 1, 
-        scale: 1, 
-        filter: 'blur(0px) saturate(1)',
-        boxShadow: '0 0 30px rgba(234, 88, 12, 0.3)'
-      }
-    },
-    ventilation: {
-      initial: { 
-        opacity: 0, 
-        rotate: -180, 
-        scale: 0.5 
-      },
-      animate: { 
-        opacity: 1, 
-        rotate: 0, 
-        scale: 1,
-        boxShadow: '0 0 30px rgba(16, 185, 129, 0.3)'
-      }
-    }
-  };
-
-  return (
-    <motion.div
-      className={className}
-      variants={equipmentVariants[equipmentType]}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.8 }}
-    >
-      {children}
-    </motion.div>
   );
 };
 

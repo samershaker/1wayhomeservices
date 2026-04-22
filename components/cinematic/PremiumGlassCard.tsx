@@ -74,17 +74,17 @@ export function PremiumGlassCard({
           {/* Tag / Metadata */}
           {tag && (
             <div className="mb-6 flex items-center gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-everglade-orange">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber-500">
                 {tag}
               </span>
-              <div className="h-[1px] w-8 bg-everglade-orange/30" />
+              <div className="h-[1px] w-8 bg-amber-500/30" />
             </div>
           )}
 
           {/* Icon with glow background */}
           {icon && (
-            <div className="relative mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-transform duration-500 group-hover:scale-110 group-hover:border-everglade-orange/30">
-              <div className="absolute inset-0 rounded-xl bg-everglade-orange/10 opacity-0 blur-lg transition-opacity group-hover:opacity-100" />
+            <div className="relative mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-transform duration-500 group-hover:scale-110 group-hover:border-amber-500/30">
+              <div className="absolute inset-0 rounded-xl bg-amber-500/10 opacity-0 blur-lg transition-opacity group-hover:opacity-100" />
               <div className="relative z-10">{icon}</div>
             </div>
           )}

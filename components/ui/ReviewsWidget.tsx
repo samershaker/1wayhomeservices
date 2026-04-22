@@ -23,27 +23,16 @@ interface ReviewsWidgetProps {
   className?: string;
 }
 
-// Placeholder reviews - replace with real data
-const placeholderReviews: Review[] = [
-  {
-    author: "Michael R.",
-    rating: 5,
-    text: "Karam was incredibly professional and responsive. Our AC went out during a heat wave and he came same-day. Honest pricing, quality work. Highly recommend!",
-    date: "2 weeks ago",
-  },
-  {
-    author: "Sarah L.",
-    rating: 5,
-    text: "Best HVAC experience I've ever had. Karam explained everything clearly, didn't try to upsell, and the installation was flawless. Our new system is so quiet!",
-    date: "1 month ago",
-  },
-  {
-    author: "David K.",
-    rating: 5,
-    text: "Called for an emergency repair at 9pm and Karam answered. Fixed our furnace the next morning. Fair price, great service. This is how all contractors should operate.",
-    date: "3 weeks ago",
-  },
-];
+// Import real testimonials from constants
+import { TESTIMONIALS } from '@/lib/constants';
+
+// Use real testimonials from 1Way Home Services
+const placeholderReviews: Review[] = TESTIMONIALS.map((t, i) => ({
+  author: t.author,
+  rating: 5,
+  text: t.quote,
+  date: i === 0 ? "2 weeks ago" : i === 1 ? "1 month ago" : "3 weeks ago",
+}));
 
 // Star rating component
 function StarRating({ rating, size = "md" }: { rating: number; size?: "sm" | "md" | "lg" }) {
@@ -113,7 +102,7 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           {/* Avatar */}
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-everglade-orange/20 to-everglade-navy/20 flex items-center justify-center text-everglade-orange font-display font-bold text-sm border border-white/10">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500/20 to-blue-600/20 flex items-center justify-center text-amber-500 font-display font-bold text-sm border border-white/10">
             {review.author.charAt(0)}
           </div>
           <div>
@@ -148,7 +137,7 @@ export function ReviewsWidget({
 }: ReviewsWidgetProps) {
   const googleReviewsUrl = googlePlaceId
     ? `https://search.google.com/local/writereview?placeid=${googlePlaceId}`
-    : "https://www.google.com/search?q=everglade+heating+and+air+san+diego+reviews";
+    : "#";
 
   return (
     <section className={`py-24 md:py-32 px-6 ${className}`}>
@@ -161,12 +150,12 @@ export function ReviewsWidget({
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <p className="text-label text-everglade-orange mb-4">
+          <p className="text-label text-amber-500 mb-4">
             CUSTOMER REVIEWS
           </p>
           <h2 className="font-display text-display-md font-bold mb-6">
-            What San Diego Says About{" "}
-            <span className="text-gradient-orange">Everglade</span>
+            What Our Clients Say{" "}
+            <span className="text-gradient-orange">About Us</span>
           </h2>
 
           {/* Rating Summary */}

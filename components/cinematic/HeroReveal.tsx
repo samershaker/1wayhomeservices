@@ -62,7 +62,7 @@ export function HeroReveal({
             style={{ backgroundImage: `url(${backgroundImage})` }}
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-b from-everglade-navy via-[#0D0D0D] to-[#0D0D0D]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1A3D82] via-[#0D0D0D] to-[#0D0D0D]" />
         )}
         {/* Rich cinematic gradient overlay with multiple stops */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent" />
@@ -81,7 +81,7 @@ export function HeroReveal({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-everglade-sky font-mono text-sm md:text-base tracking-[0.3em] uppercase mb-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_0_2px_8px_rgb(0_0_0_/_80%)]"
+            className="text-blue-400 font-mono text-sm md:text-base tracking-[0.3em] uppercase mb-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_0_2px_8px_rgb(0_0_0_/_80%)]"
           >
             {tagline}
           </motion.p>
@@ -130,7 +130,7 @@ export function HeroReveal({
                 href={ctaPrimary.href}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 bg-gradient-to-r from-everglade-orange to-everglade-orange/80 text-everglade-navy font-bold rounded-full text-lg tracking-tight hover:from-everglade-orange/90 hover:to-everglade-orange/70 transition-all shadow-lg shadow-everglade-orange/20 inline-flex items-center gap-2 justify-center"
+                className="px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-gray-900 font-bold rounded-full text-lg tracking-tight hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg shadow-amber-500/20 inline-flex items-center gap-2 justify-center"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -143,7 +143,7 @@ export function HeroReveal({
                 href={ctaSecondary.href}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 bg-gradient-to-r from-everglade-royal to-everglade-sky text-white font-bold rounded-full text-lg tracking-tight hover:from-everglade-sky hover:to-everglade-royal transition-all shadow-lg shadow-everglade-royal/20 inline-flex items-center gap-2 justify-center"
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-full text-lg tracking-tight hover:from-blue-500 hover:to-blue-600 transition-all shadow-lg shadow-blue-600/20 inline-flex items-center gap-2 justify-center"
               >
                 {ctaSecondary.label}
               </motion.a>
@@ -167,7 +167,7 @@ export function HeroReveal({
             }}
             className="w-6 h-10 rounded-full border-2 border-white/20 mx-auto flex items-start justify-center p-2"
           >
-            <motion.div className="w-1 h-2 rounded-full bg-everglade-orange" />
+            <motion.div className="w-1 h-2 rounded-full bg-amber-500" />
           </motion.div>
         </motion.div>
       </motion.div>

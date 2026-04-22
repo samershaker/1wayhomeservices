@@ -53,19 +53,6 @@ export const motionPresets = {
     initial: { opacity: 0, scale: 0.8 },
     animate: { opacity: 1, scale: 1 },
     transition: { duration: 0.5 }
-  },
-  
-  // Equipment/service simulation effects
-  equipmentRotate: {
-    initial: { rotate: 0 },
-    animate: { rotate: 360 },
-    transition: { duration: 10, repeat: Infinity }
-  },
-  
-  temperatureGlow: {
-    initial: { boxShadow: '0 0 0px rgba(37, 99, 235, 0)' },
-    animate: { boxShadow: '0 0 20px rgba(37, 99, 235, 0.6)' },
-    transition: { duration: 2, repeat: Infinity, repeatType: 'reverse' as const }
   }
 };
 
@@ -98,14 +85,7 @@ export const springConfigs: Record<string, SpringConfig> = {
     friction: 25,
     mass: 0.8
   },
-  
-  // Physics simulation for equipment/features
-  equipment: {
-    tension: 200,
-    friction: 15,
-    mass: 2
-  },
-  
+
   // Wobbly effect for attention-grabbing elements
   wobbly: {
     tension: 180,
@@ -140,7 +120,7 @@ export const inViewConfig = {
 };
 
 // Reduced motion support
-export const getAnimationProps = (animationKey: 'fadeInUp' | 'fadeInDown' | 'slideInLeft' | 'slideInRight' | 'scaleIn' | 'hvacRotate' | 'temperatureGlow') => {
+export const getAnimationProps = (animationKey: 'fadeInUp' | 'fadeInDown' | 'slideInLeft' | 'slideInRight' | 'scaleIn') => {
   // Check for reduced motion preference
   const prefersReducedMotion = typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -158,34 +138,34 @@ export const getAnimationProps = (animationKey: 'fadeInUp' | 'fadeInDown' | 'sli
   return preset;
 };
 
-// Service-specific animation utilities
+// Generic service animation utilities
 export const serviceAnimations = {
-  // Primary feature effect - blue glow and gentle movement
-  primaryFeature: {
+  // Primary brand color effect - blue glow (#2251A3)
+  primary: {
     boxShadow: [
-      '0 0 0px rgba(37, 99, 235, 0)',
-      '0 0 20px rgba(37, 99, 235, 0.4)',
-      '0 0 30px rgba(37, 99, 235, 0.6)',
-      '0 0 20px rgba(37, 99, 235, 0.4)',
-      '0 0 0px rgba(37, 99, 235, 0)'
+      '0 0 0px rgba(34, 81, 163, 0)',
+      '0 0 20px rgba(34, 81, 163, 0.4)',
+      '0 0 30px rgba(34, 81, 163, 0.6)',
+      '0 0 20px rgba(34, 81, 163, 0.4)',
+      '0 0 0px rgba(34, 81, 163, 0)'
     ],
     y: [0, -2, 0, 2, 0]
   },
 
-  // Secondary feature effect - orange glow and warm movement
-  secondaryFeature: {
+  // Accent color effect - amber glow (#D4A853)
+  accent: {
     boxShadow: [
-      '0 0 0px rgba(234, 88, 12, 0)',
-      '0 0 20px rgba(234, 88, 12, 0.4)',
-      '0 0 30px rgba(234, 88, 12, 0.6)',
-      '0 0 20px rgba(234, 88, 12, 0.4)',
-      '0 0 0px rgba(234, 88, 12, 0)'
+      '0 0 0px rgba(212, 168, 83, 0)',
+      '0 0 20px rgba(212, 168, 83, 0.4)',
+      '0 0 30px rgba(212, 168, 83, 0.6)',
+      '0 0 20px rgba(212, 168, 83, 0.4)',
+      '0 0 0px rgba(212, 168, 83, 0)'
     ],
     scale: [1, 1.02, 1, 1.01, 1]
   },
 
-  // Accent effect - subtle rotation and movement
-  accentFeature: {
+  // Subtle animation - minimal movement
+  subtle: {
     rotate: [0, 2, -2, 1, 0],
     scale: [1, 1.01, 0.99, 1.005, 1]
   }

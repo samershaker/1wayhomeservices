@@ -124,6 +124,30 @@ The main landing page (`app/en/page.tsx`) is a single-file component with all se
 
 Each section uses Framer Motion's `AnimateOnScroll` component for scroll-triggered animations.
 
+### Component Theming System
+
+The website uses a generic, semantic theming system that makes components reusable across different businesses:
+
+**Color Semantics:**
+- `primary` - Main brand color (blue #2251A3 for 1Way Home Services)
+- `accent` - Secondary highlight color (amber #D4A853)
+- `neutral` - Grayscale for neutral elements
+
+**Usage:**
+- Animation components accept `glowColor="primary"` or `"accent"` or `"neutral"`
+- Service cards accept `primaryColor="primary"` or `"accent"` or `"neutral"`
+- **Never use business-specific terms** (like "cooling", "heating") in component props
+- All components use generic, semantic naming
+
+**To Change Brand Colors:**
+1. Update CSS variables in `app/globals.css` (`:root` section)
+2. Update Tailwind color mapping in `tailwind.config.ts`
+3. No component code changes needed - everything uses CSS variables
+
+**Type Definitions:**
+- Generic types defined in `lib/types.ts`
+- `BrandColorVariant`, `IntensityLevel`, `AnimationMode`, etc.
+
 ### Animation Patterns
 
 **Framer Motion (primary):**

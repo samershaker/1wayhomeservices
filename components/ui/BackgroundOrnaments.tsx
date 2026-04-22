@@ -137,27 +137,4 @@ export const BackgroundOrnaments: React.FC<BackgroundOrnamentsProps> = ({
   );
 };
 
-// Predefined ornament sets for common service contexts
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type IconComponents = Record<string, React.ComponentType<{ size?: number }>>;
-
-export const ServiceOrnamentSets = {
-  heating: (iconComponents: IconComponents) => [
-    <iconComponents.Thermostat key="thermostat-1" size={60} />,
-    <iconComponents.Heating key="heating-1" size={80} />,
-    <iconComponents.Furnace key="furnace-1" size={40} />
-  ],
-  cooling: (iconComponents: IconComponents) => [
-    <iconComponents.AirConditioning key="ac-1" size={60} />,
-    <iconComponents.Cooling key="cooling-1" size={80} />,
-    <iconComponents.Snowflake key="snowflake-1" size={40} />
-  ],
-  mixed: (iconComponents: IconComponents) => [
-    <iconComponents.AirConditioning key="ac-mixed" size={60} />,
-    <iconComponents.Thermostat key="thermostat-mixed" size={80} />,
-    <iconComponents.Tool key="tool-mixed" size={40} />,
-    <iconComponents.Diagnosis key="diagnosis-mixed" size={50} />
-  ]
-};
-
 export default BackgroundOrnaments;
