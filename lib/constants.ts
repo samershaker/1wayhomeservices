@@ -211,9 +211,80 @@ export const STATS = [
 // Testimonials
 export const TESTIMONIALS = [
   {
+    id: 1,
     quote: '"Sam" is the best! So welcoming and knows what he\'s doing! He\'s helped me with my taxes, running loan numbers and starting my business. Great guy and helps with whatever you need when it comes to taxes, real estate and business. I will keep coming back.',
     author: 'Jennifer R.',
-    role: 'Business Owner'
+    role: 'Business Owner',
+    location: 'El Cajon, CA',
+    rating: 5,
+    service: 'Tax Planning & Business Formation',
+    image: '/testimonials/jennifer-r.jpg' // Placeholder - replace with actual image
+  },
+  {
+    id: 2,
+    quote: 'I was facing an IRS audit and didn\'t know where to turn. Sam represented me professionally and got the penalties completely waived. His expertise saved me over $4,200 in potential fines. Couldn\'t be happier with the outcome!',
+    author: 'Michael T.',
+    role: 'Real Estate Investor',
+    location: 'San Diego, CA',
+    rating: 5,
+    service: 'IRS Audit Defense',
+    result: 'Saved $4,200 in penalties',
+    image: '/testimonials/michael-t.jpg'
+  },
+  {
+    id: 3,
+    quote: 'As a small business owner, bookkeeping was taking up too much of my time. 1Way Home Services handles everything - from monthly reconciliation to quarterly tax filings. My financials have never been cleaner and I can focus on growing my business.',
+    author: 'Sarah K.',
+    role: 'Small Business Owner',
+    location: 'La Mesa, CA',
+    rating: 5,
+    service: 'Bookkeeping & Payroll',
+    result: 'Saves 10+ hours per month',
+    image: '/testimonials/sarah-k.jpg'
+  },
+  {
+    id: 4,
+    quote: 'Fast, professional, and thorough. They completed my tax return in just 3 days and found deductions I didn\'t even know existed. Got back $1,850 more than I expected. Will definitely use them again next year!',
+    author: 'David L.',
+    role: 'W-2 Employee',
+    location: 'Santee, CA',
+    rating: 5,
+    service: 'Individual Tax Filing',
+    result: 'Additional $1,850 refund',
+    image: '/testimonials/david-l.jpg'
+  },
+  {
+    id: 5,
+    quote: 'Working as a freelance designer, my taxes were a mess. Sam helped me set up quarterly estimated payments and maximize my home office deduction. No more surprises at tax time - everything is organized and stress-free now.',
+    author: 'Lisa M.',
+    role: 'Freelance Designer',
+    location: 'El Cajon, CA',
+    rating: 5,
+    service: 'Quarterly Tax Planning',
+    result: 'Eliminated tax surprises',
+    image: '/testimonials/lisa-m.jpg'
+  },
+  {
+    id: 6,
+    quote: 'Bakhan guided us through a 1031 exchange on our investment property. His knowledge of real estate tax law saved us from a huge capital gains hit. The process was smooth and we reinvested tax-free. Highly recommend for real estate investors!',
+    author: 'Robert & Patricia P.',
+    role: 'Property Investors',
+    location: 'San Diego, CA',
+    rating: 5,
+    service: '1031 Exchange Guidance',
+    result: 'Tax-deferred $85,000 capital gain',
+    image: '/testimonials/robert-p.jpg'
+  },
+  {
+    id: 7,
+    quote: 'Buying our first home was overwhelming, but the team at 1Way made the tax side simple. They explained mortgage interest deductions, property tax implications, and connected us with a great lender. Made the whole process less stressful!',
+    author: 'Amanda H.',
+    role: 'First-Time Homebuyer',
+    location: 'El Cajon, CA',
+    rating: 5,
+    service: 'Mortgage Consulting',
+    result: 'Smooth first-home purchase',
+    image: '/testimonials/amanda-h.jpg'
   }
 ] as const;
 

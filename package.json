@@ -41,5 +41,8 @@
   },
   "keywords": ["tax", "real-estate", "homes", "next.js"],
   "author": "1Way Home Services",
-  "license": "MIT"
+  "license": "MIT",
+  "notes": {
+    "recommended-dependencies": "For production, consider installing: react-hook-form, zod, @hookform/resolvers for enhanced form validation. For image optimization: sharp (dev dependency)."
+  }
 }

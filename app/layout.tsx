@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { StructuredData } from "@/components/StructuredData";
 import "./globals.css";
 
 const syne = Syne({
@@ -67,8 +70,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <StructuredData type="all" />
+      </head>
       <body className={`${syne.variable} ${dmSans.variable} antialiased bg-black text-white`}>
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

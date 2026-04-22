@@ -1,0 +1,25 @@
+# Robots.txt for 1Way Home Services
+# https://1wayhomeservices.com
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://1wayhomeservices.com/sitemap.xml
+
+# Crawl delay (optional - prevents server overload)
+Crawl-delay: 1
+
+# Disallow admin/private areas (if any)
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow important pages
+Allow: /en/
+Allow: /services/
+Allow: /images/
+
+# Host preference
+Host: https://1wayhomeservices.com
