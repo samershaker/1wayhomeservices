@@ -12,6 +12,18 @@ interface SpringConfig {
 
 // Motion Primitives Animation Presets
 export const motionPresets = {
+  // Fade up animation for sections (using hidden/visible for variants)
+  fadeUp: {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } },
+  } as const,
+
+  // Stagger animation for containers
+  stagger: {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.12 } },
+  } as const,
+
   // Text animations
   fadeInUp: {
     initial: { opacity: 0, y: 20 },
@@ -128,20 +140,22 @@ export const inViewConfig = {
 };
 
 // Reduced motion support
-export const getAnimationProps = (animationKey: keyof typeof motionPresets) => {
+export const getAnimationProps = (animationKey: 'fadeInUp' | 'fadeInDown' | 'slideInLeft' | 'slideInRight' | 'scaleIn' | 'hvacRotate' | 'temperatureGlow') => {
   // Check for reduced motion preference
-  const prefersReducedMotion = typeof window !== 'undefined' && 
+  const prefersReducedMotion = typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-  if (prefersReducedMotion) {
+
+  const preset = motionPresets[animationKey];
+
+  if (prefersReducedMotion && 'initial' in preset && 'animate' in preset) {
     return {
-      initial: motionPresets[animationKey].initial,
-      animate: motionPresets[animationKey].animate,
+      initial: preset.initial,
+      animate: preset.animate,
       transition: { duration: 0.01 } // Almost instant for accessibility
     };
   }
-  
-  return motionPresets[animationKey];
+
+  return preset;
 };
 
 // Service-specific animation utilities

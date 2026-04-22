@@ -91,9 +91,12 @@ export function ContactForm() {
     setSubmitStatus('idle');
 
     try {
-      // TODO: Replace with your actual form submission endpoint
-      // Options: Formspree, Netlify Forms, your own API route
-      const response = await fetch('/api/contact', {
+      // TODO: Replace with actual Formspree endpoint
+      // 1. Go to https://formspree.io
+      // 2. Create account with info@1wayhomeservices.com
+      // 3. Create form, get endpoint ID
+      // 4. Replace 'YOUR_FORM_ID' below with actual ID
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,8 +110,8 @@ export function ContactForm() {
         setErrors({});
 
         // Track conversion event (if analytics is set up)
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          (window as any).gtag('event', 'form_submission', {
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'form_submission', {
             event_category: 'Contact',
             event_label: formData.service,
           });

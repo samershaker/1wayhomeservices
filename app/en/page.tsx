@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ClockIcon,
   DollarIcon,
@@ -26,22 +25,15 @@ import {
   TESTIMONIALS,
   FAQ_ITEMS,
   SERVICES,
-  CONTACT_INFO,
 } from "@/lib/constants";
-import { ContactFormSection } from "@/components/ui/ContactForm";
-import { TrustBadges, GoogleReviewsBadge } from "@/components/ui/TrustBadges";
+import { ContactFormSection } from '@/components/ui/ContactForm';
+import { TrustBadges, GoogleReviewsBadge, CompactTrustIndicator } from '@/components/ui/TrustBadges';
 
 /* ═══ Animations ═══ */
-import type { Variants } from "framer-motion";
+import { motionPresets } from "@/lib/animations";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
-};
-const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
+const { fadeUp, stagger } = motionPresets;
+
 function AnimateOnScroll({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -75,29 +67,97 @@ const icons = {
   building: <BuildingIcon size={20} />,
 };
 
-/* ═══ NAVIGATION ═══ */
-function Navigation() {
+/* ═══ MOBILE STICKY CTA ═══ */
+function MobileStickyCTA() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY > 800);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (!isVisible) return null;
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/70 border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/en/" className="flex items-center gap-3">
-          <img src="/images/logo-color.png" alt="1Way Home Services" className="h-10 w-auto" />
-        </Link>
-        <div className="hidden md:flex items-center gap-8">
-          <a href="#services" className="text-sm text-gray-400 hover:text-white transition-colors">Services</a>
-          <a href="#about" className="text-sm text-gray-400 hover:text-white transition-colors">About</a>
-          <a href="#process" className="text-sm text-gray-400 hover:text-white transition-colors">Process</a>
-          <a href="#faq" className="text-sm text-gray-400 hover:text-white transition-colors">FAQ</a>
-          <a href="tel:+16197169193" className="btn-primary text-sm !py-2 !px-5">
-            {icons.phone} Call Now
-          </a>
-        </div>
-        <a href="tel:+16197169193" className="md:hidden btn-primary text-sm !py-2 !px-4">
-          {icons.phone}
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-black/95 backdrop-blur-xl border-t border-white/10">
+      <div className="flex gap-2">
+        <a href="tel:+16197169193" className="btn-primary flex-1 justify-center text-sm !py-3">
+          📞 Call Now
+        </a>
+        <a href="#contact" className="btn-secondary flex-1 justify-center text-sm !py-3">
+          ✉️ Message
         </a>
       </div>
-    </nav>
+    </div>
+  );
+}
+
+/* ═══ NAVIGATION ═══ */
+function Navigation() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
+      >
+        Skip to main content
+      </a>
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/70 border-b border-white/5" aria-label="Main navigation">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/en/" className="flex items-center gap-3">
+            <img src="/images/logo-color.png" alt="1Way Home Services home" className="h-10 w-auto" />
+          </Link>
+
+          {/* Desktop navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#services" className="text-sm text-gray-300 hover:text-white transition-colors py-3">Services</a>
+            <a href="#about" className="text-sm text-gray-300 hover:text-white transition-colors py-3">About</a>
+            <a href="#process" className="text-sm text-gray-300 hover:text-white transition-colors py-3">Process</a>
+            <a href="#faq" className="text-sm text-gray-300 hover:text-white transition-colors py-3">FAQ</a>
+            <a href="tel:+16197169193" className="btn-primary text-sm !py-2 !px-5">
+              <span className="sr-only">Call us at </span>
+              <span aria-hidden="true">{icons.phone}</span>
+              <span className="hidden sm:inline">Call Now</span>
+            </a>
+          </div>
+
+          {/* Mobile: Hamburger + Phone */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              className="p-2 text-white hover:text-blue-400 transition-colors text-2xl"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? '✕' : '☰'}
+            </button>
+            <a href="tel:+16197169193" className="btn-primary text-sm !py-2 !px-4" aria-label="Call (619) 716-9193">
+              <span aria-hidden="true">{icons.phone}</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Mobile menu dropdown */}
+        {mobileMenuOpen && (
+          <div id="mobile-menu" className="md:hidden bg-black/95 border-t border-white/5">
+            <div className="flex flex-col p-6 gap-4">
+              <a href="#services" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Services</a>
+              <a href="#about" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>About</a>
+              <a href="#process" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Process</a>
+              <a href="#faq" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
+              <a href="#contact" className="text-white py-2 text-lg hover:text-blue-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+            </div>
+          </div>
+        )}
+      </nav>
+    </>
   );
 }
 
@@ -105,17 +165,16 @@ function Navigation() {
 function HeroSection() {
   return (
     <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
-      {/* Background image - optimized for performance */}
+      {/* Background image with optimized formats */}
       <div className="absolute inset-0 z-0">
         <picture>
-          <source srcSet="/images/hero-team.avif" type="image/avif" />
           <source srcSet="/images/hero-team.webp" type="image/webp" />
           <img
             src="/images/hero-team-optimized.png"
-            alt="1Way Home Services Team - Sam Eram (CPA) and Bakhan Kareem (CEO)"
+            alt=""
             className="absolute inset-0 w-full h-full object-cover object-center"
             loading="eager"
-            decoding="async"
+            role="presentation"
           />
         </picture>
         {/* Dark overlay */}
@@ -149,11 +208,14 @@ function HeroSection() {
               View Our Services →
             </a>
           </div>
+          <div className="mt-6">
+            <CompactTrustIndicator />
+          </div>
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10" aria-hidden="true">
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
@@ -183,7 +245,7 @@ function StatsBand() {
               <div className="stat-number font-display text-4xl md:text-5xl font-extrabold tracking-tighter">
                 {s.value}
               </div>
-              <div className="text-sm text-gray-500 mt-3 font-display font-medium uppercase tracking-widest">
+              <div className="text-sm text-gray-300 mt-3 font-display font-medium uppercase tracking-widest">
                 {s.label}
               </div>
             </motion.div>
@@ -194,66 +256,39 @@ function StatsBand() {
   );
 }
 
+/* ═══ TRUST BADGES SECTION ═══ */
+function TrustBadgesSection() {
+  return (
+    <section className="py-12 px-6 border-y border-white/5">
+      <div className="max-w-6xl mx-auto">
+        <TrustBadges variant="horizontal" size="md" />
+        <div className="mt-6 flex justify-center">
+          <GoogleReviewsBadge />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ═══ SERVICES ═══ */
 function ServicesSection() {
-  const serviceCards = [
-    {
-      icon: icons.clock,
-      title: "Tax Planning & Advisory",
-      body: "Strategic tax planning to minimize liability and maximize deductions for individuals and businesses year-round.",
-      cta: "Get Tax Guidance",
-      color: "text-blue-400",
-      href: "#",
-    },
-    {
-      icon: icons.dollar,
-      title: "Tax Filing",
-      body: "Complete federal and state tax return preparation for individuals and businesses. E-file with direct deposit.",
-      cta: "Start Your Return",
-      color: "text-emerald-400",
-      href: "#",
-    },
-    {
-      icon: icons.calendar,
-      title: "Payroll Tax Filing",
-      body: "Quarterly and annual payroll tax filings, W-2 and 1099 preparation, compliance management for businesses.",
-      cta: "Business Services",
-      color: "text-purple-400",
-      href: "#",
-    },
-    {
-      icon: icons.document,
-      title: "Bookkeeping",
-      body: "Monthly financial record keeping, bank reconciliation, and financial statement preparation to keep your books in order.",
-      cta: "Organize Your Books",
-      color: "text-yellow-400",
-      href: "#",
-    },
-    {
-      icon: icons.shield,
-      title: "IRS Help & Audit Support",
-      body: "Professional representation during IRS audits, notices, and collections. Penalty abatement and payment plan negotiation.",
-      cta: "IRS Assistance",
-      color: "text-red-400",
-      href: "#",
-    },
-    {
-      icon: icons.home,
-      title: "Real Estate Tax Support",
-      body: "Capital gains planning, 1031 exchanges, depreciation strategies, and property sale tax planning for investors.",
-      cta: "Real Estate Tax",
-      color: "text-blue-400",
-      href: "#",
-    },
-    {
-      icon: icons.building,
-      title: "Mortgage Consulting",
-      body: "Loan pre-approval, refinancing analysis, debt planning, and home buying guidance — all at no charge for initial consultations.",
-      cta: "Mortgage Help",
-      color: "text-emerald-400",
-      href: "#",
-    },
-  ];
+  // Icon mapping utility
+  const getServiceIcon = (iconName: string) => {
+    const iconMap: Record<string, React.ReactNode> = {
+      'clock': icons.clock,
+      'dollar': icons.dollar,
+      'calendar': icons.calendar,
+      'document': icons.document,
+      'shield': icons.shield,
+      'home': icons.home,
+      'building': icons.building,
+    };
+    return iconMap[iconName] || icons.clock;
+  };
+
+  // Color mapping for service cards
+  const serviceColors = ['text-blue-400', 'text-emerald-400', 'text-purple-400', 'text-yellow-400', 'text-red-400', 'text-blue-400', 'text-emerald-400'];
+  const serviceCTAs = ['Get Tax Guidance', 'Start Your Return', 'Business Services', 'Organize Your Books', 'IRS Assistance', 'Real Estate Tax', 'Mortgage Help'];
 
   return (
     <section id="services" className="py-24 md:py-32 px-6 section-gradient-navy">
@@ -272,18 +307,22 @@ function ServicesSection() {
           variants={stagger}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {serviceCards.map((s, i) => (
-            <motion.div key={i} variants={fadeUp}>
-              <div className="glass-card p-7 h-full flex flex-col group hover-lift">
-                <div className={`${s.color} mb-4 icon-glow w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center transition-all`}>
-                  {s.icon}
+          {SERVICES.map((service, i) => (
+            <motion.div key={service.id} variants={fadeUp}>
+              <a
+                href="tel:+16197169193"
+                className="glass-card p-7 h-full flex flex-col group hover-lift block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black"
+                aria-label={`${service.name} - ${service.description}. Call to learn more.`}
+              >
+                <div className={`${serviceColors[i]} mb-4 icon-glow w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center transition-all`} aria-hidden="true">
+                  {getServiceIcon(service.icon)}
                 </div>
-                <h3 className="font-display text-lg font-bold mb-3 text-white tracking-tight">{s.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed flex-grow mb-5">{s.body}</p>
+                <h3 className="font-display text-lg font-bold mb-3 text-white tracking-tight">{service.name}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed flex-grow mb-5">{service.description}</p>
                 <span className="link-underline inline-flex items-center gap-2 text-sm font-semibold text-blue-400">
-                  {s.cta} {icons.arrowRight}
+                  {serviceCTAs[i]} {icons.arrowRight}
                 </span>
-              </div>
+              </a>
             </motion.div>
           ))}
         </motion.div>
@@ -383,76 +422,31 @@ function ProcessSection() {
   );
 }
 
-/* ═══ TESTIMONIALS ═══ */
+/* ═══ TESTIMONIAL ═══ */
 function TestimonialSection() {
   return (
-    <section className="py-24 md:py-32 px-6 section-gradient-subtle">
-      <div className="max-w-6xl mx-auto">
-        <AnimateOnScroll className="text-center mb-16">
-          <p className="text-label mb-4">CLIENT SUCCESS STORIES</p>
-          <h2 className="font-display text-display-md font-bold mb-6">
-            Trusted by <span className="text-gradient-blue">100+ Clients</span>
-          </h2>
-          <div className="flex justify-center mb-8">
-            <GoogleReviewsBadge />
-          </div>
-        </AnimateOnScroll>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={stagger}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {TESTIMONIALS.map((testimonial, i) => (
-            <motion.div key={testimonial.id} variants={fadeUp}>
-              <div className="glass-card p-6 h-full flex flex-col">
-                {/* Stars */}
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <span key={j} className="text-yellow-400 text-sm">{icons.star}</span>
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <blockquote className="text-sm text-gray-300 leading-relaxed mb-4 flex-grow">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </blockquote>
-
-                {/* Result (if exists) */}
-                {'result' in testimonial && testimonial.result && (
-                  <div className="mb-4 px-3 py-2 bg-green-500/10 border border-green-500/20 rounded-lg">
-                    <p className="text-xs text-green-400 font-semibold">
-                      ✓ {testimonial.result}
-                    </p>
-                  </div>
-                )}
-
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                    {icons.user}
-                  </div>
-                  <div className="text-left">
-                    <div className="text-sm font-semibold text-white">{testimonial.author}</div>
-                    <div className="text-xs text-gray-500">{testimonial.role}</div>
-                    {'location' in testimonial && testimonial.location && (
-                      <div className="text-xs text-gray-600">{testimonial.location}</div>
-                    )}
-                  </div>
-                </div>
+    <section className="py-24 md:py-32 px-6">
+      <div className="max-w-3xl mx-auto text-center">
+        <AnimateOnScroll>
+          <div className="glass-card p-10 md:p-14">
+            <div className="flex items-center justify-center gap-1 mb-6">
+              {[...Array(5)].map((_, i) => (
+                <span key={i} className="text-yellow-400">{icons.star}</span>
+              ))}
+            </div>
+            <blockquote className="text-xl md:text-2xl text-gray-200 font-display font-medium leading-relaxed mb-8">
+              &ldquo;{TESTIMONIALS[0].quote}&rdquo;
+            </blockquote>
+            <div className="flex items-center justify-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                {icons.user}
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA after testimonials */}
-        <AnimateOnScroll className="text-center mt-12">
-          <p className="text-gray-400 mb-6">Join our satisfied clients</p>
-          <a href="tel:+16197169193" className="btn-primary inline-flex items-center gap-2">
-            {icons.phone} Schedule Your Free Consultation
-          </a>
+              <div className="text-left">
+                <div className="text-sm font-semibold text-white">{TESTIMONIALS[0].author}</div>
+                <div className="text-xs text-gray-500">{TESTIMONIALS[0].role}</div>
+              </div>
+            </div>
+          </div>
         </AnimateOnScroll>
       </div>
     </section>
@@ -520,24 +514,14 @@ function CTABanner() {
 /* ═══ FOOTER ═══ */
 function Footer() {
   return (
-    <footer className="border-t border-white/5 py-16 px-6">
+    <footer className="border-t border-white/5 py-16 px-6" aria-label="Site footer">
       <div className="max-w-6xl mx-auto">
-        {/* Trust Badges */}
-        <div className="mb-12">
-          <TrustBadges variant="horizontal" size="md" />
-        </div>
-
         <div className="grid md:grid-cols-3 gap-12">
           <div>
             <img src="/images/logo-color.png" alt="1Way Home Services" className="h-10 w-auto mb-4" />
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="text-sm text-gray-400">
               Tax Preparation & Real Estate Services serving El Cajon, San Diego, and surrounding areas.
             </p>
-            <div className="flex items-center gap-1 text-xs text-gray-500">
-              <span className="text-yellow-400">★</span>
-              <span className="font-semibold">4.9/5</span>
-              <span>· 87 reviews</span>
-            </div>
           </div>
           <div>
             <h4 className="font-display font-bold text-sm mb-4">Services</h4>
@@ -569,18 +553,22 @@ function Footer() {
 /* ═══ PAGE ASSEMBLY ═══ */
 export default function HomePage() {
   return (
-    <main className="bg-[var(--color-black)]">
+    <>
+      <MobileStickyCTA />
       <Navigation />
-      <HeroSection />
-      <StatsBand />
-      <ServicesSection />
-      <AboutSection />
-      <ProcessSection />
-      <TestimonialSection />
-      <FAQSection />
-      <ContactFormSection />
-      <CTABanner />
-      <Footer />
-    </main>
+      <main id="main-content" className="bg-[var(--color-black)]">
+        <HeroSection />
+        <StatsBand />
+        <TrustBadgesSection />
+        <ServicesSection />
+        <AboutSection />
+        <ProcessSection />
+        <TestimonialSection />
+        <ContactFormSection />
+        <FAQSection />
+        <CTABanner />
+        <Footer />
+      </main>
+    </>
   );
 }

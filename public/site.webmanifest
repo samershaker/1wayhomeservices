@@ -1,0 +1,60 @@
+{
+  "name": "1Way Home Services - Tax & Real Estate",
+  "short_name": "1Way Home",
+  "description": "Professional tax preparation, bookkeeping, IRS representation, and real estate tax consulting in El Cajon and San Diego County. CPA certified with 6+ years of experience.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#2251A3",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": [
+    "finance",
+    "business",
+    "productivity"
+  ],
+  "shortcuts": [
+    {
+      "name": "Call Now",
+      "short_name": "Call",
+      "description": "Call 1Way Home Services",
+      "url": "tel:+16197169193",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "short_name": "Services",
+      "description": "View our tax and real estate services",
+      "url": "/en/#services",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "lang": "en-US",
+  "dir": "ltr"
+}

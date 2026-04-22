@@ -19,73 +19,7 @@
     <loc>https://1wayhomeservices.com/en/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <!-- Service Pages -->
-  <url>
-    <loc>https://1wayhomeservices.com/services/tax-planning/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://1wayhomeservices.com/services/tax-filing/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://1wayhomeservices.com/services/payroll-tax/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://1wayhomeservices.com/services/bookkeeping/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://1wayhomeservices.com/services/irs-help/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://1wayhomeservices.com/services/real-estate-tax/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://1wayhomeservices.com/services/mortgage/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- About/Team Pages (if created) -->
-  <url>
-    <loc>https://1wayhomeservices.com/about/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Contact Page -->
-  <url>
-    <loc>https://1wayhomeservices.com/contact/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
   </url>
 
 </urlset>

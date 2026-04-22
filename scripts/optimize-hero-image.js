@@ -6,40 +6,60 @@ const inputPath = path.join(__dirname, '../public/images/hero-team.png');
 const outputDir = path.join(__dirname, '../public/images');
 
 async function optimizeImages() {
-  console.log('🖼️  Starting image optimization...\n');
+  console.log('🖼️  Optimizing hero image...\n');
+
+  if (!fs.existsSync(inputPath)) {
+    console.error('❌ Error: hero-team.png not found at', inputPath);
+    process.exit(1);
+  }
 
   const inputSize = fs.statSync(inputPath).size;
-  console.log(`Original size: ${(inputSize / (1024 * 1024)).toFixed(2)} MB\n`);
+  console.log(`Original: ${(inputSize / (1024 * 1024)).toFixed(2)} MB\n`);
 
-  // Generate WebP (80% quality, ~200-250KB)
-  await sharp(inputPath)
-    .webp({ quality: 80 })
-    .toFile(path.join(outputDir, 'hero-team.webp'));
-  const webpSize = fs.statSync(path.join(outputDir, 'hero-team.webp')).size;
-  console.log(`✓ Generated hero-team.webp: ${(webpSize / 1024).toFixed(2)} KB`);
+  try {
+    // Generate WebP (target 80-150KB)
+    console.log('Generating WebP...');
+    const webpPath = path.join(outputDir, 'hero-team.webp');
+    await sharp(inputPath)
+      .resize(1920, 1280, { fit: 'cover', position: 'center' })
+      .webp({ quality: 80, effort: 6 })
+      .toFile(webpPath);
+    const webpSize = fs.statSync(webpPath).size;
+    console.log(`✅ WebP: ${(webpSize / 1024).toFixed(2)} KB\n`);
 
-  // Generate AVIF (75% quality, ~150-200KB)
-  await sharp(inputPath)
-    .avif({ quality: 75 })
-    .toFile(path.join(outputDir, 'hero-team.avif'));
-  const avifSize = fs.statSync(path.join(outputDir, 'hero-team.avif')).size;
-  console.log(`✓ Generated hero-team.avif: ${(avifSize / 1024).toFixed(2)} KB`);
+    // Generate AVIF (target 70-120KB)
+    console.log('Generating AVIF...');
+    const avifPath = path.join(outputDir, 'hero-team.avif');
+    await sharp(inputPath)
+      .resize(1920, 1280, { fit: 'cover', position: 'center' })
+      .avif({ quality: 75, effort: 6 })
+      .toFile(avifPath);
+    const avifSize = fs.statSync(avifPath).size;
+    console.log(`✅ AVIF: ${(avifSize / 1024).toFixed(2)} KB\n`);
 
-  // Optimize PNG fallback (quality 70, ~400-500KB)
-  await sharp(inputPath)
-    .png({ quality: 70, compressionLevel: 9 })
-    .toFile(path.join(outputDir, 'hero-team-optimized.png'));
-  const pngSize = fs.statSync(path.join(outputDir, 'hero-team-optimized.png')).size;
-  console.log(`✓ Generated hero-team-optimized.png: ${(pngSize / 1024).toFixed(2)} KB`);
+    // Optimized PNG fallback (target 400-600KB)
+    console.log('Generating optimized PNG...');
+    const pngPath = path.join(outputDir, 'hero-team-optimized.png');
+    await sharp(inputPath)
+      .resize(1920, 1280, { fit: 'cover', position: 'center' })
+      .png({ quality: 70, compressionLevel: 9, effort: 10 })
+      .toFile(pngPath);
+    const pngSize = fs.statSync(pngPath).size;
+    console.log(`✅ Optimized PNG: ${(pngSize / 1024).toFixed(2)} KB\n`);
 
-  console.log(`\n📊 Results:`);
-  console.log(`   Original PNG: ${(inputSize / 1024).toFixed(2)} KB`);
-  console.log(`   WebP: ${(webpSize / 1024).toFixed(2)} KB (${(((inputSize - webpSize) / inputSize) * 100).toFixed(1)}% smaller)`);
-  console.log(`   AVIF: ${(avifSize / 1024).toFixed(2)} KB (${(((inputSize - avifSize) / inputSize) * 100).toFixed(1)}% smaller)`);
-  console.log(`   Optimized PNG: ${(pngSize / 1024).toFixed(2)} KB (${(((inputSize - pngSize) / inputSize) * 100).toFixed(1)}% smaller)\n`);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('✅ Optimization complete!\n');
+    console.log('File Size Comparison:');
+    console.log(`  Original:      ${(inputSize / 1024).toFixed(2)} KB (${(inputSize / (1024 * 1024)).toFixed(2)} MB)`);
+    console.log(`  AVIF:          ${(avifSize / 1024).toFixed(2)} KB (${((1 - avifSize/inputSize) * 100).toFixed(1)}% smaller)`);
+    console.log(`  WebP:          ${(webpSize / 1024).toFixed(2)} KB (${((1 - webpSize/inputSize) * 100).toFixed(1)}% smaller)`);
+    console.log(`  Optimized PNG: ${(pngSize / 1024).toFixed(2)} KB (${((1 - pngSize/inputSize) * 100).toFixed(1)}% smaller)`);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
-  console.log('✅ Image optimization complete!');
-  console.log('\n📝 Next step: Update app/en/page.tsx to use optimized images');
+  } catch (error) {
+    console.error('❌ Error during optimization:', error);
+    process.exit(1);
+  }
 }
 
 optimizeImages().catch(console.error);

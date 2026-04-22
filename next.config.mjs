@@ -9,7 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
     loader: 'custom',
-    loaderFile: './lib/imageLoader.js',
+    loaderFile: './lib/imageLoader.ts',
   },
   
   // ISR and build optimization
