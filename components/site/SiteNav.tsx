@@ -131,7 +131,7 @@ export function SiteNav() {
                 aria-label="Services"
                 className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-150 absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
               >
-                <div className="glass-card min-w-[260px] py-2 shadow-xl">
+                <div className="min-w-[260px] py-2 shadow-2xl rounded-2xl bg-black/95 backdrop-blur-xl border border-white/10">
                   <Link
                     href="/en/#services"
                     role="menuitem"
