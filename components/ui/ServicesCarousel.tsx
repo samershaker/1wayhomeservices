@@ -57,7 +57,7 @@ interface CarouselCardProps {
   index: number;
 }
 
-function CarouselCard({ service, isActive, index }: CarouselCardProps) {
+function CarouselCard({ service, isActive: _isActive, index }: CarouselCardProps) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 

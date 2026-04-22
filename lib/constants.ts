@@ -3,6 +3,17 @@
  * Tax Preparation & Real Estate Services
  */
 
+// Type Exports
+export type Service = typeof SERVICES[number];
+export type ServiceId = Service['id'];
+export type ServiceCategory = Service['category'];
+
+export type Testimonial = typeof TESTIMONIALS[number];
+export type TeamMember = typeof TEAM_MEMBERS[number];
+export type ProcessStep = typeof PROCESS_STEPS[number];
+export type FAQItem = typeof FAQ_ITEMS[number];
+export type ContactInfo = typeof CONTACT_INFO;
+
 // Tax & Real Estate Services
 export const SERVICES = [
   {
@@ -10,8 +21,8 @@ export const SERVICES = [
     name: 'Tax Planning & Advisory',
     slug: 'tax-planning',
     shortName: 'Tax Planning',
-    description: 'Strategic tax planning to minimize liability and maximize deductions for individuals and businesses.',
-    icon: 'calculator',
+    description: 'Strategic tax planning to minimize liability and maximize deductions for individuals and businesses year-round.',
+    icon: 'clock',
     category: 'tax',
     price: 'Varies',
     priceNote: 'Free initial consultation',
@@ -28,8 +39,8 @@ export const SERVICES = [
     name: 'Tax Filing',
     slug: 'tax-filing',
     shortName: 'Tax Filing',
-    description: 'Complete federal and state tax return preparation for individuals and businesses.',
-    icon: 'document',
+    description: 'Complete federal and state tax return preparation for individuals and businesses. E-file with direct deposit.',
+    icon: 'dollar',
     category: 'tax',
     price: 'From $199',
     priceNote: 'Starting price — varies by complexity',
@@ -46,8 +57,8 @@ export const SERVICES = [
     name: 'Payroll Tax Filing',
     slug: 'payroll-tax',
     shortName: 'Payroll Taxes',
-    description: 'Complete payroll tax management including quarterly and annual filings.',
-    icon: 'payroll',
+    description: 'Quarterly and annual payroll tax filings, W-2 and 1099 preparation, compliance management for businesses.',
+    icon: 'calendar',
     category: 'tax',
     price: 'From $150/mo',
     priceNote: 'Starting price — varies by employee count',
@@ -64,8 +75,8 @@ export const SERVICES = [
     name: 'Bookkeeping',
     slug: 'bookkeeping',
     shortName: 'Bookkeeping',
-    description: 'Accurate and organized bookkeeping to keep your business financials in order.',
-    icon: 'ledger',
+    description: 'Monthly financial record keeping, bank reconciliation, and financial statement preparation to keep your books in order.',
+    icon: 'document',
     category: 'tax',
     price: 'From $200/mo',
     priceNote: 'Starting price — varies by transaction volume',
@@ -82,7 +93,7 @@ export const SERVICES = [
     name: 'IRS Help & Audit Support',
     slug: 'irs-help',
     shortName: 'IRS Help',
-    description: 'Professional representation and support during IRS audits, notices, and collections.',
+    description: 'Professional representation during IRS audits, notices, and collections. Penalty abatement and payment plan negotiation.',
     icon: 'shield',
     category: 'tax',
     price: 'Varies',
@@ -100,7 +111,7 @@ export const SERVICES = [
     name: 'Real Estate Tax Support',
     slug: 'real-estate-tax',
     shortName: 'Real Estate Tax',
-    description: 'Specialized tax guidance for property sales, investments, and real estate transactions.',
+    description: 'Capital gains planning, 1031 exchanges, depreciation strategies, and property sale tax planning for investors.',
     icon: 'home',
     category: 'real-estate',
     price: 'Varies',
@@ -118,8 +129,8 @@ export const SERVICES = [
     name: 'Mortgage Consulting',
     slug: 'mortgage-consulting',
     shortName: 'Mortgage',
-    description: 'Expert mortgage guidance from pre-approval through closing and refinancing.',
-    icon: 'loan',
+    description: 'Loan pre-approval, refinancing analysis, debt planning, and home buying guidance — all at no charge for initial consultations.',
+    icon: 'building',
     category: 'real-estate',
     price: 'Free',
     priceNote: 'Initial consultation at no charge',

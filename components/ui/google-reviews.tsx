@@ -99,7 +99,7 @@ const ReviewCard: React.FC<{ review: Review }> = ({ review }) => {
 };
 
 export const GoogleReviews: React.FC<GoogleReviewsProps> = ({
-  businessName = "Everglade Heating and Air",
+  businessName: _businessName = "Everglade Heating and Air",
   averageRating = 4.9,
   totalReviews = 127,
   reviews = defaultReviews,
