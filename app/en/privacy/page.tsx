@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+// Content is reproduced from the client's published Privacy Policy at
+// https://1wayhomeservices.com/privacy-policy/ (Effective Date 11/21/2025, v1.0).
+// Headings and substantive text are kept verbatim; only presentation chrome
+// (heading levels, link targets, layout) is adapted to the new site.
+
 export default function PrivacyPage() {
   return (
     <div className="bg-noise">
@@ -16,78 +21,150 @@ export default function PrivacyPage() {
         <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
           Privacy Policy
         </h1>
-        <p className="text-sm text-gray-300 mb-10">Last updated: April 22, 2026</p>
+        <p className="text-sm text-gray-300 mb-2">Effective Date: 11/21/2025</p>
+        <p className="text-sm text-gray-300 mb-10">Version: 1.0</p>
 
-        <div className="space-y-8 text-gray-300 leading-relaxed">
+        <div className="space-y-10 text-gray-300 leading-relaxed">
           <section>
-            <h2 className="font-display text-2xl font-bold text-white mb-3">Who we are</h2>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Overview</h2>
             <p>
-              {CONTACT_INFO.businessName} ({CONTACT_INFO.website}) provides tax preparation,
-              bookkeeping, real estate tax, and mortgage consulting services in El Cajon,
-              San Diego, and surrounding areas. This policy describes what information we
-              collect through this website and how we use it.
+              This Privacy Policy explains how 1 Way Home Services (&quot;we,&quot; &quot;us,&quot;
+              &quot;our&quot;) collects, uses, and protects the personal information you
+              provide when visiting our website or contacting us. By using our website,
+              you agree to the practices described in this policy. If you do not agree
+              with this Privacy Policy, please discontinue use of our website.
             </p>
           </section>
 
           <section>
-            <h2 className="font-display text-2xl font-bold text-white mb-3">What we collect</h2>
-            <p className="mb-3">When you contact us through this site, we collect:</p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Your name, email address, and (optionally) phone number</li>
-              <li>The service you are interested in and the message you send us</li>
-              <li>Standard web analytics data (page views, device type, referrer) via Vercel Analytics and Speed Insights</li>
+            <h2 className="font-display text-2xl font-bold text-white mb-4">Information We Collect</h2>
+
+            <h3 className="font-display text-lg font-semibold text-white mb-2">Personal Information You Provide</h3>
+            <p className="mb-2">We only collect the information needed to communicate with you, which includes:</p>
+            <ul className="list-disc pl-6 space-y-1 mb-6">
+              <li>Name</li>
+              <li>Phone number</li>
+              <li>Email address</li>
             </ul>
-          </section>
+            <p className="mb-6">This information is collected when you fill out a form or contact us directly.</p>
 
-          <section>
-            <h2 className="font-display text-2xl font-bold text-white mb-3">How we use it</h2>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>To reply to your inquiry and schedule consultations</li>
-              <li>To prepare and deliver the services you engage us for</li>
-              <li>To improve our website and understand how visitors use it</li>
+            <h3 className="font-display text-lg font-semibold text-white mb-2">Information Collected Automatically</h3>
+            <p className="mb-2">
+              Through Google Analytics and Google Search Console, we collect general,
+              non-identifying data such as:
+            </p>
+            <ul className="list-disc pl-6 space-y-1 mb-3">
+              <li>Device and browser type</li>
+              <li>Pages visited</li>
+              <li>Time spent on the site</li>
+              <li>Approximate location (city-level)</li>
+              <li>Traffic source</li>
             </ul>
-            <p className="mt-3">
-              We do not sell your information. We do not use it to send marketing emails unless
-              you ask us to.
+            <p>This data does not personally identify you. It helps us understand how visitors use our website.</p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">How We Use Your Information</h2>
+            <p className="mb-3">We use your information to:</p>
+            <ul className="list-disc pl-6 space-y-1 mb-3">
+              <li>Respond to your inquiries</li>
+              <li>Communicate about services you requested</li>
+              <li>Send updates or service-related messages</li>
+              <li>Improve our website and marketing</li>
+              <li>(Future) Send SMS messages if you opt in</li>
+              <li>Maintain internal business records</li>
+            </ul>
+            <p>We do not sell, rent, or share your information with third parties.</p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Text Messaging (A2P 10DLC)</h2>
+            <p className="mb-3">
+              We use a registered A2P 10DLC business phone number through GoHighLevel to
+              send service-related and, if you consent, promotional text messages.
+            </p>
+            <p className="mb-3">
+              If you choose to receive SMS messages, our forms will display the following
+              exact consent language: &quot;By checking this box, I consent to receive
+              marketing and promotional messages, including special offers, discounts,
+              new product updates among others. Message frequency may vary. Message &amp;
+              Data rates may apply. Reply HELP for help or STOP to opt-out.&quot;
+            </p>
+            <p className="mb-3">By opting in:</p>
+            <ul className="list-disc pl-6 space-y-1 mb-3">
+              <li>Message frequency may vary</li>
+              <li>You may receive reminders, updates, or promotions</li>
+              <li>You can reply STOP at any time to unsubscribe</li>
+              <li>You can reply HELP for assistance</li>
+              <li>Standard message and data rates may apply</li>
+            </ul>
+            <p>Consent is not required to use our services. Your phone number will not be shared with outside parties.</p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Cookies</h2>
+            <p>
+              We use cookies through Google Analytics to collect anonymous usage data.
+              You may disable cookies in your browser settings at any time. Because our
+              website only uses basic analytics cookies and we do not target EU users or
+              sell data, a cookie consent banner is not required under U.S. law.
             </p>
           </section>
 
           <section>
-            <h2 className="font-display text-2xl font-bold text-white mb-3">Tax information</h2>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Data Security</h2>
             <p>
-              Tax documents and financial information you share with us during an engagement
-              are handled under professional confidentiality standards and applicable state and
-              federal law. We retain client records for the periods required by the IRS and
-              the California Franchise Tax Board.
+              We take reasonable steps to protect your information, including secure
+              website connections (SSL/HTTPS), reputable third-party platforms, and
+              restricted access to submitted information. While we follow standard
+              security practices, no online data transmission is completely secure.
             </p>
           </section>
 
           <section>
-            <h2 className="font-display text-2xl font-bold text-white mb-3">Your rights</h2>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Third-Party Service Providers</h2>
+            <p className="mb-3">We use trusted partners who process data on our behalf:</p>
+            <ul className="list-disc pl-6 space-y-1 mb-3">
+              <li>Google Analytics &amp; Google Search Console (website analytics)</li>
+              <li>GoHighLevel (forms, CRM, and text messaging)</li>
+            </ul>
+            <p>These partners do not use your information for their own purposes.</p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Your Rights</h2>
+            <p className="mb-3">You may request at any time to:</p>
+            <ul className="list-disc pl-6 space-y-1 mb-3">
+              <li>Access the information we have about you</li>
+              <li>Update or correct your information</li>
+              <li>Request deletion</li>
+              <li>Opt out of emails, calls, or text messages</li>
+            </ul>
+            <p>Submit all requests through the contact information below.</p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Changes to This Policy</h2>
             <p>
-              California residents have rights under the CCPA/CPRA to know what personal
-              information we hold, to request deletion, and to opt out of any sale of personal
-              information (we do not sell personal information). To exercise these rights,
-              email{' '}
-              <a href={CONTACT_INFO.emailHref} className="text-[var(--color-secondary-light)] hover:text-white transition-colors">
-                {CONTACT_INFO.email}
-              </a>
-              .
+              We may update this Privacy Policy periodically. Any updates will be posted
+              on this page with a new effective date. Continued use of the website after
+              an update means you accept the revised policy.
             </p>
           </section>
 
           <section>
             <h2 className="font-display text-2xl font-bold text-white mb-3">Contact</h2>
+            <p className="mb-2">For questions or privacy-related requests, contact:</p>
+            <p className="text-white font-semibold">Sam Eram</p>
+            <p>1 Way Home Services</p>
             <p>
-              Questions about this policy? Call{' '}
-              <a href={CONTACT_INFO.phoneHref} className="text-[var(--color-secondary-light)] hover:text-white transition-colors">
-                {CONTACT_INFO.phone}
-              </a>{' '}
-              or email{' '}
-              <a href={CONTACT_INFO.emailHref} className="text-[var(--color-secondary-light)] hover:text-white transition-colors">
+              Email:{' '}
+              <a
+                href={CONTACT_INFO.emailHref}
+                className="text-[var(--color-secondary-light)] hover:text-white transition-colors"
+              >
                 {CONTACT_INFO.email}
               </a>
-              .
             </p>
           </section>
         </div>

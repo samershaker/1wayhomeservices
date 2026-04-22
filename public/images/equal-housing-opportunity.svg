@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Equal Housing Opportunity">
+  <title>Equal Housing Opportunity</title>
+  <rect width="64" height="64" fill="none"/>
+  <g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M8 30 L32 10 L56 30"/>
+    <path d="M14 28 V54 H50 V28"/>
+  </g>
+  <g stroke="currentColor" stroke-width="3" stroke-linecap="round">
+    <line x1="22" y1="38" x2="42" y2="38"/>
+    <line x1="22" y1="46" x2="42" y2="46"/>
+  </g>
+</svg>
