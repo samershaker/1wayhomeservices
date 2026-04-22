@@ -72,7 +72,7 @@ export default function PrivacyPage() {
               <li>Communicate about services you requested</li>
               <li>Send updates or service-related messages</li>
               <li>Improve our website and marketing</li>
-              <li>(Future) Send SMS messages if you opt in</li>
+              <li>Send SMS messages if you opt in</li>
               <li>Maintain internal business records</li>
             </ul>
             <p>We do not sell, rent, or share your information with third parties.</p>
@@ -142,6 +142,48 @@ export default function PrivacyPage() {
               <li>Opt out of emails, calls, or text messages</li>
             </ul>
             <p>Submit all requests through the contact information below.</p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl font-bold text-white mb-3">Your California Privacy Rights (CCPA / CPRA)</h2>
+            <p className="mb-3">
+              If you are a California resident, the California Consumer Privacy Act
+              (CCPA) and California Privacy Rights Act (CPRA) give you specific rights
+              regarding your personal information:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 mb-3">
+              <li>
+                <span className="text-white font-semibold">Right to know</span> — request
+                the categories and specific pieces of personal information we have
+                collected about you, the sources we collected it from, and the purposes
+                for collecting it.
+              </li>
+              <li>
+                <span className="text-white font-semibold">Right to delete</span> —
+                request that we delete personal information we have collected from you,
+                subject to exceptions such as records we are required to retain by tax
+                law or other applicable regulation.
+              </li>
+              <li>
+                <span className="text-white font-semibold">Right to correct</span> —
+                request that we correct inaccurate personal information we hold about
+                you.
+              </li>
+              <li>
+                <span className="text-white font-semibold">Right to opt out of sale or sharing</span> —
+                we do not sell or share personal information with third parties for
+                cross-context behavioral advertising or any other commercial purpose.
+              </li>
+              <li>
+                <span className="text-white font-semibold">Right to non-discrimination</span> —
+                we will not discriminate against you for exercising any of these rights.
+              </li>
+            </ul>
+            <p>
+              To exercise any of these rights, contact us using the information at the
+              bottom of this policy. We will verify your identity before responding and
+              will reply within the timeframes required by California law.
+            </p>
           </section>
 
           <section>

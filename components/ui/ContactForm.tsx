@@ -20,6 +20,7 @@ interface FormData {
   phone: string;
   service: string;
   message: string;
+  smsConsent: boolean;
 }
 
 interface FormErrors {
@@ -30,6 +31,11 @@ interface FormErrors {
   message?: string;
 }
 
+// Exact A2P 10DLC consent language as published in the Privacy Policy and
+// Terms & Conditions. Do not edit without updating both legal pages in lockstep.
+const SMS_CONSENT_TEXT =
+  'By checking this box, I consent to receive marketing and promotional messages, including special offers, discounts, new product updates among others. Message frequency may vary. Message & Data rates may apply. Reply HELP for help or STOP to opt-out.';
+
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -37,6 +43,7 @@ export function ContactForm() {
     phone: '',
     service: '',
     message: '',
+    smsConsent: false,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -95,6 +102,9 @@ export function ContactForm() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
+    // SMS consent only meaningful if a phone number was provided.
+    const smsConsentEffective = Boolean(formData.smsConsent && formData.phone.trim());
+
     // Fallback: no Formspree configured — open the user's email client with a pre-filled message
     if (!FORMSPREE_ID) {
       const body = [
@@ -102,13 +112,14 @@ export function ContactForm() {
         `Email: ${formData.email}`,
         `Phone: ${formData.phone || '—'}`,
         `Service: ${formData.service}`,
+        `SMS opt-in: ${smsConsentEffective ? 'Yes' : 'No'}`,
         '',
         formData.message,
       ].join('\n');
       const mailto = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(`Website inquiry — ${formData.service}`)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailto;
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', service: '', message: '', smsConsent: false });
       setErrors({});
       setIsSubmitting(false);
       return;
@@ -120,7 +131,12 @@ export function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          smsConsent: smsConsentEffective,
+          smsConsentLanguage: smsConsentEffective ? SMS_CONSENT_TEXT : null,
+          smsConsentTimestamp: smsConsentEffective ? new Date().toISOString() : null,
+        }),
       });
 
       if (response.ok) {
@@ -143,11 +159,11 @@ export function ContactForm() {
     }
   };
 
-  const handleChange = (field: keyof FormData, value: string) => {
+  const handleChange = (field: keyof FormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error for this field when user starts typing
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    if (typeof value === 'string' && errors[field as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [field as keyof FormErrors]: undefined }));
     }
   };
 
@@ -279,6 +295,27 @@ export function ContactForm() {
         </p>
       </div>
 
+      {/* SMS Opt-in (A2P 10DLC) — only acted on if a phone number is provided */}
+      <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+        <label htmlFor="smsConsent" className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            id="smsConsent"
+            name="smsConsent"
+            checked={formData.smsConsent}
+            onChange={(e) => handleChange('smsConsent', e.target.checked)}
+            className="mt-1 h-4 w-4 rounded border-white/20 bg-white/10 text-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-secondary-light)] focus:ring-offset-0 cursor-pointer"
+          />
+          <span className="text-xs text-gray-300 leading-relaxed">
+            {SMS_CONSENT_TEXT}
+          </span>
+        </label>
+        <p className="mt-2 text-[11px] text-gray-400 pl-7">
+          Optional. Consent is not required to use our services. SMS messages are
+          only sent to the phone number you provide above.
+        </p>
+      </div>
+
       {/* Submit Button */}
       <button
         type="submit"
@@ -390,7 +427,12 @@ export function ContactFormSection() {
                   <div>
                     <p className="text-sm text-gray-300 mb-1">Location</p>
                     <p className="text-lg font-semibold text-white">
-                      El Cajon, San Diego, CA
+                      {CONTACT_INFO.addressParts.streetAddress}
+                    </p>
+                    <p className="text-sm text-gray-300">
+                      {CONTACT_INFO.addressParts.locality},{' '}
+                      {CONTACT_INFO.addressParts.region}{' '}
+                      {CONTACT_INFO.addressParts.postalCode}
                     </p>
                   </div>
                 </div>
@@ -404,10 +446,10 @@ export function ContactFormSection() {
                   <div>
                     <p className="text-sm text-gray-300 mb-1">Hours</p>
                     <p className="text-lg font-semibold text-white">
-                      By Appointment
+                      Mon–Fri 9:00 AM – 6:00 PM
                     </p>
                     <p className="text-sm text-gray-300 mt-1">
-                      Free consultation available
+                      By appointment · Free consultation available
                     </p>
                   </div>
                 </div>

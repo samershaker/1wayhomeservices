@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { CONTACT_INFO } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -32,8 +33,14 @@ export default function TermsPage() {
             <p className="mb-3">
               These Terms &amp; Conditions (&quot;Terms&quot;) apply to your use of the
               1 Way Home Services website (&quot;Website&quot;). By using this Website,
-              you agree to be bound by these Terms and by our Privacy Policy. If you do
-              not agree, please discontinue use of the Website.
+              you agree to be bound by these Terms and by our{' '}
+              <Link
+                href="/en/privacy/"
+                className="text-[var(--color-secondary-light)] hover:text-white underline underline-offset-2 transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              . If you do not agree, please discontinue use of the Website.
             </p>
             <p>
               We may update these Terms from time to time. Any changes will be posted on

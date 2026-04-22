@@ -1,5 +1,57 @@
 # 1Way Home Services - Website Changelog
 
+## Version 2.3.0 — SMS Consent, CCPA Section & Cross-Linked Legal Pages (April 22, 2026)
+
+**Focus of this release:** Resolve the policy/compliance items the client signed off on after reviewing the v2.2.0 punch list. Brings the contact form, Privacy Policy, and Terms into alignment with each other and with how the firm actually operates.
+
+### What changed
+
+**1. Contact form now includes the A2P 10DLC SMS opt-in (`components/ui/ContactForm.tsx`)**
+- Added an unchecked-by-default SMS consent checkbox above the submit button.
+- The consent label uses the **exact** A2P 10DLC language already published in the Privacy Policy and Terms — kept in a single named constant (`SMS_CONSENT_TEXT`) so the form, Privacy Policy, and Terms cannot drift apart.
+- A small footnote under the checkbox makes the optionality explicit: "Consent is not required to use our services. SMS messages are only sent to the phone number you provide above."
+- On submission, the form derives `smsConsentEffective = smsConsent && phoneProvided` and sends the consent state, the consent language, and a UTC timestamp to Formspree (and into the mailto fallback body) — gives the client the audit trail TCPA / CTIA expect for opt-in records.
+
+**2. Privacy Policy (`app/en/privacy/page.tsx`)**
+- Removed the `(Future)` qualifier from the SMS bullet — SMS is now live, so the policy reads as current practice.
+- Added a new **Your California Privacy Rights (CCPA / CPRA)** section covering the right to know, delete, correct, opt out of sale/sharing (we don't), and non-discrimination, with the standard verification + response-window language.
+
+**3. Terms & Conditions (`app/en/terms/page.tsx`)**
+- The Overview now actually links the words "Privacy Policy" to `/en/privacy/`. The published source claims this binding but never linked it — fixed.
+
+**4. Contact form section — NAP / hours alignment**
+- The right-hand contact info card on the homepage was still showing `El Cajon, San Diego, CA` and `By Appointment` — both stale. Now reads the structured address from `CONTACT_INFO.addressParts` (`250 E Chase Ave, Suite 107` + zip) and shows hours `Mon–Fri 9:00 AM – 6:00 PM · By appointment · Free consultation available` — matching the JSON-LD, the new footer, and the legal pages.
+
+### Resolved from the v2.2.0 Pending Client Input list
+
+| # | Item | Resolution |
+|---|---|---|
+| 3 | "(Future) Send SMS messages" | SMS is live; qualifier removed |
+| 4 | A2P 10DLC consent checkbox parity | Added to contact form with exact published language |
+| 5 | CCPA / CPRA section | Added |
+| 6 | Privacy Policy cross-link in Terms | Linked |
+| 7 | Email handover (sam@ vs info@) | Confirmed `sam@1wayhomeservices.com` |
+| 8 | Office hours | Confirmed Mon–Fri 9:00 AM – 6:00 PM |
+
+### Updated PENDING CLIENT INPUT — items still open
+
+- **Age restriction language** (Terms: "Available for individuals of all ages"). Client noted as worth raising with their counsel given the financial-services context. No code change pending.
+- **Legal entity binding** in the Terms body (trade name vs. Inc.). Client signed off as OK to skip; documenting here so the next reviewer knows the divergence between Terms body and footer copyright is intentional.
+- **NMLS registration**. Skipped on the site for now. Carry into the proposal as a "if you ever decide to originate vs. consult, here is what would change" note for the client.
+- **EFIN / IRS Authorized e-File Provider**. Not surfaced on the new site until the EFIN is verified. Carry into the proposal as a one-line ask: "Send your EFIN and we'll add the badge."
+- **BBB accreditation**. Skipped. Client unsure whether they hold this. No further action.
+- **Sam Eram's professional credentials** — *clarification:* Sam is **not** a CPA. The previous Pending list framed his credentials around CPA/EA, which was incorrect. The current site does not claim CPA for Sam (his title reads "Chief Financial Officer" and credentials read "Tax Preparation & Financial Services" — both accurate as written). What we still need to ask the client for, where applicable, is:
+  - **PTIN** (Preparer Tax Identification Number) — required for any paid federal tax preparer
+  - **CTEC** registration number (California Tax Education Council — required for non-CPA paid preparers in California)
+  - **AFSP** (IRS Annual Filing Season Program) participant status, if any
+  - **EA** (Enrolled Agent) status, if any
+  - **QuickBooks ProAdvisor** or other bookkeeping certifications
+  - LinkedIn profile URL
+
+  When provided, these populate the same `licenseNumber` / `licenseAuthority` / `socialLinks` / `hasCredential` slots on Sam's TEAM_MEMBERS entry that Bakhan's now uses, and his Person schema gains the same entity-grounding signal.
+
+---
+
 ## Version 2.2.0 — Professional Footer & Verbatim Client Legal Pages (April 22, 2026)
 
 **Focus of this release:** Make the bottom of the site look and act like the rest — a regulated, professional services firm — and replace the placeholder Privacy / Terms with the client's actual published legal copy. As before, every change is grounded in publicly verifiable information and the client's own published content. Anything that requires a policy or compliance decision is flagged below for client sign-off rather than guessed at.
