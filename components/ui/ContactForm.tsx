@@ -156,7 +156,7 @@ export function ContactForm() {
           required
         />
         {errors.name && (
-          <p className="mt-1 text-sm text-red-400">{errors.name}</p>
+          <p role="alert" className="mt-1 text-sm text-red-400">{errors.name}</p>
         )}
       </div>
 
@@ -176,17 +176,18 @@ export function ContactForm() {
             transition-all duration-200 ${errors.email ? 'border-red-500' : 'border-white/10'}`}
           placeholder="john@example.com"
           autoComplete="email"
+          spellCheck={false}
           required
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-400">{errors.email}</p>
+          <p role="alert" className="mt-1 text-sm text-red-400">{errors.email}</p>
         )}
       </div>
 
       {/* Phone Field */}
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-          Phone Number <span className="text-gray-500 text-xs">(Optional)</span>
+          Phone Number <span className="text-gray-400 text-xs">(Optional)</span>
         </label>
         <input
           type="tel"
@@ -201,7 +202,7 @@ export function ContactForm() {
           autoComplete="tel"
         />
         {errors.phone && (
-          <p className="mt-1 text-sm text-red-400">{errors.phone}</p>
+          <p role="alert" className="mt-1 text-sm text-red-400">{errors.phone}</p>
         )}
       </div>
 
@@ -233,7 +234,7 @@ export function ContactForm() {
           </option>
         </select>
         {errors.service && (
-          <p className="mt-1 text-sm text-red-400">{errors.service}</p>
+          <p role="alert" className="mt-1 text-sm text-red-400">{errors.service}</p>
         )}
       </div>
 
@@ -255,9 +256,9 @@ export function ContactForm() {
           required
         />
         {errors.message && (
-          <p className="mt-1 text-sm text-red-400">{errors.message}</p>
+          <p role="alert" className="mt-1 text-sm text-red-400">{errors.message}</p>
         )}
-        <p className="mt-1 text-xs text-gray-500">
+        <p className="mt-1 text-xs text-gray-400">
           {formData.message.length}/500 characters
         </p>
       </div>
@@ -271,7 +272,7 @@ export function ContactForm() {
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
             </svg>
@@ -284,7 +285,7 @@ export function ContactForm() {
 
       {/* Success Message */}
       {submitStatus === 'success' && (
-        <div className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-center">
+        <div role="status" className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-center">
           <p className="font-semibold">Thank you for contacting us!</p>
           <p className="text-sm mt-1">We'll get back to you within 24 hours.</p>
         </div>
@@ -299,7 +300,7 @@ export function ContactForm() {
       )}
 
       {/* Privacy Note */}
-      <p className="text-xs text-gray-500 text-center">
+      <p className="text-xs text-gray-400 text-center">
         We respect your privacy. Your information will only be used to contact you about our services.
       </p>
     </form>
@@ -318,7 +319,7 @@ export function ContactFormSection() {
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
             Ready to Get Started?
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Schedule your free consultation today. Let's discuss how we can help you save on taxes and achieve your real estate goals.
           </p>
         </div>
@@ -337,12 +338,12 @@ export function ContactFormSection() {
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400 mb-1">Phone</p>
+                    <p className="text-sm text-gray-300 mb-1">Phone</p>
                     <a href="tel:+16197169193" className="text-lg font-semibold text-white hover:text-[var(--color-accent)] transition-colors">
                       (619) 716-9193
                     </a>
@@ -351,12 +352,12 @@ export function ContactFormSection() {
 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400 mb-1">Email</p>
+                    <p className="text-sm text-gray-300 mb-1">Email</p>
                     <a href="mailto:info@1wayhomeservices.com" className="text-lg font-semibold text-white hover:text-[var(--color-accent)] transition-colors">
                       info@1wayhomeservices.com
                     </a>
@@ -365,13 +366,13 @@ export function ContactFormSection() {
 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400 mb-1">Location</p>
+                    <p className="text-sm text-gray-300 mb-1">Location</p>
                     <p className="text-lg font-semibold text-white">
                       El Cajon, San Diego, CA
                     </p>
@@ -380,16 +381,16 @@ export function ContactFormSection() {
 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400 mb-1">Hours</p>
+                    <p className="text-sm text-gray-300 mb-1">Hours</p>
                     <p className="text-lg font-semibold text-white">
                       By Appointment
                     </p>
-                    <p className="text-sm text-gray-400 mt-1">
+                    <p className="text-sm text-gray-300 mt-1">
                       Free consultation available
                     </p>
                   </div>
@@ -399,7 +400,7 @@ export function ContactFormSection() {
 
             <div className="glass-card p-8 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/10">
               <h4 className="font-display text-lg font-bold mb-3">Prefer to Call?</h4>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-gray-300 text-sm mb-4">
                 Speak directly with a tax professional. We're here to answer your questions.
               </p>
               <a href="tel:+16197169193" className="btn-primary inline-block">

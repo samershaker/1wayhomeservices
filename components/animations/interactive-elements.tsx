@@ -6,7 +6,7 @@
  */
 
 import { useSpring, animated, useTrail } from '@react-spring/web';
-import { useState, ReactNode, useCallback } from 'react';
+import { useState, ReactNode } from 'react';
 import { springConfigs } from '@/lib/animations';
 
 // TypeScript interfaces

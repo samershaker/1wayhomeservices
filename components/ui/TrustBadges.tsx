@@ -7,11 +7,11 @@
 export function TrustBadges({ variant = 'horizontal', size = 'md' }: { variant?: 'horizontal' | 'vertical' | 'grid'; size?: 'sm' | 'md' | 'lg' }) {
   const badges = [
     {
-      id: 'cpa',
-      name: 'CPA Certified',
-      description: 'Certified Public Accountant',
+      id: 'tax-pro',
+      name: 'Tax Professional',
+      description: 'Licensed Tax Preparation',
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
@@ -22,7 +22,7 @@ export function TrustBadges({ variant = 'horizontal', size = 'md' }: { variant?:
       name: 'IRS Authorized',
       description: 'IRS E-File Provider',
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
       ),
@@ -33,7 +33,7 @@ export function TrustBadges({ variant = 'horizontal', size = 'md' }: { variant?:
       name: 'Bank-Level Security',
       description: '256-bit Encryption',
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
       ),
@@ -44,7 +44,7 @@ export function TrustBadges({ variant = 'horizontal', size = 'md' }: { variant?:
       name: '6+ Years',
       description: 'Industry Experience',
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
         </svg>
       ),
@@ -135,14 +135,14 @@ export function CompactTrustIndicator() {
   return (
     <div className="flex items-center gap-2 text-xs text-gray-400">
       <div className="flex items-center gap-1">
-        <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+        <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
         <span className="font-semibold">4.9</span>
         <span>(87 reviews)</span>
       </div>
       <span className="text-gray-600">•</span>
-      <span>CPA Certified</span>
+      <span>6+ Years Experience</span>
     </div>
   );
 }
@@ -160,7 +160,7 @@ export function GoogleReviewsBadge() {
     >
       {/* Google Icon */}
       <div className="w-8 h-8">
-        <svg viewBox="0 0 48 48" className="w-full h-full">
+        <svg viewBox="0 0 48 48" className="w-full h-full" aria-hidden="true">
           <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
           <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
           <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
@@ -171,7 +171,7 @@ export function GoogleReviewsBadge() {
       <div>
         <div className="flex items-center gap-1 mb-1">
           {[...Array(5)].map((_, i) => (
-            <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+            <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
           ))}
@@ -180,7 +180,7 @@ export function GoogleReviewsBadge() {
         <p className="text-xs text-gray-500">87 Google reviews</p>
       </div>
 
-      <svg className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
       </svg>
     </a>
@@ -193,11 +193,11 @@ export function GoogleReviewsBadge() {
 export function SecurityBadge() {
   return (
     <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
-      <svg className="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
       </svg>
       <span>Secure 256-bit SSL encryption</span>
-      <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
       <span>Your data is protected</span>

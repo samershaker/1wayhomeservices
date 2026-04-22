@@ -178,17 +178,17 @@ export const TEAM_MEMBERS = [
     id: 'sam-eram',
     name: 'Sam Eram',
     title: 'Chief Financial Officer',
-    credentials: 'CPA | Tax Advisor',
+    credentials: 'Tax Preparation & Financial Services',
     bio: 'Expert in tax planning, filing, and financial strategy for individuals and businesses.',
-    image: '/team-photo.png'
+    image: '/images/Sam_Eram_Headshot.PNG'
   },
   {
     id: 'bakhan-kareem',
     name: 'Bakhan Kareem',
     title: 'Chief Executive Officer',
-    credentials: 'Real Estate | Mortgage Specialist',
+    credentials: 'Real Estate & Mortgage Consulting',
     bio: 'Leading real estate tax strategy and mortgage consulting for clients across San Diego.',
-    image: '/team-photo.png'
+    image: '/images/Bakhan_Kareem_Headshot.PNG'
   }
 ] as const;
 

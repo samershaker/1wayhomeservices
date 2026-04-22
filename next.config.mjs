@@ -14,7 +14,7 @@ const nextConfig = {
   
   // ISR and build optimization
   experimental: {
-    optimizePackageImports: ['@react-spring/web', 'motion', 'daisyui'],
+    optimizePackageImports: ['@react-spring/web', 'framer-motion', 'daisyui'],
   },
   
   // Build optimization

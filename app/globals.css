@@ -8,9 +8,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ═══ Fonts ═══ */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-
 /* ═══ Brand Tokens — 1Way Home Services ═══ */
 :root {
   /* Brand palette — blue (#2251A3), black, white */
@@ -91,6 +88,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
   line-height: 1.1;
   font-weight: 700;
+  text-wrap: balance;
 }
 
 h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
@@ -173,7 +171,9 @@ h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
   border-radius: 0.75rem;
   border: none;
   cursor: pointer;
-  transition: all var(--duration-normal) var(--ease-out-quart);
+  transition: background-color var(--duration-normal) var(--ease-out-quart),
+              transform var(--duration-normal) var(--ease-out-quart),
+              box-shadow var(--duration-normal) var(--ease-out-quart);
   box-shadow: 0 4px 20px var(--color-primary-glow);
   text-decoration: none;
 }
@@ -197,7 +197,10 @@ h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
   border-radius: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  transition: all var(--duration-normal) var(--ease-out-quart);
+  transition: background-color var(--duration-normal) var(--ease-out-quart),
+              transform var(--duration-normal) var(--ease-out-quart),
+              border-color var(--duration-normal) var(--ease-out-quart),
+              color var(--duration-normal) var(--ease-out-quart);
   text-decoration: none;
 }
 
@@ -220,7 +223,9 @@ h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
   border-radius: 0.75rem;
   border: none;
   cursor: pointer;
-  transition: all var(--duration-normal) var(--ease-out-quart);
+  transition: background-color var(--duration-normal) var(--ease-out-quart),
+              transform var(--duration-normal) var(--ease-out-quart),
+              box-shadow var(--duration-normal) var(--ease-out-quart);
   box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
   text-decoration: none;
   letter-spacing: 0.01em;
@@ -273,6 +278,43 @@ h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══ Stat number gold variant ═══ */
+.stat-number-gold {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══ Gold accent button ═══ */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  color: #0A0A0A;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--duration-normal) var(--ease-out-quart),
+              transform var(--duration-normal) var(--ease-out-quart),
+              box-shadow var(--duration-normal) var(--ease-out-quart);
+  box-shadow: 0 4px 20px rgba(212, 168, 83, 0.25);
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 168, 83, 0.35);
+  background: linear-gradient(135deg, var(--color-accent-light) 0%, #F0D080 100%);
 }
 
 /* ═══ Image zoom on hover ═══ */
@@ -309,6 +351,17 @@ h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
 .animate-glow-pulse-soft {
   animation: glow-pulse 4s ease-in-out infinite;
   background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--color-primary) 0%, transparent 70%);
+}
+
+/* ═══ Gold glow pulse animation ═══ */
+@keyframes glow-pulse-gold {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.12; }
+}
+
+.animate-glow-pulse-gold {
+  animation: glow-pulse-gold 4s ease-in-out infinite;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--color-accent) 0%, transparent 70%);
 }
 
 /* ═══ Lenis smooth scroll ═══ */
@@ -367,6 +420,21 @@ button:focus-visible {
 .glass-card:focus-within {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+/* ═══ Scroll margin for anchor links ═══ */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* ═══ Touch Accessibility ═══ */
+/* Eliminates 300ms tap delay on mobile devices */
+.btn-primary,
+.btn-secondary,
+.btn-emergency,
+button,
+a {
+  touch-action: manipulation;
 }
 
 /* ═══ Reduced Motion Support ═══ */

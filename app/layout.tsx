@@ -72,6 +72,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <StructuredData type="all" />
+        <meta name="theme-color" content="#0A0A0A" />
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
