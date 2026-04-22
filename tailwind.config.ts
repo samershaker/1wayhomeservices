@@ -9,17 +9,30 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Generic brand colors mapped from CSS variables
+        // Primary brand colors (Royal Blue)
         brand: {
           primary: 'var(--color-primary)',
           'primary-light': 'var(--color-primary-light)',
           'primary-dark': 'var(--color-primary-dark)',
           'primary-glow': 'var(--color-primary-glow)',
         },
+        // Secondary colors (Teal)
+        secondary: {
+          DEFAULT: 'var(--color-secondary)',
+          light: 'var(--color-secondary-light)',
+          dark: 'var(--color-secondary-dark)',
+        },
+        // Navy (Dark sections)
+        navy: {
+          DEFAULT: 'var(--color-navy)',
+          light: 'var(--color-navy-light)',
+          dark: 'var(--color-navy-dark)',
+        },
+        // Legacy alias for backwards compatibility
         accent: {
-          DEFAULT: 'var(--color-accent)',
-          light: 'var(--color-accent-light)',
-          dark: 'var(--color-accent-dark)',
+          DEFAULT: 'var(--color-secondary)',
+          light: 'var(--color-secondary-light)',
+          dark: 'var(--color-secondary-dark)',
         },
       },
       fontFamily: {

@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { StructuredData } from "@/components/StructuredData";
 import "./globals.css";
 
-const syne = Syne({
+// Plus Jakarta Sans - Modern, clean display font for headings
+// Conveys professionalism and trust for financial services
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const dmSans = DM_Sans({
+// Inter - Highly readable body font, industry standard for professional sites
+// Excellent for longer text, forms, and UI elements
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -77,7 +81,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${syne.variable} ${dmSans.variable} antialiased bg-black text-white`}>
+      <body className={`${plusJakarta.variable} ${inter.variable} antialiased bg-black text-white`}>
         {children}
         <Analytics />
         <SpeedInsights />

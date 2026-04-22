@@ -270,7 +270,7 @@ function HeroSection() {
                     delay: 0.6 + i * 0.1,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="inline-block text-gradient-gold"
+                  className="inline-block text-gradient-teal"
                 >
                   {word}
                 </motion.span>
@@ -299,7 +299,7 @@ function HeroSection() {
           >
             <motion.a
               href="tel:+16197169193"
-              className="btn-gold text-base !py-3 !px-8"
+              className="btn-primary text-base !py-3 !px-8"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -329,12 +329,12 @@ function HeroSection() {
   );
 }
 
-/* ═══ STATS BAND - with gold accent numbers and scale animation ═══ */
+/* ═══ STATS BAND - with teal accent numbers and scale animation ═══ */
 function StatsBand() {
   return (
     <section className="py-20 border-y border-white/5 bg-black/40 bg-noise relative overflow-hidden">
-      {/* Subtle gold accent glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(212,168,83,0.06)_0%,transparent_60%)]" />
+      {/* Subtle teal accent glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(13,78,83,0.08)_0%,transparent_60%)]" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.div
@@ -353,7 +353,7 @@ function StatsBand() {
               variants={scaleInVariant}
               className="group"
             >
-              <div className="stat-number-gold font-display text-4xl md:text-5xl font-extrabold tracking-tighter group-hover:scale-105 transition-transform duration-300">
+              <div className="stat-number font-display text-4xl md:text-5xl font-extrabold tracking-tighter group-hover:scale-105 transition-transform duration-300">
                 {s.value}
               </div>
               <div className="text-sm text-gray-300 mt-3 font-display font-medium uppercase tracking-widest">
@@ -397,18 +397,21 @@ function ServicesSection() {
     return iconMap[iconName] || icons.clock;
   };
 
-  // Color mapping for service cards - using gold for first card
-  const serviceColors = ['text-amber-400', 'text-blue-400', 'text-emerald-400', 'text-purple-400', 'text-red-400', 'text-blue-400', 'text-emerald-400'];
+  // Color mapping for service cards - using teal for first card
+  const serviceColors = ['text-teal-400', 'text-blue-400', 'text-emerald-400', 'text-purple-400', 'text-sky-400', 'text-blue-400', 'text-emerald-400'];
   const serviceCTAs = ['Get Tax Guidance', 'Start Your Return', 'Business Services', 'Organize Your Books', 'IRS Assistance', 'Real Estate Tax', 'Mortgage Help'];
 
   return (
     <section id="services" className="py-24 md:py-32 px-6 section-gradient-navy bg-noise relative">
       <div className="max-w-6xl mx-auto">
-        <AnimateOnScroll className="text-center mb-16">
-          <p className="text-label mb-4">What We Do</p>
-          <h2 className="font-display text-display-md font-bold">
-            Full-Service <span className="text-gradient-gold">Tax & Real Estate</span>
+        <AnimateOnScroll className="text-center mb-20">
+          <p className="text-label mb-3">What We Do</p>
+          <h2 className="font-display text-display-md font-bold mb-4">
+            Full-Service <span className="text-gradient-teal">Tax & Real Estate</span>
           </h2>
+          <p className="text-subheading-lg max-w-2xl mx-auto">
+            Comprehensive financial services tailored to individuals and businesses in San Diego County
+          </p>
         </AnimateOnScroll>
 
         <motion.div
@@ -440,12 +443,12 @@ function ServicesSection() {
                 </div>
                 <h3 className="font-display text-lg font-bold mb-3 text-white tracking-tight relative z-10">{service.name}</h3>
                 <p className="text-sm text-gray-300 leading-relaxed flex-grow mb-5 relative z-10">{service.description}</p>
-                <span className="link-underline inline-flex items-center gap-2 text-sm font-semibold text-amber-400 relative z-10">
+                <span className="link-underline inline-flex items-center gap-2 text-sm font-semibold text-teal-400 relative z-10">
                   {serviceCTAs[i]} {icons.arrowRight}
                 </span>
 
                 {/* Bottom accent line on hover */}
-                <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-teal-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </a>
             </motion.div>
           ))}
@@ -464,13 +467,18 @@ function AboutSection() {
           {/* Left: Copy - slides in from left */}
           <div>
             <AnimateSlideIn direction="left">
-              <p className="text-label mb-4">About 1Way Home Services</p>
+              <p className="text-label mb-3">About 1Way Home Services</p>
             </AnimateSlideIn>
             <AnimateSlideIn direction="left" delay={0.1}>
-              <h2 className="font-display text-display-md font-bold mb-8">
+              <h2 className="font-display text-display-sm font-bold mb-4">
                 6 Years of Experience.{" "}
-                <span className="text-gradient-gold">100% Client Satisfaction.</span>
+                <span className="text-gradient-teal">100% Client Satisfaction.</span>
               </h2>
+            </AnimateSlideIn>
+            <AnimateSlideIn direction="left" delay={0.15}>
+              <p className="text-subheading mb-8">
+                Your trusted partners in tax preparation, real estate, and financial planning.
+              </p>
             </AnimateSlideIn>
             <AnimateSlideIn direction="left" delay={0.2}>
               <div className="space-y-5 text-body-lg">
@@ -498,7 +506,7 @@ function AboutSection() {
                   className="glass-card p-7 flex items-start gap-6 group"
                   whileHover={{ x: 8, transition: { duration: 0.3 } }}
                 >
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-amber-500/20 to-primary/5 ring-2 ring-amber-500/20 group-hover:ring-amber-500/40 transition-all">
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-teal-500/20 to-primary/5 ring-2 ring-teal-500/20 group-hover:ring-teal-500/40 transition-all">
                     <picture>
                       <source srcSet={member.image.replace('.PNG', '.webp')} type="image/webp" />
                       <img
@@ -513,7 +521,7 @@ function AboutSection() {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-display text-xl font-bold text-white mb-1">{member.name}</h4>
-                    <p className="text-sm text-amber-400 font-semibold mb-3">{member.credentials}</p>
+                    <p className="text-sm text-teal-400 font-semibold mb-3">{member.credentials}</p>
                     <p className="text-sm text-gray-300 leading-relaxed">{member.bio}</p>
                   </div>
                 </motion.div>
@@ -531,11 +539,14 @@ function ProcessSection() {
   return (
     <section id="process" className="py-24 md:py-32 px-6 section-gradient-subtle bg-noise relative">
       <div className="max-w-6xl mx-auto">
-        <AnimateOnScroll className="text-center mb-16">
-          <p className="text-label mb-4">Our Process</p>
-          <h2 className="font-display text-display-md font-bold">
-            Step by Step to <span className="text-gradient-gold">File With Confidence</span>
+        <AnimateOnScroll className="text-center mb-20">
+          <p className="text-label mb-3">Our Process</p>
+          <h2 className="font-display text-display-md font-bold mb-4">
+            Step by Step to <span className="text-gradient-teal">File With Confidence</span>
           </h2>
+          <p className="text-subheading-lg max-w-2xl mx-auto">
+            A simple, transparent approach that keeps you informed at every stage
+          </p>
         </AnimateOnScroll>
 
         <motion.div
@@ -556,16 +567,16 @@ function ProcessSection() {
             >
               {/* Connecting line between steps */}
               {i < PROCESS_STEPS.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-amber-500/30 to-transparent" />
+                <div className="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-teal-500/30 to-transparent" />
               )}
 
               <motion.div
-                className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 mb-6 group"
+                className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-500/10 border border-teal-500/30 mb-6 group"
                 whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
               >
-                <span className="stat-number-gold font-display text-2xl font-extrabold">{step.step}</span>
+                <span className="stat-number font-display text-2xl font-extrabold">{step.step}</span>
                 {/* Glow on hover */}
-                <div className="absolute inset-0 rounded-full bg-amber-500/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity" />
+                <div className="absolute inset-0 rounded-full bg-teal-500/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity" />
               </motion.div>
               <h4 className="font-display text-base font-bold text-white mb-3">{step.title}</h4>
               <p className="text-sm text-gray-300 leading-relaxed">{step.description}</p>
@@ -592,14 +603,14 @@ function TestimonialSection() {
         >
           <div className="glass-card-premium p-10 md:p-14 relative overflow-hidden">
             {/* Decorative quote marks */}
-            <div className="absolute top-6 left-6 text-6xl text-amber-500/10 font-serif">&ldquo;</div>
-            <div className="absolute bottom-6 right-6 text-6xl text-amber-500/10 font-serif">&rdquo;</div>
+            <div className="absolute top-6 left-6 text-6xl text-teal-500/10 font-serif">&ldquo;</div>
+            <div className="absolute bottom-6 right-6 text-6xl text-teal-500/10 font-serif">&rdquo;</div>
 
             <div className="flex items-center justify-center gap-1 mb-6">
               {STAR_INDICES.map((i) => (
                 <motion.span
                   key={i}
-                  className="text-amber-400"
+                  className="text-teal-400"
                   initial={{ opacity: 0, scale: 0 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: 0.3 + i * 0.1 }}
@@ -612,7 +623,7 @@ function TestimonialSection() {
               &ldquo;{TESTIMONIALS[0].quote}&rdquo;
             </blockquote>
             <div className="flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center">
                 {icons.user}
               </div>
               <div className="text-left">
@@ -635,7 +646,7 @@ function FAQSection() {
         <AnimateOnScroll className="text-center mb-16">
           <p className="text-label mb-4">FAQ</p>
           <h2 className="font-display text-display-md font-bold">
-            Your Tax Questions <span className="text-gradient-gold">Answered</span>
+            Your Tax Questions <span className="text-gradient-teal">Answered</span>
           </h2>
         </AnimateOnScroll>
 
@@ -646,7 +657,7 @@ function FAQSection() {
                 className="glass-card p-6 group"
                 whileHover={{ x: i % 2 === 0 ? 8 : -8, transition: { duration: 0.3 } }}
               >
-                <h4 className="font-display text-base font-semibold text-white mb-3 group-hover:text-amber-400 transition-colors">{item.question}</h4>
+                <h4 className="font-display text-base font-semibold text-white mb-3 group-hover:text-teal-400 transition-colors">{item.question}</h4>
                 <p className="text-sm text-gray-300 leading-relaxed">{item.answer}</p>
               </motion.div>
             </AnimateSlideIn>
@@ -657,7 +668,7 @@ function FAQSection() {
   );
 }
 
-/* ═══ CTA BANNER - with enhanced gold accents ═══ */
+/* ═══ CTA BANNER - with enhanced teal accents ═══ */
 function CTABanner() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -671,15 +682,15 @@ function CTABanner() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="relative rounded-2xl overflow-hidden glass-card-premium p-10 md:p-16 text-center">
-            {/* Enhanced gradient with gold accent */}
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-primary/10 to-transparent" />
-            <div className="absolute inset-0 animate-glow-pulse-gold" />
+            {/* Enhanced gradient with teal accent */}
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-primary/10 to-transparent" />
+            <div className="absolute inset-0 animate-glow-pulse-teal" />
             <div className="absolute inset-0 bg-noise opacity-50" />
 
             <div className="relative z-10">
               <p className="text-label mb-4">Start Saving on Your Taxes Today</p>
               <h2 className="font-display text-display-sm font-bold mb-6">
-                Get Your <span className="text-gradient-gold">Free Consultation</span>
+                Get Your <span className="text-gradient-teal">Free Consultation</span>
               </h2>
               <p className="text-body-lg text-gray-300 max-w-xl mx-auto mb-10">
                 Schedule a free, no-obligation consultation. In person, over the phone, or via Zoom —
@@ -688,7 +699,7 @@ function CTABanner() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <motion.a
                   href="tel:+16197169193"
-                  className="btn-gold text-base !py-4 !px-10"
+                  className="btn-primary text-base !py-4 !px-10"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -716,7 +727,7 @@ function Footer() {
             </p>
           </div>
           <div>
-            <h4 className="font-display font-bold text-sm mb-4 text-amber-400">Services</h4>
+            <h4 className="font-display font-bold text-sm mb-4 text-teal-400">Services</h4>
             <p className="text-sm text-gray-400 leading-relaxed">
               Tax Planning & Advisory · Tax Filing · Payroll Taxes<br />
               Bookkeeping · IRS Audit Support · Real Estate Tax<br />
@@ -724,7 +735,7 @@ function Footer() {
             </p>
           </div>
           <div>
-            <h4 className="font-display font-bold text-sm mb-4 text-amber-400">Contact</h4>
+            <h4 className="font-display font-bold text-sm mb-4 text-teal-400">Contact</h4>
             <div className="space-y-2 text-sm text-gray-300">
               <p>{icons.phone} (619) 716-9193</p>
               <p>{icons.mapPin} El Cajon, San Diego, California</p>

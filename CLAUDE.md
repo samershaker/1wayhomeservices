@@ -54,6 +54,10 @@ app/
   └── en/
       └── page.tsx         # Main landing page (all sections in one file)
 
+brand/
+  ├── colors.ts            # TypeScript brand color constants & types
+  └── README.md            # Brand color documentation & usage guide
+
 components/
   ├── animations/          # Animation utilities and demos
   ├── cinematic/           # Premium animation components (glassmorphic cards, parallax, smooth scroll)
@@ -75,24 +79,28 @@ public/
 
 ### Design System & Styling
 
-**Brand Colors:**
-- Primary: `#2251A3` (royal blue — trust, professionalism)
-- Accent: `#D4A853` (gold/amber — highlights)
-- Neutrals: Black (`#0A0A0A`), white, grays
+**Brand Colors** (extracted from live site https://1wayhomeservices.com/):
+- Primary: `#2557A8` (royal blue — trust, professionalism)
+- Secondary: `#0D4E53` (teal — freshness, growth)
+- Navy: `#0A2342` (dark blue — authority, depth) - used for dark sections
+- Neutrals: Black (`#0A0A0A`), white (`#F9FAFB`), grays
+
+See `brand/` folder for complete color documentation and TypeScript exports.
 
 **CSS Architecture:**
 - All design tokens defined in `app/globals.css` using CSS variables
+- Brand colors documented in `brand/colors.ts` with TypeScript types
 - Custom utility classes for glass effects, gradients, animations
-- Tailwind configured with DaisyUI but minimal usage
+- Tailwind configured with extended color palette
 - Font setup: Syne (display) + DM Sans (body) via Google Fonts
 
 **Key CSS Classes (defined in globals.css):**
 - `.glass-card` / `.glass-card-premium` — Glassmorphic containers
-- `.btn-primary` / `.btn-secondary` — Button styles
-- `.text-gradient-blue` — Blue gradient text effect
+- `.btn-primary` / `.btn-secondary` / `.btn-teal` — Button styles
+- `.text-gradient-blue` / `.text-gradient-teal` — Gradient text effects
 - `.hover-lift` — Hover elevation effect
 - `.section-gradient-navy` / `.section-gradient-subtle` — Section backgrounds
-- `.stat-number` — Stats with blue gradient animation
+- `.stat-number` / `.stat-number-teal` — Stats with gradient animation
 
 ### Data Management
 
@@ -129,23 +137,26 @@ Each section uses Framer Motion's `AnimateOnScroll` component for scroll-trigger
 The website uses a generic, semantic theming system that makes components reusable across different businesses:
 
 **Color Semantics:**
-- `primary` - Main brand color (blue #2251A3 for 1Way Home Services)
-- `accent` - Secondary highlight color (amber #D4A853)
+- `primary` - Main brand color (blue #2557A8 for 1Way Home Services)
+- `secondary` - Secondary accent color (teal #0D4E53)
+- `navy` - Dark section backgrounds (#0A2342)
 - `neutral` - Grayscale for neutral elements
 
 **Usage:**
-- Animation components accept `glowColor="primary"` or `"accent"` or `"neutral"`
-- Service cards accept `primaryColor="primary"` or `"accent"` or `"neutral"`
+- Animation components accept `glowColor="primary"` or `"secondary"` or `"neutral"`
+- Service cards accept `primaryColor="primary"` or `"secondary"` or `"neutral"`
 - **Never use business-specific terms** (like "cooling", "heating") in component props
 - All components use generic, semantic naming
 
 **To Change Brand Colors:**
 1. Update CSS variables in `app/globals.css` (`:root` section)
-2. Update Tailwind color mapping in `tailwind.config.ts`
-3. No component code changes needed - everything uses CSS variables
+2. Update color constants in `brand/colors.ts`
+3. Update Tailwind color mapping in `tailwind.config.ts`
+4. No component code changes needed - everything uses CSS variables
 
 **Type Definitions:**
 - Generic types defined in `lib/types.ts`
+- Brand color types in `brand/colors.ts`
 - `BrandColorVariant`, `IntensityLevel`, `AnimationMode`, etc.
 
 ### Animation Patterns
@@ -201,9 +212,11 @@ Edit `CONTACT_INFO` object in `lib/constants.ts`. Phone number appears in:
 
 ### Modifying Brand Colors
 
-1. Update CSS variables in `app/globals.css` (`:root` section)
-2. Colors are referenced via `var(--color-name)` in CSS
-3. Tailwind classes use extended color palette
+1. Update TypeScript constants in `brand/colors.ts`
+2. Update CSS variables in `app/globals.css` (`:root` section)
+3. Update Tailwind mappings in `tailwind.config.ts` if adding new colors
+4. Colors are referenced via `var(--color-name)` in CSS
+5. See `brand/README.md` for complete color documentation
 
 ### Building for Production
 
