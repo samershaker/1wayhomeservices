@@ -18,6 +18,8 @@ import {
   MailIcon,
 } from "@/components/ui/icons/page-icons";
 import { CONTACT_INFO } from "@/lib/constants";
+import { EASE_OUT_EXPO, SCROLL_VIEWPORT } from "@/lib/animations";
+import { FAQStructuredData } from "@/components/StructuredData";
 
 /* ═══ Config shape ═══ */
 
@@ -183,6 +185,9 @@ export function LongFormServicePage({ config }: { config: LandingConfig }) {
 
   return (
     <div className="bg-noise">
+      {config.faqs && config.faqs.length > 0 && (
+        <FAQStructuredData faqs={config.faqs} />
+      )}
       {/* ═══ HERO ═══ */}
       <section className="relative pt-28 md:pt-32 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 section-gradient-navy opacity-60 pointer-events-none" />
@@ -253,7 +258,7 @@ export function LongFormServicePage({ config }: { config: LandingConfig }) {
               className="text-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={SCROLL_VIEWPORT}
               transition={{ duration: 0.6, delay: i * 0.1 }}
             >
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[var(--color-secondary)]/15 text-[var(--color-secondary-light)] mb-4">
@@ -284,13 +289,13 @@ export function LongFormServicePage({ config }: { config: LandingConfig }) {
                 className="relative text-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
+                viewport={SCROLL_VIEWPORT}
                 transition={{ duration: 0.6, delay: i * 0.12 }}
               >
                 {i < config.howItWorks.length - 1 && (
                   <div
                     aria-hidden="true"
-                    className="hidden md:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-teal-500/30 to-transparent"
+                    className="hidden md:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-[var(--color-secondary)]/30 to-transparent"
                   />
                 )}
                 <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--color-secondary)]/15 border border-[var(--color-secondary)]/30 mb-6">
@@ -369,7 +374,7 @@ export function LongFormServicePage({ config }: { config: LandingConfig }) {
                   className="glass-card p-8"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
+                  viewport={SCROLL_VIEWPORT}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
                 >
                   <div className="flex items-center gap-1 mb-4 text-[var(--color-secondary-light)]" aria-hidden="true">
@@ -411,7 +416,7 @@ export function LongFormServicePage({ config }: { config: LandingConfig }) {
               className="glass-card p-8 md:p-10 flex items-start gap-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={SCROLL_VIEWPORT}
               transition={{ duration: 0.6 }}
             >
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[var(--color-secondary)]/15 text-[var(--color-secondary-light)] flex-shrink-0">

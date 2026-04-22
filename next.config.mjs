@@ -14,9 +14,9 @@ const nextConfig = {
   
   // ISR and build optimization
   experimental: {
-    optimizePackageImports: ['@react-spring/web', 'framer-motion', 'daisyui'],
+    optimizePackageImports: ['framer-motion'],
   },
-  
+
   // Build optimization
   generateBuildId: async () => {
     return '1wayhomeservices-static-build'

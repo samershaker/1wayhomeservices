@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { MenuIcon, XIcon, PhoneIcon } from "@/components/ui/icons/page-icons";
-import { CONTACT_INFO } from "@/lib/constants";
+import { CONTACT_INFO, SERVICES } from "@/lib/constants";
+
+type ServiceLike = (typeof SERVICES)[number] & { landingUrl?: string };
 
 const NAV_LINKS = [
   { href: "/en/#services", label: "Services" },
@@ -12,13 +14,23 @@ const NAV_LINKS = [
   { href: "/en/#faq", label: "FAQ" },
 ];
 
+function getServiceHref(service: ServiceLike): string {
+  if (typeof service.landingUrl === "string" && service.landingUrl.length > 0) {
+    return service.landingUrl;
+  }
+  return `/en/services/${service.slug}/`;
+}
+
 export function SiteNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = () => {
     setMobileMenuOpen(false);
+    setMobileServicesOpen(false);
     toggleBtnRef.current?.focus();
   };
 
@@ -31,7 +43,9 @@ export function SiteNav() {
         return;
       }
       if (e.key === "Tab" && menuRef.current) {
-        const focusables = menuRef.current.querySelectorAll<HTMLElement>("a, button");
+        const focusables = menuRef.current.querySelectorAll<HTMLElement>(
+          "a, button"
+        );
         if (focusables.length === 0) return;
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
@@ -75,7 +89,72 @@ export function SiteNav() {
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
+            {/* Services dropdown */}
+            <div
+              className="group relative"
+              onMouseEnter={() => setServicesDropdownOpen(true)}
+              onMouseLeave={() => setServicesDropdownOpen(false)}
+              onFocus={() => setServicesDropdownOpen(true)}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                  setServicesDropdownOpen(false);
+                }
+              }}
+            >
+              <Link
+                href="/en/#services"
+                className="text-sm text-gray-300 hover:text-white transition-colors py-3 inline-flex items-center gap-1"
+                aria-haspopup="menu"
+                aria-expanded={servicesDropdownOpen}
+              >
+                Services
+                <svg
+                  aria-hidden="true"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  className="transition-transform group-hover:rotate-180 group-focus-within:rotate-180"
+                >
+                  <path
+                    d="M3 4.5L6 7.5L9 4.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+
+              <div
+                role="menu"
+                aria-label="Services"
+                className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-150 absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
+              >
+                <div className="glass-card min-w-[260px] py-2 shadow-xl">
+                  <Link
+                    href="/en/#services"
+                    role="menuitem"
+                    className="block px-4 py-2 text-sm text-gray-200 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    All services
+                  </Link>
+                  <div className="my-1 border-t border-white/10" />
+                  {SERVICES.map((service) => (
+                    <Link
+                      key={service.id}
+                      href={getServiceHref(service as ServiceLike)}
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      {service.shortName}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {NAV_LINKS.filter((l) => l.href !== "/en/#services").map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -119,8 +198,70 @@ export function SiteNav() {
 
         {mobileMenuOpen && (
           <div id="mobile-menu" ref={menuRef} className="md:hidden bg-black/95 border-t border-white/5">
-            <div className="flex flex-col p-6 gap-4">
-              {NAV_LINKS.map((link) => (
+            <div className="flex flex-col p-6 gap-2">
+              {/* Services with nested list */}
+              <div className="flex flex-col">
+                <div className="flex items-center justify-between">
+                  <Link
+                    href="/en/#services"
+                    className="text-white py-2 text-lg hover:text-[var(--color-primary-light)] transition-colors flex-1"
+                    onClick={closeMenu}
+                  >
+                    Services
+                  </Link>
+                  <button
+                    type="button"
+                    className="min-h-11 min-w-11 flex items-center justify-center text-white"
+                    onClick={() => setMobileServicesOpen((v) => !v)}
+                    aria-expanded={mobileServicesOpen}
+                    aria-controls="mobile-services-submenu"
+                    aria-label={mobileServicesOpen ? "Collapse services" : "Expand services"}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
+                    >
+                      <path
+                        d="M3 4.5L6 7.5L9 4.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                {mobileServicesOpen && (
+                  <div
+                    id="mobile-services-submenu"
+                    className="flex flex-col pl-4 border-l border-white/10 ml-2 mt-1 mb-2 gap-1"
+                  >
+                    <Link
+                      href="/en/#services"
+                      className="text-gray-200 py-2 text-base hover:text-[var(--color-primary-light)] transition-colors"
+                      onClick={closeMenu}
+                    >
+                      All services
+                    </Link>
+                    {SERVICES.map((service) => (
+                      <Link
+                        key={service.id}
+                        href={getServiceHref(service as ServiceLike)}
+                        className="text-gray-300 py-2 text-base hover:text-[var(--color-primary-light)] transition-colors"
+                        onClick={closeMenu}
+                      >
+                        {service.shortName}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {NAV_LINKS.filter((l) => l.href !== "/en/#services").map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}

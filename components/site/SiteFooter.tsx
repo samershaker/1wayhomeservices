@@ -21,7 +21,7 @@ export function SiteFooter() {
             </p>
           </div>
           <div>
-            <h3 className="font-display font-bold text-sm mb-4 text-teal-400">Services</h3>
+            <h3 className="font-display font-bold text-sm mb-4 text-[var(--color-secondary-light)]">Services</h3>
             <p className="text-sm text-gray-300 leading-relaxed">
               Tax Planning &amp; Advisory · Tax Filing · Payroll Taxes<br />
               Bookkeeping · IRS Audit Support · Real Estate Tax<br />
@@ -29,7 +29,7 @@ export function SiteFooter() {
             </p>
           </div>
           <div>
-            <h3 className="font-display font-bold text-sm mb-4 text-teal-400">Contact</h3>
+            <h3 className="font-display font-bold text-sm mb-4 text-[var(--color-secondary-light)]">Contact</h3>
             <div className="space-y-2 text-sm text-gray-300">
               <p>
                 <PhoneIcon size={20} />{" "}

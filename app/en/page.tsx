@@ -359,6 +359,7 @@ function ServicesSection() {
 
 /* ═══ SERVICE CARD - Reusable card with image ═══ */
 function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[number]; isLarge?: boolean }) {
+  const href = 'landingUrl' in service && service.landingUrl ? service.landingUrl : `/en/services/${service.slug}/`;
   return (
     <motion.div
       variants={fadeUp}
@@ -366,7 +367,7 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
       className={isLarge ? 'md:col-span-1' : ''}
     >
       <Link
-        href={`/en/services/${service.slug}/`}
+        href={href}
         className="glass-card h-full flex flex-col group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black relative overflow-hidden"
         aria-label={`Learn more about ${service.name}`}
       >
