@@ -384,7 +384,7 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
 
           {/* Badge */}
           {service.badge && (
-            <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full bg-teal-500/90 text-white backdrop-blur-sm">
+            <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full bg-[var(--color-secondary)]/90 text-white backdrop-blur-sm">
               {service.badge}
             </span>
           )}
@@ -392,7 +392,7 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-grow">
-          <h4 className="font-display text-lg font-bold mb-2 text-white tracking-tight group-hover:text-teal-400 transition-colors">
+          <h4 className="font-display text-lg font-bold mb-2 text-white tracking-tight group-hover:text-[var(--color-secondary-light)] transition-colors">
             {service.name}
           </h4>
           <p className="text-sm text-gray-300 leading-relaxed flex-grow mb-4">
@@ -403,7 +403,7 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
           <ul className="space-y-1.5 mb-4">
             {service.features.slice(0, 2).map((feature, i) => (
               <li key={i} className="flex items-center gap-2 text-xs text-gray-300">
-                <svg className="w-3.5 h-3.5 text-teal-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-3.5 h-3.5 text-[var(--color-secondary-light)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 {feature}
@@ -412,13 +412,13 @@ function ServiceCard({ service, isLarge = false }: { service: typeof SERVICES[nu
           </ul>
 
           {/* CTA */}
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-teal-400 group-hover:gap-3 transition-all">
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-secondary-light)] group-hover:gap-3 transition-all">
             Learn more {icons.arrowRight}
           </span>
         </div>
 
         {/* Hover glow effect */}
-        <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-teal-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-[var(--color-secondary)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       </Link>
     </motion.div>
   );
@@ -476,7 +476,7 @@ function AboutSection() {
                   data-gramm_editor="false"
                   data-enable-grammarly="false"
                 >
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-teal-500/20 to-primary/5 ring-2 ring-teal-500/20 group-hover:ring-teal-500/40 transition-all">
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-[var(--color-secondary)]/20 to-primary/5 ring-2 ring-[var(--color-secondary)]/20 group-hover:ring-[var(--color-secondary)]/40 transition-all">
                     <picture>
                       <source srcSet={member.image.replace('.PNG', '.webp')} type="image/webp" />
                       <img
@@ -491,7 +491,7 @@ function AboutSection() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-display text-xl font-bold text-white mb-1">{member.name}</h3>
-                    <p className="text-sm text-teal-400 font-semibold mb-3">{member.credentials}</p>
+                    <p className="text-sm text-[var(--color-secondary-light)] font-semibold mb-3">{member.credentials}</p>
                     <p className="text-sm text-gray-300 leading-relaxed">{member.bio}</p>
                   </div>
                 </motion.div>
@@ -537,16 +537,16 @@ function ProcessSection() {
             >
               {/* Connecting line between steps */}
               {i < PROCESS_STEPS.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-teal-500/30 to-transparent" />
+                <div className="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-[var(--color-secondary)]/30 to-transparent" />
               )}
 
               <motion.div
-                className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-500/10 border border-teal-500/30 mb-6 group"
+                className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/30 mb-6 group"
                 whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
               >
                 <span className="stat-number font-display text-2xl font-extrabold">{step.step}</span>
                 {/* Glow on hover */}
-                <div className="absolute inset-0 rounded-full bg-teal-500/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity" />
+                <div className="absolute inset-0 rounded-full bg-[var(--color-secondary)]/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity" />
               </motion.div>
               <h3 className="font-display text-base font-bold text-white mb-3">{step.title}</h3>
               <p className="text-sm text-gray-300 leading-relaxed">{step.description}</p>
@@ -591,20 +591,20 @@ function TestimonialSection() {
             onBlur={() => setPaused(false)}
           >
             {/* Decorative quote marks */}
-            <div className="absolute top-6 left-6 text-6xl text-teal-500/10 font-serif" aria-hidden="true">&ldquo;</div>
-            <div className="absolute bottom-6 right-6 text-6xl text-teal-500/10 font-serif" aria-hidden="true">&rdquo;</div>
+            <div className="absolute top-6 left-6 text-6xl text-[var(--color-secondary)]/10 font-serif" aria-hidden="true">&ldquo;</div>
+            <div className="absolute bottom-6 right-6 text-6xl text-[var(--color-secondary)]/10 font-serif" aria-hidden="true">&rdquo;</div>
 
             <div aria-live="polite" aria-atomic="true">
               <div className="flex items-center justify-center gap-1 mb-6" aria-hidden="true">
                 {STAR_INDICES.map((i) => (
-                  <span key={i} className="text-teal-400">{icons.star}</span>
+                  <span key={i} className="text-[var(--color-secondary-light)]">{icons.star}</span>
                 ))}
               </div>
               <blockquote className="text-xl md:text-2xl text-gray-200 font-display font-medium leading-relaxed mb-8 relative z-10 min-h-[8rem]">
                 &ldquo;{current.quote}&rdquo;
               </blockquote>
               <div className="flex items-center justify-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center" aria-hidden="true">
+                <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)]/20 flex items-center justify-center" aria-hidden="true">
                   {icons.user}
                 </div>
                 <div className="text-left">
@@ -656,7 +656,7 @@ function FAQSection() {
                 className="glass-card p-6 group"
                 whileHover={{ x: i % 2 === 0 ? 8 : -8, transition: { duration: 0.3 } }}
               >
-                <h3 className="font-display text-base font-semibold text-white mb-3 group-hover:text-teal-400 transition-colors">{item.question}</h3>
+                <h3 className="font-display text-base font-semibold text-white mb-3 group-hover:text-[var(--color-secondary-light)] transition-colors">{item.question}</h3>
                 <p className="text-sm text-gray-300 leading-relaxed">{item.answer}</p>
               </motion.div>
             </AnimateSlideIn>
@@ -682,7 +682,7 @@ function CTABanner() {
         >
           <div className="relative rounded-2xl overflow-hidden glass-card-premium p-10 md:p-16 text-center">
             {/* Enhanced gradient with teal accent */}
-            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-primary/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-secondary)]/10 via-primary/10 to-transparent" />
             <div className="absolute inset-0 animate-glow-pulse-teal" />
             <div className="absolute inset-0 bg-noise opacity-50" />
 
