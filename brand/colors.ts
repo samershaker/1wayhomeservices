@@ -19,12 +19,12 @@ export const brandColors = {
   },
 
   // ═══════════════════════════════════════════════════════════════
-  // SECONDARY - Deep Purple (Distinction, Premium, Warmth)
+  // SECONDARY - Collapses into the Primary blue family (monochromatic brand)
   // ═══════════════════════════════════════════════════════════════
   secondary: {
-    DEFAULT: '#7E57C2',     // Deep purple accent for highlights
-    light: '#B39DDB',       // Lighter purple (AA on dark)
-    dark: '#5E35B1',        // Darker purple
+    DEFAULT: '#2557A8',     // Same hex as primary — one brand color
+    light: '#6B9FE8',       // Brighter blue for text accents (AA on dark)
+    dark: '#1A3D82',        // Same as primary-dark
   },
 
   // ═══════════════════════════════════════════════════════════════
