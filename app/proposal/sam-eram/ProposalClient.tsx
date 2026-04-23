@@ -27,74 +27,121 @@ const CURRENT_SITE_URL = "https://1wayhomeservices.com";
 const COMPARISON_STORIES = [
   {
     number: "01",
+    title: "Built for the screen your customers actually use.",
+    body: "Seven out of ten people who visit your site are on a phone. Your current site was designed for a desktop and shrunk down to fit, which is why buttons feel tight, forms are awkward, and people bounce. The new site was designed for phones first, then widened to desktop. Your customers meet you on the screen they’re already holding.",
+  },
+  {
+    number: "02",
     title: "Four seconds is the difference between a phone call and a back-button.",
     body: "People decide whether to stay on a page in about two seconds. Your current site takes four to become visible on a phone, most visitors are already gone. The new site is visible in under two. Your first impression is your first sentence, not a loading spinner.",
   },
   {
-    number: "02",
+    number: "03",
     title: "“El Cajon, CA” doesn’t help anyone find you.",
     body: "That’s what your current contact page says. Technically true, practically useless. Google Maps can’t pin you, a new client doesn’t know which cross-street to look for, and ChatGPT has nothing specific to cite. The new site publishes 250 E Chase Ave, Suite 107, El Cajon CA 92020 on every page, in a format both humans and AI tools can actually use.",
   },
   {
-    number: "03",
+    number: "04",
     title: "Bakhan is a licensed California broker. The internet doesn’t know it.",
     body: "California real estate license #02223420 is public record. It’s not on your current site anywhere. The new site displays it in the footer of every page, next to a direct link to the state’s official verification database. This is how licensed professionals signal regulated and accountable without having to say the words.",
   },
   {
-    number: "04",
+    number: "05",
     title: "416 five-star reviews should be working harder than they are.",
     body: "They’re real. They’re earned. But on your current site they aren’t structured the way AI search needs them, so when someone asks ChatGPT or Google’s AI “who’s a trusted tax preparer in El Cajon?”, your reputation isn’t doing the work it could. The new site publishes the rating properly, structured, dated, linked to Google. Your reviews start selling for you even while you’re asleep.",
   },
   {
-    number: "05",
+    number: "06",
     title: "The compliance details regulators and careful clients notice.",
     body: "Your firm sits on two regulated rails at once, real estate and tax preparation, and each has its own expected disclosures. On the real-estate side, the new site shows the Equal Housing Opportunity mark and Fair Housing language in the footer of every page. On the tax side, the California Consumer Privacy Act section is in place, the A2P 10DLC consent copy on the contact form matches what your privacy policy already commits you to (note: final SMS compliance also requires brand and campaign registration at your SMS vendor, worth flagging so we can coordinate). None of these break the business individually. All of them together signal a firm that takes the details seriously.",
   },
-  {
-    number: "06",
-    title: "Built for the screen your customers actually use.",
-    body: "Seven out of ten people who visit your site are on a phone. Your current site was designed for a desktop and shrunk down to fit, which is why buttons feel tight, forms are awkward, and people bounce. The new site was designed for phones first, then widened to desktop. Your customers meet you on the screen they’re already holding.",
-  },
 ];
 
-// All anchors point at the live preview site (not back into the proposal page,
-// which doesn't have these IDs). Sam clicks, goes to the actual artifact.
+// Engineering and compliance depth, ordered the way Sam asked for it:
+// mobile-first craft first, llms.txt second, quiet fixes to his existing
+// content third, then the discoverability infrastructure, then the deeper
+// architecture choices. Links point at the live artifact on the preview site
+// (or the raw file, when the file itself is the artifact).
 const ALREADY_BUILT = [
   {
-    name: "Verified business address, email, and licensing in every page's structured data",
+    number: "01",
+    title: "Designed on a phone, then widened up, not the other way around.",
+    body:
+      "Roughly seven in ten tax-firm visitors arrive on a phone, so every layout, tap target, and typographic scale was built at the mobile breakpoint first, then allowed to expand. Tailwind's mobile-first class order is used throughout the codebase, which means the phone experience is the default path and the desktop view is the enhancement, not the other way around.",
     href: "https://1wayhomeservices.vercel.app/en/",
+    linkLabel: "Open the live site on your phone",
   },
   {
-    name: "Bakhan's California DRE real estate license number visible in every footer",
-    href: "https://1wayhomeservices.vercel.app/en/",
+    number: "02",
+    title: "A proper llms.txt, the file AI assistants actually read.",
+    body:
+      "ChatGPT, Claude, and Perplexity look for a plain-English business summary at /llms.txt before they crawl a single page. Yours is 94 lines of curated content: services, team with Bakhan's DRE license, pricing, hours, contact, plus an expanded /llms-full.txt for assistants that want the deeper cut. Most competitors in the category don't publish either file.",
+    href: "https://1wayhomeservices.vercel.app/llms.txt",
+    linkLabel: "View the raw llms.txt",
   },
   {
-    name: "Real Privacy Policy and Terms, faithful reproductions of your published versions",
+    number: "03",
+    title: "Small errors in your existing content, caught and quietly fixed.",
+    body:
+      "Your published Terms heading reads \"Not Professional Advise\" instead of \"Advice,\" your Privacy Policy contact block lists email only, your Terms says clients are \"bound by our Privacy Policy\" without ever linking to it, and your contact address is \"El Cajon, San Diego, California\" with no street. The new publication fixes every one of those, cross-links the two legal pages, and uses the verified 250 E Chase Ave, Suite 107 address for NAP consistency across the site, structured data, and footer.",
+    href: "https://1wayhomeservices.vercel.app/en/terms/",
+    linkLabel: "Compare the reproduced Terms",
+  },
+  {
+    number: "04",
+    title: "Every major AI crawler welcomed by name in robots.txt.",
+    body:
+      "Thirteen bots are individually allow-listed with their own User-Agent blocks: GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, anthropic-ai, Claude-Web, CCBot, PerplexityBot, Google-Extended, Applebot-Extended, Amazonbot, Bytespider, FacebookBot. A generic allow line would work for most, but explicit welcome is the signal serious AI search infrastructure looks for, and the sitemap is referenced from the same file.",
+    href: "https://1wayhomeservices.vercel.app/robots.txt",
+    linkLabel: "View the raw robots.txt",
+  },
+  {
+    number: "05",
+    title: "A multi-type Schema.org entity graph, not a single blob of JSON-LD.",
+    body:
+      "The firm is declared simultaneously as ProfessionalService, AccountingService, and LocalBusiness, because each type is the one a different AI tool looks for. That sits alongside a sibling Organization schema, a WebSite schema, a BreadcrumbList, and FAQPage schema on every FAQ section, with a full address, phone, email, hours, services, employees as Person objects, aggregateRating, hasCredential for Bakhan's DRE license, and sameAs links to every social profile. Six linked schemas, one source of truth.",
+    href: "https://search.google.com/test/rich-results?url=https%3A%2F%2F1wayhomeservices.vercel.app%2Fen%2F",
+    linkLabel: "Run Google's Rich Results Test",
+  },
+  {
+    number: "06",
+    title: "Bakhan's DRE license declared two ways, one for humans, one for machines.",
+    body:
+      "California DRE #02223420 appears in the footer of every page as a linked credential, pointing straight at the Department of Real Estate's public verification lookup so anyone can confirm it in two clicks. The same license is also declared on Bakhan's Person object in JSON-LD as a Schema.org EducationalOccupationalCredential, so AI tools can cite \"licensed California broker\" as a verifiable fact rather than a claim.",
+    href: "https://1wayhomeservices.vercel.app/en/",
+    linkLabel: "See the footer credential",
+  },
+  {
+    number: "07",
+    title: "The review rating stamped with a verification date, not left floating.",
+    body:
+      "The 5.0 star rating across 416 Google reviews is published in JSON-LD with a reviewVerifiedDate attribute. That date is the freshness signal AI crawlers specifically check for when deciding whether an aggregate rating is current enough to cite. It also gives you a defensible audit trail the day a platform or regulator asks where the number came from.",
+    href: "https://validator.schema.org/#url=https%3A%2F%2F1wayhomeservices.vercel.app%2Fen%2F",
+    linkLabel: "Inspect the schema directly",
+  },
+  {
+    number: "08",
+    title: "One source of truth for every business fact on the site.",
+    body:
+      "Address, phone, hours, services, team bios, testimonials, and FAQs all live in a single TypeScript file, lib/constants.ts. One edit there propagates to more than two hundred surfaces: the footer on every page, the JSON-LD entity graph, the llms.txt and llms-full.txt files, the contact form, the Privacy Policy, and the Terms. When your hours change, you change them in one place, not twenty.",
+    href: "https://github.com/samershaker/1wayhomeservices/blob/main/lib/constants.ts",
+    linkLabel: "See the constants file",
+  },
+  {
+    number: "09",
+    title: "Static export on Vercel's global edge, sub-second first paint.",
+    body:
+      "The site is pre-rendered to plain HTML at build time and served from Vercel's edge CDN in every major US region, so there is no server round-trip between a visitor tapping your link and the first visible pixel. That architecture is also what makes the site cheap to run, resistant to traffic spikes, and simple to hand to another developer if you ever want to move it.",
+    href: "https://1wayhomeservices.vercel.app/en/",
+    linkLabel: "Time it yourself",
+  },
+  {
+    number: "10",
+    title: "A compliance footer built for a dual-regulated firm.",
+    body:
+      "Real estate and tax preparation each have their own expected disclosures, so the new footer carries both: the Equal Housing Opportunity mark from HUD's public-domain SVG, a Circular 230-style tax disclaimer, the California DRE license with verification link, the full legal entity name (1 Way Home Real Estate and Mortgage Services Inc.), and the California privacy rights disclosure mandated by CCPA and CPRA for California businesses. That last section, the one regulators look for first, wasn't on your existing site at all.",
     href: "https://1wayhomeservices.vercel.app/en/privacy/",
-  },
-  {
-    name: "Equal Housing Opportunity mark and Fair Housing language in the footer",
-    href: "https://1wayhomeservices.vercel.app/en/",
-  },
-  {
-    name: "8 plain-English FAQ entries with local anchoring, marked up for AI citation",
-    href: "https://1wayhomeservices.vercel.app/en/#faq",
-  },
-  {
-    name: "Contact form with the exact A2P 10DLC SMS consent language your policy requires",
-    href: "https://1wayhomeservices.vercel.app/en/#contact",
-  },
-  {
-    name: "California privacy rights section (CCPA / CPRA) on the Privacy page",
-    href: "https://1wayhomeservices.vercel.app/en/privacy/",
-  },
-  {
-    name: "Mobile-first responsive design, built for phones, adapted up",
-    href: "https://1wayhomeservices.vercel.app/en/",
-  },
-  {
-    name: "Live site preview you can click through right now",
-    href: "https://1wayhomeservices.vercel.app/en/",
+    linkLabel: "Read the California rights section",
   },
 ];
 
@@ -433,6 +480,25 @@ function Comparison() {
           in two tabs and check any of them yourself.
         </p>
 
+        <div className="mb-10 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
+          <a
+            href={PREVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[var(--color-primary)] text-white font-semibold hover:bg-[var(--color-primary)]/90 transition-colors"
+          >
+            Open the live preview ↗
+          </a>
+          <a
+            href={CURRENT_SITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg border border-white/15 text-gray-300 hover:text-white hover:border-white/30 transition-colors"
+          >
+            Open your current site ↗
+          </a>
+        </div>
+
         <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 p-4 md:p-6">
           <BeforeAfterPhones />
           <p className="mt-4 text-xs text-gray-500 text-center max-w-prose mx-auto leading-relaxed">
@@ -467,25 +533,6 @@ function Comparison() {
               </p>
             </motion.article>
           ))}
-        </div>
-
-        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3 text-sm">
-          <a
-            href={PREVIEW_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[var(--color-primary)] text-white font-semibold hover:bg-[var(--color-primary)]/90 transition-colors"
-          >
-            Open the live preview ↗
-          </a>
-          <a
-            href={CURRENT_SITE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg border border-white/15 text-gray-300 hover:text-white hover:border-white/30 transition-colors"
-          >
-            Open your current site ↗
-          </a>
         </div>
       </div>
     </section>
@@ -917,48 +964,59 @@ function AlreadyBuilt() {
     <section id="whats-built" className="px-6 py-16 md:py-20 bg-gradient-to-b from-black via-[#0A2342]/30 to-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
-          What&apos;s in the box
+          Under the hood
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Already done, included in the base $300/month
+          Ten pieces of craft, shipped before you said yes
         </h2>
         <p className="text-gray-300 max-w-4xl mb-10 leading-relaxed">
-          This isn&apos;t a mockup. Every item below is live on the preview site you can
-          click through right now.
+          Most of what a website does for a tax firm happens below the surface, in the
+          files AI crawlers read, the structured data search engines parse, and the
+          architecture choices nobody sees until they matter. Below is the engineering
+          and compliance depth already built into the preview, included in the base
+          $300 a month. Every item is live on the site right now and verifiable from
+          your own browser.
         </p>
 
-        <ul className="space-y-3">
+        <div className="space-y-4 md:space-y-5">
           {ALREADY_BUILT.map((item, i) => (
-            <motion.li
-              key={item.name}
-              initial={{ opacity: 0, x: -8 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.3, delay: i * 0.04 }}
+            <motion.article
+              key={item.number}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: i * 0.04 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-7"
             >
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 hover:border-white/20 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary-light)]"
-              >
+              <div className="flex items-baseline gap-4 mb-3">
                 <span
                   aria-hidden="true"
-                  className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white text-xs font-bold mt-0.5"
+                  className="font-display text-sm font-semibold tracking-wider text-[var(--color-secondary-light)]/80"
                 >
-                  ✓
+                  {item.number}
                 </span>
-                <span className="text-gray-200 leading-relaxed flex-1">{item.name}</span>
-                <span
-                  aria-hidden="true"
-                  className="text-xs text-gray-500 group-hover:text-[var(--color-secondary-light)] transition-colors flex-shrink-0 mt-1"
-                >
-                  See live ↗
-                </span>
-              </a>
-            </motion.li>
+                <h3 className="font-display text-lg md:text-xl font-bold text-white leading-snug">
+                  {item.title}
+                </h3>
+              </div>
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed md:pl-10 max-w-prose">
+                {item.body}
+              </p>
+              {item.href && (
+                <div className="mt-4 md:pl-10">
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 rounded-lg border border-white/15 text-sm text-white font-semibold hover:bg-white/5 hover:border-white/30 transition-colors"
+                  >
+                    {item.linkLabel ?? "See it live"} ↗
+                  </a>
+                </div>
+              )}
+            </motion.article>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
