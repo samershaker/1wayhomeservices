@@ -203,10 +203,10 @@ const EXTRAS = [
       "This one is contingent on you. Concrete numbers like 'San Diego real estate investor, saved $14,200 via S-Corp election in 2024' are what AI tools quote, and generic praise they ignore. But I can't make the stories up. Action 06 in the Do Yourself section above is the prerequisite: you approach three to five loyal clients for permission to share anonymized wins. Once I have their approval and the specifics, I write the hub page, draft the case studies to your spec, and add the IRS Circular 230 §10.30-compliant disclosures that keep it publishable.",
   },
   {
-    name: "Spanish version of the site",
-    price: "~$2,400 one-time",
+    name: "Spanish mirror of the site",
+    price: "$1,000 setup, plus $150/month to keep it in sync",
     why:
-      "Full translation, separate URL paths, properly tagged so Spanish-language AI search finds you. San Diego County is over thirty percent Spanish-speaking, and almost none of your category competitors publish a real Spanish site. Land-grab opportunity with a fast payback.",
+      "A full Spanish-language mirror of your site on separate URL paths, with structured data properly tagged so Spanish-language AI search actually finds you. San Diego County is over thirty percent Spanish-speaking, and almost none of your category competitors publish a real Spanish site. The $1,000 setup covers the initial translation of every existing page, navigation, contact form, and legal content. The $150 a month keeps the mirror in sync: anything new you publish in English (blog posts, service updates, case studies, the Tax Deadlines page) gets translated and mirrored on the Spanish side within the month, so the two sites never drift apart. Especially valuable paired with the managed blog above, write once in English, reach both audiences.",
   },
 ];
 
