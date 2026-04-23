@@ -23,7 +23,7 @@ A simple month-to-month arrangement to take over your website from your current 
 
 ### What's not included
 
-- Brand-new pages (e.g., adding a whole new service line as its own page) — quoted separately, see the upsell menu below
+- Brand-new pages (e.g., adding a whole new service line as its own page) — quoted separately, see the menu below
 - Major redesigns
 - Paid advertising spend (Google Ads, Facebook Ads — that money goes to those platforms, not to me)
 - Third-party fees (e.g., a premium booking calendar, a paid email service) — those would be billed at cost or you'd own the account directly
@@ -49,7 +49,7 @@ You spend less, and you get a site that's faster, more credible, and built for w
 
 ---
 
-## Upsell menu — for when you're ready (no pressure)
+## Extra's menu — for when you're ready (no pressure)
 
 These are extras. The base $300/month covers a great site that grows with normal updates. The items below are projects that go beyond maintenance — bigger swings that pay for themselves if you're ready to invest in growth.
 
@@ -71,13 +71,10 @@ These are the highest leverage per dollar. Each one makes your site more visible
 
 ### Monthly add-ons ($150–$500/mo on top of the base $300)
 
-- **Local search push (+$250/mo)** — claim and optimize your Google Business Profile, build local directory listings, ask happy clients for fresh reviews on a cadence. The single fastest way to grow tax-season phone calls.
-
 - **Monthly content (+$300/mo)** — one well-researched, well-structured blog post or service-page expansion per month. Targeted at things people actually search for, written to be cited by AI tools as well as ranked by Google.
 
 - **Email newsletter (+$200/mo)** — one monthly email to your client list (tax tips, deadline reminders, market notes for real estate clients). Keeps you top of mind between filings.
 
-- **Paid ads management (+$400/mo + ad spend)** — set up and manage Google Ads campaigns targeting "tax preparer near me" type searches in San Diego County. You set the ad budget; the management fee is separate. Best ROI is during tax season (January–April).
 
 ### Bigger projects (one-time, scoped individually)
 
