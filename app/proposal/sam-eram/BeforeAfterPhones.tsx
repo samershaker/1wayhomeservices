@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 /**
  * BeforeAfterPhones
  *
- * Two schematic phone mockups side by side — the left phone represents
+ * Two schematic phone mockups side by side, the left phone represents
  * the current site (sparse, generic content, slow load), the right phone
  * represents the new site (structured, specific, compliant, fast).
  *
- * Pure SVG — crisp at any resolution, perfect brand match, no AI-art
+ * Pure SVG, crisp at any resolution, perfect brand match, no AI-art
  * spelling artifacts.
  */
 
@@ -39,7 +39,7 @@ export function BeforeAfterPhones() {
           clear call to action, loading in 1.2 seconds.
         </desc>
 
-        {/* LEFT PHONE — CURRENT SITE */}
+        {/* LEFT PHONE, CURRENT SITE */}
         <g>
           <text
             x="180"
@@ -150,7 +150,7 @@ export function BeforeAfterPhones() {
           </g>
         </g>
 
-        {/* MIDDLE — arrow */}
+        {/* MIDDLE, arrow */}
         <g>
           <path
             d="M 330 285 L 520 285"
@@ -169,7 +169,7 @@ export function BeforeAfterPhones() {
           />
         </g>
 
-        {/* RIGHT PHONE — NEW SITE */}
+        {/* RIGHT PHONE, NEW SITE */}
         <g>
           <text
             x="680"
@@ -198,7 +198,7 @@ export function BeforeAfterPhones() {
           {/* Notch */}
           <rect x="650" y="50" width="60" height="16" rx="8" fill="#0A0A0A" />
 
-          {/* Screen — subtle navy tint */}
+          {/* Screen, subtle navy tint */}
           <rect
             x="575"
             y="80"
@@ -239,7 +239,7 @@ export function BeforeAfterPhones() {
             Tax &amp; Real Estate · El Cajon
           </text>
 
-          {/* Address block — specific */}
+          {/* Address block, specific */}
           <rect
             x="585"
             y="175"

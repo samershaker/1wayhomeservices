@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
  * that matter. Replaces about 200 words of text with a single scannable
  * diagram.
  *
- * Pure SVG — no AI generation, crisp at every resolution, locked to
+ * Pure SVG, no AI generation, crisp at every resolution, locked to
  * the 1Way brand palette (navy #0A2342 / royal blue #2557A8 /
  * light blue #6B9FE8).
  */
@@ -51,8 +51,8 @@ export function AIFlowDiagram() {
           How structured data flows from your site to AI search
         </title>
         <desc id="ai-flow-diagram-desc">
-          A diagram showing the new website on the left — containing
-          seven specific facts about the business — with flowing arrows
+          A diagram showing the new website on the left, containing
+          seven specific facts about the business, with flowing arrows
           carrying each fact to three AI search tools on the right:
           ChatGPT, Perplexity, and Google AI.
         </desc>
@@ -76,7 +76,7 @@ export function AIFlowDiagram() {
           </linearGradient>
         </defs>
 
-        {/* Website box — the source of truth */}
+        {/* Website box, the source of truth */}
         <g>
           <rect
             x="30"

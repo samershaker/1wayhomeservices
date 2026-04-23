@@ -6,7 +6,7 @@ import { AIFlowDiagram } from "./AIFlowDiagram";
 import { BeforeAfterPhones } from "./BeforeAfterPhones";
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Constants — keep proposal-only data here so it doesn't leak into site copy
+// Constants, keep proposal-only data here so it doesn't leak into site copy
 // ───────────────────────────────────────────────────────────────────────────────
 
 const CLIENT_NAME_FIRST = "Sam";
@@ -28,12 +28,12 @@ const COMPARISON_STORIES = [
   {
     number: "01",
     title: "Four seconds is the difference between a phone call and a back-button.",
-    body: "People decide whether to stay on a page in about two seconds. Your current site takes four to become visible on a phone — most visitors are already gone. The new site is visible in under two. Your first impression is your first sentence, not a loading spinner.",
+    body: "People decide whether to stay on a page in about two seconds. Your current site takes four to become visible on a phone, most visitors are already gone. The new site is visible in under two. Your first impression is your first sentence, not a loading spinner.",
   },
   {
     number: "02",
     title: "“El Cajon, CA” doesn’t help anyone find you.",
-    body: "That’s what your current contact page says. Technically true, practically useless. Google Maps can’t pin you, a new client doesn’t know which cross-street to look for, and ChatGPT has nothing specific to cite. The new site publishes 250 E Chase Ave, Suite 107, El Cajon CA 92020 on every page — in a format both humans and AI tools can actually use.",
+    body: "That’s what your current contact page says. Technically true, practically useless. Google Maps can’t pin you, a new client doesn’t know which cross-street to look for, and ChatGPT has nothing specific to cite. The new site publishes 250 E Chase Ave, Suite 107, El Cajon CA 92020 on every page, in a format both humans and AI tools can actually use.",
   },
   {
     number: "03",
@@ -43,17 +43,17 @@ const COMPARISON_STORIES = [
   {
     number: "04",
     title: "416 five-star reviews should be working harder than they are.",
-    body: "They’re real. They’re earned. But on your current site they aren’t structured the way AI search needs them — so when someone asks ChatGPT or Google’s AI “who’s a trusted tax preparer in El Cajon?”, your reputation isn’t doing the work it could. The new site publishes the rating properly — structured, dated, linked to Google. Your reviews start selling for you even while you’re asleep.",
+    body: "They’re real. They’re earned. But on your current site they aren’t structured the way AI search needs them, so when someone asks ChatGPT or Google’s AI “who’s a trusted tax preparer in El Cajon?”, your reputation isn’t doing the work it could. The new site publishes the rating properly, structured, dated, linked to Google. Your reviews start selling for you even while you’re asleep.",
   },
   {
     number: "05",
     title: "The compliance details regulators and careful clients notice.",
-    body: "Your firm sits on two regulated rails at once — real estate and tax preparation — and each has its own expected disclosures. On the real-estate side, the new site shows the Equal Housing Opportunity mark and Fair Housing language in the footer of every page. On the tax side, the California Consumer Privacy Act section is in place, the A2P 10DLC consent copy on the contact form matches what your privacy policy already commits you to (note: final SMS compliance also requires brand and campaign registration at your SMS vendor — worth flagging so we can coordinate). None of these break the business individually. All of them together signal a firm that takes the details seriously.",
+    body: "Your firm sits on two regulated rails at once, real estate and tax preparation, and each has its own expected disclosures. On the real-estate side, the new site shows the Equal Housing Opportunity mark and Fair Housing language in the footer of every page. On the tax side, the California Consumer Privacy Act section is in place, the A2P 10DLC consent copy on the contact form matches what your privacy policy already commits you to (note: final SMS compliance also requires brand and campaign registration at your SMS vendor, worth flagging so we can coordinate). None of these break the business individually. All of them together signal a firm that takes the details seriously.",
   },
   {
     number: "06",
     title: "Built for the screen your customers actually use.",
-    body: "Seven out of ten people who visit your site are on a phone. Your current site was designed for a desktop and shrunk down to fit — which is why buttons feel tight, forms are awkward, and people bounce. The new site was designed for phones first, then widened to desktop. Your customers meet you on the screen they’re already holding.",
+    body: "Seven out of ten people who visit your site are on a phone. Your current site was designed for a desktop and shrunk down to fit, which is why buttons feel tight, forms are awkward, and people bounce. The new site was designed for phones first, then widened to desktop. Your customers meet you on the screen they’re already holding.",
   },
 ];
 
@@ -69,7 +69,7 @@ const ALREADY_BUILT = [
     href: "https://1wayhomeservices.vercel.app/en/",
   },
   {
-    name: "Real Privacy Policy and Terms — faithful reproductions of your published versions",
+    name: "Real Privacy Policy and Terms, faithful reproductions of your published versions",
     href: "https://1wayhomeservices.vercel.app/en/privacy/",
   },
   {
@@ -89,7 +89,7 @@ const ALREADY_BUILT = [
     href: "https://1wayhomeservices.vercel.app/en/privacy/",
   },
   {
-    name: "Mobile-first responsive design — built for phones, adapted up",
+    name: "Mobile-first responsive design, built for phones, adapted up",
     href: "https://1wayhomeservices.vercel.app/en/",
   },
   {
@@ -98,43 +98,62 @@ const ALREADY_BUILT = [
   },
 ];
 
+// Extras: a sample of add-on projects, ordered intentionally.
+// Blog first (the compound-growth lever), booking calendar second (smallest
+// commitment, biggest friction reducer), then the content build-outs. Each
+// entry is either a flat `why` string or a structured `intro` + `options`
+// + `closing` shape for the blog.
 const EXTRAS = [
   {
-    name: "Monthly blog — yours to write, or mine to produce",
-    price: "Free to do yourself  ·  $250/month fully managed",
+    name: "Monthly blog content",
+    price: "Option A: free  ·  Option B: $250/month",
     highlight: true,
-    why:
-      "Blog posts are the single most-cited content format in AI search — more than case studies, FAQs, and testimonials combined. Every post is a new question your site can answer, a new phrase you can rank for, and a new surface ChatGPT can quote. One research-backed post a month, compounded over twelve months, turns your firm into the default answer for tax questions across San Diego County.\n\nTwo ways to run it. Option A is free: I set you up with publishing tools and a year of pre-researched topic ideas, and you write them yourself in about an hour a month. Option B is $250 a month and entirely hands-off — I research, draft, SEO-optimize, and publish one post per month with your name on the byline. You spend zero minutes on it.\n\nSample topics already on the shelf: 'San Diego property tax deadlines 2026,' 'The S-Corp election that saved my client $14,000,' '1031 exchange mistakes real-estate investors made in 2025,' 'How to appeal your San Diego County property tax assessment.' Each is targeted to win a specific AI-search query the day it goes live.",
+    intro:
+      "Blog posts are the single most-cited content format in AI search, more than case studies, FAQs, and testimonials combined. Every post is a new question your site can answer, a new phrase you can rank for, and a new surface ChatGPT can quote. One post a month, compounded over twelve months, turns your firm into the default answer for tax questions across San Diego County.",
+    options: [
+      {
+        label: "Option A",
+        name: "Write it yourself, no cost",
+        desc: "I set you up with a simple publishing space inside the site where you can draft and post articles whenever you want. No monthly fee, no word counts, no deadlines. If you enjoy writing or want to journal your own expertise, this is yours to use as often or as rarely as you like.",
+      },
+      {
+        label: "Option B",
+        name: "I run it for you, $250/month",
+        desc: "I write and publish one research-backed post per month with your name on the byline, on topics we agree on in advance. Each post is SEO-optimized and built for AI citation. Every quarter I run a full SEO/GEO audit of the site, update your llms.txt and structured data to reflect new content, and tune the pages for the queries you're closest to winning. Your citability improves visibly month over month, and you spend zero minutes on content.",
+      },
+    ],
+    closing:
+      "Sample topics I'd suggest for your first twelve months: 'The S-Corp election that saved my client $14,000,' '1031 exchange mistakes real-estate investors made last year,' 'How to appeal a San Diego County property tax assessment,' 'What changed for California tax filers this year.' Each is targeted to win a specific AI-search query the day it goes live.",
   },
   {
-    name: "\"San Diego Tax Deadlines 2026\" cornerstone page",
+    name: "Booking calendar replacing \"schedule a consultation\"",
+    price: "~$300 one-time, plus about $15/month for the calendar tool",
+    why:
+      "Prospects pick a slot themselves and it lands on your calendar automatically. One less phone-tag step, one less reason someone puts it off. Small change, measurable bump in consultation rate, especially with leads who find you after hours. This is the smallest-commitment upgrade on the menu and often the first one clients add.",
+  },
+  {
+    name: "\"San Diego Tax Deadlines 2027\" cornerstone page",
     price: "~$600 one-time",
     why:
-      "One page with every federal, California, and San Diego County tax deadline in 2026 — who it applies to, what's owed, when it's due. Dated, specific, locally anchored. This is the single most likely page on your site to show up in ChatGPT, Google's AI Overviews, and Perplexity for the next twelve months. AI tools prefer finite, date-stamped resources they can cite confidently. Shipped in two weeks.",
-  },
-  {
-    name: "Tax and real estate glossary",
-    price: "~$500 one-time",
-    why:
-      "Sixty-plus terms — 1031 exchange, depreciation recapture, S-Corp election, capital gains, AMT — each defined in two clear sentences. Definition-style content is the format AI tools quote most of all. One page, one afternoon to build, months of citations once AI tools learn that 1wayhomeservices.com is the place to send people who need a clear definition.",
-  },
-  {
-    name: "Case studies hub with specific dollar outcomes",
-    price: "~$600 one-time",
-    why:
-      "Four to six anonymized client wins: 'San Diego real estate investor, saved $14,200 via S-Corp election in 2024.' 'Retired El Cajon homeowner, reduced 2023 tax bill by $6,800 via itemized strategy.' Concrete numbers are what AI tools quote; generic praise they ignore. Every case study is drafted to your spec and reviewed by you before publishing — important for IRS Circular 230 §10.30 advertising compliance, since preparers can't publish outcome claims loosely.",
+      "Since we're already past April 15, 2026, the right play is to get ahead of next season. One page with every federal, California, and San Diego County tax deadline for the 2027 filing year, who it applies to, what's owed, when it's due. Dated, specific, locally anchored. This is the single most likely page on your site to show up in ChatGPT, Google's AI Overviews, and Perplexity during next year's tax season. Shipped in two weeks, indexed long before January.",
   },
   {
     name: "Lead magnet pack (three downloadable PDFs)",
     price: "~$400 one-time",
     why:
-      "Tax Deduction Checklist. Real Estate Investor's Tax Guide. Small Business Tax Calendar. Three downloads, each wired into the contact form so visitors trade an email for the PDF. You quietly build an email list of interested leads, each of whom becomes a future client — and the audience for the monthly blog above.",
+      "Tax Deduction Checklist. Real Estate Investor's Tax Guide. Small Business Tax Calendar. Three downloads, each wired into the contact form so visitors trade an email for the PDF. I write and design all three end-to-end so you don't lift a finger. You quietly build an email list of interested leads, each of whom becomes a future client and the audience for the monthly blog above.",
   },
   {
-    name: "Booking calendar replacing \"schedule a consultation\"",
-    price: "~$300 one-time + about $15/month for the calendar tool",
+    name: "Tax and real estate glossary",
+    price: "~$500 one-time",
     why:
-      "Prospects pick a slot themselves and it lands on your calendar automatically. One less phone-tag step, one less reason someone puts it off. Small change, measurable bump in consultation rate — especially with leads who find you after hours.",
+      "Sixty-plus terms (1031 exchange, depreciation recapture, S-Corp election, capital gains, AMT) each defined in two clear sentences. Definition-style content is the format AI tools quote most of all. One page, one afternoon to build, months of citations once AI tools learn that 1wayhomeservices.com is the place to send people who need a clear definition.",
+  },
+  {
+    name: "Case studies hub (you collect the stories, I package them)",
+    price: "~$600 one-time, once you have stories ready",
+    why:
+      "This one is contingent on you. Concrete numbers like 'San Diego real estate investor, saved $14,200 via S-Corp election in 2024' are what AI tools quote, and generic praise they ignore. But I can't make the stories up. Action 06 in the Do Yourself section above is the prerequisite: you approach three to five loyal clients for permission to share anonymized wins. Once I have their approval and the specifics, I write the hub page, draft the case studies to your spec, and add the IRS Circular 230 §10.30-compliant disclosures that keep it publishable.",
   },
   {
     name: "Spanish version of the site",
@@ -145,7 +164,7 @@ const EXTRAS = [
 ];
 
 // Six concrete actions Sam can take on his own to strengthen his online
-// presence — no inputs collected, pure value. Each one compounds with the
+// presence, no inputs collected, pure value. Each one compounds with the
 // foundation the new site provides.
 const ACTIONS = [
   {
@@ -161,7 +180,7 @@ const ACTIONS = [
     title: "Create LinkedIn profiles for you and Bakhan",
     timeToDo: "15 minutes each",
     body:
-      "Basic profiles are fine — name, photo, current role, one-line bio. The moment your LinkedIn URLs are linked from the new site, ChatGPT and other AI tools treat you as verified, identifiable people rather than anonymous strings. This is the strongest single trust signal you can add.",
+      "Basic profiles are fine, name, photo, current role, one-line bio. The moment your LinkedIn URLs are linked from the new site, ChatGPT and other AI tools treat you as verified, identifiable people rather than anonymous strings. This is the strongest single trust signal you can add.",
     cta: { label: "Create a profile at linkedin.com ↗", href: "https://www.linkedin.com/signup" },
   },
   {
@@ -169,7 +188,7 @@ const ACTIONS = [
     title: "List your firm on four free directories",
     timeToDo: "about a Saturday afternoon",
     body:
-      "Yelp (business tax preparation + real estate services), Avvo (tax, and Bakhan for real estate), Nextdoor (business page), and the El Cajon Chamber of Commerce. These third-party mentions account for roughly 80 percent of the citations AI tools hand out — Reddit and Wikipedia included. Every listing is one more place your name can be found.",
+      "Yelp (business tax preparation + real estate services), Avvo (tax, and Bakhan for real estate), Nextdoor (business page), and the El Cajon Chamber of Commerce. These third-party mentions account for roughly 80 percent of the citations AI tools hand out, Reddit and Wikipedia included. Every listing is one more place your name can be found.",
     cta: { label: "Find the El Cajon Chamber listing form ↗", href: "https://www.elcajonchamber.org" },
   },
   {
@@ -177,7 +196,7 @@ const ACTIONS = [
     title: "Build reviews around the tax calendar, not every month",
     timeToDo: "batched around your deadlines",
     body:
-      "Tax clients don't review like consumer businesses — they review once a year, and most of them do it within six weeks of getting their return back. Plan the push around that reality: biggest wave the week after each 1040 client's return is delivered (usually March through April), smaller waves after March 15 S-corp filings and October 15 extensions. One sentence per client, one direct link — 'Would you take 30 seconds to leave us a Google review?' Done well, 416 becomes 440 before next tax season.",
+      "Tax clients don't review like consumer businesses, they review once a year, and most of them do it within six weeks of getting their return back. Plan the push around that reality: biggest wave the week after each 1040 client's return is delivered (usually March through April), smaller waves after March 15 S-corp filings and October 15 extensions. One sentence per client, one direct link, 'Would you take 30 seconds to leave us a Google review?' Done well, 416 becomes 440 before next tax season.",
   },
   {
     number: "05",
@@ -191,7 +210,7 @@ const ACTIONS = [
     title: "Ask three loyal clients if you can share their stories anonymously",
     timeToDo: "one phone call each",
     body:
-      "Not a public testimonial request — just permission to reference their win in an anonymized case study. 'San Diego real estate investor, saved $14,000 via S-Corp election in 2024.' Specific numbers are what AI tools quote; generic praise is not. Three approved stories become the backbone of the case studies hub in the extras below.",
+      "Not a public testimonial request, just permission to reference their win in an anonymized case study. 'San Diego real estate investor, saved $14,000 via S-Corp election in 2024.' Specific numbers are what AI tools quote; generic praise is not. Three approved stories become the backbone of the case studies hub in the extras below.",
   },
 ];
 
@@ -266,7 +285,7 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-8"
         >
-          Hey {CLIENT_NAME_FIRST} —<br />
+          Hey {CLIENT_NAME_FIRST},<br />
           I rebuilt your website.
         </motion.h1>
 
@@ -278,12 +297,22 @@ function Hero() {
         >
           <p>
             I&apos;m Samer Shaker. I run a small web shop called imakemvps. I noticed your
-            site at 1wayhomeservices.com wasn&apos;t doing what it could for your business —
-            so I rebuilt it on speculation.
+            site at{" "}
+            <a
+              href={CURRENT_SITE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-secondary-light)] underline underline-offset-2 hover:text-white transition-colors"
+            >
+              1wayhomeservices.com
+            </a>{" "}
+            wasn&apos;t doing what it could for your business, so I rebuilt it on
+            speculation.
           </p>
           <p>
             What you&apos;re about to see is fully working. Take a few minutes to scroll
-            through. If it&apos;s not for you, no harm done. If it is —
+            through. If it&apos;s not for you, no harm done. If it is, here&apos;s what it
+            looks like.
           </p>
         </motion.div>
 
@@ -318,7 +347,7 @@ function Hero() {
             </ul>
             <p className="text-xs text-gray-400 mt-4 leading-relaxed">
               New pages, redesigns, paid-ad management, and bigger projects are quoted separately.
-              Your site code is yours — on termination I hand over source, accounts, and credentials within 14 days.
+              Your site code is yours, on termination I hand over source, accounts, and credentials within 14 days.
             </p>
           </div>
         </motion.div>
@@ -329,8 +358,8 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.5 }}
           className="text-sm text-gray-400 leading-relaxed max-w-2xl mb-10"
         >
-          If you&apos;re paying more than that elsewhere — managed CPA sites in the region typically
-          run $600 to $900 a month — the difference is yours. There&apos;s a calculator later in the
+          If you&apos;re paying more than that elsewhere, managed CPA sites in the region typically
+          run $600 to $900 a month, the difference is yours. There&apos;s a calculator later in the
           page where you can plug in your actual number and see the math.
         </motion.p>
 
@@ -373,7 +402,7 @@ function Hero() {
 
 function Comparison() {
   return (
-    <section id="whats-different" className="px-6 py-24 md:py-32 bg-black">
+    <section id="whats-different" className="px-6 py-16 md:py-20 bg-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           What&apos;s different
@@ -407,7 +436,7 @@ function Comparison() {
         <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 p-4 md:p-6">
           <BeforeAfterPhones />
           <p className="mt-4 text-xs text-gray-500 text-center max-w-prose mx-auto leading-relaxed">
-            Schematic, not a screenshot — phones drawn to scale to make the contrast
+            Schematic, not a screenshot, phones drawn to scale to make the contrast
             easier to see at a glance. Six specific differences below.
           </p>
         </div>
@@ -484,18 +513,18 @@ function AIWidget() {
   ];
 
   return (
-    <section className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/30 to-black">
+    <section className="px-6 py-16 md:py-20 bg-gradient-to-b from-black via-[#0A2342]/30 to-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           Your business card to AI search
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          What AI search needs — and the foundation we built
+          What AI search needs, and the foundation we built
         </h2>
         <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
           Citations from AI search follow the foundation. The foundation is what&apos;s
           real today: every page of the new site publishes a clean, machine-readable
-          profile of your business — the exact facts AI tools look for when deciding
+          profile of your business, the exact facts AI tools look for when deciding
           whether to cite a local firm. Here&apos;s what that flow looks like.
         </p>
 
@@ -548,7 +577,7 @@ function AIWidget() {
               <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Aggregate rating</p>
               <p className="text-white font-semibold">5.0 / 5</p>
               <p className="text-sm text-gray-400 mt-1">
-                Based on 416 Google reviews — need to confirm with you whether these
+                Based on 416 Google reviews, need to confirm with you whether these
                 live under Bakhan&apos;s real-estate Google Business Profile or the tax
                 firm&apos;s, so the schema attaches to the right entity.
               </p>
@@ -583,7 +612,7 @@ function AIWidget() {
           className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 mb-8"
         >
           <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-2">
-            Verify it yourself — click anything below
+            Verify it yourself, click anything below
           </p>
           <p className="text-white font-medium mb-2 leading-relaxed">
             You don&apos;t have to take my word for any of this.
@@ -591,7 +620,7 @@ function AIWidget() {
           <p className="text-sm text-gray-400 mb-6 leading-relaxed">
             Every link below opens in a new tab and shows you exactly what the tools read
             when they decide whether to cite a business. Try each one on the new site,
-            then try the same link on your current site — the contrast is the proof.
+            then try the same link on your current site, the contrast is the proof.
           </p>
 
           {/* Block A: Google and schema.org live validators */}
@@ -622,18 +651,18 @@ function AIWidget() {
           {/* Block B: AI-facing files, new site vs current site */}
           <div>
             <p className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold mb-3">
-              The four files AI crawlers look for — on your new site vs. on your current site
+              The four files AI crawlers look for, on your new site vs. on your current site
             </p>
 
             <div className="space-y-3">
               {[
                 {
                   file: "llms.txt",
-                  what: "A plain-English business summary written specifically for AI assistants — ChatGPT, Claude, Perplexity. It's the first file they look for.",
+                  what: "A plain-English business summary written specifically for AI assistants, ChatGPT, Claude, Perplexity. It's the first file they look for.",
                 },
                 {
                   file: "llms-full.txt",
-                  what: "Expanded version with pricing, testimonials, FAQs, and the full service catalog — everything an AI might want to quote.",
+                  what: "Expanded version with pricing, testimonials, FAQs, and the full service catalog, everything an AI might want to quote.",
                 },
                 {
                   file: "sitemap.xml",
@@ -641,7 +670,7 @@ function AIWidget() {
                 },
                 {
                   file: "robots.txt",
-                  what: "The list of AI crawlers we explicitly welcome onto your site — ChatGPT, Perplexity, Claude, Google AI, and a dozen more.",
+                  what: "The list of AI crawlers we explicitly welcome onto your site, ChatGPT, Perplexity, Claude, Google AI, and a dozen more.",
                 },
               ].map((row) => (
                 <div
@@ -672,7 +701,7 @@ function AIWidget() {
 
             <p className="mt-4 text-xs text-gray-500 leading-relaxed max-w-prose">
               If you want to see the contrast firsthand, try the same paths on your current
-              site —{" "}
+              site.{" "}
               <a
                 href={`${CURRENT_SITE_URL}/llms.txt`}
                 target="_blank"
@@ -711,7 +740,7 @@ function AIWidget() {
             <div>
               <p className="text-white font-semibold mb-1">Today</p>
               <p className="text-sm text-gray-300 leading-relaxed">
-                The foundation is live and verifiable — Google&apos;s Rich Results Test, the
+                The foundation is live and verifiable, Google&apos;s Rich Results Test, the
                 schema.org validator, and &ldquo;view source&rdquo; all confirm the structured
                 data is there.
               </p>
@@ -720,7 +749,7 @@ function AIWidget() {
               <p className="text-white font-semibold mb-1">Days to weeks</p>
               <p className="text-sm text-gray-300 leading-relaxed">
                 Once Bing IndexNow runs and Perplexity crawls the preview, narrow factual
-                questions start getting answered — things like &ldquo;is 1Way Home Services
+                questions start getting answered, things like &ldquo;is 1Way Home Services
                 licensed in California?&rdquo; or &ldquo;where is 1Way Home Services
                 located?&rdquo;
               </p>
@@ -728,8 +757,8 @@ function AIWidget() {
             <div>
               <p className="text-white font-semibold mb-1">Months, not weeks</p>
               <p className="text-sm text-gray-300 leading-relaxed">
-                Broader queries — things like &ldquo;El Cajon CPA with real estate
-                experience&rdquo; — improve as the site builds reputation on your real
+                Broader queries, things like &ldquo;El Cajon CPA with real estate
+                experience&rdquo;, improve as the site builds reputation on your real
                 domain. AI citation is a black box owned by Google and OpenAI, not me.
                 What I can promise is the foundation they look for; the citations
                 themselves are up to them.
@@ -758,17 +787,17 @@ function SavingsCalculator() {
   const totalNewSpend = OUR_MONTHLY * 12 * years;
 
   return (
-    <section id="savings" className="px-6 py-24 md:py-32 bg-black">
+    <section id="savings" className="px-6 py-16 md:py-20 bg-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           Run the numbers
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Plug in your actual costs — here&apos;s the math
+          Plug in your actual costs, here&apos;s the math
         </h2>
         <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
           I don&apos;t know what you&apos;re paying today, so the calculator lets you set
-          it yourself. Drag both sliders to see the real savings on your timeline — nothing
+          it yourself. Drag both sliders to see the real savings on your timeline, nothing
           assumed, nothing hidden.
         </p>
 
@@ -855,21 +884,21 @@ function SavingsCalculator() {
           {currentMonthly > OUR_MONTHLY && (
             <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
               That&apos;s {dollar(savingsMonthly)} a month you&apos;d be keeping. What you
-              do with it is your business, not mine — I&apos;m not routing this back into
+              do with it is your business, not mine, I&apos;m not routing this back into
               upsells.
             </p>
           )}
           {currentMonthly <= OUR_MONTHLY && currentMonthly > 0 && (
             <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
               Your current price is already competitive. The case for switching isn&apos;t
-              savings — it&apos;s the rebuilt site and the AI-search foundation. Worth a
+              savings, it&apos;s the rebuilt site and the AI-search foundation. Worth a
               look even if the cost is a wash.
             </p>
           )}
           {currentMonthly === 0 && (
             <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
               If you&apos;re running the site yourself for free today, the value
-              proposition isn&apos;t cost — it&apos;s time, capability, and discoverability.
+              proposition isn&apos;t cost, it&apos;s time, capability, and discoverability.
               Three hours of your billable time a month already pays for this.
             </p>
           )}
@@ -885,13 +914,13 @@ function SavingsCalculator() {
 
 function AlreadyBuilt() {
   return (
-    <section id="whats-built" className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/30 to-black">
+    <section id="whats-built" className="px-6 py-16 md:py-20 bg-gradient-to-b from-black via-[#0A2342]/30 to-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           What&apos;s in the box
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Already done — included in the base $300/month
+          Already done, included in the base $300/month
         </h2>
         <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
           This isn&apos;t a mockup. Every item below is live on the preview site you can
@@ -936,31 +965,39 @@ function AlreadyBuilt() {
 }
 
 function Extras() {
-  // Start with the first extra (the blog) open by default — it's the most
-  // valuable upsell, and open-by-default signals "worth reading" not "hidden."
+  // Start with the first extra (the blog) open by default so Sam sees the
+  // strongest upsell fully laid out without having to click.
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section id="extras" className="px-6 py-24 md:py-32 bg-black">
+    <section id="extras" className="px-6 py-16 md:py-20 bg-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           When you&apos;re ready
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Optional extras that compound over time
+          Optional add-ons that compound over time
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
+        <p className="text-gray-300 max-w-2xl mb-4 leading-relaxed">
           The base $300 a month covers a great site that grows with normal updates. The
-          items below are bigger swings — the ones that turn a good foundation into real
-          discoverability. None required. All optional. But one is genuinely overpowered,
-          and it&apos;s the first one below.
+          items below are bigger swings, the kind that turn a good foundation into real
+          discoverability. None required, all optional, and one (the first one) is
+          genuinely overpowered.
+        </p>
+        <p className="text-sm text-gray-400 max-w-2xl mb-10 leading-relaxed italic">
+          These are examples, not a complete list. Ideas surface regularly once we&apos;re
+          working together. If something specific is on your mind, say so.
         </p>
 
         <div className="space-y-3">
           {EXTRAS.map((extra, i) => {
             const isOpen = openIdx === i;
             const isHighlighted = "highlight" in extra && extra.highlight === true;
-            const paragraphs = extra.why.split("\n\n");
+            const hasOptions = "options" in extra && Array.isArray(extra.options);
+            const paragraphs =
+              "why" in extra && typeof extra.why === "string"
+                ? extra.why.split("\n\n")
+                : [];
             return (
               <div
                 key={extra.name}
@@ -979,7 +1016,7 @@ function Extras() {
                   <div className="min-w-0">
                     {isHighlighted && (
                       <p className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--color-secondary-light)] mb-1.5">
-                        Most impactful upgrade
+                        Most impactful add-on
                       </p>
                     )}
                     <p className="text-white font-semibold leading-snug">{extra.name}</p>
@@ -999,11 +1036,36 @@ function Extras() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     transition={{ duration: 0.2 }}
-                    className="px-5 pb-5 -mt-1 text-sm md:text-base text-gray-300 leading-relaxed border-t border-white/5 pt-4 space-y-3 max-w-prose"
+                    className="px-5 pb-5 -mt-1 text-sm md:text-base text-gray-300 leading-relaxed border-t border-white/5 pt-4 space-y-5 max-w-prose"
                   >
-                    {paragraphs.map((p, j) => (
-                      <p key={j}>{p}</p>
-                    ))}
+                    {hasOptions && "intro" in extra && typeof extra.intro === "string" && (
+                      <p>{extra.intro}</p>
+                    )}
+
+                    {hasOptions &&
+                      "options" in extra &&
+                      Array.isArray(extra.options) &&
+                      (extra.options as { label: string; name: string; desc: string }[]).map(
+                        (opt) => (
+                          <div
+                            key={opt.label}
+                            className="rounded-xl border border-white/10 bg-black/30 p-4 md:p-5"
+                          >
+                            <p className="text-[10px] uppercase tracking-[0.14em] font-semibold text-[var(--color-secondary-light)] mb-1">
+                              {opt.label}
+                            </p>
+                            <p className="text-white font-semibold mb-2">{opt.name}</p>
+                            <p className="text-sm text-gray-300 leading-relaxed">{opt.desc}</p>
+                          </div>
+                        ),
+                      )}
+
+                    {hasOptions && "closing" in extra && typeof extra.closing === "string" && (
+                      <p className="text-gray-400">{extra.closing}</p>
+                    )}
+
+                    {!hasOptions &&
+                      paragraphs.map((p, j) => <p key={j}>{p}</p>)}
                   </motion.div>
                 )}
               </div>
@@ -1021,13 +1083,13 @@ function Extras() {
 
 function ActionsList() {
   return (
-    <section id="ask" className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/40 to-black">
+    <section id="ask" className="px-6 py-16 md:py-20 bg-gradient-to-b from-black via-[#0A2342]/40 to-black">
       <div className="max-w-4xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           Things you can do yourself
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Six things you can do this week — no one needed but you
+          Six things you can do this week, no one needed but you
         </h2>
         <p className="text-gray-300 max-w-2xl mb-12 leading-relaxed">
           The new site gives you the foundation. These six things are what stack on top of
@@ -1081,7 +1143,7 @@ function ActionsList() {
 
         <p className="mt-8 text-sm text-gray-400 leading-relaxed max-w-prose">
           None of these require a contract with me to be worth doing. If you want help with
-          any of them — or you&apos;d rather hand the content side over entirely — see the
+          any of them, or you&apos;d rather hand the content side over entirely, see the
           extras section, especially the monthly content option.
         </p>
       </div>
@@ -1095,7 +1157,7 @@ function ActionsList() {
 
 function FinalCTAs() {
   return (
-    <section id="talk" className="px-6 py-24 md:py-32 bg-black">
+    <section id="talk" className="px-6 py-16 md:py-20 bg-black">
       <div className="max-w-4xl mx-auto text-center">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           Two ways to move forward
@@ -1112,8 +1174,8 @@ function FinalCTAs() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto items-stretch">
           <a
             href={buildMailto(
-              "Let's move forward — send me the agreement",
-              `Hi ${PROVIDER.name.split(" ")[0]},\n\nI'd like to move forward. Please send over the letter of agreement so I can review it — plus any specifics on how the handover from my current vendor would work when the time comes.\n\nNo commitment yet — I just want to see the terms in writing.\n\n— ${CLIENT_NAME_FIRST}`
+              "Let's move forward, send me the agreement",
+              `Hi ${PROVIDER.name.split(" ")[0]},\n\nI'd like to move forward. Please send over the letter of agreement so I can review it, plus any specifics on how the handover from my current vendor would work when the time comes.\n\nNo commitment yet, I just want to see the terms in writing.\n\nThanks,\n${CLIENT_NAME_FIRST}`
             )}
             className="group flex flex-col rounded-2xl border-2 border-[var(--color-primary)] bg-[var(--color-primary)]/10 p-8 text-left hover:bg-[var(--color-primary)]/20 transition-colors h-full"
           >
@@ -1123,14 +1185,14 @@ function FinalCTAs() {
             <p className="text-sm text-gray-300 leading-relaxed">
               Opens an email asking for the letter of agreement. You read it, sign it only
               when and if the terms land right. No verbal commitment, no vendor-switching
-              on this click — just paper you can actually review.
+              on this click, just paper you can actually review.
             </p>
           </a>
 
           <a
             href={buildMailto(
               "Let's talk about the proposal",
-              `Hi ${PROVIDER.name.split(" ")[0]},\n\nI looked at the proposal and have some questions. Let's set up a 30-minute call.\n\nGood times for me are:\n- \n- \n- \n\n— ${CLIENT_NAME_FIRST}`
+              `Hi ${PROVIDER.name.split(" ")[0]},\n\nI looked at the proposal and have some questions. Let's set up a 30-minute call.\n\nGood times for me are:\n- \n- \n- \n\nThanks,\n${CLIENT_NAME_FIRST}`
             )}
             className="group flex flex-col rounded-2xl border border-white/15 bg-white/5 p-8 text-left hover:bg-white/10 hover:border-white/30 transition-colors h-full"
           >
@@ -1171,7 +1233,7 @@ function FinalCTAs() {
 }
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Table of Contents — sticky rail (desktop) + floating sheet (mobile)
+// Table of Contents, sticky rail (desktop) + floating sheet (mobile)
 // ───────────────────────────────────────────────────────────────────────────────
 
 const TOC_SECTIONS: { id: string; label: string }[] = [
