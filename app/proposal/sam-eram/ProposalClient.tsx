@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { AIFlowDiagram } from "./AIFlowDiagram";
+import { BeforeAfterPhones } from "./BeforeAfterPhones";
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Constants — keep proposal-only data here so it doesn't leak into site copy
@@ -402,6 +404,14 @@ function Comparison() {
           in two tabs and check any of them yourself.
         </p>
 
+        <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 p-4 md:p-6">
+          <BeforeAfterPhones />
+          <p className="mt-4 text-xs text-gray-500 text-center max-w-prose mx-auto leading-relaxed">
+            Schematic, not a screenshot — phones drawn to scale to make the contrast
+            easier to see at a glance. Six specific differences below.
+          </p>
+        </div>
+
         <div className="space-y-4 md:space-y-5">
           {COMPARISON_STORIES.map((story, i) => (
             <motion.article
@@ -483,11 +493,15 @@ function AIWidget() {
           What AI search needs — and the foundation we built
         </h2>
         <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
-          Citations from ChatGPT, Perplexity, and Google&apos;s AI follow the foundation.
-          The foundation is what&apos;s real today: every page of the new site publishes a
-          clean, machine-readable profile of your business — the exact facts AI tools look
-          for when deciding whether to cite a local firm.
+          Citations from AI search follow the foundation. The foundation is what&apos;s
+          real today: every page of the new site publishes a clean, machine-readable
+          profile of your business — the exact facts AI tools look for when deciding
+          whether to cite a local firm. Here&apos;s what that flow looks like.
         </p>
+
+        <div className="mb-10">
+          <AIFlowDiagram />
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -497,7 +511,7 @@ function AIWidget() {
           className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 mb-8"
         >
           <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-4">
-            Here&apos;s what AI sees on every page of your new site
+            Every field the diagram shows, published as structured data
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
