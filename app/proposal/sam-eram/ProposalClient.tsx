@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Constants — keep proposal-only data here so it doesn't leak into site copy
@@ -22,30 +21,6 @@ const PROVIDER = {
 
 const PREVIEW_URL = "https://1wayhomeservices.vercel.app";
 const CURRENT_SITE_URL = "https://1wayhomeservices.com";
-
-const FINGERPRINT_QUERIES = [
-  {
-    label: "Real estate license lookup",
-    query:
-      "Look at https://1wayhomeservices.vercel.app and tell me Bakhan Kareem's California real estate license number and the brokerage that holds it.",
-    expected:
-      "AI tools read the page and return: Bakhan Kareem holds California DRE License #02223420.",
-  },
-  {
-    label: "Office address and hours",
-    query:
-      "Look at https://1wayhomeservices.vercel.app and tell me the full office address and business hours for 1Way Home Services in El Cajon.",
-    expected:
-      "AI tools return: 250 E Chase Ave, Suite 107, El Cajon, CA 92020, Monday–Friday 9:00 AM – 6:00 PM by appointment.",
-  },
-  {
-    label: "Specific service details",
-    query:
-      "Look at https://1wayhomeservices.vercel.app and explain what 1Way Home Services does for real estate investors, with specific examples.",
-    expected:
-      "AI tools quote our real-estate tax page: capital gains planning, 1031 exchanges, depreciation strategies, and property-sale tax planning, with the testimonial about a $85,000 deferred capital gain.",
-  },
-];
 
 const COMPARISON_ROWS = [
   { label: "Page load time", current: "4–5 seconds", us: "Under 2 seconds", win: "us" },
@@ -158,14 +133,6 @@ function buildMailto(subject: string, body: string) {
   return `mailto:${PROVIDER.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function buildPerplexity(q: string) {
-  return `https://www.perplexity.ai/?q=${encodeURIComponent(q)}`;
-}
-
-function buildChatGPT(q: string) {
-  return `https://chatgpt.com/?q=${encodeURIComponent(q)}`;
-}
-
 // ───────────────────────────────────────────────────────────────────────────────
 // Animated counter (used in hero)
 // ───────────────────────────────────────────────────────────────────────────────
@@ -194,7 +161,10 @@ function AnimatedNumber({ value, prefix = "", suffix = "" }: { value: number; pr
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center px-6 py-20 overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex flex-col justify-center px-6 pt-20 pb-28 md:pb-24 overflow-hidden"
+    >
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0A2342] via-[#0A2342] to-black" aria-hidden="true" />
       <div
@@ -256,7 +226,7 @@ function Hero() {
             <AnimatedNumber value={SAVINGS_MONTHLY} prefix="$" />
             <span className="text-gray-400 text-2xl md:text-3xl font-semibold ml-3">/ month</span>
           </p>
-          <p className="text-sm text-gray-300">
+          <p className="text-sm text-gray-300 max-w-prose">
             <span className="font-semibold text-white">{dollar(SAVINGS_MONTHLY * 12)}</span> a year.{" "}
             <span className="font-semibold text-white">{dollar(SAVINGS_MONTHLY * 36)}</span> over three.
             And you get a better site the entire time.
@@ -267,7 +237,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.55 }}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-16"
         >
           <a
             href="#whats-different"
@@ -287,7 +257,7 @@ function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="absolute bottom-8 left-6 right-6 max-w-5xl mx-auto text-xs text-gray-400"
+          className="text-xs text-gray-400"
         >
           From {PROVIDER.name} · {PROVIDER.company} · {PROVIDER.email} · {PROVIDER.phone}
         </motion.div>
@@ -310,7 +280,7 @@ function Comparison() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Your current site vs. the new one
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-12">
+        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
           Nine concrete differences. Click through to{" "}
           <a
             href={PREVIEW_URL}
@@ -349,11 +319,11 @@ function Comparison() {
             >
               <div className="md:col-span-5 font-medium text-white mb-2 md:mb-0">{row.label}</div>
               <div className="md:col-span-3 text-gray-400 mb-1 md:mb-0">
-                <span className="md:hidden text-xs uppercase tracking-wider text-gray-500 mr-2">Now:</span>
+                <span className="md:hidden inline-block text-[10px] uppercase tracking-wider text-gray-400 font-semibold mr-2">Now</span>
                 {row.current}
               </div>
               <div className="md:col-span-4 text-[var(--color-secondary-light)]">
-                <span className="md:hidden text-xs uppercase tracking-wider text-gray-500 mr-2">New:</span>
+                <span className="md:hidden inline-block text-[10px] uppercase tracking-wider text-[var(--color-secondary-light)]/80 font-semibold mr-2">New</span>
                 {row.us}
               </div>
             </motion.div>
@@ -384,89 +354,187 @@ function Comparison() {
 }
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Section: Live AI-citation widget
+// Section: Your business card to AI search
 // ───────────────────────────────────────────────────────────────────────────────
 
 function AIWidget() {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const active = FINGERPRINT_QUERIES[activeIdx];
+  const richResultsUrl =
+    "https://search.google.com/test/rich-results?url=https%3A%2F%2F1wayhomeservices.vercel.app%2Fen%2F";
+  const schemaValidatorUrl =
+    "https://validator.schema.org/#url=https%3A%2F%2F1wayhomeservices.vercel.app%2Fen%2F";
+
+  const services = [
+    "Tax planning",
+    "Tax filing",
+    "Payroll",
+    "Bookkeeping",
+    "IRS support",
+    "Real estate tax guidance",
+    "Mortgage consulting",
+  ];
 
   return (
     <section className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/30 to-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
-          See it work right now
+          Your business card to AI search
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          AI search can quote your business — today
+          What AI search needs — and the foundation we built
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10">
-          Pick any question below, then click to ask Perplexity or ChatGPT. They&apos;ll
-          read the new site live and quote the specific facts back to you. Most local
-          tax firms can&apos;t do this — your current site can&apos;t. Yours now can.
+        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
+          Citations from ChatGPT, Perplexity, and Google&apos;s AI follow the foundation.
+          The foundation is what&apos;s real today: every page of the new site publishes a
+          clean, machine-readable profile of your business — the exact facts AI tools look
+          for when deciding whether to cite a local firm.
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-6">
-          {FINGERPRINT_QUERIES.map((q, i) => (
-            <button
-              key={q.label}
-              type="button"
-              onClick={() => setActiveIdx(i)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                i === activeIdx
-                  ? "bg-[var(--color-primary)] text-white"
-                  : "bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10"
-              }`}
-            >
-              {q.label}
-            </button>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.4 }}
+          className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 mb-8"
+        >
+          <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-4">
+            Here&apos;s what AI sees on every page of your new site
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Business name</p>
+              <p className="text-white font-semibold">1Way Home Services</p>
+              <p className="text-sm text-gray-400 mt-1">
+                1 Way Home Real Estate and Mortgage Services Inc.
+              </p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Phone</p>
+              <p className="text-white font-semibold">(619) 716-9193</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Address</p>
+              <p className="text-white font-semibold">250 E Chase Ave, Suite 107</p>
+              <p className="text-sm text-gray-400">El Cajon, CA 92020</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Email</p>
+              <p className="text-white font-semibold">sam@1wayhomeservices.com</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Hours</p>
+              <p className="text-white font-semibold">Mon – Fri, 9:00 AM – 6:00 PM</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">California DRE license</p>
+              <p className="text-white font-semibold">#02223420</p>
+              <p className="text-sm text-gray-400 mt-1">Bakhan Kareem</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Aggregate rating</p>
+              <p className="text-white font-semibold">5.0 / 5</p>
+              <p className="text-sm text-gray-400 mt-1">Based on 416 Google reviews</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Services published</p>
+              <p className="text-white font-semibold">7 services</p>
+              <p className="text-sm text-gray-400 mt-1">All tagged in structured data</p>
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 pt-5">
+            <p className="text-xs uppercase tracking-wider text-gray-500 mb-3">Service lineup</p>
+            <div className="flex flex-wrap gap-2">
+              {services.map((s) => (
+                <span
+                  key={s}
+                  className="px-3 py-1 rounded-full border border-white/10 bg-black/30 text-xs text-gray-200"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         <motion.div
-          key={activeIdx}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 mb-8"
         >
-          <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">The question</p>
-          <p className="text-white font-medium mb-6 leading-relaxed">&ldquo;{active.query}&rdquo;</p>
+          <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-2">
+            Verify it yourself in 30 seconds
+          </p>
+          <p className="text-white font-medium mb-2 leading-relaxed">
+            These are Google&apos;s and schema.org&apos;s own public tools.
+          </p>
+          <p className="text-sm text-gray-400 mb-6 leading-relaxed">
+            They fetch the live preview URL right now and show you exactly the structured
+            data the new site publishes — the same data ChatGPT, Perplexity, and Google&apos;s
+            AI read to decide whether to cite a business.
+          </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row gap-3">
             <a
-              href={buildPerplexity(active.query)}
+              href={richResultsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[var(--color-primary)] text-white font-semibold hover:bg-[var(--color-primary)]/90 transition-colors"
             >
-              Ask Perplexity ↗
+              Open Google Rich Results Test ↗
             </a>
             <a
-              href={buildChatGPT(active.query)}
+              href={schemaValidatorUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg border border-white/15 text-white font-semibold hover:bg-white/5 transition-colors"
             >
-              Ask ChatGPT ↗
+              Open schema.org Validator ↗
             </a>
-          </div>
-
-          <div className="rounded-xl border border-[var(--color-secondary-light)]/20 bg-[var(--color-secondary-light)]/5 p-5">
-            <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-2">
-              What you should see
-            </p>
-            <p className="text-sm text-gray-200 leading-relaxed">{active.expected}</p>
           </div>
         </motion.div>
 
-        <p className="mt-8 text-sm text-gray-400 max-w-2xl">
-          <strong className="text-gray-300">Honest note on timing:</strong> these specific
-          questions work today because we built your site to publish exactly the facts AI
-          needs. Broader questions like &ldquo;best tax preparer San Diego&rdquo; take 1–3 months
-          of search-tool reputation building once your real domain points at the new site.
-          The foundation is what matters — and that&apos;s already built.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+          className="rounded-2xl border border-[var(--color-secondary-light)]/20 bg-[var(--color-secondary-light)]/5 p-6 md:p-8"
+        >
+          <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-4">
+            An honest timeline
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div>
+              <p className="text-white font-semibold mb-1">Today</p>
+              <p className="text-sm text-gray-300 leading-relaxed">
+                The foundation is live and verifiable — Google&apos;s Rich Results Test, the
+                schema.org validator, and &ldquo;view source&rdquo; all confirm the structured
+                data is there.
+              </p>
+            </div>
+            <div>
+              <p className="text-white font-semibold mb-1">Days to weeks</p>
+              <p className="text-sm text-gray-300 leading-relaxed">
+                Once Bing IndexNow runs and Perplexity crawls the preview, the new site starts
+                answering specific, narrow questions — license numbers, office hours, service
+                lists.
+              </p>
+            </div>
+            <div>
+              <p className="text-white font-semibold mb-1">1 – 3 months</p>
+              <p className="text-sm text-gray-300 leading-relaxed">
+                Once your real domain <span className="text-white">1wayhomeservices.com</span>{" "}
+                points at this build, broader queries like &ldquo;best tax preparer San
+                Diego&rdquo; start naming you as ChatGPT and Google&apos;s AI grow trust in
+                the site.
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -482,8 +550,23 @@ function SavingsCalculator() {
   const totalCurrentSpend = CURRENT_VENDOR_MONTHLY * 12 * years;
   const totalNewSpend = OUR_MONTHLY * 12 * years;
 
+  const horizonLine = useMemo(() => {
+    switch (years) {
+      case 1:
+        return "cover a full quarterly tax software subscription";
+      case 2:
+        return "fund a real client appreciation event each year";
+      case 3:
+        return "pay for the cornerstone Tax Deadlines page and the glossary upsell, and still pocket the rest";
+      case 4:
+        return "run a proper email marketing program with room to spare";
+      default:
+        return "treat the team to a real annual retreat, every year";
+    }
+  }, [years]);
+
   return (
-    <section className="px-6 py-24 md:py-32 bg-black">
+    <section id="savings" className="px-6 py-24 md:py-32 bg-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           Run the numbers
@@ -491,7 +574,7 @@ function SavingsCalculator() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           What this saves you, however long you stay
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10">
+        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
           Drag the slider. No commitment — month-to-month, you can leave any time. This is
           just so you can see the math at a few different time horizons.
         </p>
@@ -541,17 +624,9 @@ function SavingsCalculator() {
             </div>
           </div>
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
             That&apos;s {dollar(SAVINGS_MONTHLY)} a month back into the business —
-            enough to{" "}
-            {years <= 1
-              ? "cover a full quarterly tax software subscription"
-              : years <= 2
-              ? "fund a real client appreciation event each year"
-              : years <= 3
-              ? "buy yourself the cornerstone Tax Deadlines page and the glossary, both upsells, and still pocket the difference"
-              : "treat the team to a real annual retreat, every year"}
-            .
+            enough to {horizonLine}.
           </p>
         </div>
       </div>
@@ -565,7 +640,7 @@ function SavingsCalculator() {
 
 function AlreadyBuilt() {
   return (
-    <section className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/30 to-black">
+    <section id="whats-built" className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/30 to-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           What&apos;s in the box
@@ -573,7 +648,7 @@ function AlreadyBuilt() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Already done — included in the base $300/month
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10">
+        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
           This isn&apos;t a mockup. Every item below is live on the preview site you can
           click through right now.
         </p>
@@ -607,7 +682,7 @@ function Extras() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section className="px-6 py-24 md:py-32 bg-black">
+    <section id="extras" className="px-6 py-24 md:py-32 bg-black">
       <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           When you&apos;re ready
@@ -615,7 +690,7 @@ function Extras() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Optional extras — no pressure, ever
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10">
+        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
           These are projects you could add over time. The base $300/month covers a great
           site that grows with normal updates. The items below are bigger swings — only
           worth doing when there&apos;s a real reason. Tap any to expand.
@@ -716,7 +791,7 @@ function AskForm() {
   }, [values]);
 
   return (
-    <section className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/40 to-black">
+    <section id="ask" className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/40 to-black">
       <div className="max-w-3xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           To finish polishing the site
@@ -724,7 +799,7 @@ function AskForm() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Six small things — answer any you can
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-2">
+        <p className="text-gray-300 max-w-2xl mb-3 leading-relaxed">
           None of these are blockers. The site is fully built and live. These would just
           sharpen the last details and let me give credit to the right credentials and
           links. Your answers save automatically in your browser as you go.
@@ -733,9 +808,9 @@ function AskForm() {
           {hydrated ? `${filledCount} of ${ASKS.length} answered` : "Loading…"}
         </p>
 
-        <div className="space-y-5">
+        <div className="space-y-4 md:space-y-5">
           {ASKS.map((ask) => (
-            <div key={ask.id} className="rounded-xl border border-white/10 bg-white/5 p-5">
+            <div key={ask.id} className="rounded-xl border border-white/10 bg-white/5 p-4 md:p-5">
               <label htmlFor={ask.id} className="block text-white font-semibold mb-1">
                 {ask.label}
                 {ask.optional && (
@@ -804,22 +879,22 @@ function FinalCTAs() {
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           Two ways to move forward
         </p>
-        <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-6">
+        <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Pick the one that feels right
         </h2>
-        <p className="text-gray-300 max-w-2xl mx-auto mb-12">
+        <p className="text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
           Whichever you pick, you&apos;re not signing anything. The first opens an email
           to me saying you&apos;re interested; the second opens an email to set up a
           30-minute call. No payment, no contract, no commitment until we&apos;ve talked.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto items-stretch">
           <a
             href={buildMailto(
               "Yes — let's switch to the new site",
               `Hi ${PROVIDER.name.split(" ")[0]},\n\nI looked at the proposal and I'm in. Let's set up the next steps to switch from my current vendor.\n\n— ${CLIENT_NAME_FIRST}`
             )}
-            className="group rounded-2xl border-2 border-[var(--color-primary)] bg-[var(--color-primary)]/10 p-8 text-left hover:bg-[var(--color-primary)]/20 transition-colors"
+            className="group flex flex-col rounded-2xl border-2 border-[var(--color-primary)] bg-[var(--color-primary)]/10 p-8 text-left hover:bg-[var(--color-primary)]/20 transition-colors h-full"
           >
             <p className="font-display text-2xl font-bold text-white mb-3">
               Yes, let&apos;s do this →
@@ -836,7 +911,7 @@ function FinalCTAs() {
               "Let's talk about the proposal",
               `Hi ${PROVIDER.name.split(" ")[0]},\n\nI looked at the proposal and have some questions. Let's set up a 30-minute call.\n\nGood times for me are:\n- \n- \n- \n\n— ${CLIENT_NAME_FIRST}`
             )}
-            className="group rounded-2xl border border-white/15 bg-white/5 p-8 text-left hover:bg-white/10 hover:border-white/30 transition-colors"
+            className="group flex flex-col rounded-2xl border border-white/15 bg-white/5 p-8 text-left hover:bg-white/10 hover:border-white/30 transition-colors h-full"
           >
             <p className="font-display text-2xl font-bold text-white mb-3">
               Let&apos;s talk first →
@@ -875,15 +950,207 @@ function FinalCTAs() {
 }
 
 // ───────────────────────────────────────────────────────────────────────────────
+// Table of Contents — sticky rail (desktop) + floating sheet (mobile)
+// ───────────────────────────────────────────────────────────────────────────────
+
+const TOC_SECTIONS: { id: string; label: string }[] = [
+  { id: "hero", label: "Intro" },
+  { id: "whats-different", label: "What's different" },
+  { id: "ai-search", label: "AI search demo" },
+  { id: "savings", label: "Run the numbers" },
+  { id: "whats-built", label: "What's in the box" },
+  { id: "extras", label: "Optional extras" },
+  { id: "ask", label: "Six small things" },
+  { id: "talk", label: "Let's talk" },
+];
+
+function TableOfContents() {
+  const [activeId, setActiveId] = useState<string>(TOC_SECTIONS[0].id);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    // Track which section is most visible in the viewport. Multiple sections
+    // may be partially visible, so pick the entry with the highest intersection
+    // ratio that is currently intersecting.
+    const elements = TOC_SECTIONS
+      .map((s) => document.getElementById(s.id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0) return;
+
+    const visibility = new Map<string, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visibility.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        }
+        let bestId: string | null = null;
+        let bestRatio = 0;
+        visibility.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        });
+        if (bestId) setActiveId(bestId);
+      },
+      {
+        // A band across the middle of the viewport; whichever section has the
+        // most of its area in this band wins.
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleJump = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setMobileOpen(false);
+  }, []);
+
+  return (
+    <>
+      {/* Desktop: fixed vertical rail on the right */}
+      <nav
+        aria-label="Proposal sections"
+        className="hidden md:flex flex-col gap-1 fixed right-6 top-1/2 -translate-y-1/2 z-40 pointer-events-auto"
+      >
+        {TOC_SECTIONS.map((s) => {
+          const isActive = s.id === activeId;
+          return (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                handleJump(s.id);
+              }}
+              aria-current={isActive ? "location" : undefined}
+              className={`group relative flex items-center justify-end gap-3 rounded-md pl-3 pr-2 py-1.5 text-[11px] uppercase tracking-[0.14em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary-light)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                isActive ? "text-white" : "text-gray-500 hover:text-gray-200"
+              }`}
+            >
+              <span
+                className={`transition-opacity ${
+                  isActive ? "opacity-100 font-semibold" : "opacity-70 group-hover:opacity-100"
+                }`}
+              >
+                {s.label}
+              </span>
+              <span
+                aria-hidden="true"
+                className={`block h-px transition-all ${
+                  isActive
+                    ? "w-6 bg-[var(--color-secondary-light)]"
+                    : "w-3 bg-gray-600 group-hover:w-5 group-hover:bg-gray-400"
+                }`}
+              />
+            </a>
+          );
+        })}
+      </nav>
+
+      {/* Mobile: floating button + bottom sheet */}
+      <div className="md:hidden">
+        <button
+          type="button"
+          aria-label="Open proposal sections menu"
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen(true)}
+          className="fixed bottom-5 right-5 z-40 h-12 w-12 rounded-full bg-[var(--color-primary)] text-white shadow-lg shadow-black/40 flex items-center justify-center border border-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary-light)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+        >
+          <span aria-hidden="true" className="flex flex-col gap-[3px]">
+            <span className="block h-[2px] w-4 bg-white rounded-full" />
+            <span className="block h-[2px] w-4 bg-white rounded-full" />
+            <span className="block h-[2px] w-4 bg-white rounded-full" />
+          </span>
+        </button>
+
+        {mobileOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-end"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Proposal sections"
+          >
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMobileOpen(false)}
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            />
+            <div className="relative w-full rounded-t-2xl bg-[#0A2342] border-t border-white/10 p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)]">
+                  Jump to
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Close"
+                  className="text-gray-400 hover:text-white text-sm px-2 py-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary-light)]"
+                >
+                  Close
+                </button>
+              </div>
+              <ul className="space-y-1">
+                {TOC_SECTIONS.map((s) => {
+                  const isActive = s.id === activeId;
+                  return (
+                    <li key={s.id}>
+                      <a
+                        href={`#${s.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleJump(s.id);
+                        }}
+                        aria-current={isActive ? "location" : undefined}
+                        className={`flex items-center justify-between gap-3 rounded-lg px-3 py-3 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary-light)] ${
+                          isActive
+                            ? "bg-white/10 text-white font-semibold"
+                            : "text-gray-300 hover:bg-white/5"
+                        }`}
+                      >
+                        <span>{s.label}</span>
+                        {isActive && (
+                          <span
+                            aria-hidden="true"
+                            className="h-1.5 w-1.5 rounded-full bg-[var(--color-secondary-light)]"
+                          />
+                        )}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+
+// ───────────────────────────────────────────────────────────────────────────────
 // Top-level proposal client
 // ───────────────────────────────────────────────────────────────────────────────
 
 export function ProposalClient() {
   return (
     <main className="min-h-screen bg-black text-white">
+      <TableOfContents />
       <Hero />
       <Comparison />
-      <AIWidget />
+      <div id="ai-search">
+        <AIWidget />
+      </div>
       <SavingsCalculator />
       <AlreadyBuilt />
       <Extras />
