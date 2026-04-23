@@ -22,16 +22,37 @@ const PROVIDER = {
 const PREVIEW_URL = "https://1wayhomeservices.vercel.app";
 const CURRENT_SITE_URL = "https://1wayhomeservices.com";
 
-const COMPARISON_ROWS = [
-  { label: "Page load time", current: "4–5 seconds", us: "Under 2 seconds", win: "us" },
-  { label: "Pages designed for mobile first", current: "No (desktop shrunk down)", us: "Yes", win: "us" },
-  { label: "Machine-readable business data (JSON-LD)", current: "Minimal", us: "Comprehensive", win: "us" },
-  { label: "Real estate license number on every page", current: "Not visible", us: "Footer of every page", win: "us" },
-  { label: "Full street address with suite", current: "City only", us: "250 E Chase Ave Suite 107", win: "us" },
-  { label: "Equal Housing Opportunity disclosure", current: "Not present", us: "Footer compliance strip", win: "us" },
-  { label: "Working contact form with SMS opt-in", current: "Form only", us: "Form + A2P 10DLC opt-in", win: "us" },
-  { label: "Privacy + Terms cross-linked", current: "Not linked", us: "Linked + California privacy section", win: "us" },
-  { label: "Built to be cited by AI search", current: "No", us: "Yes — entity graph, sameAs, hasCredential", win: "us" },
+const COMPARISON_STORIES = [
+  {
+    number: "01",
+    title: "Four seconds is the difference between a phone call and a back-button.",
+    body: "People decide whether to stay on a page in about two seconds. Your current site takes four to become visible on a phone — most visitors are already gone. The new site is visible in under two. Your first impression is your first sentence, not a loading spinner.",
+  },
+  {
+    number: "02",
+    title: "“El Cajon, CA” doesn’t help anyone find you.",
+    body: "That’s what your current contact page says. Technically true, practically useless. Google Maps can’t pin you, a new client doesn’t know which cross-street to look for, and ChatGPT has nothing specific to cite. The new site publishes 250 E Chase Ave, Suite 107, El Cajon CA 92020 on every page — in a format both humans and AI tools can actually use.",
+  },
+  {
+    number: "03",
+    title: "Bakhan is a licensed California broker. The internet doesn’t know it.",
+    body: "California real estate license #02223420 is public record. It’s not on your current site anywhere. The new site displays it in the footer of every page, next to a direct link to the state’s official verification database. This is how licensed professionals signal regulated and accountable without having to say the words.",
+  },
+  {
+    number: "04",
+    title: "416 five-star reviews should be working harder than they are.",
+    body: "They’re real. They’re earned. But on your current site they aren’t structured the way AI search needs them — so when someone asks ChatGPT or Google’s AI “who’s a trusted tax preparer in El Cajon?”, your reputation isn’t doing the work it could. The new site publishes the rating properly — structured, dated, linked to Google. Your reviews start selling for you even while you’re asleep.",
+  },
+  {
+    number: "05",
+    title: "The small things regulators and careful clients notice.",
+    body: "Fair Housing language. California privacy rights. Text-message consent wording that matches what your own privacy policy already commits you to. None of them make or break your business on their own. All three together signal a firm that takes the details seriously — the kind of firm regulators don’t need to call. Your current site is missing all three. The new one has all three.",
+  },
+  {
+    number: "06",
+    title: "Built for the screen your customers actually use.",
+    body: "Seven out of ten people who visit your site are on a phone. Your current site was designed for a desktop and shrunk down to fit — which is why buttons feel tight, forms are awkward, and people bounce. The new site was designed for phones first, then widened to desktop. Your customers meet you on the screen they’re already holding.",
+  },
 ];
 
 const ALREADY_BUILT = [
@@ -273,24 +294,25 @@ function Hero() {
 function Comparison() {
   return (
     <section id="whats-different" className="px-6 py-24 md:py-32 bg-black">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
           What&apos;s different
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Your current site vs. the new one
+          Six specific things your customers will notice
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
-          Nine concrete differences. Click through to{" "}
+        <p className="text-gray-300 max-w-2xl mb-12 leading-relaxed">
+          Vague comparisons are how bad agencies sell you things you don&apos;t need.
+          Every item below is specific and verifiable. Open{" "}
           <a
             href={PREVIEW_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[var(--color-secondary-light)] hover:text-white underline underline-offset-2"
           >
-            the live preview
+            the new site
           </a>{" "}
-          to see them yourself, or compare against{" "}
+          and{" "}
           <a
             href={CURRENT_SITE_URL}
             target="_blank"
@@ -298,35 +320,35 @@ function Comparison() {
             className="text-gray-400 hover:text-white underline underline-offset-2"
           >
             your current site
-          </a>
-          .
+          </a>{" "}
+          in two tabs and check any of them yourself.
         </p>
 
-        <div className="rounded-2xl border border-white/10 overflow-hidden">
-          <div className="hidden md:grid grid-cols-12 px-6 py-4 bg-white/5 text-xs uppercase tracking-wider text-gray-400">
-            <div className="col-span-5">Detail</div>
-            <div className="col-span-3">Your current site</div>
-            <div className="col-span-4">The new site</div>
-          </div>
-          {COMPARISON_ROWS.map((row, i) => (
-            <motion.div
-              key={row.label}
+        <div className="space-y-4 md:space-y-5">
+          {COMPARISON_STORIES.map((story, i) => (
+            <motion.article
+              key={story.number}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: i * 0.04 }}
-              className="grid grid-cols-1 md:grid-cols-12 px-6 py-4 border-t border-white/5 text-sm"
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: i * 0.05 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8"
             >
-              <div className="md:col-span-5 font-medium text-white mb-2 md:mb-0">{row.label}</div>
-              <div className="md:col-span-3 text-gray-400 mb-1 md:mb-0">
-                <span className="md:hidden inline-block text-[10px] uppercase tracking-wider text-gray-400 font-semibold mr-2">Now</span>
-                {row.current}
+              <div className="flex items-baseline gap-4 md:gap-5 mb-3">
+                <span
+                  aria-hidden="true"
+                  className="font-display text-sm font-semibold tracking-wider text-[var(--color-secondary-light)]/80"
+                >
+                  {story.number}
+                </span>
+                <h3 className="font-display text-xl md:text-2xl font-bold text-white leading-snug tracking-tight">
+                  {story.title}
+                </h3>
               </div>
-              <div className="md:col-span-4 text-[var(--color-secondary-light)]">
-                <span className="md:hidden inline-block text-[10px] uppercase tracking-wider text-[var(--color-secondary-light)]/80 font-semibold mr-2">New</span>
-                {row.us}
-              </div>
-            </motion.div>
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed md:pl-10 max-w-prose">
+                {story.body}
+              </p>
+            </motion.article>
           ))}
         </div>
 
