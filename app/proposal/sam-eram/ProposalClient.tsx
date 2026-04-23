@@ -410,7 +410,7 @@ function Comparison() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Six specific things your customers will notice
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-12 leading-relaxed">
+        <p className="text-gray-300 max-w-4xl mb-12 leading-relaxed">
           Vague comparisons are how bad agencies sell you things you don&apos;t need.
           Every item below is specific and verifiable. Open{" "}
           <a
@@ -521,7 +521,7 @@ function AIWidget() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           What AI search needs, and the foundation we built
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
+        <p className="text-gray-300 max-w-4xl mb-10 leading-relaxed">
           Citations from AI search follow the foundation. The foundation is what&apos;s
           real today: every page of the new site publishes a clean, machine-readable
           profile of your business, the exact facts AI tools look for when deciding
@@ -795,7 +795,7 @@ function SavingsCalculator() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Plug in your actual costs, here&apos;s the math
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
+        <p className="text-gray-300 max-w-4xl mb-10 leading-relaxed">
           I don&apos;t know what you&apos;re paying today, so the calculator lets you set
           it yourself. Drag both sliders to see the real savings on your timeline, nothing
           assumed, nothing hidden.
@@ -922,7 +922,7 @@ function AlreadyBuilt() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Already done, included in the base $300/month
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
+        <p className="text-gray-300 max-w-4xl mb-10 leading-relaxed">
           This isn&apos;t a mockup. Every item below is live on the preview site you can
           click through right now.
         </p>
@@ -978,13 +978,13 @@ function Extras() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Optional add-ons that compound over time
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-4 leading-relaxed">
+        <p className="text-gray-300 max-w-4xl mb-4 leading-relaxed">
           The base $300 a month covers a great site that grows with normal updates. The
           items below are bigger swings, the kind that turn a good foundation into real
           discoverability. None required, all optional, and one (the first one) is
           genuinely overpowered.
         </p>
-        <p className="text-sm text-gray-400 max-w-2xl mb-10 leading-relaxed italic">
+        <p className="text-sm text-gray-400 max-w-4xl mb-10 leading-relaxed italic">
           These are examples, not a complete list. Ideas surface regularly once we&apos;re
           working together. If something specific is on your mind, say so.
         </p>
@@ -1091,7 +1091,7 @@ function ActionsList() {
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
           Six things you can do this week, no one needed but you
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-12 leading-relaxed">
+        <p className="text-gray-300 max-w-4xl mb-12 leading-relaxed">
           The new site gives you the foundation. These six things are what stack on top of
           it to turn it into real discoverability. Every one of them is free, takes minutes
           to an afternoon, and compounds for months. Do them whether or not you ever work
