@@ -29,7 +29,7 @@ import {
   CONTACT_INFO,
 } from "@/lib/constants";
 import { ContactFormSection } from '@/components/ui/ContactForm';
-import { TrustBadges, GoogleReviewsBadge, CompactTrustIndicator } from '@/components/ui/TrustBadges';
+import { GoogleReviewsBadge, CompactTrustIndicator } from '@/components/ui/TrustBadges';
 import { FAQStructuredData } from '@/components/StructuredData';
 
 /* ═══ Animations ═══ */
@@ -115,15 +115,73 @@ function HeroSection() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/images/hero-banner.png"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          fetchPriority="high"
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        {/* Deep navy base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A2342] via-[#071934] to-black" />
+
+        {/* Aurora mesh: layered radial glows in royal blue and light blue */}
+        <div
+          className="absolute inset-0 opacity-70"
+          style={{
+            backgroundImage: `
+              radial-gradient(ellipse 80% 60% at 20% 25%, rgba(37, 87, 168, 0.45) 0%, transparent 60%),
+              radial-gradient(ellipse 70% 50% at 85% 70%, rgba(107, 159, 232, 0.22) 0%, transparent 55%),
+              radial-gradient(ellipse 60% 40% at 50% 100%, rgba(37, 87, 168, 0.3) 0%, transparent 65%)
+            `,
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/80 to-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+
+        {/* Subtle SVG grid overlay for texture and depth */}
+        <svg
+          className="absolute inset-0 w-full h-full opacity-[0.06]"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern id="hero-grid" width="72" height="72" patternUnits="userSpaceOnUse">
+              <path d="M 72 0 L 0 0 0 72" fill="none" stroke="#6B9FE8" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hero-grid)" />
+        </svg>
+
+        {/* Floating blurred orbs — slow, subtle motion; respects reduced-motion */}
+        <motion.div
+          className="absolute top-[15%] -left-32 w-[30rem] h-[30rem] rounded-full bg-[var(--color-primary)] opacity-25 blur-[120px] pointer-events-none"
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { x: [0, 40, 0], y: [0, -20, 0] }
+          }
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-[10%] -right-32 w-[32rem] h-[32rem] rounded-full bg-[var(--color-secondary-light)] opacity-[0.12] blur-[140px] pointer-events-none"
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { x: [0, -30, 0], y: [0, 25, 0] }
+          }
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+
+        {/* Final vignette to focus attention on center content */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 0%, transparent 40%, rgba(0,0,0,0.4) 100%)",
+          }}
+        />
       </div>
       <div className="relative z-10 min-h-[100vh] flex items-center justify-center bg-noise">
         <div ref={containerRef} className="max-w-4xl mx-auto px-6 text-center">
@@ -133,7 +191,7 @@ function HeroSection() {
         >
           {/* Logo with scale-in animation */}
           <motion.img
-            src="/images/logo-white.png"
+            src="/images/logo.png"
             alt="1Way Home Services"
             className="h-24 w-auto mx-auto mb-8"
             width={288}
@@ -275,20 +333,6 @@ function StatsBand() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ═══ TRUST BADGES SECTION ═══ */
-function TrustBadgesSection() {
-  return (
-    <section className="py-12 px-6 border-y border-white/5">
-      <div className="max-w-6xl mx-auto">
-        <TrustBadges variant="horizontal" size="md" />
-        <div className="mt-6 flex justify-center">
-          <GoogleReviewsBadge />
-        </div>
       </div>
     </section>
   );
@@ -723,7 +767,6 @@ export default function HomePage() {
     <>
       <HeroSection />
       <StatsBand />
-      <TrustBadgesSection />
       <ServicesSection />
       <AboutSection />
       <ProcessSection />

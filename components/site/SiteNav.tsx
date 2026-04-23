@@ -79,7 +79,7 @@ export function SiteNav() {
           <Link href="/en/" className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/logo-color.png"
+              src="/images/logo.png"
               alt="1Way Home Services home"
               className="h-10 w-auto"
               width={120}

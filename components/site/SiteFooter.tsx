@@ -41,7 +41,7 @@ export function SiteFooter() {
           <div className="md:col-span-5 space-y-5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/logo-color.png"
+              src="/images/logo.png"
               alt="1Way Home Services"
               className="h-10 w-auto"
               width={120}

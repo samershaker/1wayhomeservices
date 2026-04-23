@@ -127,7 +127,7 @@ export function StructuredData({ type = 'all' }: StructuredDataProps = {}) {
       name: CONTACT_INFO.businessName,
       legalName: CONTACT_INFO.legalEntityName,
       url: siteUrl,
-      logo: `${siteUrl}/images/logo-color.png`,
+      logo: `${siteUrl}/images/logo.png`,
       description: 'Tax preparation and real estate services in San Diego County',
       telephone: CONTACT_INFO.phoneTel,
       email: CONTACT_INFO.email,

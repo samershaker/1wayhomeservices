@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     description: "Tax Preparation, Real Estate Tax, and Mortgage Consulting serving El Cajon and San Diego.",
     images: [
       {
-        url: '/images/logo-color.png',
+        url: '/images/logo.png',
         width: 800,
         height: 300,
         alt: '1Way Home Services',
