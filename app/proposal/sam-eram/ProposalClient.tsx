@@ -45,8 +45,8 @@ const COMPARISON_STORIES = [
   },
   {
     number: "05",
-    title: "The small things regulators and careful clients notice.",
-    body: "Fair Housing language. California privacy rights. Text-message consent wording that matches what your own privacy policy already commits you to. None of them make or break your business on their own. All three together signal a firm that takes the details seriously — the kind of firm regulators don’t need to call. Your current site is missing all three. The new one has all three.",
+    title: "The compliance details regulators and careful clients notice.",
+    body: "Your firm sits on two regulated rails at once — real estate and tax preparation — and each has its own expected disclosures. On the real-estate side, the new site shows the Equal Housing Opportunity mark and Fair Housing language in the footer of every page. On the tax side, the California Consumer Privacy Act section is in place, the A2P 10DLC consent copy on the contact form matches what your privacy policy already commits you to (note: final SMS compliance also requires brand and campaign registration at your SMS vendor — worth flagging so we can coordinate). None of these break the business individually. All of them together signal a firm that takes the details seriously.",
   },
   {
     number: "06",
@@ -55,16 +55,45 @@ const COMPARISON_STORIES = [
   },
 ];
 
+// All anchors point at the live preview site (not back into the proposal page,
+// which doesn't have these IDs). Sam clicks, goes to the actual artifact.
 const ALREADY_BUILT = [
-  { name: "Verified business address, email, and licensing in every page's structured data", anchor: "#about" },
-  { name: "Bakhan's real estate license number visible everywhere", anchor: "#about" },
-  { name: "Real Privacy Policy and Terms — your published versions, faithfully republished", anchor: "/en/privacy/" },
-  { name: "Equal Housing Opportunity footer compliance strip", anchor: "#contact" },
-  { name: "8 plain-English FAQ entries with location anchoring", anchor: "#faq" },
-  { name: "Contact form with the exact SMS consent language your privacy policy requires", anchor: "#contact" },
-  { name: "California privacy rights section (CCPA / CPRA)", anchor: "/en/privacy/" },
-  { name: "Mobile-first responsive design", anchor: "" },
-  { name: "Live site preview you can click through right now", anchor: "" },
+  {
+    name: "Verified business address, email, and licensing in every page's structured data",
+    href: "https://1wayhomeservices.vercel.app/en/",
+  },
+  {
+    name: "Bakhan's California DRE real estate license number visible in every footer",
+    href: "https://1wayhomeservices.vercel.app/en/",
+  },
+  {
+    name: "Real Privacy Policy and Terms — faithful reproductions of your published versions",
+    href: "https://1wayhomeservices.vercel.app/en/privacy/",
+  },
+  {
+    name: "Equal Housing Opportunity mark and Fair Housing language in the footer",
+    href: "https://1wayhomeservices.vercel.app/en/",
+  },
+  {
+    name: "8 plain-English FAQ entries with local anchoring, marked up for AI citation",
+    href: "https://1wayhomeservices.vercel.app/en/#faq",
+  },
+  {
+    name: "Contact form with the exact A2P 10DLC SMS consent language your policy requires",
+    href: "https://1wayhomeservices.vercel.app/en/#contact",
+  },
+  {
+    name: "California privacy rights section (CCPA / CPRA) on the Privacy page",
+    href: "https://1wayhomeservices.vercel.app/en/privacy/",
+  },
+  {
+    name: "Mobile-first responsive design — built for phones, adapted up",
+    href: "https://1wayhomeservices.vercel.app/en/",
+  },
+  {
+    name: "Live site preview you can click through right now",
+    href: "https://1wayhomeservices.vercel.app/en/",
+  },
 ];
 
 const EXTRAS = [
@@ -91,7 +120,7 @@ const EXTRAS = [
     name: "Case studies hub with specific dollar outcomes",
     price: "~$600 one-time",
     why:
-      "Four to six anonymized client wins: 'San Diego real estate investor, saved $14,200 via S-Corp election in 2024.' 'Retired El Cajon homeowner, reduced 2023 tax bill by $6,800 via itemized strategy.' Concrete numbers are what AI tools quote; generic praise they ignore. This becomes the most trust-building page on the site — for humans and for AI.",
+      "Four to six anonymized client wins: 'San Diego real estate investor, saved $14,200 via S-Corp election in 2024.' 'Retired El Cajon homeowner, reduced 2023 tax bill by $6,800 via itemized strategy.' Concrete numbers are what AI tools quote; generic praise they ignore. Every case study is drafted to your spec and reviewed by you before publishing — important for IRS Circular 230 §10.30 advertising compliance, since preparers can't publish outcome claims loosely.",
   },
   {
     name: "Lead magnet pack (three downloadable PDFs)",
@@ -143,10 +172,10 @@ const ACTIONS = [
   },
   {
     number: "04",
-    title: "Start a post-filing review habit",
-    timeToDo: "5 minutes per client, ongoing",
+    title: "Build reviews around the tax calendar, not every month",
+    timeToDo: "batched around your deadlines",
     body:
-      "Right after you send a completed return, email the client one sentence: 'Would you take 30 seconds to leave us a Google review?' Include the direct link. Aim for 2 to 3 new reviews per month. 416 turns into 440, 440 turns into 480, and the 5.0 rating stays fresh — which is its own ranking signal.",
+      "Tax clients don't review like consumer businesses — they review once a year, and most of them do it within six weeks of getting their return back. Plan the push around that reality: biggest wave the week after each 1040 client's return is delivered (usually March through April), smaller waves after March 15 S-corp filings and October 15 extensions. One sentence per client, one direct link — 'Would you take 30 seconds to leave us a Google review?' Done well, 416 becomes 440 before next tax season.",
   },
   {
     number: "05",
@@ -263,18 +292,45 @@ function Hero() {
           className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 mb-10 max-w-2xl"
         >
           <p className="text-xs uppercase tracking-[0.14em] text-[var(--color-secondary-light)] mb-3">
-            You save every month
+            The offer
           </p>
           <p className="font-display text-5xl md:text-7xl font-extrabold text-white leading-none mb-3">
-            <AnimatedNumber value={SAVINGS_MONTHLY} prefix="$" />
+            <AnimatedNumber value={OUR_MONTHLY} prefix="$" />
             <span className="text-gray-400 text-2xl md:text-3xl font-semibold ml-3">/ month</span>
           </p>
-          <p className="text-sm text-gray-300 max-w-prose">
-            <span className="font-semibold text-white">{dollar(SAVINGS_MONTHLY * 12)}</span> a year.{" "}
-            <span className="font-semibold text-white">{dollar(SAVINGS_MONTHLY * 36)}</span> over three.
-            And you get a better site the entire time.
+          <p className="text-sm text-gray-300 mb-5 max-w-prose">
+            Month-to-month. No contract, no setup fee, cancel any time with 30 days notice.
           </p>
+
+          <div className="border-t border-white/10 pt-5">
+            <p className="text-[10px] uppercase tracking-[0.14em] text-gray-500 font-semibold mb-3">
+              What {dollar(OUR_MONTHLY)} covers every month
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-gray-300">
+              <li className="flex gap-2"><span className="text-[var(--color-secondary-light)]">·</span>Hosting on Vercel&apos;s edge</li>
+              <li className="flex gap-2"><span className="text-[var(--color-secondary-light)]">·</span>Uptime monitoring</li>
+              <li className="flex gap-2"><span className="text-[var(--color-secondary-light)]">·</span>Security patches + updates</li>
+              <li className="flex gap-2"><span className="text-[var(--color-secondary-light)]">·</span>Small content edits as needed</li>
+              <li className="flex gap-2"><span className="text-[var(--color-secondary-light)]">·</span>Bug fixes at no extra charge</li>
+              <li className="flex gap-2"><span className="text-[var(--color-secondary-light)]">·</span>Email support, one-day reply</li>
+            </ul>
+            <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+              New pages, redesigns, paid-ad management, and bigger projects are quoted separately.
+              Your site code is yours — on termination I hand over source, accounts, and credentials within 14 days.
+            </p>
+          </div>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          className="text-sm text-gray-400 leading-relaxed max-w-2xl mb-10"
+        >
+          If you&apos;re paying more than that elsewhere — managed CPA sites in the region typically
+          run $600 to $900 a month — the difference is yours. There&apos;s a calculator later in the
+          page where you can plug in your actual number and see the math.
+        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -477,7 +533,11 @@ function AIWidget() {
             <div>
               <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Aggregate rating</p>
               <p className="text-white font-semibold">5.0 / 5</p>
-              <p className="text-sm text-gray-400 mt-1">Based on 416 Google reviews</p>
+              <p className="text-sm text-gray-400 mt-1">
+                Based on 416 Google reviews — need to confirm with you whether these
+                live under Bakhan&apos;s real-estate Google Business Profile or the tax
+                firm&apos;s, so the schema attaches to the right entity.
+              </p>
             </div>
             <div>
               <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Services published</p>
@@ -574,38 +634,50 @@ function AIWidget() {
                   key={row.file}
                   className="rounded-xl border border-white/10 bg-black/30 p-4 md:p-5"
                 >
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 mb-2">
                     <code className="font-mono text-sm font-semibold text-[var(--color-secondary-light)]">
                       /{row.file}
                     </code>
+                    <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-semibold text-gray-500">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-600" aria-hidden="true" />
+                      typically missing on competitor sites
+                    </span>
                   </div>
                   <p className="text-sm text-gray-300 leading-relaxed mb-3">{row.what}</p>
-                  <div className="flex flex-wrap gap-2">
-                    <a
-                      href={`${PREVIEW_URL}/${row.file}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--color-primary)]/15 border border-[var(--color-primary)]/40 text-[var(--color-secondary-light)] hover:bg-[var(--color-primary)]/25 text-xs font-semibold transition-colors"
-                    >
-                      View on new site ↗
-                    </a>
-                    <a
-                      href={`${CURRENT_SITE_URL}/${row.file}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-white/15 text-gray-400 hover:text-white hover:border-white/30 text-xs font-semibold transition-colors"
-                    >
-                      View on current site ↗
-                    </a>
-                  </div>
+                  <a
+                    href={`${PREVIEW_URL}/${row.file}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--color-primary)]/15 border border-[var(--color-primary)]/40 text-[var(--color-secondary-light)] hover:bg-[var(--color-primary)]/25 text-xs font-semibold transition-colors"
+                  >
+                    View it live on your new site ↗
+                  </a>
                 </div>
               ))}
             </div>
 
             <p className="mt-4 text-xs text-gray-500 leading-relaxed max-w-prose">
-              Heads up: most of the files above likely don&apos;t exist on your current
-              site, so those tabs may just show &ldquo;Not Found.&rdquo; That&apos;s the
-              contrast in one click.
+              If you want to see the contrast firsthand, try the same paths on your current
+              site —{" "}
+              <a
+                href={`${CURRENT_SITE_URL}/llms.txt`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-white"
+              >
+                1wayhomeservices.com/llms.txt
+              </a>{" "}
+              and{" "}
+              <a
+                href={`${CURRENT_SITE_URL}/sitemap.xml`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-white"
+              >
+                /sitemap.xml
+              </a>{" "}
+              are the quickest checks. Most competitor sites 404 on these, which is exactly
+              why they don&apos;t get cited by AI.
             </p>
           </div>
         </motion.div>
@@ -633,18 +705,20 @@ function AIWidget() {
             <div>
               <p className="text-white font-semibold mb-1">Days to weeks</p>
               <p className="text-sm text-gray-300 leading-relaxed">
-                Once Bing IndexNow runs and Perplexity crawls the preview, the new site starts
-                answering specific, narrow questions — license numbers, office hours, service
-                lists.
+                Once Bing IndexNow runs and Perplexity crawls the preview, narrow factual
+                questions start getting answered — things like &ldquo;is 1Way Home Services
+                licensed in California?&rdquo; or &ldquo;where is 1Way Home Services
+                located?&rdquo;
               </p>
             </div>
             <div>
-              <p className="text-white font-semibold mb-1">1 – 3 months</p>
+              <p className="text-white font-semibold mb-1">Months, not weeks</p>
               <p className="text-sm text-gray-300 leading-relaxed">
-                Once your real domain <span className="text-white">1wayhomeservices.com</span>{" "}
-                points at this build, broader queries like &ldquo;best tax preparer San
-                Diego&rdquo; start naming you as ChatGPT and Google&apos;s AI grow trust in
-                the site.
+                Broader queries — things like &ldquo;El Cajon CPA with real estate
+                experience&rdquo; — improve as the site builds reputation on your real
+                domain. AI citation is a black box owned by Google and OpenAI, not me.
+                What I can promise is the foundation they look for; the citations
+                themselves are up to them.
               </p>
             </div>
           </div>
@@ -660,24 +734,14 @@ function AIWidget() {
 
 function SavingsCalculator() {
   const [years, setYears] = useState(3);
-  const totalSaved = useMemo(() => SAVINGS_MONTHLY * 12 * years, [years]);
-  const totalCurrentSpend = CURRENT_VENDOR_MONTHLY * 12 * years;
-  const totalNewSpend = OUR_MONTHLY * 12 * years;
+  // Default to the mid-range of typical managed CPA sites. Sam can adjust to
+  // his actual bill; we never claim we know what he pays.
+  const [currentMonthly, setCurrentMonthly] = useState(700);
 
-  const horizonLine = useMemo(() => {
-    switch (years) {
-      case 1:
-        return "cover a full quarterly tax software subscription";
-      case 2:
-        return "fund a real client appreciation event each year";
-      case 3:
-        return "pay for the cornerstone Tax Deadlines page and the glossary upsell, and still pocket the rest";
-      case 4:
-        return "run a proper email marketing program with room to spare";
-      default:
-        return "treat the team to a real annual retreat, every year";
-    }
-  }, [years]);
+  const savingsMonthly = Math.max(0, currentMonthly - OUR_MONTHLY);
+  const totalSaved = useMemo(() => savingsMonthly * 12 * years, [savingsMonthly, years]);
+  const totalCurrentSpend = currentMonthly * 12 * years;
+  const totalNewSpend = OUR_MONTHLY * 12 * years;
 
   return (
     <section id="savings" className="px-6 py-24 md:py-32 bg-black">
@@ -686,18 +750,48 @@ function SavingsCalculator() {
           Run the numbers
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          What this saves you, however long you stay
+          Plug in your actual costs — here&apos;s the math
         </h2>
         <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
-          Drag the slider. No commitment — month-to-month, you can leave any time. This is
-          just so you can see the math at a few different time horizons.
+          I don&apos;t know what you&apos;re paying today, so the calculator lets you set
+          it yourself. Drag both sliders to see the real savings on your timeline — nothing
+          assumed, nothing hidden.
         </p>
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-10">
+          {/* Slider 1: current monthly cost */}
+          <div className="mb-8">
+            <div className="flex items-end justify-between mb-3">
+              <label htmlFor="currentMonthly" className="text-sm font-medium text-gray-300">
+                What you pay your current vendor per month
+              </label>
+              <span className="font-display text-2xl font-bold text-white">
+                {dollar(currentMonthly)}
+              </span>
+            </div>
+            <input
+              id="currentMonthly"
+              type="range"
+              min={0}
+              max={1500}
+              step={50}
+              value={currentMonthly}
+              onChange={(e) => setCurrentMonthly(Number(e.target.value))}
+              className="w-full accent-[var(--color-primary)] cursor-pointer"
+            />
+            <div className="flex justify-between mt-2 text-xs text-gray-500">
+              <span>$0</span>
+              <span>$500</span>
+              <span>$1,000</span>
+              <span>$1,500</span>
+            </div>
+          </div>
+
+          {/* Slider 2: time horizon */}
           <div className="mb-8">
             <div className="flex items-end justify-between mb-3">
               <label htmlFor="years" className="text-sm font-medium text-gray-300">
-                If you stay with us for
+                If you stayed with us for
               </label>
               <span className="font-display text-2xl font-bold text-white">
                 {years} {years === 1 ? "year" : "years"}
@@ -720,7 +814,7 @@ function SavingsCalculator() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div className="rounded-xl border border-white/10 bg-black/40 p-5">
               <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">Current vendor</p>
               <p className="font-display text-3xl font-bold text-gray-300">{dollar(totalCurrentSpend)}</p>
@@ -732,16 +826,39 @@ function SavingsCalculator() {
               <p className="text-xs text-gray-500 mt-1">over {years} {years === 1 ? "year" : "years"}</p>
             </div>
             <div className="rounded-xl border border-[var(--color-secondary-light)]/30 bg-[var(--color-secondary-light)]/10 p-5">
-              <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-2">You save</p>
+              <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-2">
+                {currentMonthly > OUR_MONTHLY ? "You save" : "Difference"}
+              </p>
               <p className="font-display text-3xl font-bold text-white">{dollar(totalSaved)}</p>
-              <p className="text-xs text-gray-300 mt-1">{dollar(SAVINGS_MONTHLY)} every month</p>
+              <p className="text-xs text-gray-300 mt-1">
+                {savingsMonthly > 0
+                  ? `${dollar(savingsMonthly)} every month`
+                  : "You're already paying less than $300"}
+              </p>
             </div>
           </div>
 
-          <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
-            That&apos;s {dollar(SAVINGS_MONTHLY)} a month back into the business —
-            enough to {horizonLine}.
-          </p>
+          {currentMonthly > OUR_MONTHLY && (
+            <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
+              That&apos;s {dollar(savingsMonthly)} a month you&apos;d be keeping. What you
+              do with it is your business, not mine — I&apos;m not routing this back into
+              upsells.
+            </p>
+          )}
+          {currentMonthly <= OUR_MONTHLY && currentMonthly > 0 && (
+            <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
+              Your current price is already competitive. The case for switching isn&apos;t
+              savings — it&apos;s the rebuilt site and the AI-search foundation. Worth a
+              look even if the cost is a wash.
+            </p>
+          )}
+          {currentMonthly === 0 && (
+            <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
+              If you&apos;re running the site yourself for free today, the value
+              proposition isn&apos;t cost — it&apos;s time, capability, and discoverability.
+              Three hours of your billable time a month already pays for this.
+            </p>
+          )}
         </div>
       </div>
     </section>
@@ -775,15 +892,27 @@ function AlreadyBuilt() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.3, delay: i * 0.04 }}
-              className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-4"
             >
-              <span
-                aria-hidden="true"
-                className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white text-xs font-bold mt-0.5"
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 hover:border-white/20 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary-light)]"
               >
-                ✓
-              </span>
-              <span className="text-gray-200 leading-relaxed">{item.name}</span>
+                <span
+                  aria-hidden="true"
+                  className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white text-xs font-bold mt-0.5"
+                >
+                  ✓
+                </span>
+                <span className="text-gray-200 leading-relaxed flex-1">{item.name}</span>
+                <span
+                  aria-hidden="true"
+                  className="text-xs text-gray-500 group-hover:text-[var(--color-secondary-light)] transition-colors flex-shrink-0 mt-1"
+                >
+                  See live ↗
+                </span>
+              </a>
             </motion.li>
           ))}
         </ul>
@@ -969,18 +1098,18 @@ function FinalCTAs() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto items-stretch">
           <a
             href={buildMailto(
-              "Yes — let's switch to the new site",
-              `Hi ${PROVIDER.name.split(" ")[0]},\n\nI looked at the proposal and I'm in. Let's set up the next steps to switch from my current vendor.\n\n— ${CLIENT_NAME_FIRST}`
+              "Let's move forward — send me the agreement",
+              `Hi ${PROVIDER.name.split(" ")[0]},\n\nI'd like to move forward. Please send over the letter of agreement so I can review it — plus any specifics on how the handover from my current vendor would work when the time comes.\n\nNo commitment yet — I just want to see the terms in writing.\n\n— ${CLIENT_NAME_FIRST}`
             )}
             className="group flex flex-col rounded-2xl border-2 border-[var(--color-primary)] bg-[var(--color-primary)]/10 p-8 text-left hover:bg-[var(--color-primary)]/20 transition-colors h-full"
           >
             <p className="font-display text-2xl font-bold text-white mb-3">
-              Yes, let&apos;s do this →
+              Send me the agreement to review →
             </p>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Opens an email to me saying you&apos;re ready to switch. I&apos;ll reply
-              within a business day with the simple letter of agreement and the handover
-              plan from your current vendor.
+              Opens an email asking for the letter of agreement. You read it, sign it only
+              when and if the terms land right. No verbal commitment, no vendor-switching
+              on this click — just paper you can actually review.
             </p>
           </a>
 
