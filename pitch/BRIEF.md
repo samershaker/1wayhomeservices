@@ -79,4 +79,4 @@ The full list is in `INFO_NEEDED.md` in plain English with a short explanation o
 
 A 30-minute call where I walk you through the new site live, show the AI-search foundation working in real time, and answer any questions about the switchover. Once you're comfortable, the handover from your current vendor to us takes about a week.
 
-**Reach me:** sam@imakemvps.com
+**Reach me:** Samer Shaker · sam@imakemvps.com · 619-792-3366

@@ -97,7 +97,8 @@ These came up while I was reviewing your existing privacy policy and terms. Neit
 
 ## How to send
 
-Reply to this email, text me at `<your phone>`, or jot answers into a doc and share it back. Whatever's easiest.
+Reply to this email, text me at **619-792-3366**, or jot answers into a doc and share it back. Whatever's easiest.
 
-— Samer
+— Samer Shaker
 sam@imakemvps.com
+619-792-3366
