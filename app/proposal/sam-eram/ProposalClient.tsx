@@ -69,78 +69,100 @@ const ALREADY_BUILT = [
 
 const EXTRAS = [
   {
-    name: "San Diego Tax Deadlines 2026 cornerstone page",
-    price: "~$600 one-time",
-    why: "The single most likely page on your site to get cited by ChatGPT and Google's AI for the next 12 months — dated, specific, locally anchored.",
+    name: "Monthly blog — yours to write, or mine to produce",
+    price: "Free to do yourself  ·  $250/month fully managed",
+    highlight: true,
+    why:
+      "Blog posts are the single most-cited content format in AI search — more than case studies, FAQs, and testimonials combined. Every post is a new question your site can answer, a new phrase you can rank for, and a new surface ChatGPT can quote. One research-backed post a month, compounded over twelve months, turns your firm into the default answer for tax questions across San Diego County.\n\nTwo ways to run it. Option A is free: I set you up with publishing tools and a year of pre-researched topic ideas, and you write them yourself in about an hour a month. Option B is $250 a month and entirely hands-off — I research, draft, SEO-optimize, and publish one post per month with your name on the byline. You spend zero minutes on it.\n\nSample topics already on the shelf: 'San Diego property tax deadlines 2026,' 'The S-Corp election that saved my client $14,000,' '1031 exchange mistakes real-estate investors made in 2025,' 'How to appeal your San Diego County property tax assessment.' Each is targeted to win a specific AI-search query the day it goes live.",
   },
   {
-    name: "Tax & real estate glossary",
+    name: "\"San Diego Tax Deadlines 2026\" cornerstone page",
+    price: "~$600 one-time",
+    why:
+      "One page with every federal, California, and San Diego County tax deadline in 2026 — who it applies to, what's owed, when it's due. Dated, specific, locally anchored. This is the single most likely page on your site to show up in ChatGPT, Google's AI Overviews, and Perplexity for the next twelve months. AI tools prefer finite, date-stamped resources they can cite confidently. Shipped in two weeks.",
+  },
+  {
+    name: "Tax and real estate glossary",
     price: "~$500 one-time",
-    why: "60+ terms each defined in two clear sentences. Definition-style content is what AI tools quote most.",
+    why:
+      "Sixty-plus terms — 1031 exchange, depreciation recapture, S-Corp election, capital gains, AMT — each defined in two clear sentences. Definition-style content is the format AI tools quote most of all. One page, one afternoon to build, months of citations once AI tools learn that 1wayhomeservices.com is the place to send people who need a clear definition.",
   },
   {
-    name: "Case studies hub",
+    name: "Case studies hub with specific dollar outcomes",
     price: "~$600 one-time",
-    why: "4–6 anonymized client wins with specific dollar outcomes — builds trust with prospects, gives AI tools concrete numbers to cite.",
+    why:
+      "Four to six anonymized client wins: 'San Diego real estate investor, saved $14,200 via S-Corp election in 2024.' 'Retired El Cajon homeowner, reduced 2023 tax bill by $6,800 via itemized strategy.' Concrete numbers are what AI tools quote; generic praise they ignore. This becomes the most trust-building page on the site — for humans and for AI.",
   },
   {
-    name: "Lead magnet pack (3 downloadable PDFs)",
+    name: "Lead magnet pack (three downloadable PDFs)",
     price: "~$400 one-time",
-    why: "Tax Deduction Checklist, Real Estate Investor's Guide, Small Business Tax Calendar — wired into the contact form to build your email list.",
+    why:
+      "Tax Deduction Checklist. Real Estate Investor's Tax Guide. Small Business Tax Calendar. Three downloads, each wired into the contact form so visitors trade an email for the PDF. You quietly build an email list of interested leads, each of whom becomes a future client — and the audience for the monthly blog above.",
   },
   {
-    name: "Booking calendar",
-    price: "~$300 one-time + ~$15/mo",
-    why: "Replace 'schedule a free consultation' with a real calendar. Removes one phone-tag step from your sales process.",
+    name: "Booking calendar replacing \"schedule a consultation\"",
+    price: "~$300 one-time + about $15/month for the calendar tool",
+    why:
+      "Prospects pick a slot themselves and it lands on your calendar automatically. One less phone-tag step, one less reason someone puts it off. Small change, measurable bump in consultation rate — especially with leads who find you after hours.",
   },
   {
     name: "Spanish version of the site",
     price: "~$2,400 one-time",
-    why: "Opens up a meaningful slice of San Diego County. Properly tagged so it shows up in Spanish-language AI search.",
+    why:
+      "Full translation, separate URL paths, properly tagged so Spanish-language AI search finds you. San Diego County is over thirty percent Spanish-speaking, and almost none of your category competitors publish a real Spanish site. Land-grab opportunity with a fast payback.",
   },
 ];
 
-const ASKS = [
+// Six concrete actions Sam can take on his own to strengthen his online
+// presence — no inputs collected, pure value. Each one compounds with the
+// foundation the new site provides.
+const ACTIONS = [
   {
-    id: "preparerId",
-    label: "Your federal tax preparer ID number",
-    hint: "The number the IRS issues to anyone who prepares tax returns for pay.",
-    optional: false,
+    number: "01",
+    title: "Claim and optimize your Google Business Profile",
+    timeToDo: "10 minutes",
+    body:
+      "If you haven't already done this, do it today. It's free, and it's the single biggest local-search signal you can send. Ensures your address, hours, phone, and the 416 reviews show up correctly next to your name on Google Maps and in local results.",
+    cta: { label: "Start at google.com/business ↗", href: "https://www.google.com/business/" },
   },
   {
-    id: "stateRegistration",
-    label: "Your California state tax preparer registration",
-    hint: "If you're not a CPA, attorney, or enrolled agent, the state requires registration. Skip if not applicable.",
-    optional: true,
+    number: "02",
+    title: "Create LinkedIn profiles for you and Bakhan",
+    timeToDo: "15 minutes each",
+    body:
+      "Basic profiles are fine — name, photo, current role, one-line bio. The moment your LinkedIn URLs are linked from the new site, ChatGPT and other AI tools treat you as verified, identifiable people rather than anonymous strings. This is the strongest single trust signal you can add.",
+    cta: { label: "Create a profile at linkedin.com ↗", href: "https://www.linkedin.com/signup" },
   },
   {
-    id: "linkedin",
-    label: "Your LinkedIn profile URL",
-    hint: "Single biggest signal to ChatGPT that you're a real, identifiable person. If you don't have one, set up a basic profile.",
-    optional: true,
+    number: "03",
+    title: "List your firm on four free directories",
+    timeToDo: "about a Saturday afternoon",
+    body:
+      "Yelp (business tax preparation + real estate services), Avvo (tax, and Bakhan for real estate), Nextdoor (business page), and the El Cajon Chamber of Commerce. These third-party mentions account for roughly 80 percent of the citations AI tools hand out — Reddit and Wikipedia included. Every listing is one more place your name can be found.",
+    cta: { label: "Find the El Cajon Chamber listing form ↗", href: "https://www.elcajonchamber.org" },
   },
   {
-    id: "brokerage",
-    label: "Brokerage Bakhan's real estate license is held under",
-    hint: "California real estate licenses are always held under a brokerage. Helps complete the public record.",
-    optional: false,
+    number: "04",
+    title: "Start a post-filing review habit",
+    timeToDo: "5 minutes per client, ongoing",
+    body:
+      "Right after you send a completed return, email the client one sentence: 'Would you take 30 seconds to leave us a Google review?' Include the direct link. Aim for 2 to 3 new reviews per month. 416 turns into 440, 440 turns into 480, and the 5.0 rating stays fresh — which is its own ranking signal.",
   },
   {
-    id: "efile",
-    label: "Is your IRS e-file authorization current?",
-    hint: 'Answer "yes", "no", or "not sure" — if yes, we add a trust badge to the site.',
-    optional: false,
+    number: "05",
+    title: "Google yourself today, screenshot the result",
+    timeToDo: "3 minutes",
+    body:
+      "Open an incognito tab. Search 'tax preparer El Cajon' and 'Bakhan Kareem real estate San Diego.' Save the screenshots. Do it again one month after launch, and again after three. You'll see yourself climb in both regular search and Google's AI Overviews as the new site's foundation takes hold.",
   },
   {
-    id: "background",
-    label: "Two or three sentences about your background",
-    hint: "How long you've been doing tax work, what you specialize in, anything that sets you apart. Plain English, your own words.",
-    optional: false,
-    multiline: true,
+    number: "06",
+    title: "Ask three loyal clients if you can share their stories anonymously",
+    timeToDo: "one phone call each",
+    body:
+      "Not a public testimonial request — just permission to reference their win in an anonymized case study. 'San Diego real estate investor, saved $14,000 via S-Corp election in 2024.' Specific numbers are what AI tools quote; generic praise is not. Three approved stories become the backbone of the case studies hub in the extras below.",
   },
 ];
-
-const STORAGE_KEY = "1way-proposal-asks-sameram";
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Small helpers
@@ -487,34 +509,104 @@ function AIWidget() {
           className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 mb-8"
         >
           <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-2">
-            Verify it yourself in 30 seconds
+            Verify it yourself — click anything below
           </p>
           <p className="text-white font-medium mb-2 leading-relaxed">
-            These are Google&apos;s and schema.org&apos;s own public tools.
+            You don&apos;t have to take my word for any of this.
           </p>
           <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-            They fetch the live preview URL right now and show you exactly the structured
-            data the new site publishes — the same data ChatGPT, Perplexity, and Google&apos;s
-            AI read to decide whether to cite a business.
+            Every link below opens in a new tab and shows you exactly what the tools read
+            when they decide whether to cite a business. Try each one on the new site,
+            then try the same link on your current site — the contrast is the proof.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href={richResultsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[var(--color-primary)] text-white font-semibold hover:bg-[var(--color-primary)]/90 transition-colors"
-            >
-              Open Google Rich Results Test ↗
-            </a>
-            <a
-              href={schemaValidatorUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg border border-white/15 text-white font-semibold hover:bg-white/5 transition-colors"
-            >
-              Open schema.org Validator ↗
-            </a>
+          {/* Block A: Google and schema.org live validators */}
+          <div className="mb-8">
+            <p className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold mb-3">
+              Google and schema.org live validators (they fetch the URL while you watch)
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href={richResultsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[var(--color-primary)] text-white font-semibold hover:bg-[var(--color-primary)]/90 transition-colors"
+              >
+                Run Google&apos;s Rich Results Test ↗
+              </a>
+              <a
+                href={schemaValidatorUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg border border-white/15 text-white font-semibold hover:bg-white/5 transition-colors"
+              >
+                Run schema.org Validator ↗
+              </a>
+            </div>
+          </div>
+
+          {/* Block B: AI-facing files, new site vs current site */}
+          <div>
+            <p className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold mb-3">
+              The four files AI crawlers look for — on your new site vs. on your current site
+            </p>
+
+            <div className="space-y-3">
+              {[
+                {
+                  file: "llms.txt",
+                  what: "A plain-English business summary written specifically for AI assistants — ChatGPT, Claude, Perplexity. It's the first file they look for.",
+                },
+                {
+                  file: "llms-full.txt",
+                  what: "Expanded version with pricing, testimonials, FAQs, and the full service catalog — everything an AI might want to quote.",
+                },
+                {
+                  file: "sitemap.xml",
+                  what: "The map every search engine uses to find every page on your site.",
+                },
+                {
+                  file: "robots.txt",
+                  what: "The list of AI crawlers we explicitly welcome onto your site — ChatGPT, Perplexity, Claude, Google AI, and a dozen more.",
+                },
+              ].map((row) => (
+                <div
+                  key={row.file}
+                  className="rounded-xl border border-white/10 bg-black/30 p-4 md:p-5"
+                >
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
+                    <code className="font-mono text-sm font-semibold text-[var(--color-secondary-light)]">
+                      /{row.file}
+                    </code>
+                  </div>
+                  <p className="text-sm text-gray-300 leading-relaxed mb-3">{row.what}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <a
+                      href={`${PREVIEW_URL}/${row.file}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--color-primary)]/15 border border-[var(--color-primary)]/40 text-[var(--color-secondary-light)] hover:bg-[var(--color-primary)]/25 text-xs font-semibold transition-colors"
+                    >
+                      View on new site ↗
+                    </a>
+                    <a
+                      href={`${CURRENT_SITE_URL}/${row.file}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-white/15 text-gray-400 hover:text-white hover:border-white/30 text-xs font-semibold transition-colors"
+                    >
+                      View on current site ↗
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-4 text-xs text-gray-500 leading-relaxed max-w-prose">
+              Heads up: most of the files above likely don&apos;t exist on your current
+              site, so those tabs may just show &ldquo;Not Found.&rdquo; That&apos;s the
+              contrast in one click.
+            </p>
           </div>
         </motion.div>
 
@@ -701,7 +793,9 @@ function AlreadyBuilt() {
 }
 
 function Extras() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  // Start with the first extra (the blog) open by default — it's the most
+  // valuable upsell, and open-by-default signals "worth reading" not "hidden."
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
     <section id="extras" className="px-6 py-24 md:py-32 bg-black">
@@ -710,19 +804,29 @@ function Extras() {
           When you&apos;re ready
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Optional extras — no pressure, ever
+          Optional extras that compound over time
         </h2>
         <p className="text-gray-300 max-w-2xl mb-10 leading-relaxed">
-          These are projects you could add over time. The base $300/month covers a great
-          site that grows with normal updates. The items below are bigger swings — only
-          worth doing when there&apos;s a real reason. Tap any to expand.
+          The base $300 a month covers a great site that grows with normal updates. The
+          items below are bigger swings — the ones that turn a good foundation into real
+          discoverability. None required. All optional. But one is genuinely overpowered,
+          and it&apos;s the first one below.
         </p>
 
         <div className="space-y-3">
           {EXTRAS.map((extra, i) => {
             const isOpen = openIdx === i;
+            const isHighlighted = "highlight" in extra && extra.highlight === true;
+            const paragraphs = extra.why.split("\n\n");
             return (
-              <div key={extra.name} className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+              <div
+                key={extra.name}
+                className={`rounded-xl overflow-hidden transition-colors ${
+                  isHighlighted
+                    ? "border-2 border-[var(--color-primary)]/60 bg-[var(--color-primary)]/10"
+                    : "border border-white/10 bg-white/5"
+                }`}
+              >
                 <button
                   type="button"
                   onClick={() => setOpenIdx(isOpen ? null : i)}
@@ -730,7 +834,12 @@ function Extras() {
                   aria-expanded={isOpen}
                 >
                   <div className="min-w-0">
-                    <p className="text-white font-semibold">{extra.name}</p>
+                    {isHighlighted && (
+                      <p className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--color-secondary-light)] mb-1.5">
+                        Most impactful upgrade
+                      </p>
+                    )}
+                    <p className="text-white font-semibold leading-snug">{extra.name}</p>
                     <p className="text-xs text-[var(--color-secondary-light)] mt-1">{extra.price}</p>
                   </div>
                   <span
@@ -747,9 +856,11 @@ function Extras() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     transition={{ duration: 0.2 }}
-                    className="px-5 pb-5 -mt-1 text-sm text-gray-300 leading-relaxed border-t border-white/5 pt-4"
+                    className="px-5 pb-5 -mt-1 text-sm md:text-base text-gray-300 leading-relaxed border-t border-white/5 pt-4 space-y-3 max-w-prose"
                   >
-                    {extra.why}
+                    {paragraphs.map((p, j) => (
+                      <p key={j}>{p}</p>
+                    ))}
                   </motion.div>
                 )}
               </div>
@@ -765,126 +876,71 @@ function Extras() {
 // Section: Interactive ask form
 // ───────────────────────────────────────────────────────────────────────────────
 
-type AskValues = Record<string, string>;
-
-function AskForm() {
-  const [values, setValues] = useState<AskValues>(() =>
-    Object.fromEntries(ASKS.map((a) => [a.id, ""]))
-  );
-  const [hydrated, setHydrated] = useState(false);
-
-  // Restore from localStorage after mount (avoid hydration mismatch)
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (parsed && typeof parsed === "object") {
-          setValues((v) => ({ ...v, ...parsed }));
-        }
-      }
-    } catch {
-      // ignore
-    }
-    setHydrated(true);
-  }, []);
-
-  // Persist on change
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
-    } catch {
-      // ignore
-    }
-  }, [values, hydrated]);
-
-  const filledCount = ASKS.filter((a) => values[a.id]?.trim()).length;
-
-  const mailtoBody = useMemo(() => {
-    const lines = ["Sam — here's what you asked for:", ""];
-    ASKS.forEach((a) => {
-      const v = values[a.id]?.trim();
-      lines.push(`${a.label}:`);
-      lines.push(v ? v : "(leaving blank for now)");
-      lines.push("");
-    });
-    return lines.join("\n");
-  }, [values]);
-
+function ActionsList() {
   return (
     <section id="ask" className="px-6 py-24 md:py-32 bg-gradient-to-b from-black via-[#0A2342]/40 to-black">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
-          To finish polishing the site
+          Things you can do yourself
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Six small things — answer any you can
+          Six things you can do this week — no one needed but you
         </h2>
-        <p className="text-gray-300 max-w-2xl mb-3 leading-relaxed">
-          None of these are blockers. The site is fully built and live. These would just
-          sharpen the last details and let me give credit to the right credentials and
-          links. Your answers save automatically in your browser as you go.
-        </p>
-        <p className="text-sm text-gray-400 mb-10">
-          {hydrated ? `${filledCount} of ${ASKS.length} answered` : "Loading…"}
+        <p className="text-gray-300 max-w-2xl mb-12 leading-relaxed">
+          The new site gives you the foundation. These six things are what stack on top of
+          it to turn it into real discoverability. Every one of them is free, takes minutes
+          to an afternoon, and compounds for months. Do them whether or not you ever work
+          with me.
         </p>
 
         <div className="space-y-4 md:space-y-5">
-          {ASKS.map((ask) => (
-            <div key={ask.id} className="rounded-xl border border-white/10 bg-white/5 p-4 md:p-5">
-              <label htmlFor={ask.id} className="block text-white font-semibold mb-1">
-                {ask.label}
-                {ask.optional && (
-                  <span className="text-xs text-gray-400 font-normal ml-2">(skip if not applicable)</span>
-                )}
-              </label>
-              <p className="text-xs text-gray-400 mb-3">{ask.hint}</p>
-              {ask.multiline ? (
-                <textarea
-                  id={ask.id}
-                  value={values[ask.id] || ""}
-                  onChange={(e) => setValues((v) => ({ ...v, [ask.id]: e.target.value }))}
-                  rows={3}
-                  className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary-light)] focus:border-transparent"
-                  placeholder="Type here…"
-                />
-              ) : (
-                <input
-                  id={ask.id}
-                  type="text"
-                  value={values[ask.id] || ""}
-                  onChange={(e) => setValues((v) => ({ ...v, [ask.id]: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary-light)] focus:border-transparent"
-                  placeholder="Type here…"
-                />
+          {ACTIONS.map((action, i) => (
+            <motion.article
+              key={action.number}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: i * 0.04 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-7"
+            >
+              <div className="flex items-baseline gap-4 mb-2">
+                <span
+                  aria-hidden="true"
+                  className="font-display text-sm font-semibold tracking-wider text-[var(--color-secondary-light)]/80"
+                >
+                  {action.number}
+                </span>
+                <h3 className="font-display text-lg md:text-xl font-bold text-white leading-snug">
+                  {action.title}
+                </h3>
+              </div>
+              <p className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold md:pl-10 mb-3">
+                Takes about {action.timeToDo}
+              </p>
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed md:pl-10 max-w-prose">
+                {action.body}
+              </p>
+              {action.cta && (
+                <div className="mt-4 md:pl-10">
+                  <a
+                    href={action.cta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 rounded-lg border border-white/15 text-sm text-white font-semibold hover:bg-white/5 hover:border-white/30 transition-colors"
+                  >
+                    {action.cta.label}
+                  </a>
+                </div>
               )}
-            </div>
+            </motion.article>
           ))}
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
-          <a
-            href={buildMailto("My answers for the new website", mailtoBody)}
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[var(--color-primary)] text-white font-semibold hover:bg-[var(--color-primary)]/90 transition-colors"
-          >
-            Send these answers to {PROVIDER.name.split(" ")[0]} ↗
-          </a>
-          <button
-            type="button"
-            onClick={() => {
-              setValues(Object.fromEntries(ASKS.map((a) => [a.id, ""])));
-              try {
-                window.localStorage.removeItem(STORAGE_KEY);
-              } catch {
-                // ignore
-              }
-            }}
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-white/15 text-gray-300 font-semibold hover:text-white hover:border-white/30 transition-colors"
-          >
-            Clear and start over
-          </button>
-        </div>
+        <p className="mt-8 text-sm text-gray-400 leading-relaxed max-w-prose">
+          None of these require a contract with me to be worth doing. If you want help with
+          any of them — or you&apos;d rather hand the content side over entirely — see the
+          extras section, especially the monthly content option.
+        </p>
       </div>
     </section>
   );
@@ -982,7 +1038,7 @@ const TOC_SECTIONS: { id: string; label: string }[] = [
   { id: "savings", label: "Run the numbers" },
   { id: "whats-built", label: "What's in the box" },
   { id: "extras", label: "Optional extras" },
-  { id: "ask", label: "Six small things" },
+  { id: "ask", label: "Do yourself" },
   { id: "talk", label: "Let's talk" },
 ];
 
@@ -1176,7 +1232,7 @@ export function ProposalClient() {
       <SavingsCalculator />
       <AlreadyBuilt />
       <Extras />
-      <AskForm />
+      <ActionsList />
       <FinalCTAs />
 
       <footer className="px-6 py-8 border-t border-white/5 text-center text-xs text-gray-500">
