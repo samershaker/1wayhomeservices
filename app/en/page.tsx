@@ -255,9 +255,8 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            Serving El Cajon, San Diego, and surrounding areas. We uncover every possible
-            tax benefit for a stronger return — plus real estate and mortgage support
-            when you need it.
+            Keep more of what you earn. We find every deduction you qualify for,
+            plus trusted real estate and mortgage support for El Cajon and San Diego.
           </motion.p>
 
           {/* CTAs */}
