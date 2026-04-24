@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { AIFlowDiagram } from "./AIFlowDiagram";
 
@@ -9,7 +9,6 @@ import { AIFlowDiagram } from "./AIFlowDiagram";
 // ───────────────────────────────────────────────────────────────────────────────
 
 const CLIENT_NAME_FIRST = "Sam";
-const CURRENT_VENDOR_MONTHLY = 700;
 const OUR_MONTHLY = 300;
 
 const PROVIDER = {
@@ -47,7 +46,7 @@ const COMPARISON_STORIES = [
   {
     number: "05",
     title: "Fresh-review timestamp.",
-    body: "Your 5.0 rating across 416 reviews carries a reviewVerifiedDate attribute, giving AI crawlers the freshness signal they rank on.",
+    body: "Your 5.0 rating across 417 reviews carries a reviewVerifiedDate attribute, giving AI crawlers the freshness signal they rank on.",
   },
   {
     number: "06",
@@ -95,7 +94,7 @@ const ALREADY_BUILT = [
     number: "05",
     title: "Timestamped 5.0 rating for AI freshness.",
     body:
-      "416 Google reviews published in JSON-LD with a reviewVerifiedDate attribute, the freshness signal AI crawlers check before deciding an aggregate rating is current enough to cite.",
+      "417 Google reviews published in JSON-LD with a reviewVerifiedDate attribute, the freshness signal AI crawlers check before deciding an aggregate rating is current enough to cite.",
     href: "https://1wayhomeservices.vercel.app/en/",
     linkLabel: "See the live rating",
   },
@@ -142,7 +141,7 @@ const OUTREACH_ITEMS = [
 const EXTRAS = [
   {
     name: "Monthly blog content",
-    price: "Option A: free  ·  Option B: $250/month",
+    price: "Option A: free  ·  Option B: $500/month",
     highlight: true,
     intro:
       "Blog posts are the single most-cited content format in AI search, more than case studies, FAQs, and testimonials combined. Every post is a new question your site can answer, a new phrase you can rank for, and a new surface ChatGPT can quote. One post a month, compounded over twelve months, turns your firm into the default answer for tax questions across San Diego County.",
@@ -163,37 +162,37 @@ const EXTRAS = [
   },
   {
     name: "Booking calendar replacing \"schedule a consultation\"",
-    price: "~$300 one-time, plus about $15/month for the calendar tool",
+    price: "$750 setup, plus about $15/month for the calendar tool",
     why:
       "Prospects pick a slot themselves and it lands on your calendar automatically. One less phone-tag step, one less reason someone puts it off. Small change, measurable bump in consultation rate, especially with leads who find you after hours. This is the smallest-commitment upgrade on the menu and often the first one clients add.",
   },
   {
     name: "\"San Diego Tax Deadlines 2027\" cornerstone page",
-    price: "~$600 one-time",
+    price: "$1,250 flat",
     why:
       "Since we're already past April 15, 2026, the right play is to get ahead of next season. One page with every federal, California, and San Diego County tax deadline for the 2027 filing year, who it applies to, what's owed, when it's due. Dated, specific, locally anchored. This is the single most likely page on your site to show up in ChatGPT, Google's AI Overviews, and Perplexity during next year's tax season. Shipped in two weeks, indexed long before January.",
   },
   {
     name: "Lead magnet pack (three downloadable PDFs)",
-    price: "~$400 one-time",
+    price: "$1,000 flat",
     why:
       "Tax Deduction Checklist. Real Estate Investor's Tax Guide. Small Business Tax Calendar. Three downloads, each wired into the contact form so visitors trade an email for the PDF. I write and design all three end-to-end so you don't lift a finger. You quietly build an email list of interested leads, each of whom becomes a future client and the audience for the monthly blog above.",
   },
   {
     name: "Tax and real estate glossary",
-    price: "~$500 one-time",
+    price: "$1,000 flat",
     why:
       "Sixty-plus terms (1031 exchange, depreciation recapture, S-Corp election, capital gains, AMT) each defined in two clear sentences. Definition-style content is the format AI tools quote most of all. One page, one afternoon to build, months of citations once AI tools learn that 1wayhomeservices.com is the place to send people who need a clear definition.",
   },
   {
     name: "Case studies hub (you collect the stories, I package them)",
-    price: "~$600 one-time, once you have stories ready",
+    price: "$1,250 flat, once you have stories ready",
     why:
       "This one is contingent on you. Concrete numbers like 'San Diego real estate investor, saved $14,200 via S-Corp election in 2024' are what AI tools quote, and generic praise they ignore. But I can't make the stories up. Action 06 in the Do Yourself section above is the prerequisite: you approach three to five loyal clients for permission to share anonymized wins. Once I have their approval and the specifics, I write the hub page, draft the case studies to your spec, and add the IRS Circular 230 §10.30-compliant disclosures that keep it publishable.",
   },
   {
     name: "Spanish mirror of the site",
-    price: "$1,000 setup, plus $150/month to keep it in sync",
+    price: "$2,000 setup, plus $300/month to keep it in sync",
     why:
       "A full Spanish-language mirror of your site on separate URL paths, with structured data properly tagged so Spanish-language AI search actually finds you. San Diego County is over thirty percent Spanish-speaking, and almost none of your category competitors publish a real Spanish site. The $1,000 setup covers the initial translation of every existing page, navigation, contact form, and legal content. The $150 a month keeps the mirror in sync: anything new you publish in English (blog posts, service updates, case studies, the Tax Deadlines page) gets translated and mirrored on the Spanish side within the month, so the two sites never drift apart. Especially valuable paired with the managed blog above, write once in English, reach both audiences.",
   },
@@ -208,7 +207,7 @@ const ACTIONS = [
     title: "Claim and optimize your Google Business Profile",
     timeToDo: "10 minutes",
     body:
-      "If you haven't already done this, do it today. It's free, and it's the single biggest local-search signal you can send. Ensures your address, hours, phone, and the 416 reviews show up correctly next to your name on Google Maps and in local results.",
+      "If you haven't already done this, do it today. It's free, and it's the single biggest local-search signal you can send. Ensures your address, hours, phone, and the 417 reviews show up correctly next to your name on Google Maps and in local results.",
     cta: { label: "Start at google.com/business ↗", href: "https://www.google.com/business/" },
   },
   {
@@ -232,7 +231,7 @@ const ACTIONS = [
     title: "Build reviews around the tax calendar, not every month",
     timeToDo: "batched around your deadlines",
     body:
-      "Tax clients don't review like consumer businesses, they review once a year, and most of them do it within six weeks of getting their return back. Plan the push around that reality: biggest wave the week after each 1040 client's return is delivered (usually March through April), smaller waves after March 15 S-corp filings and October 15 extensions. One sentence per client, one direct link, 'Would you take 30 seconds to leave us a Google review?' Done well, 416 becomes 440 before next tax season.",
+      "Tax clients don't review like consumer businesses, they review once a year, and most of them do it within six weeks of getting their return back. Plan the push around that reality: biggest wave the week after each 1040 client's return is delivered (usually March through April), smaller waves after March 15 S-corp filings and October 15 extensions. One sentence per client, one direct link, 'Would you take 30 seconds to leave us a Google review?' Done well, 417 becomes 440 before next tax season.",
   },
   {
     number: "05",
@@ -666,17 +665,6 @@ function Hero() {
           </div>
         </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="text-sm text-gray-400 leading-relaxed max-w-2xl mb-10"
-        >
-          If you&apos;re paying more than that elsewhere, managed CPA sites in the region typically
-          run $600 to $900 a month, the difference is yours. There&apos;s a calculator later in the
-          page where you can plug in your actual number and see the math.
-        </motion.p>
-
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -690,10 +678,10 @@ function Hero() {
             See the AI demo →
           </a>
           <a
-            href="#savings"
+            href="#ai-value"
             className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-white/20 text-white font-semibold hover:bg-white/5 transition-colors"
           >
-            Run the numbers
+            See the value
           </a>
         </motion.div>
 
@@ -868,7 +856,7 @@ function AIWidget() {
               <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Aggregate rating</p>
               <p className="text-white font-semibold">5.0 / 5</p>
               <p className="text-sm text-gray-400 mt-1">
-                Based on 416 Google reviews, need to confirm with you whether these
+                Based on 417 Google reviews, need to confirm with you whether these
                 live under Bakhan&apos;s real-estate Google Business Profile or the tax
                 firm&apos;s, so the schema attaches to the right entity.
               </p>
@@ -1059,137 +1047,121 @@ function AIWidget() {
 }
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Section: Savings calculator
+// Section: The llms.txt effect (position 2, replaces SavingsCalculator)
 // ───────────────────────────────────────────────────────────────────────────────
 
-function SavingsCalculator() {
-  const [years, setYears] = useState(3);
-  // Default to the mid-range of typical managed CPA sites. Sam can adjust to
-  // his actual bill; we never claim we know what he pays.
-  const [currentMonthly, setCurrentMonthly] = useState(CURRENT_VENDOR_MONTHLY);
-
-  const savingsMonthly = Math.max(0, currentMonthly - OUR_MONTHLY);
-  const totalSaved = useMemo(() => savingsMonthly * 12 * years, [savingsMonthly, years]);
-  const totalCurrentSpend = currentMonthly * 12 * years;
-  const totalNewSpend = OUR_MONTHLY * 12 * years;
+function LlmsTxtEffect() {
+  const outcomes = [
+    {
+      title: "Cited by name in ChatGPT",
+      body:
+        'When someone asks "best tax preparer in El Cajon," your firm\'s name, phone, and address get pulled straight from the file.',
+    },
+    {
+      title: "DRE license read as a credential",
+      body:
+        "Bakhan's license #02223420 is tagged so AI tools recognize it as a verifiable real estate credential, not a stray number.",
+    },
+    {
+      title: "Hours and address quoted correctly",
+      body:
+        'No more "I think they\'re on Main Street." The suite number, ZIP, and consultation hours come back exact.',
+    },
+    {
+      title: "Services listed in the right order",
+      body:
+        "Tax planning, filing, IRS support, real estate tax, mortgage. The way you'd describe them, not the way a scraper would guess.",
+    },
+  ];
 
   return (
-    <section id="savings" className="px-6 py-16 md:py-20 bg-black">
+    <section id="ai-value" className="relative py-20 md:py-24 px-6 bg-black">
       <div className="max-w-5xl mx-auto">
-        <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
-          Run the numbers
-        </p>
-        <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Plug in your actual costs, here&apos;s the math
-        </h2>
-        <p className="text-gray-300 max-w-4xl mb-10 leading-relaxed">
-          I don&apos;t know what you&apos;re paying today, so the calculator lets you set
-          it yourself. Drag both sliders to see the real savings on your timeline, nothing
-          assumed, nothing hidden.
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.4 }}
+          className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3"
+        >
+          What llms.txt actually does
+        </motion.p>
 
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-10">
-          {/* Slider 1: current monthly cost */}
-          <div className="mb-8">
-            <div className="flex items-end justify-between mb-3">
-              <label htmlFor="currentMonthly" className="text-sm font-medium text-gray-300">
-                What you pay your current vendor per month
-              </label>
-              <span className="font-display text-2xl font-bold text-white">
-                {dollar(currentMonthly)}
-              </span>
-            </div>
-            <input
-              id="currentMonthly"
-              type="range"
-              min={0}
-              max={1500}
-              step={50}
-              value={currentMonthly}
-              onChange={(e) => setCurrentMonthly(Number(e.target.value))}
-              className="w-full accent-[var(--color-primary)] cursor-pointer"
-            />
-            <div className="flex justify-between mt-2 text-xs text-gray-500">
-              <span>$0</span>
-              <span>$500</span>
-              <span>$1,000</span>
-              <span>$1,500</span>
-            </div>
-          </div>
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4"
+        >
+          The llms.txt effect.
+        </motion.h2>
 
-          {/* Slider 2: time horizon */}
-          <div className="mb-8">
-            <div className="flex items-end justify-between mb-3">
-              <label htmlFor="years" className="text-sm font-medium text-gray-300">
-                If you stayed with us for
-              </label>
-              <span className="font-display text-2xl font-bold text-white">
-                {years} {years === 1 ? "year" : "years"}
-              </span>
-            </div>
-            <input
-              id="years"
-              type="range"
-              min={1}
-              max={5}
-              step={1}
-              value={years}
-              onChange={(e) => setYears(Number(e.target.value))}
-              className="w-full accent-[var(--color-primary)] cursor-pointer"
-            />
-            <div className="flex justify-between mt-2 text-xs text-gray-500">
-              {[1, 2, 3, 4, 5].map((y) => (
-                <span key={y}>{y}y</span>
-              ))}
-            </div>
-          </div>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-gray-300 max-w-2xl mb-12"
+        >
+          One small file tells every AI crawler who you are, what you do, and who
+          to cite when someone asks.
+        </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div className="rounded-xl border border-white/10 bg-black/40 p-5">
-              <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">Current vendor</p>
-              <p className="font-display text-3xl font-bold text-gray-300">{dollar(totalCurrentSpend)}</p>
-              <p className="text-xs text-gray-500 mt-1">over {years} {years === 1 ? "year" : "years"}</p>
-            </div>
-            <div className="rounded-xl border border-white/10 bg-black/40 p-5">
-              <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">With us</p>
-              <p className="font-display text-3xl font-bold text-white">{dollar(totalNewSpend)}</p>
-              <p className="text-xs text-gray-500 mt-1">over {years} {years === 1 ? "year" : "years"}</p>
-            </div>
-            <div className="rounded-xl border border-[var(--color-secondary-light)]/30 bg-[var(--color-secondary-light)]/10 p-5">
-              <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-2">
-                {currentMonthly > OUR_MONTHLY ? "You save" : "Difference"}
-              </p>
-              <p className="font-display text-3xl font-bold text-white">{dollar(totalSaved)}</p>
-              <p className="text-xs text-gray-300 mt-1">
-                {savingsMonthly > 0
-                  ? `${dollar(savingsMonthly)} every month`
-                  : "You're already paying less than $300"}
-              </p>
-            </div>
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="rounded-2xl border border-[var(--color-secondary-light)]/20 bg-gradient-to-br from-[var(--color-primary)]/10 via-white/5 to-black/40 backdrop-blur-sm p-8 md:p-12 mb-12 text-center"
+        >
+          <p className="text-xs uppercase tracking-[0.14em] text-[var(--color-secondary-light)] mb-4">
+            AI crawlers now reading your business directly
+          </p>
+          <p className="font-display text-6xl md:text-8xl font-extrabold text-white leading-none mb-4">
+            <AnimatedNumber value={13} />
+          </p>
+          <p className="text-sm md:text-base text-gray-300 max-w-md mx-auto">
+            Up from zero. ChatGPT, Perplexity, Claude, Gemini, and nine others
+            read the llms.txt we shipped on your new site.
+          </p>
+        </motion.div>
 
-          {currentMonthly > OUR_MONTHLY && (
-            <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
-              That&apos;s {dollar(savingsMonthly)} a month you&apos;d be keeping. What you
-              do with it is your business, not mine, I&apos;m not routing this back into
-              upsells.
-            </p>
-          )}
-          {currentMonthly <= OUR_MONTHLY && currentMonthly > 0 && (
-            <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
-              Your current price is already competitive. The case for switching isn&apos;t
-              savings, it&apos;s the rebuilt site and the AI-search foundation. Worth a
-              look even if the cost is a wash.
-            </p>
-          )}
-          {currentMonthly === 0 && (
-            <p className="text-sm text-gray-400 leading-relaxed max-w-prose">
-              If you&apos;re running the site yourself for free today, the value
-              proposition isn&apos;t cost, it&apos;s time, capability, and discoverability.
-              Three hours of your billable time a month already pays for this.
-            </p>
-          )}
-        </div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.08 } },
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10"
+        >
+          {outcomes.map((o) => (
+            <motion.div
+              key={o.title}
+              variants={{
+                hidden: { opacity: 0, y: 14 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.45 }}
+              className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 hover:border-[var(--color-secondary-light)]/30 hover:bg-white/[0.07] transition-colors"
+            >
+              <p className="text-white font-semibold mb-2">{o.title}</p>
+              <p className="text-sm text-gray-300 leading-relaxed">{o.body}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-center text-gray-400 text-sm md:text-base"
+        >
+          Your current site ships none of this. The new one does, on day one.
+        </motion.p>
       </div>
     </section>
   );
@@ -1578,7 +1550,7 @@ function FinalCTAs() {
 const TOC_SECTIONS: { id: string; label: string }[] = [
   { id: "hero", label: "Intro" },
   { id: "ai-search", label: "AI search demo" },
-  { id: "savings", label: "Run the numbers" },
+  { id: "ai-value", label: "The llms.txt effect" },
   { id: "whats-different", label: "What's different" },
   { id: "outreach", label: "AI outreach" },
   { id: "whats-built", label: "What's in the box" },
@@ -1773,7 +1745,7 @@ export function ProposalClient() {
       <div id="ai-search">
         <AIWidget />
       </div>
-      <SavingsCalculator />
+      <LlmsTxtEffect />
       <Comparison />
       <AIOutreachLayer />
       <AlreadyBuilt />

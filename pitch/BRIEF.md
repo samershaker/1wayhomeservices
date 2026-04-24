@@ -49,7 +49,7 @@ Three ways, in plain language:
 
 - **People searching "tax preparer near me" on Google or AI** are more likely to see you in the results, because the new site speaks the language those search tools require.
 - **People who land on your site stick around longer** because it loads fast, looks credible, and answers their questions. More time on site means more phone calls and form submissions.
-- **People who research your business before calling** (most do) see a professional, transparent firm with real licensing, a real address, and 416 five-star Google reviews — instead of a generic template site. That's the difference between "I'll think about it" and "let me call right now."
+- **People who research your business before calling** (most do) see a professional, transparent firm with real licensing, a real address, and 417 five-star Google reviews — instead of a generic template site. That's the difference between "I'll think about it" and "let me call right now."
 
 ---
 

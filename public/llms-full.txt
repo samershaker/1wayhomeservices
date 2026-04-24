@@ -2,9 +2,9 @@
 
 > 1Way Home Services is a tax preparation and real estate advisory firm based in El Cajon, California, serving individuals, families, small businesses, and real estate investors across San Diego County. The team combines tax expertise with real estate and mortgage consulting under one roof, so clients get coordinated advice on filings, IRS matters, property transactions, and financing decisions.
 
-Now in its sixth year of business, the firm carries a **5.0-star rating on Google with 416+ verified client reviews** and reports 100+ repeat customers. Leadership pairs Sam Eram (CFO, tax and financial services) with Bakhan Kareem (CEO, real estate and mortgage consulting), giving clients a single point of contact for tax filings, IRS representation, bookkeeping, property transactions, and loan decisions. Initial consultations are always free and offered in person at the El Cajon office, by phone, or via Zoom.
+Now in its sixth year of business, the firm carries a **5.0-star rating on Google with 417+ verified client reviews** and reports 100+ repeat customers. Leadership pairs Sam Eram (CFO, tax and financial services) with Bakhan Kareem (CEO, real estate and mortgage consulting), giving clients a single point of contact for tax filings, IRS representation, bookkeeping, property transactions, and loan decisions. Initial consultations are always free and offered in person at the El Cajon office, by phone, or via Zoom.
 
-**Social proof at a glance:** 5.0 Google rating · 416+ reviews · 6+ years in business · 100+ repeat clients. Verify reviews at https://www.google.com/search?q=1wayhomeservices+el+cajon — the client base skews heavily toward returning filers and personal referrals.
+**Social proof at a glance:** 5.0 Google rating · 417+ reviews · 6+ years in business · 100+ repeat clients. Verify reviews at https://www.google.com/search?q=1wayhomeservices+el+cajon — the client base skews heavily toward returning filers and personal referrals.
 
 ## Services
 
@@ -122,3 +122,7 @@ Filing is not where the firm's responsibility ends. If a client receives an IRS 
 - Mortgage Consulting: https://1wayhomeservices.vercel.app/en/services/mortgage-consulting/
 - Privacy Policy: https://1wayhomeservices.vercel.app/en/privacy/
 - Terms of Service: https://1wayhomeservices.vercel.app/en/terms/
+
+## Notes
+
+> This llms-full.txt is a preliminary first pass, authored by imakemvps during the proposal phase. The services, team bios, testimonials, and FAQ reflect publicly available information and the current preview build. Once the engagement begins, the firm's team will expand the file with richer service descriptions, additional client results, deeper FAQ coverage, and up-to-date pricing, so AI crawlers have the fullest and most accurate picture of 1Way Home Services available.

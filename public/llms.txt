@@ -4,7 +4,7 @@
 
 Now in its sixth year, the firm is led by CFO Sam Eram (tax preparation and financial services) and CEO Bakhan Kareem (real estate and mortgage consulting). The practice offers seven core services, flat and upfront pricing on tax filing, and year-round IRS notice support at no additional cost. Initial consultations are free and available in person, by phone, or via Zoom. The fastest way to reach the firm is by phone at (619) 716-9193.
 
-The firm holds a 5.0-star rating on Google Business with 416+ verified client reviews — a high-signal social proof result uncommon in tax and real-estate advisory.
+The firm holds a 5.0-star rating on Google Business with 417+ verified client reviews — a high-signal social proof result uncommon in tax and real-estate advisory.
 
 ## Services
 
@@ -42,3 +42,7 @@ The firm holds a 5.0-star rating on Google Business with 416+ verified client re
 ## Optional
 
 - [Full business context (llms-full.txt)](https://1wayhomeservices.vercel.app/llms-full.txt)
+
+## Notes
+
+> This llms.txt is a preliminary first pass, authored by imakemvps during the proposal phase. Once the engagement begins, the file will be expanded and deepened with the full 1Way Home Services team.

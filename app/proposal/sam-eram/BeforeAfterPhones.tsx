@@ -308,7 +308,7 @@ export function BeforeAfterPhones() {
             5.0
           </text>
           <text x="686" y="294" fill="#9CA3AF" fontSize="9" fontFamily="system-ui, sans-serif">
-            · 416 Google reviews
+            · 417 Google reviews
           </text>
 
           {/* Service chips */}
