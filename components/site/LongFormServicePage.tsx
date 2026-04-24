@@ -18,7 +18,7 @@ import {
   MailIcon,
 } from "@/components/ui/icons/page-icons";
 import { CONTACT_INFO } from "@/lib/constants";
-import { EASE_OUT_EXPO, SCROLL_VIEWPORT } from "@/lib/animations";
+import { SCROLL_VIEWPORT } from "@/lib/animations";
 import { FAQStructuredData } from "@/components/StructuredData";
 
 /* ═══ Config shape ═══ */

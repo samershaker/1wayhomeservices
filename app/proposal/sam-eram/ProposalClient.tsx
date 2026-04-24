@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { AIFlowDiagram } from "./AIFlowDiagram";
-import { BeforeAfterPhones } from "./BeforeAfterPhones";
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Constants, keep proposal-only data here so it doesn't leak into site copy
@@ -12,7 +11,6 @@ import { BeforeAfterPhones } from "./BeforeAfterPhones";
 const CLIENT_NAME_FIRST = "Sam";
 const CURRENT_VENDOR_MONTHLY = 700;
 const OUR_MONTHLY = 300;
-const SAVINGS_MONTHLY = CURRENT_VENDOR_MONTHLY - OUR_MONTHLY;
 
 const PROVIDER = {
   name: "Samer Shaker",
@@ -24,124 +22,115 @@ const PROVIDER = {
 const PREVIEW_URL = "https://1wayhomeservices.vercel.app";
 const CURRENT_SITE_URL = "https://1wayhomeservices.com";
 
+// AI-forward reframing: six signals AI tools look for before citing a firm.
 const COMPARISON_STORIES = [
   {
     number: "01",
-    title: "Built for the screen your customers actually use.",
-    body: "Seven out of ten people who visit your site are on a phone. Your current site was designed for a desktop and shrunk down to fit, which is why buttons feel tight, forms are awkward, and people bounce. The new site was designed for phones first, then widened to desktop. Your customers meet you on the screen they’re already holding.",
+    title: "Plain-English briefing for AI.",
+    body: "A public llms.txt file (94 lines) plus an expanded llms-full.txt tells ChatGPT and Claude exactly who you are before they crawl a single page.",
   },
   {
     number: "02",
-    title: "Four seconds is the difference between a phone call and a back-button.",
-    body: "People decide whether to stay on a page in about two seconds. Your current site takes four to become visible on a phone, most visitors are already gone. The new site is visible in under two. Your first impression is your first sentence, not a loading spinner.",
+    title: "13 AI bots invited by name.",
+    body: "GPTBot, ClaudeBot, PerplexityBot, Google-Extended, and nine others are explicitly welcomed in robots.txt. Most firms block them by default without realizing it.",
   },
   {
     number: "03",
-    title: "“El Cajon, CA” doesn’t help anyone find you.",
-    body: "That’s what your current contact page says. Technically true, practically useless. Google Maps can’t pin you, a new client doesn’t know which cross-street to look for, and ChatGPT has nothing specific to cite. The new site publishes 250 E Chase Ave, Suite 107, El Cajon CA 92020 on every page, in a format both humans and AI tools can actually use.",
+    title: "Six linked machine schemas.",
+    body: "ProfessionalService, AccountingService, LocalBusiness, Organization, WebSite, and FAQPage form one connected graph assistants can parse in a single pass.",
   },
   {
     number: "04",
-    title: "Bakhan is a licensed California broker. The internet doesn’t know it.",
-    body: "California real estate license #02223420 is public record. It’s not on your current site anywhere. The new site displays it in the footer of every page, next to a direct link to the state’s official verification database. This is how licensed professionals signal regulated and accountable without having to say the words.",
+    title: "DRE license as a verifiable credential.",
+    body: "Bakhan's DRE #02223420 is published as an EducationalOccupationalCredential, so it reads as verified fact, not marketing copy.",
   },
   {
     number: "05",
-    title: "416 five-star reviews should be working harder than they are.",
-    body: "They’re real. They’re earned. But on your current site they aren’t structured the way AI search needs them, so when someone asks ChatGPT or Google’s AI “who’s a trusted tax preparer in El Cajon?”, your reputation isn’t doing the work it could. The new site publishes the rating properly, structured, dated, linked to Google. Your reviews start selling for you even while you’re asleep.",
+    title: "Fresh-review timestamp.",
+    body: "Your 5.0 rating across 416 reviews carries a reviewVerifiedDate attribute, giving AI crawlers the freshness signal they rank on.",
   },
   {
     number: "06",
-    title: "The compliance details regulators and careful clients notice.",
-    body: "Your firm sits on two regulated rails at once, real estate and tax preparation, and each has its own expected disclosures. On the real-estate side, the new site shows the Equal Housing Opportunity mark and Fair Housing language in the footer of every page. On the tax side, the California Consumer Privacy Act section is in place, the A2P 10DLC consent copy on the contact form matches what your privacy policy already commits you to (note: final SMS compliance also requires brand and campaign registration at your SMS vendor, worth flagging so we can coordinate). None of these break the business individually. All of them together signal a firm that takes the details seriously.",
+    title: "One source of truth, zero NAP drift.",
+    body: "Phone, address, hours, and credentials live in one file and propagate to 200-plus surfaces, so AI never sees a conflicting name, address, or phone.",
   },
 ];
 
-// Engineering and compliance depth, ordered the way Sam asked for it:
-// mobile-first craft first, llms.txt second, quiet fixes to his existing
-// content third, then the discoverability infrastructure, then the deeper
-// architecture choices. Links point at the live artifact on the preview site
-// (or the raw file, when the file itself is the artifact).
+// Six AI-focused pieces of craft already shipped on the live preview.
+// Links point at the raw artifact or the live validator that inspects it.
 const ALREADY_BUILT = [
   {
     number: "01",
-    title: "Designed on a phone, then widened up, not the other way around.",
+    title: "llms.txt briefing file, live at the edge.",
     body:
-      "Roughly seven in ten tax-firm visitors arrive on a phone, so every layout, tap target, and typographic scale was built at the mobile breakpoint first, then allowed to expand. Tailwind's mobile-first class order is used throughout the codebase, which means the phone experience is the default path and the desktop view is the enhancement, not the other way around.",
-    href: "https://1wayhomeservices.vercel.app/en/",
-    linkLabel: "Open the live site on your phone",
-  },
-  {
-    number: "02",
-    title: "A proper llms.txt, the file AI assistants actually read.",
-    body:
-      "ChatGPT, Claude, and Perplexity look for a plain-English business summary at /llms.txt before they crawl a single page. Yours is 94 lines of curated content: services, team with Bakhan's DRE license, pricing, hours, contact, plus an expanded /llms-full.txt for assistants that want the deeper cut. Most competitors in the category don't publish either file.",
+      "Plain-English summary AI assistants read first, 94 curated lines, plus an expanded llms-full.txt for assistants that want the deeper cut. Most firms in your category publish neither.",
     href: "https://1wayhomeservices.vercel.app/llms.txt",
     linkLabel: "View the raw llms.txt",
   },
   {
-    number: "03",
-    title: "Small errors in your existing content, caught and quietly fixed.",
+    number: "02",
+    title: "13-bot AI allow-list in robots.txt.",
     body:
-      "Your published Terms heading reads \"Not Professional Advise\" instead of \"Advice,\" your Privacy Policy contact block lists email only, your Terms says clients are \"bound by our Privacy Policy\" without ever linking to it, and your contact address is \"El Cajon, San Diego, California\" with no street. The new publication fixes every one of those, cross-links the two legal pages, and uses the verified 250 E Chase Ave, Suite 107 address for NAP consistency across the site, structured data, and footer.",
-    href: "https://1wayhomeservices.vercel.app/en/terms/",
-    linkLabel: "Compare the reproduced Terms",
-  },
-  {
-    number: "04",
-    title: "Every major AI crawler welcomed by name in robots.txt.",
-    body:
-      "Thirteen bots are individually allow-listed with their own User-Agent blocks: GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, anthropic-ai, Claude-Web, CCBot, PerplexityBot, Google-Extended, Applebot-Extended, Amazonbot, Bytespider, FacebookBot. A generic allow line would work for most, but explicit welcome is the signal serious AI search infrastructure looks for, and the sitemap is referenced from the same file.",
+      "GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, anthropic-ai, Claude-Web, CCBot, PerplexityBot, Google-Extended, Applebot-Extended, Amazonbot, Bytespider, FacebookBot, each welcomed explicitly.",
     href: "https://1wayhomeservices.vercel.app/robots.txt",
     linkLabel: "View the raw robots.txt",
   },
   {
-    number: "05",
-    title: "A multi-type Schema.org entity graph, not a single blob of JSON-LD.",
+    number: "03",
+    title: "Six-type linked schema graph.",
     body:
-      "The firm is declared simultaneously as ProfessionalService, AccountingService, and LocalBusiness, because each type is the one a different AI tool looks for. That sits alongside a sibling Organization schema, a WebSite schema, a BreadcrumbList, and FAQPage schema on every FAQ section, with a full address, phone, email, hours, services, employees as Person objects, aggregateRating, hasCredential for Bakhan's DRE license, and sameAs links to every social profile. Six linked schemas, one source of truth.",
+      "ProfessionalService, AccountingService, LocalBusiness, Organization, WebSite, and FAQPage, all connected for one-pass parsing by AI crawlers. Run it through Google's Rich Results test.",
     href: "https://search.google.com/test/rich-results?url=https%3A%2F%2F1wayhomeservices.vercel.app%2Fen%2F",
     linkLabel: "Run Google's Rich Results Test",
   },
   {
-    number: "06",
-    title: "Bakhan's DRE license declared two ways, one for humans, one for machines.",
+    number: "04",
+    title: "DRE license as a Schema.org credential.",
     body:
-      "California DRE #02223420 appears in the footer of every page as a linked credential, pointing straight at the Department of Real Estate's public verification lookup so anyone can confirm it in two clicks. The same license is also declared on Bakhan's Person object in JSON-LD as a Schema.org EducationalOccupationalCredential, so AI tools can cite \"licensed California broker\" as a verifiable fact rather than a claim.",
-    href: "https://1wayhomeservices.vercel.app/en/",
-    linkLabel: "See the footer credential",
-  },
-  {
-    number: "07",
-    title: "The review rating stamped with a verification date, not left floating.",
-    body:
-      "The 5.0 star rating across 416 Google reviews is published in JSON-LD with a reviewVerifiedDate attribute. That date is the freshness signal AI crawlers specifically check for when deciding whether an aggregate rating is current enough to cite. It also gives you a defensible audit trail the day a platform or regulator asks where the number came from.",
+      "California DRE #02223420 declared on Bakhan's Person object as an EducationalOccupationalCredential, so AI tools cite 'licensed California broker' as a verifiable fact, not a claim.",
     href: "https://validator.schema.org/#url=https%3A%2F%2F1wayhomeservices.vercel.app%2Fen%2F",
     linkLabel: "Inspect the schema directly",
   },
   {
-    number: "08",
-    title: "One source of truth for every business fact on the site.",
+    number: "05",
+    title: "Timestamped 5.0 rating for AI freshness.",
     body:
-      "Address, phone, hours, services, team bios, testimonials, and FAQs all live in a single TypeScript file, lib/constants.ts. One edit there propagates to more than two hundred surfaces: the footer on every page, the JSON-LD entity graph, the llms.txt and llms-full.txt files, the contact form, the Privacy Policy, and the Terms. When your hours change, you change them in one place, not twenty.",
+      "416 Google reviews published in JSON-LD with a reviewVerifiedDate attribute, the freshness signal AI crawlers check before deciding an aggregate rating is current enough to cite.",
+    href: "https://1wayhomeservices.vercel.app/en/",
+    linkLabel: "See the live rating",
+  },
+  {
+    number: "06",
+    title: "One source of truth, 200-plus surfaces.",
+    body:
+      "Address, phone, hours, services, team, testimonials, and FAQs all live in one TypeScript constants file. One edit there propagates to llms.txt, JSON-LD, footer, and the contact form.",
     href: "https://github.com/samershaker/1wayhomeservices/blob/main/lib/constants.ts",
     linkLabel: "See the constants file",
   },
+];
+
+// The AI-outreach layer: what we do every month to keep 1Way cited and keep
+// leads warm after the AI surfaces them.
+const OUTREACH_ITEMS = [
   {
-    number: "09",
-    title: "Static export on Vercel's global edge, sub-second first paint.",
-    body:
-      "The site is pre-rendered to plain HTML at build time and served from Vercel's edge CDN in every major US region, so there is no server round-trip between a visitor tapping your link and the first visible pixel. That architecture is also what makes the site cheap to run, resistant to traffic spikes, and simple to hand to another developer if you ever want to move it.",
-    href: "https://1wayhomeservices.vercel.app/en/",
-    linkLabel: "Time it yourself",
+    label: "Monthly cited content",
+    body: "One research-backed post per month, written to win a specific AI-search query and published under your byline.",
   },
   {
-    number: "10",
-    title: "A compliance footer built for a dual-regulated firm.",
-    body:
-      "Real estate and tax preparation each have their own expected disclosures, so the new footer carries both: the Equal Housing Opportunity mark from HUD's public-domain SVG, a Circular 230-style tax disclaimer, the California DRE license with verification link, the full legal entity name (1 Way Home Real Estate and Mortgage Services Inc.), and the California privacy rights disclosure mandated by CCPA and CPRA for California businesses. That last section, the one regulators look for first, wasn't on your existing site at all.",
-    href: "https://1wayhomeservices.vercel.app/en/privacy/",
-    linkLabel: "Read the California rights section",
+    label: "Quarterly AI re-tune",
+    body: "llms.txt, the schema graph, and the crawler allow-list refreshed every quarter against the latest AI ranking signals.",
+  },
+  {
+    label: "AI-visible syndication",
+    body: "Google Business, Bing Places, Apple Business Connect, and the directories AI crawlers ingest, kept in sync with one source of truth.",
+  },
+  {
+    label: "Lead magnet capture",
+    body: "Downloadable guides wired to the contact form so AI-referred visitors leave an email before they leave the page.",
+  },
+  {
+    label: "AI-drafted follow-up",
+    body: "Email sequences written for your list, edited and sent by you, so interest from an AI citation turns into a booked call.",
   },
 ];
 
@@ -296,6 +285,265 @@ function AnimatedNumber({ value, prefix = "", suffix = "" }: { value: number; pr
 }
 
 // ───────────────────────────────────────────────────────────────────────────────
+// Interactive AI widgets (crawler grid, llms.txt peek, discovery funnel)
+// ───────────────────────────────────────────────────────────────────────────────
+
+function AICrawlerGrid() {
+  const CRAWLERS = [
+    { name: "GPTBot", feeds: "ChatGPT" },
+    { name: "ChatGPT-User", feeds: "ChatGPT browsing" },
+    { name: "OAI-SearchBot", feeds: "OpenAI Search" },
+    { name: "ClaudeBot", feeds: "Claude" },
+    { name: "anthropic-ai", feeds: "Claude training" },
+    { name: "Claude-Web", feeds: "Claude browsing" },
+    { name: "CCBot", feeds: "Common Crawl (feeds most LLMs)" },
+    { name: "PerplexityBot", feeds: "Perplexity" },
+    { name: "Google-Extended", feeds: "Google AI Overviews / Gemini" },
+    { name: "Applebot-Extended", feeds: "Apple Intelligence" },
+    { name: "Amazonbot", feeds: "Alexa / Rufus" },
+    { name: "Bytespider", feeds: "Doubao / TikTok AI" },
+    { name: "FacebookBot", feeds: "Meta AI" },
+  ] as const;
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(containerRef, { once: true, margin: "-80px" });
+
+  const count = useMotionValue(0);
+  const spring = useSpring(count, { stiffness: 60, damping: 20 });
+  const roundedSpring = useTransform(spring, (latest) => Math.round(latest).toString());
+
+  useEffect(() => {
+    if (inView) spring.set(13);
+  }, [inView, spring]);
+
+  return (
+    <div ref={containerRef} className="w-full">
+      <div className="flex items-baseline gap-3 mb-6">
+        <motion.span
+          className="text-5xl md:text-6xl font-bold text-gradient-blue tabular-nums"
+          aria-label="13 AI crawlers welcomed by name"
+        >
+          {roundedSpring}
+        </motion.span>
+        <span className="text-sm md:text-base text-slate-300">
+          AI crawlers welcomed by name in robots.txt.
+        </span>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
+        {CRAWLERS.map((c, i) => (
+          <motion.div
+            key={c.name}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+            transition={{ duration: 0.4, delay: 0.1 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative"
+          >
+            <div className="hover-lift rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-center cursor-default transition-colors hover:border-[color:var(--color-secondary-light)]/50 hover:bg-[color:var(--color-primary)]/15">
+              <span className="text-xs md:text-sm font-mono font-semibold text-slate-100 whitespace-nowrap">
+                {c.name}
+              </span>
+            </div>
+            <div
+              className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              role="tooltip"
+            >
+              <div className="whitespace-nowrap rounded-md border border-[color:var(--color-secondary-light)]/30 bg-[color:var(--color-navy)] px-2.5 py-1.5 text-[11px] text-slate-200 shadow-lg">
+                <span className="text-[color:var(--color-secondary-light)] font-semibold">{c.name}</span>
+                <span className="text-slate-400 mx-1.5">feeds</span>
+                <span>{c.feeds}</span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <p className="mt-5 text-xs text-slate-400 italic">
+        Hover any crawler to see which AI tool it feeds.
+      </p>
+    </div>
+  );
+}
+
+function LlmsTxtPeek() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const LINES: Array<{ text: string; tone?: "comment" | "section" }> = [
+    { text: "# 1Way Home Services", tone: "section" },
+    { text: "# Tax preparation and real estate, El Cajon CA", tone: "comment" },
+    { text: "" },
+    { text: "Business: 1 Way Home Real Estate and Mortgage Services Inc." },
+    { text: "Address: 250 E Chase Ave, Suite 107, El Cajon, CA 92020" },
+    { text: "Phone: (619) 792-3366" },
+    { text: "Hours: Mon to Fri, 9 AM to 6 PM PT" },
+    { text: "" },
+    { text: "## Team", tone: "section" },
+    { text: "- Sam Eram, CFO and CPA" },
+    { text: "- Bakhan Kareem, CEO and licensed CA broker, DRE #02223420" },
+    { text: "" },
+    { text: "## Services", tone: "section" },
+    { text: "Tax planning, filing, bookkeeping, IRS support," },
+    { text: "real estate tax guidance, mortgage consulting." },
+  ];
+
+  const toneColor = (tone?: string) => {
+    if (tone === "comment") return "text-slate-500";
+    if (tone === "section") return "text-[color:var(--color-secondary-light)] font-semibold";
+    return "text-slate-200";
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.6 }}
+      className="w-full glass-card-premium rounded-xl overflow-hidden border border-white/10"
+    >
+      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/10 bg-black/40">
+        <div className="flex items-center gap-1.5">
+          <span className="block w-3 h-3 rounded-full bg-red-400/70" />
+          <span className="block w-3 h-3 rounded-full bg-yellow-400/70" />
+          <span className="block w-3 h-3 rounded-full bg-green-400/70" />
+        </div>
+        <div className="flex-1 text-center">
+          <span className="text-[11px] md:text-xs font-mono text-slate-400">
+            1wayhomeservices.com/llms.txt
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <motion.span
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="block w-2 h-2 rounded-full bg-green-400"
+          />
+          <span className="text-[10px] font-mono font-semibold tracking-wider text-green-400">LIVE</span>
+        </div>
+      </div>
+      <div className="px-4 md:px-6 py-4 md:py-5 font-mono text-[12px] md:text-[13px] leading-relaxed bg-[color:var(--color-navy)]/60">
+        {LINES.map((line, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -8 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
+            transition={{ duration: 0.3, delay: 0.3 + i * 0.06 }}
+            className={`flex gap-4 ${line.text === "" ? "h-3" : ""}`}
+          >
+            <span className="select-none text-slate-600 w-5 text-right shrink-0">
+              {line.text === "" ? "" : i + 1}
+            </span>
+            <span className={toneColor(line.tone)}>{line.text || " "}</span>
+          </motion.div>
+        ))}
+      </div>
+      <div className="px-4 py-3 border-t border-white/10 bg-black/30 flex items-center justify-between">
+        <span className="text-[11px] text-slate-400">94 curated lines, served at the edge.</span>
+        <a
+          href="https://1wayhomeservices.vercel.app/llms.txt"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs font-semibold text-[color:var(--color-secondary-light)] hover:text-white transition-colors"
+        >
+          View full file &rarr;
+        </a>
+      </div>
+    </motion.div>
+  );
+}
+
+function AIDiscoveryFunnel() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const STAGES = [
+    {
+      label: "AI crawler visits",
+      body: "GPTBot, ClaudeBot, PerplexityBot land on the domain.",
+      icon: (
+        <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="16" cy="16" r="11" />
+          <path d="M5 16h22M16 5c3 3.5 4.5 7 4.5 11s-1.5 7.5-4.5 11c-3-3.5-4.5-7-4.5-11S13 8.5 16 5z" />
+          <circle cx="16" cy="16" r="2" fill="currentColor" />
+        </svg>
+      ),
+    },
+    {
+      label: "Reads llms.txt + schema",
+      body: "Structured facts, DRE license, hours, reviews, all machine-readable.",
+      icon: (
+        <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="7" y="5" width="18" height="22" rx="2" />
+          <path d="M11 11h10M11 15h10M11 19h7M11 23h6" />
+        </svg>
+      ),
+    },
+    {
+      label: "Indexes as trusted answer",
+      body: "Firm is stored as a verified entity, not a guess.",
+      icon: (
+        <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 4l10 4v7c0 6-4.5 10.5-10 13-5.5-2.5-10-7-10-13V8l10-4z" />
+          <path d="M11 16l3.5 3.5L22 12" />
+        </svg>
+      ),
+    },
+    {
+      label: "Cites firm to next user",
+      body: "When someone asks, the AI quotes 1Way Home Services by name.",
+      icon: (
+        <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 9a3 3 0 013-3h16a3 3 0 013 3v10a3 3 0 01-3 3H14l-6 5v-5H8a3 3 0 01-3-3V9z" />
+          <circle cx="12" cy="14" r="1" fill="currentColor" />
+          <circle cx="16" cy="14" r="1" fill="currentColor" />
+          <circle cx="20" cy="14" r="1" fill="currentColor" />
+        </svg>
+      ),
+    },
+  ];
+
+  return (
+    <div ref={ref} className="w-full">
+      <div className="flex flex-col md:flex-row md:items-stretch gap-4 md:gap-2">
+        {STAGES.map((stage, i) => (
+          <div key={stage.label} className="flex md:flex-1 md:items-stretch gap-3 md:gap-2">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.5, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="flex-1 glass-card rounded-xl p-4 md:p-5 border border-white/10 hover:border-[color:var(--color-secondary-light)]/40 transition-colors relative"
+            >
+              <div className="absolute top-3 right-3 text-[10px] font-mono font-bold text-slate-500">
+                0{i + 1}
+              </div>
+              <div className="text-[color:var(--color-secondary-light)] mb-3">{stage.icon}</div>
+              <div className="text-sm md:text-[15px] font-bold text-white leading-tight mb-1.5">
+                {stage.label}
+              </div>
+              <div className="text-xs text-slate-400 leading-relaxed">{stage.body}</div>
+            </motion.div>
+            {i < STAGES.length - 1 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.15 + 0.3 }}
+                className="flex md:items-center justify-center shrink-0 px-0 md:px-1"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24" className="hidden md:block w-6 h-6 text-[color:var(--color-secondary-light)]/60" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 12h16M14 6l6 6-6 6" />
+                </svg>
+                <svg viewBox="0 0 24 24" className="md:hidden w-6 h-6 text-[color:var(--color-secondary-light)]/60 ml-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 4v16M6 14l6 6 6-6" />
+                </svg>
+              </motion.div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ───────────────────────────────────────────────────────────────────────────────
 // Section: Hero + cold-outreach hook
 // ───────────────────────────────────────────────────────────────────────────────
 
@@ -333,7 +581,7 @@ function Hero() {
           className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-8"
         >
           Hey {CLIENT_NAME_FIRST},<br />
-          I rebuilt your website.
+          be the answer AI gives in El Cajon.
         </motion.h1>
 
         <motion.div
@@ -343,24 +591,43 @@ function Hero() {
           className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mb-10 space-y-4"
         >
           <p>
-            I&apos;m Samer Shaker. I run a small web shop called imakemvps. I noticed your
-            site at{" "}
-            <a
-              href={CURRENT_SITE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[var(--color-secondary-light)] underline underline-offset-2 hover:text-white transition-colors"
-            >
-              1wayhomeservices.com
-            </a>{" "}
-            wasn&apos;t doing what it could for your business, so I rebuilt it on
-            speculation.
+            This proposal is about AI integration and outreach. We make 1Way Home Services
+            the firm ChatGPT, Claude, and Google AI cite when someone in your zip code asks
+            about tax prep, 1031 exchanges, or a licensed local broker. The website you
+            already have is how we do it, not what we are selling.
           </p>
-          <p>
-            What you&apos;re about to see is fully working. Take a few minutes to scroll
-            through. If it&apos;s not for you, no harm done. If it is, here&apos;s what it
-            looks like.
-          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex flex-wrap gap-3 mb-10 max-w-2xl"
+        >
+          <div className="glass-card rounded-xl border border-white/10 px-5 py-3 flex items-baseline gap-3 bg-white/5 backdrop-blur-sm">
+            <span className="font-display text-3xl md:text-4xl font-extrabold text-white leading-none tabular-nums">
+              <AnimatedNumber value={13} />
+            </span>
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.14em] text-[var(--color-secondary-light)] font-semibold leading-tight">
+              AI crawlers<br />welcomed
+            </span>
+          </div>
+          <div className="glass-card rounded-xl border border-white/10 px-5 py-3 flex items-baseline gap-3 bg-white/5 backdrop-blur-sm">
+            <span className="font-display text-3xl md:text-4xl font-extrabold text-white leading-none tabular-nums">
+              <AnimatedNumber value={6} />
+            </span>
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.14em] text-[var(--color-secondary-light)] font-semibold leading-tight">
+              linked JSON-LD<br />schemas
+            </span>
+          </div>
+          <div className="glass-card rounded-xl border border-white/10 px-5 py-3 flex items-baseline gap-3 bg-white/5 backdrop-blur-sm">
+            <span className="font-display text-3xl md:text-4xl font-extrabold text-white leading-none tabular-nums">
+              <AnimatedNumber value={2} />
+            </span>
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.14em] text-[var(--color-secondary-light)] font-semibold leading-tight">
+              AI-readable<br />briefing files
+            </span>
+          </div>
         </motion.div>
 
         <motion.div
@@ -417,16 +684,16 @@ function Hero() {
           className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-16"
         >
           <a
-            href="#whats-different"
+            href="#ai-search"
             className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[var(--color-primary)] text-white font-semibold hover:bg-[var(--color-primary)]/90 transition-colors"
           >
-            See what changed →
+            See the AI demo →
           </a>
           <a
-            href="#talk"
+            href="#savings"
             className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-white/20 text-white font-semibold hover:bg-white/5 transition-colors"
           >
-            Let&apos;s talk first
+            Run the numbers
           </a>
         </motion.div>
 
@@ -455,29 +722,11 @@ function Comparison() {
           What&apos;s different
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Six specific things your customers will notice
+          What&apos;s different, in AI terms.
         </h2>
         <p className="text-gray-300 max-w-4xl mb-12 leading-relaxed">
-          Vague comparisons are how bad agencies sell you things you don&apos;t need.
-          Every item below is specific and verifiable. Open{" "}
-          <a
-            href={PREVIEW_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--color-secondary-light)] hover:text-white underline underline-offset-2"
-          >
-            the new site
-          </a>{" "}
-          and{" "}
-          <a
-            href={CURRENT_SITE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white underline underline-offset-2"
-          >
-            your current site
-          </a>{" "}
-          in two tabs and check any of them yourself.
+          Six ways this site is built for machine readers, not just humans. Each one is a
+          signal an AI tool looks for before it cites a firm by name.
         </p>
 
         <div className="mb-10 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
@@ -497,14 +746,6 @@ function Comparison() {
           >
             Open your current site ↗
           </a>
-        </div>
-
-        <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 p-4 md:p-6">
-          <BeforeAfterPhones />
-          <p className="mt-4 text-xs text-gray-500 text-center max-w-prose mx-auto leading-relaxed">
-            Schematic, not a screenshot, phones drawn to scale to make the contrast
-            easier to see at a glance. Six specific differences below.
-          </p>
         </div>
 
         <div className="space-y-4 md:space-y-5">
@@ -566,17 +807,20 @@ function AIWidget() {
           Your business card to AI search
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          What AI search needs, and the foundation we built
+          The AI search demo.
         </h2>
         <p className="text-gray-300 max-w-4xl mb-10 leading-relaxed">
-          Citations from AI search follow the foundation. The foundation is what&apos;s
-          real today: every page of the new site publishes a clean, machine-readable
-          profile of your business, the exact facts AI tools look for when deciding
-          whether to cite a local firm. Here&apos;s what that flow looks like.
+          Here is exactly what ChatGPT, Claude, and Perplexity see when they visit
+          1wayhomeservices.com today, and the 13 AI tools we welcomed by name.
         </p>
 
         <div className="mb-10">
           <AIFlowDiagram />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mt-10 mb-10">
+          <AICrawlerGrid />
+          <LlmsTxtPeek />
         </div>
 
         <motion.div
@@ -661,13 +905,9 @@ function AIWidget() {
           <p className="text-xs uppercase tracking-wider text-[var(--color-secondary-light)] mb-2">
             Verify it yourself, click anything below
           </p>
-          <p className="text-white font-medium mb-2 leading-relaxed">
-            You don&apos;t have to take my word for any of this.
-          </p>
           <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-            Every link below opens in a new tab and shows you exactly what the tools read
-            when they decide whether to cite a business. Try each one on the new site,
-            then try the same link on your current site, the contrast is the proof.
+            Every link opens what AI crawlers actually read; try the same path on your
+            current site for the contrast.
           </p>
 
           {/* Block A: Google and schema.org live validators */}
@@ -826,7 +1066,7 @@ function SavingsCalculator() {
   const [years, setYears] = useState(3);
   // Default to the mid-range of typical managed CPA sites. Sam can adjust to
   // his actual bill; we never claim we know what he pays.
-  const [currentMonthly, setCurrentMonthly] = useState(700);
+  const [currentMonthly, setCurrentMonthly] = useState(CURRENT_VENDOR_MONTHLY);
 
   const savingsMonthly = Math.max(0, currentMonthly - OUR_MONTHLY);
   const totalSaved = useMemo(() => savingsMonthly * 12 * years, [savingsMonthly, years]);
@@ -956,6 +1196,51 @@ function SavingsCalculator() {
 }
 
 // ───────────────────────────────────────────────────────────────────────────────
+// Section: AI outreach layer
+// ───────────────────────────────────────────────────────────────────────────────
+
+function AIOutreachLayer() {
+  return (
+    <section id="outreach" className="relative py-20 md:py-24 px-6 bg-gradient-to-b from-black via-[#0A2342]/20 to-black">
+      <div className="max-w-5xl mx-auto">
+        <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-secondary-light)] mb-3">
+          Outreach, not just optimization
+        </p>
+        <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
+          The AI outreach layer.
+        </h2>
+        <p className="text-gray-300 max-w-4xl mb-10 leading-relaxed">
+          Citations are half the work. The other half is turning an AI-referred visitor
+          into a booked call, every month, on repeat.
+        </p>
+
+        <div className="mb-10">
+          <AIDiscoveryFunnel />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          {OUTREACH_ITEMS.map((item, i) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+              className="glass-card rounded-xl p-5 border border-white/10 hover:border-[color:var(--color-secondary-light)]/40 transition-colors"
+            >
+              <p className="font-display text-base font-bold text-white mb-2 leading-snug">
+                {item.label}
+              </p>
+              <p className="text-sm text-gray-300 leading-relaxed">{item.body}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ───────────────────────────────────────────────────────────────────────────────
 // Section: What's already built + extras
 // ───────────────────────────────────────────────────────────────────────────────
 
@@ -967,15 +1252,11 @@ function AlreadyBuilt() {
           Under the hood
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight mb-4">
-          Ten pieces of craft, shipped before you said yes
+          Under the hood, the AI plumbing.
         </h2>
         <p className="text-gray-300 max-w-4xl mb-10 leading-relaxed">
-          Most of what a website does for a tax firm happens below the surface, in the
-          files AI crawlers read, the structured data search engines parse, and the
-          architecture choices nobody sees until they matter. Below is the engineering
-          and compliance depth already built into the preview, included in the base
-          $300 a month. Every item is live on the site right now and verifiable from
-          your own browser.
+          Six specific pieces of craft that turn your site from a brochure into a
+          machine-readable entity AI tools will quote.
         </p>
 
         <div className="space-y-4 md:space-y-5">
@@ -1296,9 +1577,10 @@ function FinalCTAs() {
 
 const TOC_SECTIONS: { id: string; label: string }[] = [
   { id: "hero", label: "Intro" },
-  { id: "whats-different", label: "What's different" },
   { id: "ai-search", label: "AI search demo" },
   { id: "savings", label: "Run the numbers" },
+  { id: "whats-different", label: "What's different" },
+  { id: "outreach", label: "AI outreach" },
   { id: "whats-built", label: "What's in the box" },
   { id: "extras", label: "Optional extras" },
   { id: "ask", label: "Do yourself" },
@@ -1488,11 +1770,12 @@ export function ProposalClient() {
     <main className="min-h-screen bg-black text-white">
       <TableOfContents />
       <Hero />
-      <Comparison />
       <div id="ai-search">
         <AIWidget />
       </div>
       <SavingsCalculator />
+      <Comparison />
+      <AIOutreachLayer />
       <AlreadyBuilt />
       <Extras />
       <ActionsList />
