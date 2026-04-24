@@ -153,7 +153,7 @@ const EXTRAS = [
       },
       {
         label: "Option B",
-        name: "I run it for you, $250/month",
+        name: "I run it for you, $500/month",
         desc: "I write and publish one research-backed post per month with your name on the byline, on topics we agree on in advance. Each post is SEO-optimized and built for AI citation. Every quarter I run a full SEO/GEO audit of the site, update your llms.txt and structured data to reflect new content, and tune the pages for the queries you're closest to winning. Your citability improves visibly month over month, and you spend zero minutes on content.",
       },
     ],
@@ -162,7 +162,7 @@ const EXTRAS = [
   },
   {
     name: "Booking calendar replacing \"schedule a consultation\"",
-    price: "$750 setup, plus about $15/month for the calendar tool",
+    price: "$750 setup, plus about $30/month for the calendar tool",
     why:
       "Prospects pick a slot themselves and it lands on your calendar automatically. One less phone-tag step, one less reason someone puts it off. Small change, measurable bump in consultation rate, especially with leads who find you after hours. This is the smallest-commitment upgrade on the menu and often the first one clients add.",
   },
